@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://go1f.cc/sitemap.xml
+Sitemap: http://localhost:1313/sitemap.xml

@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>WEB安全 on Go1f&#39;s Blog</title>
-    <link>http://go1f.cc/categories/web%E5%AE%89%E5%85%A8/</link>
-    <description>Recent content in WEB安全 on Go1f&#39;s Blog</description>
+    <title>WEB安全 on Arefu&#39;s Blog</title>
+    <link>http://localhost:1313/categories/web%E5%AE%89%E5%85%A8/</link>
+    <description>Recent content in WEB安全 on Arefu&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 22 Jan 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://go1f.cc/categories/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/categories/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>网站信息搜集</title>
-      <link>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
+      <link>http://localhost:1313/post/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
       <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
+      <guid>http://localhost:1313/post/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
       <description>主动信息收集：与目标主机直接交互 被动信息收集：通过搜索引擎或社会工程获取目标信息 网站信息收集 工具利用 综合类 wappalyzer插件 (CMS/</description>
     </item>
     
     <item>
       <title>文件上传漏洞</title>
-      <link>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
+      <link>http://localhost:1313/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
+      <guid>http://localhost:1313/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
       <description>途径 相册、头像 视频、照片分享 附件上传 文件管理器 前端检验 删除或者禁用js burpsuit代理控制POST content filename=&amp;quot;shell.php&amp;rdquo; content-Type: image/jpeg 修改js程序 MIME文件类型检</description>
     </item>
     
     <item>
       <title>文件包含漏洞</title>
-      <link>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
+      <link>http://localhost:1313/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
       <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
+      <guid>http://localhost:1313/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
       <description>两个条件 用户能够控制文件内容 include()等函数通过动态变量的方式引入需要包含的文件 特征函数 include（错误继续执行）、 requir</description>
     </item>
     

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>文件包含 on Go1f&#39;s Blog</title>
-    <link>http://go1f.cc/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
-    <description>Recent content in 文件包含 on Go1f&#39;s Blog</description>
+    <title>文件包含 on Arefu&#39;s Blog</title>
+    <link>http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
+    <description>Recent content in 文件包含 on Arefu&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 19 Jan 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://go1f.cc/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>文件包含漏洞</title>
-      <link>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
+      <link>http://localhost:1313/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
       <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
+      <guid>http://localhost:1313/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
       <description>两个条件 用户能够控制文件内容 include()等函数通过动态变量的方式引入需要包含的文件 特征函数 include（错误继续执行）、 requir</description>
     </item>
     
