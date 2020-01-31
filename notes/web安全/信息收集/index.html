@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  网站信息搜集 &ndash; Arefu&#39;s Zone
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="网站信息搜集|Hugo-Primer theme&#39;s example site">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Zone">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="网站信息搜集 | Arefu&#39;s Zone">
+    <meta name="twitter:description" content="网站信息搜集|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    Arefu&#39;s Zone
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>公告栏</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/notes/">
+      
+      <span>学习笔记</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">网站信息搜集</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E5%AE%89%E5%85%A8' class="muted-link">
+  <span class="Label Label--gray-darker">WEB安全</span>
+</a>
+
+
+
+<a href='/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86' class="muted-link">
+  <span class="Label Label--gray">信息搜集</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-01-22. Published at: 2020-01-22.">
+        
+          Published: 2020-01-22
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>主动信息收集：与目标主机直接交互；被动信息收集：通过搜索引擎或社会工程获取目标信息</p>
+<h2 id="网站信息收集">网站信息收集</h2>
+<h3 id="工具利用">工具利用</h3>
+<p><strong>综合类</strong></p>
+<p>wappalyzer插件 (CMS/网站脚本语言/中间件)</p>
+<p><a href="https://www.osint-labs.org/apt/">OSINT-CN情报/工具合集</a></p>
+<p><strong>CMS指纹</strong></p>
+<p><a href="https://github.com/urbanadventurer/WhatWeb">whatweb工具</a>、<a href="http://whatweb.bugscaner.com/look/">CMS识别</a>、<a href="http://www.yunsee.cn/finger.html">云悉</a>、</p>
+<p><strong>漏洞收集</strong></p>
+<p><a href="https://www.seebug.org/">知道创宇 Seebug</a> 、乌云漏洞库、<a href="https://www.exploit-db.com/">exploit-db</a> 搜索CMS等关键词，必要时源代码审计</p>
+<p><a href="https://www.zoomeye.org/">钟馗之眼 zoomeye</a></p>
+<blockquote>
+<p><code>app=&quot;dedecms&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; server=&quot;Apache&quot;</code></p>
+<p>“相关漏洞”功能</p>
+</blockquote>
+<p>Google it  <code>&lt;cmsname&gt;  漏洞/exp/poc/exploit/bug</code></p>
+<!-- raw HTML omitted -->
+<h3 id="cms版本">cms版本</h3>
+<blockquote>
+<p>指定目录或特殊文件</p>
+<p>页面底部版权信息 (关键字 Powered By等)</p>
+<p>注释的html代码内容</p>
+<p>robots.txt文件中关键字</p>
+<p>报错 (例:thinkPHP)</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<h3 id="中间件">中间件</h3>
+<p>apache、nginx、IIS、tomcat及其具体版本</p>
+<h3 id="脚本语言">脚本语言</h3>
+<h3 id="网站敏感目录">网站敏感目录</h3>
+<p><strong>举例</strong></p>
+<p>.SVN、.git、网站备份压缩文件、.DS_Store文件、_MAC_STORE、WEB-INF文件、配置文件泄露</p>
+<p><strong>工具</strong></p>
+<p>Burpsuit Sitemap、7kbscan、御剑</p>
+<!-- raw HTML omitted -->
+<h3 id="子域名站群">子域名/站群</h3>
+<p><a href="https://github.com/shmilylty/OneForAll">OneForAll子域名查询</a></p>
+<p><a href="http://stool.chinaz.com/same">同IP网站查询</a></p>
+<p><a href="https://phpinfo.me/domain/">子域名在线扫描</a></p>
+<h3 id="网站个人信息">网站个人信息</h3>
+<ul>
+<li>企业基本信息</li>
+<li>员工信息、组织框架、企业法人、企业综合信息</li>
+<li>员工信息：姓名、工号、家庭、交际信息、上网习惯</li>
+<li>员工身份信息：员工简历、身份证、手机号、生日、家乡、住址</li>
+<li>社交账号信息：qq、qq群、微博、微信、支付宝、员工邮箱账号</li>
+</ul>
+<p><strong>手机号能干什么</strong></p>
+<blockquote>
+<p>空手机，电话本，进入qq，关联通讯录</p>
+<p>微信，关联通讯录，找微信</p>
+<p>支付宝，转账，*xx，猜姓氏</p>
+<p>微博</p>
+<p>生成社工字典？？</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<p><strong>弱口令与暴力破解</strong></p>
+<ol>
+<li>
+<p>域名</p>
+<p>whois查询&gt;联系方式&gt;社工库/google/baidu</p>
+<p>whois反查其它域名，域名内容探测，收集信息</p>
+</li>
+<li>
+<p>ip</p>
+<p>端口服务、ip地信息</p>
+</li>
+<li>
+<p>目标相关人员</p>
+<p>搜索引擎，豆瓣、知乎、微博等等社交平台，越活跃，越多信息</p>
+</li>
+</ol>
+<p>搜集信息生成字典</p>
+<!-- raw HTML omitted -->
+<h2 id="服务器信息收集">服务器信息收集</h2>
+<h3 id="开放端口">开放端口</h3>
+<h4 id="扫描端口">扫描端口</h4>
+<p>nmap / zenmap(GUI界面)</p>
+<blockquote>
+<p><code>nmap domain -v -O</code></p>
+<p>-v    查看详情</p>
+<p>-A    指纹信息收集</p>
+<p>-O    系统版本估计</p>
+</blockquote>
+<p>k8portscan</p>
+<h4 id="数据库识别">数据库识别</h4>
+<table>
+<thead>
+<tr>
+<th align="left">数据库</th>
+<th>端口</th>
+<th>相关</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">SQL Server</td>
+<td>1433</td>
+<td>文件后缀.mdf、ASP</td>
+</tr>
+<tr>
+<td align="left">MySQL</td>
+<td>3306</td>
+<td>PHP</td>
+</tr>
+<tr>
+<td align="left">ACCESS</td>
+<td>\</td>
+<td>文件后缀.mdb、ASP</td>
+</tr>
+<tr>
+<td align="left">Oracle</td>
+<td>1521</td>
+<td>JSP</td>
+</tr>
+<tr>
+<td align="left">MongoDB</td>
+<td>27017</td>
+<td>非关系型数据库</td>
+</tr>
+<tr>
+<td align="left">Redis</td>
+<td>6379</td>
+<td>非关系型数据库</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="操作系统">操作系统</h3>
+<p><strong>特殊端口</strong></p>
+<p>rpc 135 、smb 445、rdp 3389</p>
+<p>ssh 22</p>
+<!-- raw HTML omitted -->
+<p><strong>大小写敏感</strong></p>
+<p>后缀名Windows不区分大小写，而Linux大小写敏感，例：<code>index.HTml</code></p>
+<p><strong>ping探测</strong></p>
+<p>Windows的TTL的值是128，而Linux的TTL大多是64</p>
+<!-- raw HTML omitted -->
+<h3 id="cdn绕过真实-ip">CDN绕过/真实 IP</h3>
+<ul>
+<li>
+<p>多地PING（使用外网IP PING可能暴露真实IP）</p>
+</li>
+<li>
+<p>证书报错</p>
+</li>
+<li>
+<p>查询历史DNS记录</p>
+</li>
+<li>
+<p>查询子域名</p>
+</li>
+<li>
+<p>网络引擎搜索法</p>
+<p>shodan <code>http.tittle:xxx</code> 、fofa <code>tittle=&quot;tittle&quot;</code></p>
+</li>
+<li>
+<p>网站邮件订阅 / RSS / 注册、激活、找回密码（邮件服务器为真实服务器，邮件信头有来源信息）</p>
+</li>
+<li>
+<p>扫描全网</p>
+</li>
+<li>
+<p>PING二级域名（针对非全站CDN，一般子域名不用CDN）</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h3 id="网络搜索引擎">网络搜索引擎</h3>
+<h4 id="shodan">shodan</h4>
+<p><strong>语法</strong></p>
+<p>port 端口号、os 操作系统类型、</p>
+<p>html.html 网页内容、 html.tittle 网页标题</p>
+<p>http.server http请求返回server的类型</p>
+<p>city 城市、country 国家</p>
+<p>product 所使用的软件或产品product:&ldquo;apache&rdquo;、 vuln CVE漏洞编号，例如vuln: CVE-2014-0723</p>
+<p>net 搜索网段，例如，net：123.12.1.0/24</p>
+<p><strong><a href="https://www.cnblogs.com/miaodaren/p/9177379.html">Shodan的http.favicon.hash语法详解与使用技巧</a></strong></p>
+<blockquote>
+<p>环境要求 python2.7 VCForPython27.msi pip mmh3 requests</p>
+<pre><code>#iconhash.py
+import mmh3
+import requests
+ 
+response = requests.get('http://127.0.0.1/favicon.ico')
+favicon = response.content.encode('base64')
+hash = mmh3.hash(favicon)
+print(hash)
+</code></pre><pre><code>py -2 iconhash.py
+</code></pre><p>搜索语法</p>
+<pre><code>http.favicon.hash:-231109625
+</code></pre><blockquote>
+<p>bwapp的图标hash</p>
+<p>-689227143</p>
+<p>dvwa的网站图标hash</p>
+<p>-231109625</p>
+</blockquote>
+</blockquote>
+<!-- raw HTML omitted -->
+<h2 id="扫描器">扫描器</h2>
+<p><strong>awvs 漏洞扫描器 的使用</strong></p>
+<p>appscan、massscan、nessus等</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>网站信息搜集</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#网站信息收集">网站信息收集</a>
+      <ul>
+        <li><a href="#工具利用">工具利用</a></li>
+        <li><a href="#cms版本">cms版本</a></li>
+        <li><a href="#中间件">中间件</a></li>
+        <li><a href="#脚本语言">脚本语言</a></li>
+        <li><a href="#网站敏感目录">网站敏感目录</a></li>
+        <li><a href="#子域名站群">子域名/站群</a></li>
+        <li><a href="#网站个人信息">网站个人信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#服务器信息收集">服务器信息收集</a>
+      <ul>
+        <li><a href="#开放端口">开放端口</a></li>
+        <li><a href="#操作系统">操作系统</a></li>
+        <li><a href="#cdn绕过真实-ip">CDN绕过/真实 IP</a></li>
+        <li><a href="#网络搜索引擎">网络搜索引擎</a></li>
+      </ul>
+    </li>
+    <li><a href="#扫描器">扫描器</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

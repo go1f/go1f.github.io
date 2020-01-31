@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>WEB安全 on Arefu&#39;s Zone</title>
+    <title>Web安全 on Arefu&#39;s Zone</title>
     <link>https://blog.go1f.cc/categories/web%E5%AE%89%E5%85%A8/</link>
-    <description>Recent content in WEB安全 on Arefu&#39;s Zone</description>
+    <description>Recent content in Web安全 on Arefu&#39;s Zone</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -14,29 +14,38 @@
     
     <item>
       <title>网站信息搜集</title>
-      <link>https://blog.go1f.cc/blog/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
       <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
       <description>&lt;p&gt;主动信息收集：与目标主机直接交互；被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>文件上传</title>
-      <link>https://blog.go1f.cc/blog/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
       <description>&lt;p&gt;文件上传漏洞笔记&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>文件包含漏洞</title>
-      <link>https://blog.go1f.cc/blog/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
       <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
       <description>&lt;p&gt;文件包含漏洞&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>渗透墙外的世界——Burpsuit多重代理</title>
+      <link>https://blog.go1f.cc/blog/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
+      <description>&lt;p&gt;入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个&lt;strong&gt;多重代理&lt;/strong&gt;问题。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -14,28 +14,28 @@
     
     <item>
       <title>Linux入门命令1</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
       <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
       <description>whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #</description>
     </item>
     
     <item>
       <title>Linux入门命令2</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
       <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
       <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 安装 包管理 Debian（Ubuntu/kali） apt 从软件</description>
     </item>
     
     <item>
       <title>Linux学习的若干板块</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
       <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
       <description>操作系统 进程管理、储存管理、设备管理、文件管理、作业管理 用户与用户组 相关文件 /etc/passwd -rw- r&amp;ndash; r&amp;ndash; 用户信息 1.用户名 2.密码 3.UID4.GID组号 5. 备注</description>
     </item>
     
