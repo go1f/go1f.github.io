@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  我的渗透重装大全 &ndash; Arefu&#39;s Zone
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="重装指导|Hugo-Primer theme&#39;s example site">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Zone">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="我的渗透重装大全 | Arefu&#39;s Zone">
+    <meta name="twitter:description" content="重装指导|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    Arefu&#39;s Zone
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>公告栏</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>学习笔记</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">我的渗透重装大全</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/tools' class="muted-link">
+  <span class="Label Label--gray-darker">Tools</span>
+</a>
+
+
+
+<a href='/tags/tools' class="muted-link">
+  <span class="Label Label--gray">Tools</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-01-20. Published at: 2019-12-31.">
+        
+          Lastmod: 2020-01-20
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <h2 id="install-all">INSTALL ALL</h2>
+<p>有感于重装了一次windows LTSC版，然后配置各种初始化，竟花费了一晚上。故特意做一个Memo供日后使用。</p>
+<h2 id="kms激活">KMS激活</h2>
+<p>激活步骤（管理员命令执行）https://github.com/netnr/kms</p>
+<pre><code>设置服务　　slmgr -skms kms.zme.ink
+安装密钥　　slmgr -ipk 版本对应秘钥
+激活系统　　slmgr -ato
+</code></pre>
+<p>或</p>
+<pre><code>slmgr /skms kms.digiboy.ir
+slmgr /ato
+</code></pre><h2 id="xdebug">Xdebug</h2>
+<p>开放源代码的PHP程序调试器，在php5-7各版本皆有支持扩展插件。</p>
+<h4 id="phpini配置xdebug">php.ini配置Xdebug</h4>
+<blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1">;覆盖模式  xdebug.trace_options = 0</span>
+<span class="c1">;人眼可读  xdebug.trace_format = 0</span>
+<span class="c1">;输出路径  xdebug.trace_output_dir</span>
+<span class="na">[XDebug]</span>
+<span class="na">xdebug.auto_trace</span> <span class="o">=</span> <span class="s">1</span>
+<span class="c1">;日志追踪输出目录 0人可读，1机器可读</span>
+<span class="na">xdebug.trace_format</span> <span class="o">=</span> <span class="s">0</span>
+<span class="na">xdebug.trace_output_dir</span> <span class="o">=</span><span class="s">&#34;C:\Tools\phpStudy\PHPTutorial\tmp\xdebug&#34;</span>
+<span class="na">xdebug.trace_options</span> <span class="o">=</span> <span class="s">0</span>
+<span class="c1">;记录添加到文件方式，0=覆盖，1=追加</span>
+<span class="na">xdebug.collect_params</span> <span class="o">=</span> <span class="s">4</span>
+<span class="c1">;返回函数输出值</span>
+<span class="na">xdebug.collect_return</span> <span class="o">=</span> <span class="s">1</span>
+<span class="c1">;显示使用哪些变量</span>
+<span class="na">xdebug.collect_vars</span> <span class="o">=</span> <span class="s">1		</span>
+<span class="c1">;添加一行显示变量赋值</span>
+<span class="na">xdebug.collect_assignments</span> <span class="o">=</span> <span class="s">1</span>
+<span class="na">xdebug.profiler_append</span> <span class="o">=</span> <span class="s">0</span>
+<span class="na">xdebug.profiler_enable</span> <span class="o">=</span> <span class="s">1</span>
+<span class="na">xdebug.profiler_enable_trigger</span> <span class="o">=</span> <span class="s">0</span>
+<span class="na">xdebug.profiler_output_dir</span> <span class="o">=</span><span class="s">&#34;C:\Tools\phpStudy\PHPTutorial\tmp\xdebug&#34;</span>
+<span class="na">xdebug.profiler_output_name</span> <span class="o">=</span> <span class="s">&#34;cache.out.%t-%s&#34;</span>
+<span class="na">xdebug.remote_enable</span> <span class="o">=</span> <span class="s">1</span>
+<span class="na">xdebug.remote_handler</span> <span class="o">=</span> <span class="s">&#34;dbgp&#34;</span>
+<span class="na">xdebug.remote_host</span> <span class="o">=</span> <span class="s">&#34;127.0.0.1&#34;</span>
+<span class="na">zend_extension</span><span class="o">=</span><span class="s">&#34;C:\Tools\phpStudy\PHPTutorial\php\php-5.4.45-nts\ext\php_xdebug.dll&#34;</span>
+</code></pre></div></blockquote>
+<h2 id="sublime-text3">Sublime Text3</h2>
+<p>安装插件</p>
+<ul>
+<li>
+<p>install package control</p>
+<ul>
+<li>ctags    函数跳转</li>
+<li>phpfmt    代码补全</li>
+<li>convertToUFT8    utf8编码</li>
+<li>alignment    代码对齐</li>
+</ul>
+</li>
+</ul>
+<p>激活</p>
+<ul>
+<li><a href="http://wordjian.com/2019/10/03/sublime/">永久激活Sublime(3211)方案</a></li>
+</ul>
+<p>php编译环境</p>
+<ul>
+<li>
+<p>创建PHP编译系统
+添加 PHP 的 build system，如图所示， Tools-&gt;Build System-&gt; New Build System ：
+新建一个，</p>
+<pre><code>{
+    &quot;cmd&quot;: [&quot;php&quot;, &quot;$file&quot;],
+    &quot;file_regex&quot;: &quot;php$&quot;,
+    &quot;selector&quot;: &quot;source.php&quot;
+}
+</code></pre><p>保存在下面目录即可，注意修改文件名为 php.sublime-build 。</p>
+<blockquote>
+<pre><code>C:\Users\[YourUserName]\AppData\Roaming\Sublime Text 3\Packages\User
+</code></pre></blockquote>
+</li>
+</ul>
+<p>自动换行</p>
+<pre><code>在Preferences–&gt;Settings 然后添加&quot;word_wrap&quot;:&quot;true&quot;保存即可 
+</code></pre><h2 id="git代理">GIT代理</h2>
+<pre><code>git config --global http.proxy 'socks5://127.0.0.1:10808'
+git config --global https.proxy 'socks5://127.0.0.1:10808'
+</code></pre><h3 id="iis服务器管理器">IIS服务器管理器</h3>
+<ul>
+<li>
+<p>添加角色-&gt;IIS服务-&gt;.net扩展</p>
+</li>
+<li>
+<p>IIS-&gt;ASP&gt;启用父路径</p>
+</li>
+<li>
+<p>应用程序池-&gt;32位</p>
+</li>
+<li>
+<p>首页设置-&gt;添加首页-&gt;index.asp</p>
+</li>
+<li>
+<p>文件夹添加Everyone用户</p>
+</li>
+<li>
+<p>有时需要手动访问安装文件install.asp</p>
+</li>
+</ul>
+<p>​</p>
+<h2 id="burp-导入ca证书">Burp 导入CA证书</h2>
+<ul>
+<li>
+<p>http://burp 下载证书</p>
+</li>
+<li>
+<p>firefox导入证书</p>
+</li>
+</ul>
+<p>​</p>
+<h2 id="git">GIT</h2>
+<p>安装</p>
+<pre><code>sudo apt-get install git
+</code></pre><p>初始化</p>
+<pre><code>git init xxx 
+--bare	裸库，指工作目录下文件不包含在仓库内
+
+git add 文件		添加文件到仓库
+
+git commit -m 注释		提交仓库
+</code></pre><p>克隆</p>
+<pre><code>git clone ssh://用户名@ip地址:端口/文件夹或文件名地址
+群组用户克隆，需要有文件夹执行权限
+</code></pre><p>git加固</p>
+<ul>
+<li>禁止git用户登录，设置用于连接git用户，shell为usr/bin/git-shell</li>
+</ul>
+<p>思考问题/待办</p>
+<ul>
+<li>当前用户克隆的git仓库，会是什么权限？这个用户是否应该拥有登陆系统的权限</li>
+<li>其他登录用户是否可以clone仓库？</li>
+</ul>
+<h2 id="kali-国内源">Kali 国内源</h2>
+<h2 id="debian-安装docker">Debian 安装docker</h2>
+<blockquote>
+<p>sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg2 \ lsb-release \ software-properties-common</p>
+</blockquote>
+<blockquote>
+<p>curl -fsSL <a href="https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg">https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg</a> | sudo apt-key add -</p>
+</blockquote>
+<blockquote>
+<p>sudo add-apt-repository \ &ldquo;deb [arch=amd64] <a href="https://mirrors.ustc.edu.cn/docker-ce/linux">https://mirrors.ustc.edu.cn/docker-ce/linux</a> /debian \ $(lsb_release -cs)  \ stable&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>echo &lsquo;deb [arch=amd64] <a href="https://mirrors.aliyun.com/docker-ce/linux/debian">https://mirrors.aliyun.com/docker-ce/linux/debian</a> stretch stable&rsquo; &gt; 
+/etc/apt/sources.list.d/docker.list</p>
+</blockquote>
+<p>​</p>
+<h2 id="beef">BeEF</h2>
+<p><a href="https://github.com/beefproject/beef/wiki/Installation">https://github.com/beefproject/beef/wiki/Installation</a></p>
+<p>安装ruby2.4</p>
+<pre><code class="language-console" data-lang="console">sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+sudo apt-get install ruby2.4 ruby2.4-dev
+</code></pre><p>Bundler</p>
+<pre><code>gem install bundler
+</code></pre><p>git clone</p>
+<pre><code>wget https://github.com/beefproject/beef/archive/master.zip
+</code></pre><p>unzip</p>
+<pre><code>./install
+</code></pre><p>run</p>
+<pre><code>./beef
+</code></pre><h2 id="gfwlist">GFWList</h2>
+<blockquote>
+<p><a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</a></p>
+</blockquote>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>我的渗透重装大全</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#install-all">INSTALL ALL</a></li>
+    <li><a href="#kms激活">KMS激活</a></li>
+    <li><a href="#xdebug">Xdebug</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#sublime-text3">Sublime Text3</a></li>
+    <li><a href="#git代理">GIT代理</a>
+      <ul>
+        <li><a href="#iis服务器管理器">IIS服务器管理器</a></li>
+      </ul>
+    </li>
+    <li><a href="#burp-导入ca证书">Burp 导入CA证书</a></li>
+    <li><a href="#git">GIT</a></li>
+    <li><a href="#kali-国内源">Kali 国内源</a></li>
+    <li><a href="#debian-安装docker">Debian 安装docker</a></li>
+    <li><a href="#beef">BeEF</a></li>
+    <li><a href="#gfwlist">GFWList</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
+  </body>
+</html>

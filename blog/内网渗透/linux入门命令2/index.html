@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Linux入门命令2 &ndash; Arefu&#39;s Zone
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 安装 包管理 Debian（Ubuntu/kali） apt 从软件|Hugo-Primer theme&#39;s example site">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Zone">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Linux入门命令2 | Arefu&#39;s Zone">
+    <meta name="twitter:description" content="关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 安装 包管理 Debian（Ubuntu/kali） apt 从软件|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    Arefu&#39;s Zone
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>公告栏</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>学习笔记</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Linux入门命令2</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F' class="muted-link">
+  <span class="Label Label--gray-darker">内网渗透</span>
+</a>
+
+
+
+<a href='/tags/linux' class="muted-link">
+  <span class="Label Label--gray">Linux</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-01-29. Published at: 2020-01-29.">
+        
+          Published: 2020-01-29
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <h2 id="关机重启">关机重启</h2>
+<p>重启 <code>reboot</code> , <code>init 6</code></p>
+<p>关机 <code>init 0</code> , <code>halt</code> , <code>shutdown</code> , <code>poweroff</code></p>
+<!-- raw HTML omitted -->
+<h2 id="网卡配置">网卡配置</h2>
+<p><code>vi /etc/network/interfaces</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">auto ens38
+iface ens38 inet static
+address 192.168.5.200
+netmask 255.255.255.0
+gateway 192.168.5.1
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">ifdown ens38
+ifup ens38
+</code></pre></div><!-- raw HTML omitted -->
+<h2 id="安装">安装</h2>
+<h3 id="包管理">包管理</h3>
+<p>Debian（Ubuntu/kali）</p>
+<pre><code>apt	从软件源安装软件
+apt update	更新软件源
+apt install xxx	安装
+apt search xxx
+apt remove xxx	卸载
+apt upgrde	一键更新
+apt install -f	解决依赖问题
+</code></pre><p><strong>换源</strong></p>
+<pre><code>vim /etc/apt/source.list
+</code></pre><blockquote>
+<p>error：无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系。</p>
+<p><strong>解决办法</strong>：复制完整的多个源到source.list。</p>
+</blockquote>
+<p>CentOS（red-hat）<a href="http://mirrors.163.com/centos/6.10/isos/x86_64/">CentOS 6.10 下载</a></p>
+<p>与上同理
+<code>yum	软件源安装</code></p>
+<p><strong>换源</strong></p>
+<p><a href="https://blog.csdn.net/inslow/article/details/54177191">修改CentOS默认yum源为mirrors.163.com或mirrors.aliyun.com</a></p>
+<!-- raw HTML omitted -->
+<h3 id="本地包管理">本地包管理</h3>
+<p><strong><a href="https://man.linuxde.net/dpkg">dpkg命令</a></strong></p>
+<p><code>dpkg -i [package.deb]</code>
+<code>dpkg -l [package]</code></p>
+<p><strong><a href="https://man.linuxde.net/rpm">rpm命令</a></strong></p>
+<p><code>rpm -qa | grep [package]</code>
+<code>rpm -ivh [package.rpm]</code></p>
+<!-- raw HTML omitted -->
+<p><strong>源码安装</strong></p>
+<p>可移植性高</p>
+<h2 id="文件管理">文件管理</h2>
+<h3 id="新建文件">新建文件</h3>
+<p><code>touch &lt;新建文件&gt;</code></p>
+<p><code>mkdir &lt;文件夹&gt;</code></p>
+<h3 id="删除">删除</h3>
+<p><code>rm -rf ./*	删除文件</code>
+<code>rm -r * 删除文件夹</code></p>
+<h3 id="复制粘贴">复制粘贴</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">cp &lt;file&gt; &lt;dest-dir&gt;
+mv &lt;file&gt; &lt;dest-dir&gt;
+</code></pre></div><h3 id="查看">查看</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">cat &lt;file&gt;	查看全部
+more &lt;file&gt;从头开始显示一页
+head -n <span class="m">15</span> &lt;file&gt; 从头显示n行，默认10行
+tail -n <span class="m">15</span> &lt;file&gt; 从尾显示15行
+</code></pre></div><h3 id="查找">查找</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">find -name &lt;name&gt;	//全局查找
+grep &lt;name&gt;
+或
+cat /etc/passwd <span class="p">|</span> grep &lt;name&gt;
+	-v 可以反向查找
+</code></pre></div><h3 id="文本编辑vim">文本编辑Vim</h3>
+<ul>
+<li>
+<p>命令模式</p>
+<blockquote>
+<p>i	游标前插入
+o	另起一行插入
+2dd	删除两行
+s	向后删除
+u	撤销
+p	粘贴
+y	复制
+<code>:</code>	底线命令模式
+<code>/word</code>	搜索word，n 下一个(next)结果，N 上一个结果</p>
+</blockquote>
+</li>
+<li>
+<p>末行模式</p>
+<blockquote>
+<p><code>:set nu</code>	设置行号
+<code>:set ff=unix</code> 或 <code>:set fileformat=unix</code>	设置文件格式
+<code>:gg</code>	跳转首行
+<code>:GG</code>	跳转尾行
+<code>:7</code>	<code>7gg</code>	<code>7G </code>跳转到第7行
+<code>:set nonu</code>	删除行号
+<code>:wq</code>	保存并退出
+<code>:wq！</code>	强行保存会覆盖文件，文件所有者可能会更改
+<code>:q！</code>	不保存直接退出
+<code>:%s/word1/word2</code>	替换成word2</p>
+</blockquote>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h3 id="挂载外设">挂载外设</h3>
+<pre><code>fdisk -l    #查看系统的磁盘列表
+
+mkdir /media/usb   
+mount /dev/sdb1 /media/usb    #把/dev/sdb1挂载在/mnt/usb
+
+umount /media/usb   # umount命令解挂U盘
+</code></pre><!-- raw HTML omitted -->
+<h3 id="打包与压缩">打包与压缩</h3>
+<blockquote>
+<p>-c或&ndash;create：建立新的备份文件；
+-x或&ndash;extract或&ndash;get：从备份文件中还原文件；
+-z或&ndash;gzip或&ndash;ungzip：通过gzip指令处理备份文件；
+-j：支持bzip2解压文件；
+-v：显示操作过程；</p>
+</blockquote>
+<p>将文件全部打包成tar文件，并gzip压缩</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">tar -zcvf log.tar.gz 内容1 内容2 ...
+</code></pre></div><p>解压带压缩的tar文件</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">tar -zxvf /opt/soft/test/log.tar.gz   //x --extract解压
+tar -jxvf filename.tar.bz2 -C 欲解压缩的目录  //j bzip2解压
+</code></pre></div><!-- raw HTML omitted -->
+<p>unzip 用于解压zip包</p>
+<!-- raw HTML omitted -->
+<h2 id="任务管理">任务管理</h2>
+<p>强杀进程 <code>kill -9 id</code></p>
+<p>将任务退到后台，返回到终端（后台挂起） <code>Ctrl +Z</code></p>
+<p>显示终端后台任务 <code>jobs</code></p>
+<p>退出shell进程  <code>exit </code>或 <code>Ctrl + D</code></p>
+<p>使第N个任务前台运行<code>fg %N</code></p>
+<p>使第N个任务后台运行 <code>bg %N</code></p>
+<!-- raw HTML omitted -->
+<p><strong><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/index.html">任务如何持续运行</a></strong></p>
+<ul>
+<li>
+<p>末尾加 &amp; 符号</p>
+</li>
+<li>
+<p>nohup 命令 &amp;</p>
+</li>
+<li>
+<p>setsid</p>
+</li>
+<li>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-screen/index.html">screen</a></p>
+<p>键绑定（Ctrl-A），使用方法，先按绑定键，再按下一个键。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">screen -ls	<span class="c1">#查看</span>
+screen -r id	<span class="c1">#恢复连接指定session会话</span>
+Ctrl-A A	<span class="c1">#显示窗口</span>
+Ctrl-A D	<span class="c1">#离开这个会话</span>
+Ctrl-A K	<span class="c1">#关闭这个会话窗口</span>
+</code></pre></div></li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="iptables-centos-6">iptables （CentOS 6）</h2>
+<p>四表五链</p>
+<pre><code>表:
+- filter 用于过滤，访问控制、规则匹配
+- nat 用于nat功能，端口映射，地址转发
+- mangle 用于用于对特定数据包的修改
+- raw 原生的数据，raw 中的数据包不会被系统跟踪
+
+一般前两张表用的比较多
+
+链:
+- INPUT 匹配目的地址为本机的
+- OUTPUT 匹配向外转发的
+- FORWARD 匹配本机转发的
+- PREROUTING 路由前，用于修改目的地址（DNAT）
+- POSTROUTING 路由后，用于修改源地址（SNAT）
+</code></pre><p>操作<code>-j</code></p>
+<pre><code>ACCEPT 允许数据包通过
+DROP 阻止数据包通过
+REJECT 拒绝数据包通过，并返回报错信息
+</code></pre><p>启用</p>
+<pre><code>service iptables stop
+service iptables start
+</code></pre><p>保存，否则重启失效</p>
+<pre><code>service iptables save
+</code></pre><p>查看所有规则</p>
+<pre><code>iptables -nvL
+</code></pre><p>允许本地访问，lo 数据包，并允许 ICMP 协议的数据包（ping）和 正常本地向外连接</p>
+<pre><code>iptables -I INPUT -i lo -j ACCEPT
+iptables -I INPUT -p icmp -j ACCEPT
+iptables -I INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+</code></pre><p>允许 22 （ssh） 和 80 （http） 端口的访问</p>
+<pre><code>iptables -I INPUT -p tcp --dport 22 -j ACCEPT
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+</code></pre><p>iptables 的规则是从前往后匹配，找到匹配即停止。所以 前面先是<code>ACCEPT</code>，<code>drop</code> 或 <code>reject</code>操作一般是放在最后。</p>
+<p>除开放的端口外，其他端口都禁止访问</p>
+<pre><code>iptables -A INPUT -j REJECT
+</code></pre><p>其他</p>
+<pre><code>iptables -P INPUT DROP	#其他入站一律丢弃
+iptables -P OUTPUT ACCEPT	#所有出站一律绿灯
+iptables -P FORWARD DROP	#所有转发一律丢弃
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Linux入门命令2</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#关机重启">关机重启</a></li>
+    <li><a href="#网卡配置">网卡配置</a></li>
+    <li><a href="#安装">安装</a>
+      <ul>
+        <li><a href="#包管理">包管理</a></li>
+        <li><a href="#本地包管理">本地包管理</a></li>
+      </ul>
+    </li>
+    <li><a href="#文件管理">文件管理</a>
+      <ul>
+        <li><a href="#新建文件">新建文件</a></li>
+        <li><a href="#删除">删除</a></li>
+        <li><a href="#复制粘贴">复制粘贴</a></li>
+        <li><a href="#查看">查看</a></li>
+        <li><a href="#查找">查找</a></li>
+        <li><a href="#文本编辑vim">文本编辑Vim</a></li>
+        <li><a href="#挂载外设">挂载外设</a></li>
+        <li><a href="#打包与压缩">打包与压缩</a></li>
+      </ul>
+    </li>
+    <li><a href="#任务管理">任务管理</a></li>
+    <li><a href="#iptables-centos-6">iptables （CentOS 6）</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
+  </body>
+</html>
