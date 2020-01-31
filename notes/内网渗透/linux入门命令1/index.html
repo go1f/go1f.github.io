@@ -3,6 +3,17 @@
   <head>
     
     
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +24,7 @@
     </title>
     
     
-    <meta name="description" property="og:description" content="whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #|Hugo-Primer theme&#39;s example site">
+    <meta name="description" property="og:description" content="whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #|blog under go1f.cc">
     
 
     <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Zone">
@@ -29,7 +40,7 @@
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
     <meta name="twitter:title" content="Linux入门命令1 | Arefu&#39;s Zone">
-    <meta name="twitter:description" content="whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:description" content="whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
 
@@ -127,10 +138,10 @@
 <code>uname -a</code>   # 显示主机名、内核版本、硬件平台等
 <code>id</code>    #显示用户 uid、gid，所属组等信息</p>
 <p><code>df -h </code>   # 硬盘使用情况</p>
-<!-- raw HTML omitted -->
+<p>​</p>
 <h2 id="netstat">netstat</h2>
 <h3 id="tcp-状态机">TCP 状态机</h3>
-<p><img src="https://upload-images.jianshu.io/upload_images/2846604-6a8557619966204d.png?imageMogr2/auto-orient/strip%7CimageView2/2" alt="img"></p>
+<p><img src="https://i.loli.net/2020/01/31/a46TBpLNZFwbOi1.png" alt="tcp状态机.png"></p>
 <p>状态说明</p>
 <blockquote>
 <p>LISTEN：侦听来自远方的TCP端口的连接请求</p>
@@ -143,15 +154,16 @@
 <p>TIME-WAIT：等待足够的时间以确保远程TCP接收到连接中断请求的确认</p>
 <p>CLOSED：没有任何连接状态</p>
 </blockquote>
-<p><img src="%E6%B8%97%E9%80%8F%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.assets/TCP%E6%8F%A1%E6%89%8B%E3%80%81%E4%BC%A0%E8%BE%93%E3%80%81%E6%8C%A5%E6%89%8B.jpg" alt="TCP握手、传输、挥手"></p>
-<!-- raw HTML omitted -->
+<p>​</p>
+<p><img src="https://i.loli.net/2020/01/31/1cdevUVi9mqQwMJ.jpg" alt="TCP握手、传输、挥手.jpg"></p>
+<p>​</p>
 <h3 id="命令参数"><strong>命令参数</strong></h3>
 <p><strong>常用</strong></p>
 <p><code>netstat -antupo</code>     #ALL_socket、IP、TCP、UDP、PID、Timer</p>
 <p>-a    有源TCP连接 + 有源Unix域套接口</p>
 <p><strong>找出xxx程序占用的端口</strong></p>
 <p><code>netstat -ap | grep xxx</code></p>
-<!-- raw HTML omitted -->
+<p>​</p>
 <h2 id="nslookup">nslookup</h2>
 <p>dns解析地址</p>
 <pre><code>nslookup [主机地址] [指定DNS服务器]
@@ -161,12 +173,12 @@ nslookup
 -&gt;google.com	#再进行查询
 或
 -&gt;google.com 114.114.114.114	#查询同时指定DNS服务器
-</code></pre><!-- raw HTML omitted -->
+</code></pre><p>​</p>
 <h2 id="进程状态">进程状态</h2>
 <p><code>ps -aux</code>
 <code>top</code>   #实时查看进程，“任务管理器”
 <code>pstree</code>    #进程树</p>
-<!-- raw HTML omitted -->
+<p>​</p>
 <h2 id="curl--wget">curl &amp; wget</h2>
 <p><code>curl &lt;URL&gt;</code></p>
 <blockquote>
@@ -178,7 +190,7 @@ nslookup
 <code>-head</code> 只显示响应头信息</p>
 </blockquote>
 <p><code>wget  -b </code>    # 后台的方式运行</p>
-<!-- raw HTML omitted -->
+<p>​</p>
 <h2 id="ssh">SSH</h2>
 <p><strong>安装</strong>   <code>apt install openssh-server</code></p>
 <p><strong>允许SSH登录密码root用户</strong></p>
@@ -191,7 +203,7 @@ nslookup
 <li>重启ssh服务
 <code>systemctl restart sshd</code></li>
 </ol>
-<!-- raw HTML omitted -->
+<p>​</p>
 <p><strong><a href="https://hyjk2000.github.io/2012/03/16/how-to-set-up-ssh-keys/">设置 SSH 通过密钥登录</a></strong></p>
 <blockquote>
 <ol>
@@ -218,11 +230,11 @@ nslookup
 <li>将私钥转移到登录客户机</li>
 </ol>
 </blockquote>
-<!-- raw HTML omitted -->
+<p>​</p>
 <h2 id="scp">SCP</h2>
 <p>&ldquo;安全复制&rdquo;</p>
 <p><code> scp -r &lt;local_folder&gt; &lt;remote_username@remote_ip:remote_folder&gt;</code></p>
-<!-- raw HTML omitted -->
+<p>​</p>
 <h2 id="systemctl">systemctl</h2>
 <p>八卦：<a href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></p>
 <p>systemctl命令是系统服务管理器指令，它包揽 service 和 chkconfig 这两个命令到一起。</p>
@@ -237,6 +249,7 @@ systemctl <span class="nb">enable</span> xxx
 systemctl enable命令用于在上面两个目录之间，建立符号链接关系。</p>
 </li>
 </ul>
+<p>​</p>
 <p><strong>OLD FASHION</strong></p>
 <ul>
 <li>

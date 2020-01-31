@@ -3,6 +3,17 @@
   <head>
     
     
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +24,7 @@
     </title>
     
     
-    <meta name="description" property="og:description" content="文件上传漏洞笔记|Hugo-Primer theme&#39;s example site">
+    <meta name="description" property="og:description" content="文件上传漏洞笔记|blog under go1f.cc">
     
 
     <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Zone">
@@ -29,7 +40,7 @@
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
     <meta name="twitter:title" content="文件上传 | Arefu&#39;s Zone">
-    <meta name="twitter:description" content="文件上传漏洞笔记|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:description" content="文件上传漏洞笔记|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
 
@@ -108,9 +119,9 @@
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-01-20. Published at: 2020-01-20.">
+      <span title="Lastmod: 2020-01-31. Published at: 2020-01-20.">
         
-          Published: 2020-01-20
+          Lastmod: 2020-01-31
         
       </span>
     </div>
@@ -120,7 +131,7 @@
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>文件上传漏洞笔记</p>
+    <p>学习笔记，总结一些文件上传漏洞利用。</p>
 <p><strong>途径</strong></p>
 <ul>
 <li>
@@ -152,6 +163,7 @@
 <p>修改js程序</p>
 </li>
 </ul>
+<p>​</p>
 <h2 id="mime文件类型检验">MIME文件类型检验</h2>
 <p>MIME文件定义在web服务器的/conf/mime.types</p>
 <p><strong>常见MIME</strong></p>
@@ -163,6 +175,7 @@
 </blockquote>
 <p><strong>绕过</strong></p>
 <p>修改“Content-Type”字段为合法MIME类型</p>
+<p>​</p>
 <h2 id="扩展名检验">扩展名检验</h2>
 <h3 id="黑名单检测">黑名单检测</h3>
 <p><strong>黑名单列表绕过</strong></p>
@@ -179,14 +192,18 @@
 <blockquote>
 <p>.PHP .pHp .aSp</p>
 </blockquote>
-<p><strong>黑名单字符串替换绕过</strong></p>
-<p>针对单次替换，双写</p>
+<p><strong>字符串替换双写绕过</strong></p>
+<p>针对单次替换的，</p>
 <pre><code>str_replace(&quot;php&quot;, &quot; &quot;, &quot;shell.pphphp&quot;)
-</code></pre><h3 id="userini绕过">.user.ini绕过</h3>
-<p><a href="https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html"><strong>文件构成的PHP后门</strong></a></p>
-<p>让同目录下正常的php文件都“自动”包含某个文件</p>
+</code></pre><p>​</p>
+<h3 id="userini绕过">.user.ini绕过</h3>
+<blockquote>
+<p><a href="https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html"><strong>.user.ini文件构成的PHP后门</strong></a></p>
+</blockquote>
+<p>运行在fastcgi 模式，让同目录下正常的php文件都“自动”包含某个文件</p>
 <pre><code>auto_prepend_file=01.gif
 </code></pre><p>借助图片马，造成文件包含。</p>
+<p>​</p>
 <h3 id="htaccess-间接绕过">.htaccess 间接绕过</h3>
 <p>利用.htaccess（apache的分布式配置文件） 添加文件后缀做php解析</p>
 <p><strong>条件</strong></p>
@@ -194,7 +211,7 @@
 <li>Apache+mod_php5 模式</li>
 <li>apache 启用 AllowOverride</li>
 <li>黑名单过滤.htaccess文件</li>
-<li>多个上传文件在一个文件夹或子文件夹共存</li>
+<li>多个上传文件在一个文件夹内共存</li>
 </ul>
 <p><strong>原理</strong></p>
 <blockquote>
@@ -207,7 +224,8 @@
 <pre><code>&lt;FilesMatch &quot;abc&quot;&gt;
     SetHandler application/x-httpd-php
 &lt;/FilesMatch&gt;
-</code></pre><h3 id="windows系统特性">Windows系统特性</h3>
+</code></pre><p>​</p>
+<h3 id="windows系统特性">Windows系统特性</h3>
 <ul>
 <li>
 <p>文件后缀添加空格</p>
@@ -219,12 +237,13 @@ shell.php. .
 </code></pre><p>Windows下自动将非法字符去掉</p>
 </li>
 <li>
-<p>添加 ::$DATA后缀</p>
+<p>添加 ::$DATA后缀(绕过黑名单)</p>
 <p>NTFS ADS流格式 <code>filename.ext::$DATA</code></p>
 <p>$DATA代表了主数据流的数据，用于绕过黑名单后缀检测</p>
 <p>引用：<a href="https://veritas501.space/2017/03/04/%E8%84%91%E6%B4%9E%E5%A4%A7%E5%BC%80%20-%20NTFS%E4%BA%A4%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%B5%81ADS/">脑洞大开 - NTFS交换数据流ADS</a></p>
 </li>
 </ul>
+<p>​</p>
 <h3 id="0x00截断">0x00截断</h3>
 <h4 id="cve-2006-7243httpswwwlinuxidccomlinux2012-0458534htm"><a href="https://www.linuxidc.com/Linux/2012-04/58534.htm">CVE-2006-7243</a></h4>
 <p>PHP 5.3.4之前版本<strong>路径名</strong>中接受\0字符，通过在此<strong>字符后放置安全的文件扩展名</strong>，攻击者可绕过目标访问限制。</p>
@@ -234,6 +253,7 @@ shell.php%00.jpg
 upload/test.php%00/avatar.png
 </code></pre><p><strong>条件</strong></p>
 <p>php&lt;5.3.4  &amp;&amp; magic_qutoes_gpc off</p>
+<p>​</p>
 <h4 id="cve-2015-2348httpswwwfreebufcomvuls62811html"><a href="https://www.freebuf.com/vuls/62811.html">CVE-2015-2348</a></h4>
 <p><strong>触发函数</strong></p>
 <p>比如move_uploaded_file(),getimagesize(), imagecreatefromjpeg()…等</p>
@@ -243,8 +263,9 @@ upload/test.php%00/avatar.png
 <pre><code>$target_path .= basename( $_FILES[ 'uploaded' ][ 'name' ] );
 
 move_uploaded_file($_FILES['uploaded']['tmp_name'], $target_path);
-</code></pre><p>**PS：**截断字符的 get提交   <code>%00</code>，post提交需要对<code>%00</code> url解码；</p>
+</code></pre><p><strong>PS</strong>：截断字符<code>\x00</code>的 get提交   <code>%00</code>，post提交需要对<code>%00</code> url解码，或burpsuit进行hex修改；</p>
 <p>代码审计：重点关注不经过赋值和过滤、直接拼接的 <code>$_GET</code>、<code>$_POST</code>等外部引入的可控变量</p>
+<p>​</p>
 <h2 id="读写条件竞争">读写条件竞争</h2>
 <p>使用burpsuit爆破模块，上传恶意代码文件的同时请求访问该资源（在本地生成一句话木马）</p>
 <p>恶意代码如下：</p>
@@ -276,14 +297,14 @@ cp logo.jpg /b + shell.php /a hack.jpg
 <li>
 <p>使用脚本：</p>
 <p>jpg_payload.php、png_payload.php脚本</p>
-<p>对二次渲染后的图片，执行命令</p>
-<pre><code>php jpg_payload.php shell.jpg
-</code></pre></li>
+<p>对二次渲染后的图片，执行命令 <code>php jpg_payload.php shell.jpg</code></p>
+</li>
 </ul>
 <p>​</p>
 <h2 id="解析漏洞">解析漏洞</h2>
-<p>中间件（解析非php后缀文件）</p>
-<p>》》》php解析运行（版本&lt;5.3.9忽略后缀直接解析，往后版本有security.security.limit_extensions限制）</p>
+<p><strong>原理</strong></p>
+<p>中间件（触发非php后缀文件进行解析） &raquo; php解析运行（版本&lt;5.3.9到此就成功解析了，往后版本增加security.limit_extensions限制，php再次检验文件后缀是否合法）</p>
+<p>​</p>
 <h3 id="iis">IIS</h3>
 <p><strong>IIS 5.x - 6.x</strong></p>
 <ul>
@@ -296,11 +317,13 @@ cp logo.jpg /b + shell.php /a hack.jpg
 <p>服务器默认不解析；号后面的内容，于是xx.asp;.jpg文件解析作asp文件</p>
 </li>
 </ul>
+<p>​</p>
 <p><strong>IIS 7.0/7.5</strong></p>
 <p><strong>条件</strong>：运行在cgi模式，cgi.fix_pathinfo=1</p>
 <p>对任意文件名只要在URL后面追加上字符串&rdquo;/任意文件名.php&quot;就会按照php的方式去解析；</p>
 <pre><code>任意文件名/任意文件名.php
-</code></pre><h3 id="apache">Apache</h3>
+</code></pre><p>​</p>
+<h3 id="apache">Apache</h3>
 <ul>
 <li>
 <p><strong>Apache 1.x 2.x 解析漏洞</strong></p>
@@ -308,6 +331,9 @@ cp logo.jpg /b + shell.php /a hack.jpg
 <p><strong>思路</strong></p>
 <p>若允许上传7z文件，可以上传shell.php.7z，apache会识别为shell.php</p>
 </li>
+</ul>
+<p>​</p>
+<ul>
 <li>
 <p><a href="https://github.com/vulhub/vulhub/tree/master/httpd/apache_parsing_vulnerability"><strong>Apache Httpd 多后缀解析漏洞</strong></a></p>
 <p><strong>条件</strong></p>
@@ -324,14 +350,20 @@ AddHandler php5-script .php
 </ul>
 <p>那么，在有多个后缀的情况下，只要一个文件含有<code>.php</code>后缀的文件即将被识别成PHP文件，没必要是最后一个后缀。利用这个特性，将会造成一个可以绕过上传白名单的解析漏洞。</p>
 </li>
+</ul>
+<p>​</p>
+<ul>
 <li>
 <p><strong>Apache添加解析后缀</strong></p>
-<p>AddType 配置（一般结合.htaccess攻击）</p>
+<p>AddType 配置（一般结合**.htaccess**攻击）</p>
 <pre><code>AddType application/x-httpd-php .jpg
 </code></pre><p>则文件名是test.php.jpg也会解析为php。</p>
+<p>​</p>
 </li>
 <li>
 <p><strong><a href="https://www.leavesongs.com/PENETRATION/apache-cve-2017-15715-vulnerability.html">Apache HTTPD 换行解析漏洞（CVE-2017-15715）</a></strong></p>
+<p>摘抄：</p>
+<blockquote>
 <p>2.4.0~2.4.29版本中存在一个解析漏洞，在解析PHP时，<code>1.php\x0A</code>将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略。</p>
 <ol>
 <li>获取文件名时不能用<code>$_FILES['file']['name']</code>，因为会自动把换行去掉？！（鸡肋）</li>
@@ -340,12 +372,14 @@ AddHandler php5-script .php
 <pre><code>&lt;FilesMatch \.php$&gt;
     SetHandler application/x-httpd-php
 &lt;/FilesMatch&gt;
-</code></pre></li>
+</code></pre></blockquote>
+</li>
 <li>
 <p><strong>Apache SSI 远程命令执行漏洞</strong></p>
 <p>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<code>&lt;!--#exec cmd=&quot;id&quot; --&gt;</code>语法执行任意命令。</p>
 </li>
 </ul>
+<p>​</p>
 <h3 id="nginx">Nginx</h3>
 <p><strong>条件</strong></p>
 <ul>
@@ -358,11 +392,12 @@ AddHandler php5-script .php
 </ul>
 <p><strong>原理 <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4547">CVE-2013-4547</a></strong></p>
 <p>Nginx获取到文件路径upload/test.jpg/bb.txt/shell.php，因php后缀结尾而送往php解析；</p>
-<p>由于php开启了路径修补（ cgi.fix_pathinfo=1)，逐层查找upload/test.jpg/bb.txt、upload/test.jpg，最后找到upload/test.jpg，以php解析该文件</p>
+<p>由于php默认开启了路径修补（ cgi.fix_pathinfo=1)，逐层查找upload/test.jpg/bb.txt、upload/test.jpg，最后找到upload/test.jpg，最后以php解析该文件</p>
 <pre><code>www.xxxx.com/Upload/image/1.jpg/1.php
 www.xxxx.com/Upload/image/1.jpg%00.php
 www.xxxx.com/Upload/image/1.jpg/%20\0.php
-</code></pre><h2 id="配置不当">配置不当</h2>
+</code></pre><p>​</p>
+<h2 id="配置不当">配置不当</h2>
 <h3 id="iis-webdav漏洞详情">IIS Webdav漏洞详情</h3>
 <p>当测试一个站点是否存在webdav漏洞时，可以先构造一个OPTIONS请求，若返回200，则查看返回头的Allow参数中包含哪些方法（可以请求）。</p>
 <pre><code>OPTIONS  / HTTP/1.1
@@ -378,7 +413,8 @@ Content-length:30
 <pre><code>COPY /shell.txt HTTP/1.1
 HOST:thief.one
 Destination:http://thief.one/shell.asp
-</code></pre><h2 id="防御">防御</h2>
+</code></pre><p>​</p>
+<h2 id="防御">防御</h2>
 <p>上传目录禁止运行</p>
 <p>使用白名单过滤</p>
 <p>更新php版本</p>
@@ -395,7 +431,10 @@ Destination:http://thief.one/shell.asp
 </code></pre><p><strong>GoogleHacking</strong></p>
 <p>inurl:&ldquo;editor/filemanager&rdquo;</p>
 <p>intext:&ldquo;Index of&rdquo; site:&ldquo;edu.cn&rdquo;</p>
-<p>参考文章：</p>
+<p>​</p>
+<p>​</p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://github.com/c0ny1/upload-labs">upload-labs</a></p>
 <p><a href="http://www.owasp.org.cn/OWASP_Training/Upload_Attack_Framework.pdf">OWASP上传攻击框架</a></p>
 <p><a href="https://github.com/vulhub/vulhub/tree/master/httpd">vulhub/httpd/</a></p>
   </section>
@@ -449,6 +488,7 @@ Destination:http://thief.one/shell.asp
     </li>
     <li><a href="#防御">防御</a></li>
     <li><a href="#在线编辑器任意文件上传">在线编辑器任意文件上传</a></li>
+    <li><a href="#参考文章">参考文章</a></li>
   </ul>
 </nav></div>
   
