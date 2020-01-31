@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Arefu&#39;s Blog</title>
-    <link>http://localhost:1313/tags/</link>
-    <description>Recent content in Tags on Arefu&#39;s Blog</description>
+    <title>Tags on Arefu&#39;s Zone</title>
+    <link>https://blog.go1f.cc/tags/</link>
+    <description>Recent content in Tags on Arefu&#39;s Zone</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>ch</language>
+    <copyright>&amp;copy;go1f 2020</copyright>
     <lastBuildDate>Wed, 22 Jan 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.go1f.cc/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>信息搜集</title>
-      <link>http://localhost:1313/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</link>
+      <link>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</link>
       <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</guid>
+      <guid>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</guid>
       <description></description>
     </item>
     
     <item>
       <title>文件上传</title>
-      <link>http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
+      <link>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
+      <guid>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
       <description></description>
     </item>
     
     <item>
       <title>文件包含</title>
-      <link>http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
+      <link>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
       <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
+      <guid>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
       <description></description>
     </item>
     
