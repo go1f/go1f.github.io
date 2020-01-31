@@ -41,10 +41,10 @@
     
     <item>
       <title>渗透墙外的世界——Burpsuit多重代理</title>
-      <link>https://blog.go1f.cc/blog/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
+      <link>https://blog.go1f.cc/blog/web%E6%B8%97%E9%80%8F/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
       <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
+      <guid>https://blog.go1f.cc/blog/web%E6%B8%97%E9%80%8F/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
       <description>&lt;p&gt;入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个&lt;strong&gt;多重代理&lt;/strong&gt;问题。&lt;/p&gt;</description>
     </item>
     

