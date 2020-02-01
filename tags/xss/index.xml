@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>XSS on Arefu&#39;s Zone</title>
+    <link>https://blog.go1f.cc/tags/xss/</link>
+    <description>Recent content in XSS on Arefu&#39;s Zone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy;go1f 2020</copyright>
+    <lastBuildDate>Sat, 01 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.go1f.cc/tags/xss/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>XSS漏洞学习笔记</title>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</guid>
+      <description>&lt;p&gt;XSS漏洞学习笔记&lt;/p&gt;
+&lt;p&gt;多得有幸拜读前人的分享，高层的抽象思想，让我能够整理XSS学习笔记，整理出来一点条理。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>XSS闯关小游戏记录</title>
+      <link>https://blog.go1f.cc/blog/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</guid>
+      <description>&lt;p&gt;没什么特别的&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

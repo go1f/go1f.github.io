@@ -12,43 +12,17 @@
     
     
     <item>
-      <title>Linux入门命令1</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
-      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      <title>XSS漏洞学习笔记</title>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
-      <description>whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #</description>
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</guid>
+      <description>&lt;p&gt;XSS漏洞学习笔记&lt;/p&gt;
+&lt;p&gt;多得有幸拜读前人的分享，高层的抽象思想，让我能够整理XSS学习笔记，整理出来一点条理。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Linux入门命令2</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
-      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
-      <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 ​ 安装 包管理 Debian（Ubuntu/kali） apt 从</description>
-    </item>
-    
-    <item>
-      <title>Linux学习的若干板块</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
-      <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
-      <description>操作系统 进程管理、储存管理、设备管理、文件管理、作业管理 用户与用户组 相关文件 /etc/passwd -rw- r&amp;ndash; r&amp;ndash; 用户信息 1.用户名 2.密码 3.UID4.GID组号 5. 备注</description>
-    </item>
-    
-    <item>
-      <title>网站信息搜集</title>
-      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
-      <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
-      <description>&lt;p&gt;主动信息收集：与目标主机直接交互；被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>文件上传</title>
+      <title>文件上传漏洞笔记</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -57,7 +31,7 @@
     </item>
     
     <item>
-      <title>文件包含漏洞</title>
+      <title>文件包含漏洞笔记</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
       <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -84,21 +58,58 @@
     </item>
     
     <item>
+      <title>信息搜集入门</title>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</guid>
+      <description>&lt;p&gt;主动信息收集：与目标主机直接交互；被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>XSS闯关小游戏记录</title>
+      <link>https://blog.go1f.cc/blog/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</guid>
+      <description>&lt;p&gt;没什么特别的&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>渗透墙外的世界——Burpsuit多重代理</title>
       <link>https://blog.go1f.cc/blog/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
-      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/blog/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
       <description>&lt;p&gt;入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个&lt;strong&gt;多重代理&lt;/strong&gt;问题。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>渗透墙外的世界——Burpsuit多重代理</title>
-      <link>https://blog.go1f.cc/blog/web%E6%B8%97%E9%80%8F/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
-      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      <title>Linux入门命令2</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
+      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/web%E6%B8%97%E9%80%8F/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
-      <description>&lt;p&gt;入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个&lt;strong&gt;多重代理&lt;/strong&gt;问题。&lt;/p&gt;</description>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
+      <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 ​ 安装 包管理 Debian（Ubuntu/kali） apt 从</description>
+    </item>
+    
+    <item>
+      <title>Linux学习的若干板块</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
+      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
+      <description>操作系统 进程管理、储存管理、设备管理、文件管理、作业管理 用户与用户组 相关文件 /etc/passwd -rw- r&amp;ndash; r&amp;ndash; 用户信息 1.用户名 2.密码 3.UID4.GID组号 5. 备注</description>
+    </item>
+    
+    <item>
+      <title>Linux入门命令1</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
+      <description>whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #</description>
     </item>
     
   </channel>

