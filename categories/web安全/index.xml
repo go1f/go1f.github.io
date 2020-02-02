@@ -13,6 +13,15 @@
     
     
     <item>
+      <title>CSRF漏洞学习笔记</title>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/csrf/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/csrf/</guid>
+      <description>&lt;p&gt;CSRF又很好防，只能钻钻漏洞这样子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>XSS漏洞学习笔记</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</link>
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
