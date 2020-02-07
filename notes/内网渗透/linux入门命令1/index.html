@@ -207,16 +207,26 @@ nslookup
 <p><strong><a href="https://hyjk2000.github.io/2012/03/16/how-to-set-up-ssh-keys/">设置 SSH 通过密钥登录</a></strong></p>
 <blockquote>
 <ol>
-<li>制作密钥对
-<code>ssh-keygen -t RSA</code>	生成密钥</li>
-<li><code>cd ~/.ssh</code>	密钥所在地，包含公钥、私钥</li>
-<li><code>cat id_rsa.pub &gt;&gt; authorized_keys</code>	安装公钥</li>
-<li>[确保权限]：
+<li>
+<p>制作密钥对
+<code>ssh-keygen -t RSA</code>	生成密钥</p>
+</li>
+<li>
+<p><code>cd ~/.ssh</code>	密钥所在地，包含公钥、私钥</p>
+</li>
+<li>
+<p><code>cat id_rsa.pub &gt;&gt; authorized_keys</code>	服务器安装公钥</p>
+</li>
+<li>
+<p>[确保权限]：
 <code>chmod 600 authorized_keys</code>
-<code>chmod 700 ~/.ssh</code></li>
-<li>设置 SSH
+<code>chmod 700 ~/.ssh</code></p>
+</li>
+<li>
+<p>设置 SSH
 打开密钥登录功能
-编辑 /etc/ssh/sshd_config 文件，进行如下设置：</li>
+编辑 /etc/ssh/sshd_config 文件，进行如下设置：</p>
+</li>
 </ol>
 <p><code>RSAAuthentication yes</code>
 <code>PubkeyAuthentication yes</code></p>
@@ -224,10 +234,12 @@ nslookup
 <p><code>PermitRootLogin yes</code></p>
 <p>当你完成全部设置，并以密钥方式登录成功后，再禁用密码登录：</p>
 <p><code>PasswordAuthentication no</code></p>
-<p>最后，重启 SSH 服务：</p>
-<p><code>[root@host .ssh]$</code> <code>service sshd restart</code></p>
 <ol start="6">
-<li>将私钥转移到登录客户机</li>
+<li>最后，重启 SSH 服务：</li>
+</ol>
+<p><code>[root@host .ssh]$</code> <code>service sshd restart</code></p>
+<ol start="7">
+<li>将私钥id_rsa转移到登录机</li>
 </ol>
 </blockquote>
 <p>​</p>

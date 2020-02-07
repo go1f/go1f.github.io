@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Sat, 01 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>暴力破解</title>
+      <link>https://blog.go1f.cc/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CSRF</title>
@@ -49,20 +58,20 @@
     </item>
     
     <item>
-      <title>Tools</title>
-      <link>https://blog.go1f.cc/tags/tools/</link>
-      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      <title>信息收集</title>
+      <link>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/tags/tools/</guid>
+      <guid>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>信息搜集</title>
-      <link>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</link>
-      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      <title>Tools</title>
+      <link>https://blog.go1f.cc/tags/tools/</link>
+      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</guid>
+      <guid>https://blog.go1f.cc/tags/tools/</guid>
       <description></description>
     </item>
     

