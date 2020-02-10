@@ -24,7 +24,7 @@ if (!doNotTrack) {
     </title>
     
     
-    <meta name="description" property="og:description" content="关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 ​ 安装 包管理 Debian（Ubuntu/kali） apt 从|blog under go1f.cc">
+    <meta name="description" property="og:description" content="关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 dhclient ens38 ​ 安装 包管理 Debian（Ubuntu/kali）|blog under go1f.cc">
     
 
     <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Zone">
@@ -40,7 +40,7 @@ if (!doNotTrack) {
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
     <meta name="twitter:title" content="Linux入门命令2 | Arefu&#39;s Zone">
-    <meta name="twitter:description" content="关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 ​ 安装 包管理 Debian（Ubuntu/kali） apt 从|blog under go1f.cc">
+    <meta name="twitter:description" content="关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 dhclient ens38 ​ 安装 包管理 Debian（Ubuntu/kali）|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
 
@@ -76,7 +76,7 @@ if (!doNotTrack) {
     
     <a class="UnderlineNav-item " href="/notes/">
       
-      <span>学习笔记</span>
+      <span>笔记</span>
     </a>
     
     
@@ -85,6 +85,14 @@ if (!doNotTrack) {
     <a class="UnderlineNav-item " href="/blog/">
       
       <span>博客</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/about/">
+      
+      <span>一份简历</span>
     </a>
     
     
@@ -144,7 +152,8 @@ netmask 255.255.255.0
 gateway 192.168.5.1
 </code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">ifdown ens38
 ifup ens38
-</code></pre></div><p>​</p>
+</code></pre></div><pre><code>dhclient ens38
+</code></pre><p>​</p>
 <h2 id="安装">安装</h2>
 <h3 id="包管理">包管理</h3>
 <p>Debian（Ubuntu/kali）</p>
@@ -334,7 +343,26 @@ iptables -P FORWARD DROP	#所有转发一律丢弃
 
   <section>
     
-      
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "go1f" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
   </section>
 </article>

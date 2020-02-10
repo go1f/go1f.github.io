@@ -76,7 +76,7 @@ if (!doNotTrack) {
     
     <a class="UnderlineNav-item " href="/notes/">
       
-      <span>学习笔记</span>
+      <span>笔记</span>
     </a>
     
     
@@ -85,6 +85,14 @@ if (!doNotTrack) {
     <a class="UnderlineNav-item " href="/blog/">
       
       <span>博客</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/about/">
+      
+      <span>一份简历</span>
     </a>
     
     
@@ -119,9 +127,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-05. Published at: 2020-02-01.">
+      <span title="Lastmod: 2020-02-10. Published at: 2020-02-01.">
         
-          Lastmod: 2020-02-05
+          Lastmod: 2020-02-10
         
       </span>
     </div>
@@ -287,10 +295,10 @@ if (!doNotTrack) {
 <p>读取  <code>document.cookie</code></p>
 </li>
 <li>
-<p>设置cookie   <code>document.cookie = &quot;uname=bca&quot;</code></p>
+<p>设置 cookie   <code>document.cookie = &quot;uname=bca&quot;</code></p>
 </li>
 <li>
-<p>删除cookie  <code>document.cookie = &quot;Sessionid=' ';expires=&quot;+Date()</code></p>
+<p>删除 cookie  <code>document.cookie = &quot;Sessionid=' ';expires=&quot;+Date()</code></p>
 </li>
 </ul>
 <p>​</p>
@@ -326,7 +334,26 @@ if (!doNotTrack) {
 
   <section>
     
-      
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "go1f" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
   </section>
 </article>

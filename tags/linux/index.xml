@@ -18,7 +18,7 @@
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
-      <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 ​ 安装 包管理 Debian（Ubuntu/kali） apt 从</description>
+      <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 dhclient ens38 ​ 安装 包管理 Debian（Ubuntu/kali）</description>
     </item>
     
     <item>

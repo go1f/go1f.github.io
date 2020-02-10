@@ -58,21 +58,22 @@
     </item>
     
     <item>
-      <title>信息收集初阶</title>
+      <title>信息收集——网站篇</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
-      <description>&lt;p&gt;主动信息收集：与目标主机直接交互；被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;
+      <description>&lt;p&gt;主动信息收集：与目标主机直接交互；&lt;/p&gt;
+&lt;p&gt;被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;
 &lt;p&gt;​&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>XSS闯关小游戏记录</title>
-      <link>https://blog.go1f.cc/blog/%E6%9D%82%E6%96%87/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</link>
+      <link>https://blog.go1f.cc/blog/others/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E6%9D%82%E6%96%87/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</guid>
+      <guid>https://blog.go1f.cc/blog/others/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</guid>
       <description>&lt;p&gt;没什么特别的&lt;/p&gt;</description>
     </item>
     
@@ -96,10 +97,10 @@
     
     <item>
       <title>渗透墙外的世界——Burpsuit多重代理</title>
-      <link>https://blog.go1f.cc/blog/%E6%9D%82%E6%96%87/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
+      <link>https://blog.go1f.cc/blog/others/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
       <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E6%9D%82%E6%96%87/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
+      <guid>https://blog.go1f.cc/blog/others/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
       <description>&lt;p&gt;入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个&lt;strong&gt;多重代理&lt;/strong&gt;问题。&lt;/p&gt;</description>
     </item>
     
@@ -109,7 +110,7 @@
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
-      <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 ​ 安装 包管理 Debian（Ubuntu/kali） apt 从</description>
+      <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 dhclient ens38 ​ 安装 包管理 Debian（Ubuntu/kali）</description>
     </item>
     
     <item>

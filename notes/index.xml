@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>学习笔记 on Arefu&#39;s Zone</title>
+    <title>笔记 on Arefu&#39;s Zone</title>
     <link>https://blog.go1f.cc/notes/</link>
-    <description>Recent content in 学习笔记 on Arefu&#39;s Zone</description>
+    <description>Recent content in 笔记 on Arefu&#39;s Zone</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -49,12 +49,13 @@
     </item>
     
     <item>
-      <title>信息收集初阶</title>
+      <title>信息收集——网站篇</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
-      <description>&lt;p&gt;主动信息收集：与目标主机直接交互；被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;
+      <description>&lt;p&gt;主动信息收集：与目标主机直接交互；&lt;/p&gt;
+&lt;p&gt;被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;
 &lt;p&gt;​&lt;/p&gt;</description>
     </item>
     
@@ -82,7 +83,7 @@
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
-      <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 ​ 安装 包管理 Debian（Ubuntu/kali） apt 从</description>
+      <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 dhclient ens38 ​ 安装 包管理 Debian（Ubuntu/kali）</description>
     </item>
     
     <item>
