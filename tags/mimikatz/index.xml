@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mimikatz on Arefu&#39;s Zone</title>
+    <link>https://blog.go1f.cc/tags/mimikatz/</link>
+    <description>Recent content in mimikatz on Arefu&#39;s Zone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy;go1f 2020</copyright>
+    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.go1f.cc/tags/mimikatz/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>黄金票据与mimikatz</title>
+      <link>https://blog.go1f.cc/blog/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
+      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
+      <description>&lt;p&gt;后渗透的一些隐匿手段。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
