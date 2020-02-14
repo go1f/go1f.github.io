@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>公告栏 on Arefu&#39;s Zone</title>
+    <title>公告栏 on 阿富的在线稿子</title>
     <link>https://blog.go1f.cc/</link>
-    <description>Recent content in 公告栏 on Arefu&#39;s Zone</description>
+    <description>Recent content in 公告栏 on 阿富的在线稿子</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -12,21 +12,39 @@
     
     
     <item>
-      <title>黄金票据与mimikatz</title>
-      <link>https://blog.go1f.cc/blog/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
+      <title>制作白银票据</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</guid>
+      <description>​ 白银票据 Silver Tickets(白银票据) 就是伪造的TGS Ticket，包含了伪造的PAC，用来让服务器获取相应的用户UID等信息，向KDC确认</description>
+    </item>
+    
+    <item>
+      <title>内网/域控扫盲</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</link>
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</guid>
+      <description>​ 系统账户 NT Authority\Local System，SID S-1-5-18，系统内置账号，对本地系统拥有完全控制权限；在工作组模式下，该账户不能网络资源；通常用于服</description>
+    </item>
+    
+    <item>
+      <title>黄金票据与 mimikatz</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
+      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
       <description>&lt;p&gt;后渗透的一些隐匿手段。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Hash获取与传递</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E8%8E%B7%E5%8F%96%E4%B8%8E%E4%BC%A0%E9%80%92/</link>
+      <title>Hash抓取——域、工作组、在线、离线</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</link>
       <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E8%8E%B7%E5%8F%96%E4%B8%8E%E4%BC%A0%E9%80%92/</guid>
-      <description>&lt;p&gt;​&lt;/p&gt;</description>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</guid>
+      <description>&lt;p&gt;什么是Hash？Hash抓取、域网络中的Hash抓取。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,6 +54,34 @@
       
       <guid>https://blog.go1f.cc/blog/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%B7%91js%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AD%97%E5%85%B8%E7%94%9F%E6%88%90/</guid>
       <description>&lt;p&gt;关键字: 前端JS加密，伪验证码，PyV8，pydictor&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>如何优雅地爆破密码？</title>
+      <link>https://blog.go1f.cc/blog/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E7%88%86%E7%A0%B4%E5%AF%86%E7%A0%81/</link>
+      <pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E7%88%86%E7%A0%B4%E5%AF%86%E7%A0%81/</guid>
+      <description>&lt;p&gt;之前就听说，弱口令比想象中多，密码爆破很多时候就是渗透的一个不错的打进去的入口。&lt;/p&gt;
+&lt;p&gt;没找到后门，就堂而皇之地从瞎撞几次正门。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>获取绝对路径</title>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80/%E8%8E%B7%E5%8F%96%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8C%87%E5%BC%95/</link>
+      <pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80/%E8%8E%B7%E5%8F%96%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8C%87%E5%BC%95/</guid>
+      <description>&lt;p&gt;记录网站路径泄露的各种方法，为数据库写入一句话木马做准备。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PHP Manual 笔记</title>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80/php-manual-%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80/php-manual-%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;有事没事翻翻&lt;a href=&#34;https://www.php.net/manual/zh/index.php&#34;&gt;PHP 手册&lt;/a&gt;，当作基础，可以帮助理解很多东西。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -76,6 +122,16 @@
     </item>
     
     <item>
+      <title>数据库getShell</title>
+      <link>https://blog.go1f.cc/blog/%E6%95%B0%E6%8D%AE%E5%BA%93getshell/</link>
+      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E6%95%B0%E6%8D%AE%E5%BA%93getshell/</guid>
+      <description>&lt;p&gt;数据库的getshell方法汇总，持续更新……&lt;/p&gt;
+&lt;p&gt;借助数据库的getshell方法汇总，持续更新……&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>信息收集——网站篇</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
@@ -88,10 +144,10 @@
     
     <item>
       <title>XSS闯关小游戏记录</title>
-      <link>https://blog.go1f.cc/blog/others/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</link>
+      <link>https://blog.go1f.cc/blog/%E5%B0%8F%E8%AE%B0/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/others/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</guid>
+      <guid>https://blog.go1f.cc/blog/%E5%B0%8F%E8%AE%B0/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</guid>
       <description>&lt;p&gt;没什么特别的&lt;/p&gt;</description>
     </item>
     
@@ -115,10 +171,10 @@
     
     <item>
       <title>渗透墙外的世界——Burpsuit多重代理</title>
-      <link>https://blog.go1f.cc/blog/others/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
+      <link>https://blog.go1f.cc/blog/%E5%B0%8F%E8%AE%B0/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
       <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/others/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
+      <guid>https://blog.go1f.cc/blog/%E5%B0%8F%E8%AE%B0/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</guid>
       <description>&lt;p&gt;入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个&lt;strong&gt;多重代理&lt;/strong&gt;问题。&lt;/p&gt;</description>
     </item>
     

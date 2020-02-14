@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>内网渗透 on Arefu&#39;s Zone</title>
+    <title>内网渗透 on 阿富的在线稿子</title>
     <link>https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</link>
-    <description>Recent content in 内网渗透 on Arefu&#39;s Zone</description>
+    <description>Recent content in 内网渗透 on 阿富的在线稿子</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>黄金票据与mimikatz</title>
-      <link>https://blog.go1f.cc/blog/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
+      <title>制作白银票据</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</guid>
+      <description>​ 白银票据 Silver Tickets(白银票据) 就是伪造的TGS Ticket，包含了伪造的PAC，用来让服务器获取相应的用户UID等信息，向KDC确认</description>
+    </item>
+    
+    <item>
+      <title>内网/域控扫盲</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</link>
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</guid>
+      <description>​ 系统账户 NT Authority\Local System，SID S-1-5-18，系统内置账号，对本地系统拥有完全控制权限；在工作组模式下，该账户不能网络资源；通常用于服</description>
+    </item>
+    
+    <item>
+      <title>黄金票据与 mimikatz</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
+      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
       <description>&lt;p&gt;后渗透的一些隐匿手段。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Hash获取与传递</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E8%8E%B7%E5%8F%96%E4%B8%8E%E4%BC%A0%E9%80%92/</link>
+      <title>Hash抓取——域、工作组、在线、离线</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</link>
       <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E8%8E%B7%E5%8F%96%E4%B8%8E%E4%BC%A0%E9%80%92/</guid>
-      <description>&lt;p&gt;​&lt;/p&gt;</description>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</guid>
+      <description>&lt;p&gt;什么是Hash？Hash抓取、域网络中的Hash抓取。&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Arefu&#39;s Zone</title>
+    <title>Categories on 阿富的在线稿子</title>
     <link>https://blog.go1f.cc/categories/</link>
-    <description>Recent content in Categories on Arefu&#39;s Zone</description>
+    <description>Recent content in Categories on 阿富的在线稿子</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>内网渗透</title>
       <link>https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</link>
-      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</guid>
       <description></description>

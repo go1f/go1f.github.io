@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  渗透墙外的世界——Burpsuit多重代理 &ndash; 阿富的在线稿子
+
+    </title>
+    
+    <meta content="burpsuit多重代理" name="keywords">
+    
+    
+    <meta name="description" property="og:description" content="burp的外网代理问题|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="阿富的在线稿子">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="渗透墙外的世界——Burpsuit多重代理 | 阿富的在线稿子">
+    <meta name="twitter:description" content="burp的外网代理问题|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    阿富的在线稿子
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>公告栏</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/notes/">
+      
+      <span>低质笔记</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/about/">
+      
+      <span>简历</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">渗透墙外的世界——Burpsuit多重代理</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E5%AE%89%E5%85%A8' class="muted-link">
+  <span class="Label Label--gray-darker">Web安全</span>
+</a>
+
+
+
+<a href='/tags/burpsuit' class="muted-link">
+  <span class="Label Label--gray">Burpsuit</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-11-01. Published at: 2019-10-24.">
+        
+          Lastmod: 2019-11-01
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个<strong>多重代理</strong>问题。</p>
+<blockquote>
+<p>在这种情况下，我们必须借助代理链了。</p>
+<p>顾名思义，代理链就一系列的代理形成的链条。像刚才那种情形，我们首先设置浏览器的代理为BurpSuite以便能够抓包；然后为BurpSuite再设置一个上游代理即SS。这样访问google.com时，请求数据先经过BurpSuite，于是可以进行抓包了；然后再流向SS，最后经过SS服务器到达google.com。服务器端返回的响应则刚好相反。通过这个BurpSuite——SS的代理链，我们就解决了本节开头所描述的问题。</p>
+</blockquote>
+<p>——  <a href="https://www.anquanke.com/post/id/85925">【技术分享】BurpSuite 代理设置的小技巧 </a></p>
+<p>​</p>
+<p>在这里，介绍使用V2ray情况下的burpsuit代理。</p>
+<p>在User options下的Connections找到：</p>
+<h2 id="upstream-proxy-servers功能">Upstream Proxy Servers功能</h2>
+<p><img src="https://i.loli.net/2020/01/31/rca3zmps9NPRoIE.png" alt="upstream proxy servers设置界面"></p>
+<p>destination host address 指需要代理的网站，例如*.google.com</p>
+<pre><code>proxy host: 127.0.0.1
+</code></pre><p>​</p>
+<p>我的端口设置是10809，参照下图中v2rayN的界面，</p>
+<pre><code>proxy port: 10809
+</code></pre><p><img src="https://i.loli.net/2020/01/31/FSZajKBdNi1LyEb.png" alt="v2rayN界面"></p>
+<p>​</p>
+<h2 id="socks-proxy">Socks Proxy</h2>
+<p>个人觉得upstream功能需要设置代理的网站，有点繁琐，直接使用v2ray提供的Socks服务器功能岂不是更妙？设置如下：</p>
+<pre><code>socks proxy host: 127.0.0.1
+</code></pre><p>端口号填写同理，参照上图：</p>
+<pre><code>proxy host: 10808
+</code></pre><p>注意勾选“ Do DNSlookups over SOCKS proxy”，毕竟科学网站被DNS污染是必然的。</p>
+<p><img src="https://i.loli.net/2020/01/31/NFnjUwTtSEuc9MC.png" alt="Socks Proxy设置界面"></p>
+<h2 id="本地调试与科学上网可兼得">本地调试与科学上网可兼得</h2>
+<p>若希望用burp测试本地搭建的网站，同时又希望可以用google搜索。则在v2rayN设置添加下面的环回地址到“直连的Domain或IP”。</p>
+<pre><code>127.0.0.1
+[::1]
+localhost
+</code></pre><p><img src="https://i.loli.net/2020/01/31/YdcR8OaIynFuLDJ.png" alt="v2rayN参数设置"></p>
+<p>​</p>
+<p>完。</p>
+  </section>
+
+  <section>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "go1f" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>渗透墙外的世界——Burpsuit多重代理</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#upstream-proxy-servers功能">Upstream Proxy Servers功能</a></li>
+    <li><a href="#socks-proxy">Socks Proxy</a></li>
+    <li><a href="#本地调试与科学上网可兼得">本地调试与科学上网可兼得</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
