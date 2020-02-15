@@ -22,25 +22,16 @@
     </item>
     
     <item>
-      <title>绝对路径的获取思路</title>
-      <link>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E7%9A%84%E8%8E%B7%E5%8F%96%E6%80%9D%E8%B7%AF/</link>
-      <pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E7%9A%84%E8%8E%B7%E5%8F%96%E6%80%9D%E8%B7%AF/</guid>
-      <description>&lt;p&gt;记录网站路径泄露的各种方法，为数据库写入一句话木马做准备。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>PHP Manual——安全目录</title>
       <link>https://blog.go1f.cc/notes/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual%E5%AE%89%E5%85%A8%E7%9B%AE%E5%BD%95/</link>
       <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual%E5%AE%89%E5%85%A8%E7%9B%AE%E5%BD%95/</guid>
-      <description>&lt;p&gt;有事没事翻翻&lt;a href=&#34;https://www.php.net/manual/zh/index.php&#34;&gt;PHP 手册&lt;/a&gt;，当作基础，可以帮助理解很多东西。&lt;/p&gt;</description>
+      <description>&lt;p&gt;有事没事翻翻&lt;a href=&#34;https://www.php.net/manual/zh/index.php&#34;&gt;PHP 手册&lt;/a&gt;，边作基础，帮助理解很多。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>CSRF漏洞学习笔记</title>
+      <title>Web安全笔记系列 —— CSRF</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/csrf/</link>
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -49,7 +40,7 @@
     </item>
     
     <item>
-      <title>XSS漏洞学习笔记</title>
+      <title>Web安全笔记系列 —— XSS</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</link>
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -58,7 +49,7 @@
     </item>
     
     <item>
-      <title>文件上传漏洞笔记</title>
+      <title>Web安全笔记系列 —— 文件上传</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -68,7 +59,7 @@
     </item>
     
     <item>
-      <title>文件包含漏洞笔记</title>
+      <title>Web安全笔记系列 —— 文件包含</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
       <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -77,7 +68,7 @@
     </item>
     
     <item>
-      <title>信息收集——网站篇</title>
+      <title>Web安全笔记系列 —— 信息收集/网站篇</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       

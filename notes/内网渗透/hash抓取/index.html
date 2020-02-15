@@ -19,14 +19,14 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  Hash抓取——域、工作组、在线、离线 &ndash; Arefu&#39;s Playground
+  Hash抓取 —— 域与工作组、在线与离线 &ndash; Arefu&#39;s Playground
 
     </title>
     
     <meta content="hash抓取, 域渗透, 明文密码" name="keywords">
     
     
-    <meta name="description" property="og:description" content="什么是Hash？Hash抓取、域网络中的Hash抓取。
+    <meta name="description" property="og:description" content="Hash抓取手法、重点是域网络下的离线抓取。什么是Hash？
 |blog under go1f.cc">
     
 
@@ -42,8 +42,8 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="Hash抓取——域、工作组、在线、离线 | Arefu&#39;s Playground">
-    <meta name="twitter:description" content="什么是Hash？Hash抓取、域网络中的Hash抓取。|blog under go1f.cc">
+    <meta name="twitter:title" content="Hash抓取 —— 域与工作组、在线与离线 | Arefu&#39;s Playground">
+    <meta name="twitter:description" content="Hash抓取手法、重点是域网络下的离线抓取。什么是Hash？|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
 
@@ -71,7 +71,7 @@ if (!doNotTrack) {
     
     <a class="UnderlineNav-item " href="/">
       
-      <span>公告栏</span>
+      <span>Board</span>
     </a>
     
     
@@ -79,7 +79,7 @@ if (!doNotTrack) {
     
     <a class="UnderlineNav-item " href="/notes/">
       
-      <span>低质笔记</span>
+      <span>Notes</span>
     </a>
     
     
@@ -87,7 +87,7 @@ if (!doNotTrack) {
     
     <a class="UnderlineNav-item " href="/blog/">
       
-      <span>博客</span>
+      <span>Blog</span>
     </a>
     
     
@@ -102,7 +102,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">Hash抓取——域、工作组、在线、离线</div>
+    <div class="h1 mt-3 mb-1">Hash抓取 —— 域与工作组、在线与离线</div>
   </div>
   <div class="Subhead-description">
     
@@ -122,9 +122,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-14. Published at: 2020-02-11.">
+      <span title="Lastmod: 2020-02-15. Published at: 2020-02-11.">
         
-          Lastmod: 2020-02-14
+          Lastmod: 2020-02-15
         
       </span>
     </div>
@@ -134,7 +134,7 @@ if (!doNotTrack) {
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>什么是Hash？Hash抓取、域网络中的Hash抓取。</p>
+    <p>Hash抓取手法、重点是域网络下的离线抓取。什么是Hash？</p>
 <p>​</p>
 <h2 id="hash来源">Hash来源</h2>
 <ul>
@@ -224,7 +224,7 @@ mount {195f814f-9a8d-42df-b7a5-f8495b6ec352}   #挂载快照
 <span class="k">copy</span> windows\system32\config\SYSTEM \\pc1\c$\hash
 </code></pre></div><p><img src="https://i.loli.net/2020/02/14/QLkUZtYp2qbW754.jpg" alt="copy_from_ntdsutil_method.jpg"></p>
 <p>​</p>
-<h3 id="其它工具">其它工具</h3>
+<h3 id="others">others</h3>
 <ul>
 <li>
 <p>diskshadow.exe   官方，适用Windows Server 2016, Windows Server 2012 R2, Windows Server 2012</p>
@@ -337,26 +337,7 @@ mimikatz # sekurlsa::logonpasswords
 
   <section>
     
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "go1f" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
 </article>
@@ -368,7 +349,7 @@ mimikatz # sekurlsa::logonpasswords
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>Hash抓取——域、工作组、在线、离线</b><nav id="TableOfContents">
+      <b>Hash抓取 —— 域与工作组、在线与离线</b><nav id="TableOfContents">
   <ul>
     <li><a href="#hash来源">Hash来源</a></li>
     <li><a href="#在线抓取">在线抓取</a></li>
@@ -376,7 +357,7 @@ mimikatz # sekurlsa::logonpasswords
       <ul>
         <li><a href="#vssadmin">vssadmin</a></li>
         <li><a href="#ntdsutilexe">ntdsutil.exe</a></li>
-        <li><a href="#其它工具">其它工具</a></li>
+        <li><a href="#others">others</a></li>
       </ul>
     </li>
     <li><a href="#解码">解码</a></li>

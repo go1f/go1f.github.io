@@ -76,7 +76,7 @@ dfn {
     font-style: italic
 }
 h1 {
-	color: #FFA566;
+	color: #586069;
     font-size: 2em;
     margin: 0.67em 0
 }
@@ -2570,7 +2570,7 @@ a.tabnav-extra:hover {
     margin-left: 16px
 }
 .UnderlineNav--right .UnderlineNav-actions {
-
+    font-family: serif;
     flex: 1 1 auto
 }
 .UnderlineNav-actions {
@@ -3227,11 +3227,10 @@ a.tabnav-extra:hover {
     color: #6699FF !important
 }
 .muted-link {
-	font-family: Helvetica;
-    color: #FFA566 !important
+    color: #586069 !important
 }
 .muted-link:hover {
-    color: #FF7F66 !important;
+    color: #0366d6 !important;
     text-decoration: none
 }
 .flex-row {
@@ -6041,7 +6040,8 @@ a.tabnav-extra:hover {
     }
 }
 .h1 {
-	color: #FFA566;
+	font-family: serif;
+	color: #586069;
     font-size: 26px !important
 }
 @media (min-width: 768px) {
@@ -6050,6 +6050,7 @@ a.tabnav-extra:hover {
     }
 }
 .h2 {
+	font-family: serif;
     font-size: 22px !important
 }
 @media (min-width: 768px) {
