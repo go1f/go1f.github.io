@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>低质笔记 on 阿富的在线稿子</title>
+    <title>低质笔记 on Arefu&#39;s Playground</title>
     <link>https://blog.go1f.cc/notes/</link>
-    <description>Recent content in 低质笔记 on 阿富的在线稿子</description>
+    <description>Recent content in 低质笔记 on Arefu&#39;s Playground</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -40,28 +40,28 @@
     
     <item>
       <title>Hash抓取——域、工作组、在线、离线</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</link>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8A%93%E5%8F%96hash/</link>
       <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8A%93%E5%8F%96hash/</guid>
       <description>&lt;p&gt;什么是Hash？Hash抓取、域网络中的Hash抓取。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>获取绝对路径</title>
-      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80/%E8%8E%B7%E5%8F%96%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8C%87%E5%BC%95/</link>
+      <title>绝对路径的获取思路</title>
+      <link>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E7%9A%84%E8%8E%B7%E5%8F%96%E6%80%9D%E8%B7%AF/</link>
       <pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80/%E8%8E%B7%E5%8F%96%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8C%87%E5%BC%95/</guid>
+      <guid>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E7%9A%84%E8%8E%B7%E5%8F%96%E6%80%9D%E8%B7%AF/</guid>
       <description>&lt;p&gt;记录网站路径泄露的各种方法，为数据库写入一句话木马做准备。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>PHP Manual 笔记</title>
-      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80/php-manual-%E7%AC%94%E8%AE%B0/</link>
+      <title>PHP Manual——安全目录</title>
+      <link>https://blog.go1f.cc/notes/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual%E5%AE%89%E5%85%A8%E7%9B%AE%E5%BD%95/</link>
       <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80/php-manual-%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.go1f.cc/notes/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual%E5%AE%89%E5%85%A8%E7%9B%AE%E5%BD%95/</guid>
       <description>&lt;p&gt;有事没事翻翻&lt;a href=&#34;https://www.php.net/manual/zh/index.php&#34;&gt;PHP 手册&lt;/a&gt;，当作基础，可以帮助理解很多东西。&lt;/p&gt;</description>
     </item>
     
@@ -80,8 +80,7 @@
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</guid>
-      <description>&lt;p&gt;XSS漏洞学习笔记&lt;/p&gt;
-&lt;p&gt;多得有幸拜读前人的分享，高层的抽象思想，让我能够整理XSS学习笔记，整理出来一点条理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;有幸获得前辈的分享，高层的概括受益匪浅（见文尾），得以对XSS整理出一点条理。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -90,7 +89,8 @@
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
-      <description>&lt;p&gt;学习笔记，总结一些文件上传漏洞利用。&lt;/p&gt;</description>
+      <description>&lt;p&gt;一些文件上传漏洞利用。&lt;/p&gt;
+&lt;p&gt;记录经典一些文件上传漏洞利用。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -109,52 +109,33 @@
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
       <description>&lt;p&gt;主动信息收集：与目标主机直接交互；&lt;/p&gt;
-&lt;p&gt;被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;
-&lt;p&gt;​&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>渗透工具备忘录</title>
-      <link>https://blog.go1f.cc/notes/random/%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/</link>
-      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/notes/random/%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>渗透重装备忘</title>
-      <link>https://blog.go1f.cc/notes/random/%E9%87%8D%E8%A3%85%E5%8A%A9%E6%89%8B/</link>
-      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/notes/random/%E9%87%8D%E8%A3%85%E5%8A%A9%E6%89%8B/</guid>
-      <description>&lt;p&gt;有感于重装了一次windows LTSC版，然后配置各种初始化，竟花费了一晚上。故特意做一个Memo供日后使用。&lt;/p&gt;</description>
+&lt;p&gt;被动信息收集：通过搜索引擎或社会工程获取目标信息&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Linux入门命令2</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
+      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
+      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
       <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 dhclient ens38 ​ 安装 包管理 Debian（Ubuntu/kali）</description>
     </item>
     
     <item>
       <title>Linux学习的若干板块</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
+      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
       <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
+      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
       <description>操作系统 进程管理、储存管理、设备管理、文件管理、作业管理 用户与用户组 相关文件 /etc/passwd -rw- r&amp;ndash; r&amp;ndash; 用户信息 1.用户名 2.密码 3.UID4.GID组号 5. 备注</description>
     </item>
     
     <item>
       <title>Linux入门命令1</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
+      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
+      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
       <description>whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #</description>
     </item>
     

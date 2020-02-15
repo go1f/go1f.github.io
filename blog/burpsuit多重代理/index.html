@@ -19,16 +19,18 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  获取绝对路径 &ndash; 阿富的在线稿子
+  Burpsuit多重代理——渗透墙外的世界 &ndash; Arefu&#39;s Playground
 
     </title>
     
+    <meta content="burpsuit多重代理" name="keywords">
     
-    <meta name="description" property="og:description" content="记录网站路径泄露的各种方法，为数据库写入一句话木马做准备。
+    
+    <meta name="description" property="og:description" content="入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个多重代理问题。
 |blog under go1f.cc">
     
 
-    <meta name="apple-mobile-web-app-title" content="阿富的在线稿子">
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Playground">
     
     
     <link rel="icon" href="/favicon-64.png">
@@ -40,8 +42,8 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="获取绝对路径 | 阿富的在线稿子">
-    <meta name="twitter:description" content="记录网站路径泄露的各种方法，为数据库写入一句话木马做准备。|blog under go1f.cc">
+    <meta name="twitter:title" content="Burpsuit多重代理——渗透墙外的世界 | Arefu&#39;s Playground">
+    <meta name="twitter:description" content="入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个多重代理问题。|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
 
@@ -58,7 +60,7 @@ if (!doNotTrack) {
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
   <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
-    阿富的在线稿子
+    Arefu&#39;s Playground
   </a>
 
   
@@ -89,14 +91,6 @@ if (!doNotTrack) {
     </a>
     
     
-    
-    
-    <a class="UnderlineNav-item " href="/about/">
-      
-      <span>简历</span>
-    </a>
-    
-    
   </div>
   
 </nav>
@@ -108,7 +102,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">获取绝对路径</div>
+    <div class="h1 mt-3 mb-1">Burpsuit多重代理——渗透墙外的世界</div>
   </div>
   <div class="Subhead-description">
     
@@ -120,17 +114,17 @@ if (!doNotTrack) {
 
 
 
-<a href='/tags/getshell' class="muted-link">
-  <span class="Label Label--gray">getshell</span>
+<a href='/tags/burpsuit' class="muted-link">
+  <span class="Label Label--gray">Burpsuit</span>
 </a>
 
 
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-14. Published at: 2020-02-06.">
+      <span title="Lastmod: 2019-11-01. Published at: 2019-10-24.">
         
-          Lastmod: 2020-02-14
+          Lastmod: 2019-11-01
         
       </span>
     </div>
@@ -140,45 +134,39 @@ if (!doNotTrack) {
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>记录网站路径泄露的各种方法，为数据库写入一句话木马做准备。</p>
-<h2 id="错误参数">错误参数</h2>
-<h3 id="单引号">单引号</h3>
-<p>直接在URL后面加单引号，要求单引号没有被过滤(gpc=off)且服务器默认返回错误信息。</p>
-<pre><code>http://www.xxx.com/series/typeno/H009'
-</code></pre><h3 id="错误参数值">错误参数值</h3>
-<p>将要提交的参数值改成错误值，比如 <code>-1</code> 。</p>
-<pre><code>www.xxx.com/researcharchive.php?id=-1
-</code></pre><h2 id="google-hacking">Google Hacking</h2>
-<p>结合关键字和site语法搜索出错页面的网页快照，常见关键字有<code>warning</code>和<code>fatal error</code>。</p>
-<pre><code>Site:xxx.edu warning
-Site:xxx.com &quot;fatal error&quot;
-</code></pre><h2 id="爆破敏感文件">爆破敏感文件</h2>
-<p>很多网站的根目录下都存在测试文件，脚本代码通常都是phpinfo()。</p>
-<h2 id="phpmyadmin">phpmyadmin</h2>
-<p>一旦找到phpmyadmin的管理页面，再访问该目录下的某些特定文件，就很有可能爆出物理路径。至于phpmyadmin的地址可以用wwwscan这类的工具去扫，也可以选择google。</p>
-<pre><code>/phpmyadmin/libraries/lect_lang.lib.php
-/phpMyAdmin/index.php?lang[]=1
-/phpMyAdmin/phpinfo.php
-/phpmyadmin/themes/darkblue_orange/layout.inc.php
-/phpmyadmin/libraries/select_lang.lib.php
-/phpmyadmin/libraries/lect_lang.lib.php
-/phpmyadmin/libraries/mcrypt.lib.php
-</code></pre><h2 id="找配置文件">找配置文件</h2>
-<p>如果注入点有文件读取权限，就可以手工load_file或工具读取配置文件，再从中寻找路径信息（一般在文件末尾）。各平台下Web服务器和PHP的配置文件默认路径可以上网查，这里列举常见的几个。</p>
-<pre><code>Windows:
-c:\windows\php.ini php配置文件
-c:\windows\system32\inetsrv\MetaBase.xml IIS虚拟主机配置文件
-
-
-Linux:
-/etc/php.ini php配置文件
-/etc/httpd/conf.d/php.conf
-/etc/httpd/conf/httpd.conf Apache配置文件
-/usr/local/apache/conf/httpd.conf
-/usr/local/apache2/conf/httpd.conf
-/usr/local/apache/conf/extra/httpd-vhosts.conf 虚拟目录配置文件
-</code></pre><h2 id="参考文章">参考文章</h2>
-<p><a href="https://xz.aliyun.com/t/3283#toc-8">phpmyadmin getshell姿势 #php爆绝对路径方法</a></p>
+    <p>入门者都已了解到，浏览器的代理交给了Burpsuit，但是有些情况不好解决：渗透一些需要走代理的网站、渗透期间希望用上google搜索等。这时候就需要Burpsuit向上再找一重代理，强大的它，正能解决这个<strong>多重代理</strong>问题。</p>
+<blockquote>
+<p>在这种情况下，我们必须借助代理链了。</p>
+<p>顾名思义，代理链就一系列的代理形成的链条。像刚才那种情形，我们首先设置浏览器的代理为BurpSuite以便能够抓包；然后为BurpSuite再设置一个上游代理即SS。这样访问google.com时，请求数据先经过BurpSuite，于是可以进行抓包了；然后再流向SS，最后经过SS服务器到达google.com。服务器端返回的响应则刚好相反。通过这个BurpSuite——SS的代理链，我们就解决了本节开头所描述的问题。</p>
+</blockquote>
+<p>——  <a href="https://www.anquanke.com/post/id/85925">【技术分享】BurpSuite 代理设置的小技巧 </a></p>
+<p>​</p>
+<p>在这里，介绍使用V2ray情况下的burpsuit代理。</p>
+<p>在User options下的Connections找到：</p>
+<h2 id="upstream-proxy-servers功能">Upstream Proxy Servers功能</h2>
+<p><img src="https://i.loli.net/2020/01/31/rca3zmps9NPRoIE.png" alt="upstream proxy servers设置界面"></p>
+<p>destination host address 指需要代理的网站，例如*.google.com</p>
+<pre><code>proxy host: 127.0.0.1
+</code></pre><p>​</p>
+<p>我的端口设置是10809，参照下图中v2rayN的界面，</p>
+<pre><code>proxy port: 10809
+</code></pre><p><img src="https://i.loli.net/2020/01/31/FSZajKBdNi1LyEb.png" alt="v2rayN界面"></p>
+<p>​</p>
+<h2 id="socks-proxy">Socks Proxy</h2>
+<p>个人觉得upstream功能需要设置代理的网站，有点繁琐，直接使用v2ray提供的Socks服务器功能岂不是更妙？设置如下：</p>
+<pre><code>socks proxy host: 127.0.0.1
+</code></pre><p>端口号填写同理，参照上图：</p>
+<pre><code>proxy host: 10808
+</code></pre><p>注意勾选“ Do DNSlookups over SOCKS proxy”，毕竟科学网站被DNS污染是必然的。</p>
+<p><img src="https://i.loli.net/2020/01/31/NFnjUwTtSEuc9MC.png" alt="Socks Proxy设置界面"></p>
+<h2 id="本地调试与科学上网可兼得">本地调试与科学上网可兼得</h2>
+<p>若希望用burp测试本地搭建的网站，同时又希望可以用google搜索。则在v2rayN设置添加下面的环回地址到“直连的Domain或IP”。</p>
+<pre><code>127.0.0.1
+[::1]
+localhost
+</code></pre><p><img src="https://i.loli.net/2020/01/31/YdcR8OaIynFuLDJ.png" alt="v2rayN参数设置"></p>
+<p>​</p>
+<p>完。</p>
   </section>
 
   <section>
@@ -214,19 +202,11 @@ Linux:
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>获取绝对路径</b><nav id="TableOfContents">
+      <b>Burpsuit多重代理——渗透墙外的世界</b><nav id="TableOfContents">
   <ul>
-    <li><a href="#错误参数">错误参数</a>
-      <ul>
-        <li><a href="#单引号">单引号</a></li>
-        <li><a href="#错误参数值">错误参数值</a></li>
-      </ul>
-    </li>
-    <li><a href="#google-hacking">Google Hacking</a></li>
-    <li><a href="#爆破敏感文件">爆破敏感文件</a></li>
-    <li><a href="#phpmyadmin">phpmyadmin</a></li>
-    <li><a href="#找配置文件">找配置文件</a></li>
-    <li><a href="#参考文章">参考文章</a></li>
+    <li><a href="#upstream-proxy-servers功能">Upstream Proxy Servers功能</a></li>
+    <li><a href="#socks-proxy">Socks Proxy</a></li>
+    <li><a href="#本地调试与科学上网可兼得">本地调试与科学上网可兼得</a></li>
   </ul>
 </nav></div>
   

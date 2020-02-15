@@ -19,7 +19,7 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  PHP Manual 笔记 &ndash; 阿富的在线稿子
+  PHP Manual——安全目录 &ndash; Arefu&#39;s Playground
 
     </title>
     
@@ -28,7 +28,7 @@ if (!doNotTrack) {
 |blog under go1f.cc">
     
 
-    <meta name="apple-mobile-web-app-title" content="阿富的在线稿子">
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Playground">
     
     
     <link rel="icon" href="/favicon-64.png">
@@ -40,7 +40,7 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="PHP Manual 笔记 | 阿富的在线稿子">
+    <meta name="twitter:title" content="PHP Manual——安全目录 | Arefu&#39;s Playground">
     <meta name="twitter:description" content="有事没事翻翻PHP 手册，当作基础，可以帮助理解很多东西。|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
@@ -58,7 +58,7 @@ if (!doNotTrack) {
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
   <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
-    阿富的在线稿子
+    Arefu&#39;s Playground
   </a>
 
   
@@ -89,14 +89,6 @@ if (!doNotTrack) {
     </a>
     
     
-    
-    
-    <a class="UnderlineNav-item " href="/about/">
-      
-      <span>简历</span>
-    </a>
-    
-    
   </div>
   
 </nav>
@@ -108,7 +100,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">PHP Manual 笔记</div>
+    <div class="h1 mt-3 mb-1">PHP Manual——安全目录</div>
   </div>
   <div class="Subhead-description">
     
@@ -128,9 +120,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-14. Published at: 2020-02-05.">
+      <span title="Lastmod: 2020-02-15. Published at: 2020-02-05.">
         
-          Lastmod: 2020-02-14
+          Lastmod: 2020-02-15
         
       </span>
     </div>
@@ -213,7 +205,7 @@ ini_set(&#39;display_errors&#39;, &#39;On&#39;);
 <p><a href="https://www.php.net/manual/zh/security.filesystem.nullbytes.php">Null 字符问题</a></p>
 <h2 id="register-globals过时">Register Globals(过时)</h2>
 <p>自 PHP 5.3.0 起<em>废弃</em>并将自 PHP 5.4.0 起<em>移除</em>，默认关闭。</p>
-<p>register_globals 打开以后，各种变量都被注入代码，例如来自 HTML表单的请求变量</p>
+<p>关闭后，变量不能通过如 URL请求等方式来改变</p>
 <h2 id="隐藏-php">隐藏 PHP</h2>
 <p>在 php.ini 文件里设置 <code>expose_php = off </code></p>
   </section>
@@ -251,7 +243,7 @@ ini_set(&#39;display_errors&#39;, &#39;On&#39;);
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>PHP Manual 笔记</b><nav id="TableOfContents">
+      <b>PHP Manual——安全目录</b><nav id="TableOfContents">
   <ul>
     <li><a href="#apache-php-运行模式">Apache PHP 运行模式</a></li>
     <li><a href="#配置运行目录">配置运行目录</a></li>

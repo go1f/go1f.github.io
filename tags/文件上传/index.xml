@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>文件上传 on 阿富的在线稿子</title>
+    <title>文件上传 on Arefu&#39;s Playground</title>
     <link>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
-    <description>Recent content in 文件上传 on 阿富的在线稿子</description>
+    <description>Recent content in 文件上传 on Arefu&#39;s Playground</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -18,7 +18,8 @@
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
-      <description>&lt;p&gt;学习笔记，总结一些文件上传漏洞利用。&lt;/p&gt;</description>
+      <description>&lt;p&gt;一些文件上传漏洞利用。&lt;/p&gt;
+&lt;p&gt;记录经典一些文件上传漏洞利用。&lt;/p&gt;</description>
     </item>
     
   </channel>

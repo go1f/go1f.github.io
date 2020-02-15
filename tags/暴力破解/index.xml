@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>暴力破解 on 阿富的在线稿子</title>
+    <title>暴力破解 on Arefu&#39;s Playground</title>
     <link>https://blog.go1f.cc/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</link>
-    <description>Recent content in 暴力破解 on 阿富的在线稿子</description>
+    <description>Recent content in 暴力破解 on Arefu&#39;s Playground</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -13,7 +13,7 @@
     
     
     <item>
-      <title>记一次跑JS脚本的字典生成</title>
+      <title>记一次基于PyV8库的加密字典生成</title>
       <link>https://blog.go1f.cc/blog/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%B7%91js%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AD%97%E5%85%B8%E7%94%9F%E6%88%90/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       

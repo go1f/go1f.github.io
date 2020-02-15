@@ -19,15 +19,17 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  文件上传漏洞笔记 &ndash; 阿富的在线稿子
+  文件上传漏洞笔记 &ndash; Arefu&#39;s Playground
 
     </title>
     
     
-    <meta name="description" property="og:description" content="文件上传漏洞笔记|blog under go1f.cc">
+    <meta name="description" property="og:description" content="一些文件上传漏洞利用。
+记录经典一些文件上传漏洞利用。
+|blog under go1f.cc">
     
 
-    <meta name="apple-mobile-web-app-title" content="阿富的在线稿子">
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Playground">
     
     
     <link rel="icon" href="/favicon-64.png">
@@ -39,8 +41,9 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="文件上传漏洞笔记 | 阿富的在线稿子">
-    <meta name="twitter:description" content="文件上传漏洞笔记|blog under go1f.cc">
+    <meta name="twitter:title" content="文件上传漏洞笔记 | Arefu&#39;s Playground">
+    <meta name="twitter:description" content="一些文件上传漏洞利用。
+记录经典一些文件上传漏洞利用。|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
 
@@ -57,7 +60,7 @@ if (!doNotTrack) {
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
   <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
-    阿富的在线稿子
+    Arefu&#39;s Playground
   </a>
 
   
@@ -85,14 +88,6 @@ if (!doNotTrack) {
     <a class="UnderlineNav-item " href="/blog/">
       
       <span>博客</span>
-    </a>
-    
-    
-    
-    
-    <a class="UnderlineNav-item " href="/about/">
-      
-      <span>简历</span>
     </a>
     
     
@@ -139,7 +134,8 @@ if (!doNotTrack) {
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>学习笔记，总结一些文件上传漏洞利用。</p>
+    <p>一些文件上传漏洞利用。</p>
+<p>记录经典一些文件上传漏洞利用。</p>
 <p><strong>途径</strong></p>
 <ul>
 <li>
@@ -161,32 +157,30 @@ if (!doNotTrack) {
 <p>删除或者禁用js</p>
 </li>
 <li>
-<p>burpsuit代理控制POST content</p>
-<blockquote>
-<p>filename=&quot;shell.php&rdquo;</p>
-<p>content-Type: image/jpeg</p>
-</blockquote>
-</li>
-<li>
 <p>修改js程序</p>
 </li>
 </ul>
 <p>​</p>
-<h2 id="mime文件类型检验">MIME文件类型检验</h2>
+<h2 id="mime检验">MIME检验</h2>
 <p>MIME文件定义在web服务器的/conf/mime.types</p>
 <p><strong>常见MIME</strong></p>
 <blockquote>
-<p>text/plain &gt; txt;  text/javascript&gt;js;</p>
-<p>image/png &gt; png; image/gif  &gt; gif; image/jpeg &gt;  jpeg jpg;</p>
-<p>application/msword &gt; doc; application/pdf &gt; pdf;</p>
-<p>video/mp4 &gt; mp4; video/x-msvideo &gt; avi; video/x-flv &gt; flv;</p>
+<p>text/plain &gt; txt、 text/javascript&gt;js；</p>
+<p>image/png &gt; png、image/gif  &gt; gif、 image/jpeg &gt;  jpeg jpg;</p>
+<p>application/msword &gt; doc、 application/pdf &gt; pdf、</p>
+<p>video/mp4 &gt; mp4、 video/x-msvideo &gt; avi、video/x-flv &gt; flv;</p>
 </blockquote>
 <p><strong>绕过</strong></p>
-<p>修改“Content-Type”字段为合法MIME类型</p>
+<p>burpsuit抓包修改POST content</p>
+<blockquote>
+<p>filename=&quot;shell.php&rdquo;</p>
+<p>content-Type: image/jpeg</p>
+</blockquote>
+<p>修改<code>Content-Type</code>字段为合法MIME</p>
 <p>​</p>
 <h2 id="扩展名检验">扩展名检验</h2>
-<h3 id="黑名单检测">黑名单检测</h3>
-<p><strong>黑名单列表绕过</strong></p>
+<h3 id="黑名单机制">黑名单机制</h3>
+<p><strong>黑名单列表不全绕过</strong></p>
 <blockquote>
 <p><code>AddType application/x-httpd-php   .php .phtml .php5 .php3</code> .shtml</p>
 </blockquote>
@@ -201,18 +195,15 @@ if (!doNotTrack) {
 <p>.PHP .pHp .aSp</p>
 </blockquote>
 <p><strong>字符串替换双写绕过</strong></p>
-<p>针对单次替换的，</p>
 <pre><code>str_replace(&quot;php&quot;, &quot; &quot;, &quot;shell.pphphp&quot;)
 </code></pre><p>​</p>
 <h3 id="userini绕过">.user.ini绕过</h3>
-<blockquote>
 <p><a href="https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html"><strong>.user.ini文件构成的PHP后门</strong></a></p>
-</blockquote>
 <p>运行在fastcgi 模式，让同目录下正常的php文件都“自动”包含某个文件</p>
 <pre><code>auto_prepend_file=01.gif
 </code></pre><p>借助图片马，造成文件包含。</p>
 <p>​</p>
-<h3 id="htaccess-间接绕过">.htaccess 间接绕过</h3>
+<h3 id="htaccess绕过">.htaccess绕过</h3>
 <p>利用.htaccess（apache的分布式配置文件） 添加文件后缀做php解析</p>
 <p><strong>条件</strong></p>
 <ul>
@@ -224,9 +215,10 @@ if (!doNotTrack) {
 <p><strong>原理</strong></p>
 <blockquote>
 <p><a href="https://www.cnblogs.com/adforce/archive/2012/11/23/2784664.html">.htaccess 详解</a></p>
-</blockquote>
 <p>当前目录的.htaccess文件会覆盖全局httpd.conf的配置</p>
-<p>自行构建一个&rdquo;.htaccess&quot;文件做上传：</p>
+</blockquote>
+<p>上传构造的&rdquo;.htaccess&quot;文件</p>
+<p><strong>payload</strong></p>
 <pre><code>AddType application/x-httpd-php  .abc
 </code></pre><p>或</p>
 <pre><code>&lt;FilesMatch &quot;abc&quot;&gt;
@@ -265,14 +257,15 @@ upload/test.php%00/avatar.png
 <h4 id="cve-2015-2348httpswwwfreebufcomvuls62811html"><a href="https://www.freebuf.com/vuls/62811.html">CVE-2015-2348</a></h4>
 <p><strong>触发函数</strong></p>
 <p>比如move_uploaded_file(),getimagesize(), imagecreatefromjpeg()…等</p>
-<pre><code>move_uploaded_file($_FILES['name']['tmp_name'],&quot;/file.php\x00.jpg&quot;);
-</code></pre><p><strong>条件</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">move_uploaded_file($_FILES[&#39;name&#39;][&#39;tmp_name&#39;],&#34;/file.php\x00.jpg&#34;);
+</code></pre></div><p><strong>条件</strong></p>
 <p>php版本在 5.4.39, 5.5.x – 5.5.23, 或者 5.6.x – 5.6.7，且上传的文件名保留</p>
-<pre><code>$target_path .= basename( $_FILES[ 'uploaded' ][ 'name' ] );
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">$target_path .= basename( $_FILES[ &#39;uploaded&#39; ][ &#39;name&#39; ] );
 
-move_uploaded_file($_FILES['uploaded']['tmp_name'], $target_path);
-</code></pre><p><strong>PS</strong>：截断字符<code>\x00</code>的 get提交   <code>%00</code>，post提交需要对<code>%00</code> url解码，或burpsuit进行hex修改；</p>
-<p>代码审计：重点关注不经过赋值和过滤、直接拼接的 <code>$_GET</code>、<code>$_POST</code>等外部引入的可控变量</p>
+move_uploaded_file($_FILES[&#39;uploaded&#39;][&#39;tmp_name&#39;], $target_path);
+</code></pre></div><p>​</p>
+<p><strong>PS</strong>：截断字符<code>\x00</code>的 get提交   <code>%00</code>，post提交需要对<code>%00</code> url解码，或burpsuit进行hex修改；</p>
+<p>代码审计：重点关注不经过<strong>赋值</strong>和过滤、直接拼接的 <code>$_GET</code>、<code>$_POST</code>等外部引入的可控变量</p>
 <p>​</p>
 <h2 id="读写条件竞争">读写条件竞争</h2>
 <p>使用burpsuit爆破模块，上传恶意代码文件的同时请求访问该资源（在本地生成一句话木马）</p>
@@ -322,12 +315,12 @@ cp logo.jpg /b + shell.php /a hack.jpg
 </li>
 <li>
 <p><strong>文件解析</strong></p>
-<p>服务器默认不解析；号后面的内容，于是xx.asp;.jpg文件解析作asp文件</p>
+<p>服务器默认不解析；号后面的内容，于是<code>xx.asp;.jpg</code>文件解析作asp文件</p>
 </li>
 </ul>
 <p>​</p>
 <p><strong>IIS 7.0/7.5</strong></p>
-<p><strong>条件</strong>：运行在cgi模式，cgi.fix_pathinfo=1</p>
+<p><strong>条件</strong>：cgi模式运行+路径自动补全 cgi.fix_pathinfo=1</p>
 <p>对任意文件名只要在URL后面追加上字符串&rdquo;/任意文件名.php&quot;就会按照php的方式去解析；</p>
 <pre><code>任意文件名/任意文件名.php
 </code></pre><p>​</p>
@@ -343,25 +336,6 @@ cp logo.jpg /b + shell.php /a hack.jpg
 <p>​</p>
 <ul>
 <li>
-<p><a href="https://github.com/vulhub/vulhub/tree/master/httpd/apache_parsing_vulnerability"><strong>Apache Httpd 多后缀解析漏洞</strong></a></p>
-<p><strong>条件</strong></p>
-<ul>
-<li>
-<p><strong>php&lt;5.3.9</strong></p>
-</li>
-<li>
-<p>httpd.conf添加配置：</p>
-<pre><code>AddHandler application/x-httpd-php .php
-或
-AddHandler php5-script .php
-</code></pre></li>
-</ul>
-<p>那么，在有多个后缀的情况下，只要一个文件含有<code>.php</code>后缀的文件即将被识别成PHP文件，没必要是最后一个后缀。利用这个特性，将会造成一个可以绕过上传白名单的解析漏洞。</p>
-</li>
-</ul>
-<p>​</p>
-<ul>
-<li>
 <p><strong>Apache添加解析后缀</strong></p>
 <p>AddType 配置（一般结合**.htaccess**攻击）</p>
 <pre><code>AddType application/x-httpd-php .jpg
@@ -369,13 +343,13 @@ AddHandler php5-script .php
 <p>​</p>
 </li>
 <li>
-<p><strong><a href="https://www.leavesongs.com/PENETRATION/apache-cve-2017-15715-vulnerability.html">Apache HTTPD 换行解析漏洞（CVE-2017-15715）</a></strong></p>
+<p><strong><a href="https://www.leavesongs.com/PENETRATION/apache-cve-2017-15715-vulnerability.html">Apache 换行解析漏洞（CVE-2017-15715）</a></strong></p>
 <p>摘抄：</p>
 <blockquote>
 <p>2.4.0~2.4.29版本中存在一个解析漏洞，在解析PHP时，<code>1.php\x0A</code>将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略。</p>
 <ol>
 <li>获取文件名时不能用<code>$_FILES['file']['name']</code>，因为会自动把换行去掉？！（鸡肋）</li>
-<li>默认的Apache配置即可利用，因为默认Apache配置就使用了<code>$</code>。（这是为了修补旧的解析漏洞）</li>
+<li>默认的Apache配置即可利用，因为默认Apache配置就使用了<code>$</code>。（这是为了修补旧的AddHandler解析漏洞）</li>
 </ol>
 <pre><code>&lt;FilesMatch \.php$&gt;
     SetHandler application/x-httpd-php
@@ -384,7 +358,7 @@ AddHandler php5-script .php
 </li>
 <li>
 <p><strong>Apache SSI 远程命令执行漏洞</strong></p>
-<p>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<code>&lt;!--#exec cmd=&quot;id&quot; --&gt;</code>语法执行任意命令。</p>
+<p>若目标服务器开启了SSI与CGI支持，上传一个shtml文件，并利用<code>&lt;!--#exec cmd=&quot;id&quot; --&gt;</code>语法执行任意命令。</p>
 </li>
 </ul>
 <p>​</p>
@@ -422,6 +396,20 @@ Content-length:30
 HOST:thief.one
 Destination:http://thief.one/shell.asp
 </code></pre><p>​</p>
+<h3 id="apache-多后缀解析漏洞httpsgithubcomvulhubvulhubtreemasterhttpdapache_parsing_vulnerability"><a href="https://github.com/vulhub/vulhub/tree/master/httpd/apache_parsing_vulnerability">Apache 多后缀解析漏洞</a></h3>
+<p><strong>条件</strong></p>
+<ul>
+<li>
+<p><strong>php&lt;5.3.9</strong></p>
+</li>
+<li>
+<p>httpd.conf添加配置：</p>
+<pre><code>AddHandler application/x-httpd-php .php
+或
+AddHandler php5-script .php
+</code></pre><p>那么，在有多个后缀的情况下，含有<code>.php</code>的文件即被识别成PHP文件，没必要是最后一个后缀。</p>
+</li>
+</ul>
 <h2 id="防御">防御</h2>
 <p>上传目录禁止运行</p>
 <p>使用白名单过滤</p>
@@ -445,6 +433,7 @@ Destination:http://thief.one/shell.asp
 <p><a href="https://github.com/c0ny1/upload-labs">upload-labs</a></p>
 <p><a href="http://www.owasp.org.cn/OWASP_Training/Upload_Attack_Framework.pdf">OWASP上传攻击框架</a></p>
 <p><a href="https://github.com/vulhub/vulhub/tree/master/httpd">vulhub/httpd/</a></p>
+<p><a href="https://www.leavesongs.com/PENETRATION/fastcgi-and-php-fpm.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p>
   </section>
 
   <section>
@@ -483,12 +472,12 @@ Destination:http://thief.one/shell.asp
       <b>文件上传漏洞笔记</b><nav id="TableOfContents">
   <ul>
     <li><a href="#前端检验">前端检验</a></li>
-    <li><a href="#mime文件类型检验">MIME文件类型检验</a></li>
+    <li><a href="#mime检验">MIME检验</a></li>
     <li><a href="#扩展名检验">扩展名检验</a>
       <ul>
-        <li><a href="#黑名单检测">黑名单检测</a></li>
+        <li><a href="#黑名单机制">黑名单机制</a></li>
         <li><a href="#userini绕过">.user.ini绕过</a></li>
-        <li><a href="#htaccess-间接绕过">.htaccess 间接绕过</a></li>
+        <li><a href="#htaccess绕过">.htaccess绕过</a></li>
         <li><a href="#windows系统特性">Windows系统特性</a></li>
         <li><a href="#0x00截断">0x00截断</a></li>
       </ul>
@@ -511,6 +500,7 @@ Destination:http://thief.one/shell.asp
     <li><a href="#配置不当">配置不当</a>
       <ul>
         <li><a href="#iis-webdav漏洞详情">IIS Webdav漏洞详情</a></li>
+        <li><a href="#apache-多后缀解析漏洞httpsgithubcomvulhubvulhubtreemasterhttpdapache_parsing_vulnerability">Apache 多后缀解析漏洞</a></li>
       </ul>
     </li>
     <li><a href="#防御">防御</a></li>

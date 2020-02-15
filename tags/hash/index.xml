@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hash on 阿富的在线稿子</title>
+    <title>hash on Arefu&#39;s Playground</title>
     <link>https://blog.go1f.cc/tags/hash/</link>
-    <description>Recent content in Hash on 阿富的在线稿子</description>
+    <description>Recent content in hash on Arefu&#39;s Playground</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -32,10 +32,10 @@
     
     <item>
       <title>Hash抓取——域、工作组、在线、离线</title>
-      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</link>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8A%93%E5%8F%96hash/</link>
       <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8A%93%E5%8F%96hash/</guid>
       <description>&lt;p&gt;什么是Hash？Hash抓取、域网络中的Hash抓取。&lt;/p&gt;</description>
     </item>
     

