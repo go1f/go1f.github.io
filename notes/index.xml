@@ -12,6 +12,24 @@
     
     
     <item>
+      <title>Sqlmap重温</title>
+      <link>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/sqlmap/</link>
+      <pubDate>Sun, 16 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/sqlmap/</guid>
+      <description>&lt;p&gt;很久没跑过sqlmap了，不太相信有运气碰上一个SQL注入，挖洞时候碰上多好啊。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Web安全漏洞系列 —— XXE</title>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xxe/</link>
+      <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xxe/</guid>
+      <description>&lt;p&gt;XXE出现在服务器接受外部XML输入，XML的外部实体令XML注入增色不少。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>域渗透必由之路下 —— 白银票据</title>
       <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
@@ -39,7 +57,7 @@
     </item>
     
     <item>
-      <title>PHP Manual——安全目录</title>
+      <title>PHP Manual —— 安全目录</title>
       <link>https://blog.go1f.cc/notes/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual%E5%AE%89%E5%85%A8%E7%9B%AE%E5%BD%95/</link>
       <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -62,7 +80,7 @@
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</guid>
-      <description>&lt;p&gt;有幸获得前辈的分享，高层的概括受益匪浅（见文尾），得以对XSS整理出一点条理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;有幸浏览到一些前辈的分享，高层的概括受益匪浅（见文尾），得以对XSS整理出一点条理。&lt;/p&gt;</description>
     </item>
     
     <item>

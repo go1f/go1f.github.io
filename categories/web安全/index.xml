@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/categories/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sqlmap重温</title>
+      <link>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/sqlmap/</link>
+      <pubDate>Sun, 16 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/sqlmap/</guid>
+      <description>&lt;p&gt;很久没跑过sqlmap了，不太相信有运气碰上一个SQL注入，挖洞时候碰上多好啊。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Web安全漏洞系列 —— XXE</title>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xxe/</link>
+      <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xxe/</guid>
+      <description>&lt;p&gt;XXE出现在服务器接受外部XML输入，XML的外部实体令XML注入增色不少。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>记一次基于PyV8库的加密字典生成</title>
@@ -22,7 +40,7 @@
     </item>
     
     <item>
-      <title>PHP Manual——安全目录</title>
+      <title>PHP Manual —— 安全目录</title>
       <link>https://blog.go1f.cc/notes/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual%E5%AE%89%E5%85%A8%E7%9B%AE%E5%BD%95/</link>
       <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -45,7 +63,7 @@
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</guid>
-      <description>&lt;p&gt;有幸获得前辈的分享，高层的概括受益匪浅（见文尾），得以对XSS整理出一点条理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;有幸浏览到一些前辈的分享，高层的概括受益匪浅（见文尾），得以对XSS整理出一点条理。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -78,7 +96,7 @@
     </item>
     
     <item>
-      <title>Burpsuit多重代理——渗透墙外的世界</title>
+      <title>Burpsuit多重代理 —— 渗透墙外的世界</title>
       <link>https://blog.go1f.cc/blog/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</link>
       <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
       
