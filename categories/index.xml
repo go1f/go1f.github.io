@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Arefu&#39;s Playground</title>
+    <title>Categories on 春田花花幼稚园</title>
     <link>https://blog.go1f.cc/categories/</link>
-    <description>Recent content in Categories on Arefu&#39;s Playground</description>
+    <description>Recent content in Categories on 春田花花幼稚园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Sun, 16 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Web安全</title>
       <link>https://blog.go1f.cc/categories/web%E5%AE%89%E5%85%A8/</link>
-      <pubDate>Sun, 16 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/categories/web%E5%AE%89%E5%85%A8/</guid>
       <description></description>

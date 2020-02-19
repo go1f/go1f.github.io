@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Notes on Arefu&#39;s Playground</title>
+    <title>笔记 on 春田花花幼稚园</title>
     <link>https://blog.go1f.cc/notes/</link>
-    <description>Recent content in Notes on Arefu&#39;s Playground</description>
+    <description>Recent content in 笔记 on 春田花花幼稚园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -12,11 +12,29 @@
     
     
     <item>
+      <title>翻箱倒柜 —— SQL注入</title>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqli/</link>
+      <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqli/</guid>
+      <description>&lt;p&gt;SQL注入已经不比当年了？遇到就珍惜。本篇没有什么多的感悟，重新温习而已。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MsSQL注入速记</title>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/mssql/</link>
+      <pubDate>Tue, 18 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/mssql/</guid>
+      <description>&lt;p&gt;端口：TCP-1433、UDP-1434&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Sqlmap重温</title>
-      <link>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/sqlmap/</link>
+      <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqlmap/</link>
       <pubDate>Sun, 16 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/web%E8%BE%85%E5%8A%A9/sqlmap/</guid>
+      <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqlmap/</guid>
       <description>&lt;p&gt;很久没跑过sqlmap了，不太相信有运气碰上一个SQL注入，挖洞时候碰上多好啊。&lt;/p&gt;</description>
     </item>
     
