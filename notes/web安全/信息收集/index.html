@@ -122,9 +122,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-15. Published at: 2019-11-22.">
+      <span title="Lastmod: 2020-02-21. Published at: 2019-11-22.">
         
-          Lastmod: 2020-02-15
+          Lastmod: 2020-02-21
         
       </span>
     </div>
@@ -138,50 +138,77 @@ if (!doNotTrack) {
 <p>被动信息收集：通过搜索引擎或社会工程获取目标信息</p>
 <p>​</p>
 <h2 id="网站信息收集">网站信息收集</h2>
-<h3 id="cms版本">cms版本</h3>
+<h3 id="cms版本">CMS版本</h3>
 <p><strong>手工</strong></p>
-<blockquote>
-<p>指定目录或特殊文件</p>
-<p>页面底部版权信息 (关键字 Powered By等)</p>
-<p>注释的html代码内容</p>
-<p>robots.txt文件中关键字</p>
-<p>报错 (例:thinkPHP)</p>
-</blockquote>
+<ul>
+<li>特征目录或特殊文件</li>
+<li>页面底部版权信息 (关键字 Powered By等)</li>
+<li>注释的html代码内容</li>
+<li>robots.txt、sitemap 关键字</li>
+<li>报错 (例:thinkPHP)</li>
+</ul>
 <p><strong>工具</strong></p>
-<p><a href="https://github.com/urbanadventurer/WhatWeb">whatweb工具</a>、<a href="http://whatweb.bugscaner.com/look/">CMS识别</a>、<a href="http://www.yunsee.cn/finger.html">云悉</a></p>
+<p><a href="https://github.com/urbanadventurer/WhatWeb">Whatweb</a>、<a href="http://whatweb.bugscaner.com/look/">在线cms指纹识别</a>、<a href="http://www.yunsee.cn/finger.html">云悉</a></p>
+<p>​</p>
 <h3 id="中间件">中间件</h3>
-<p>apache、nginx、IIS、tomcat及其具体版本</p>
-<h3 id="脚本语言">脚本语言</h3>
+<p>Apache、Nginx、IIS、Tomcat、Tengine及其具体版本</p>
 <p>​</p>
 <h3 id="网站目录敏感目录爆破">网站目录/敏感目录爆破</h3>
 <p><strong>举例</strong></p>
-<p>.SVN、.git、网站备份压缩文件、.DS_Store文件、_MAC_STORE、WEB-INF文件、配置文件泄露</p>
+<p><code>.SVN</code>、<code>.git</code>、<code>.rar</code>、<code>.bak</code>、<code>.DS_Store</code>、<code>_MAC_STORE</code>、<code>WEB-INF</code>、<code>inc</code> 配置文件</p>
 <p><strong>工具</strong></p>
 <p>Burpsuit Sitemap、7kbscan、御剑</p>
 <p>​</p>
-<h3 id="子域名dns爆破">子域名/DNS爆破</h3>
+<h3 id="子域名">子域名</h3>
+<ul>
+<li>
 <p>Google hacking/Baidu hacking   <code>site:domain</code></p>
+</li>
+<li>
+<p>DNS数据库 + DNS枚举</p>
+</li>
+<li>
+<p>robots、sitemap、HTTPS证书cer、跨域策略cdx</p>
+</li>
+<li>
+<p>DNS区<strong>域传输</strong>漏洞 axfr</p>
+<pre><code>dig @ns1.example.com example.com axfr
+host -T -l sina.com ns3.sina.com
+</code></pre></li>
+<li>
+<p>工具利用</p>
 <p><a href="https://github.com/shmilylty/OneForAll">OneForAll 子域名查询</a></p>
 <p><a href="http://stool.chinaz.com/same">同IP网站查询</a></p>
 <p><a href="https://phpinfo.me/domain/">子域名在线扫描</a></p>
-<p>DNS区域传输</p>
-<pre><code>dig @ns1.example.com example.com axfr
-host -T -l sina.com ns3.sina.com
-</code></pre><p>​</p>
+</li>
+</ul>
+<p>​</p>
 <h3 id="网站个人信息">网站个人信息</h3>
 <p><strong>定制社工字典</strong></p>
 <p>工具： <a href="https://github.com/Mebus/cupp">cupp</a>、pydictor</p>
 <p><strong>相关信息</strong></p>
 <ul>
-<li>whois查询/反查&gt;联系方式&gt;社工库/google/baidu、企业基本信息、ip地信息</li>
-<li>员工信息、组织框架、企业法人、企业综合信息、工商注册、新闻组/论坛、招聘网站</li>
-<li>员工信息：姓名、工号、家庭、交际信息、上网习惯（豆瓣、知乎、微博等社交平台）</li>
-<li>员工身份信息：员工简历、身份证、手机号、生日、家乡、住址</li>
-<li>社交账号信息：qq、qq群、微博、微信、支付宝、员工邮箱账号</li>
-<li>Metadata: 图片Exif</li>
+<li>
+<p>域名(子域名) =》 Whois(联系方式、手机邮箱) =》 IP(地址) =》IP反查多个域名=》循环</p>
+</li>
+<li>
+<p>员工信息、组织框架、企业法人、企业综合信息、工商注册、新闻组/论坛、招聘网站</p>
+</li>
+<li>
+<p>员工信息：姓名、工号、家庭、交际信息、上网习惯（豆瓣、知乎、微博等社交平台）</p>
+</li>
+<li>
+<p>员工身份信息：员工简历、身份证、手机号、生日、家乡、住址</p>
+</li>
+<li>
+<p>社交账号信息：qq、qq群、微博、微信、支付宝、员工邮箱账号</p>
+</li>
+<li>
+<p>Metadata: 图片Exif</p>
+<p><strong>手机号能干什么</strong></p>
+</li>
 </ul>
 <blockquote>
-<p><strong>手机号能干什么</strong></p>
 <p>空手机，电话本，进入qq，关联通讯录</p>
 <p>微信，关联通讯录，找微信</p>
 <p>支付宝，转账，*xx，猜姓氏</p>
@@ -277,7 +304,7 @@ http://toolbar.netcraft.com/site_report?url=
 <p>shodan <code>http.title:xxx</code> 、fofa <code>tittle=&quot;title&quot;</code></p>
 </li>
 <li>
-<p>网站邮件订阅 / RSS / 注册、激活、找回密码</p>
+<p>服务器主动访问  在线资源获取 / 网站 RSS / 邮件订阅 / 注册、激活、找回密码</p>
 <p>邮件服务器可能部署在真实服务器，查询邮件信头的来源信息</p>
 </li>
 <li>
@@ -424,11 +451,10 @@ modules load reporting/html
   <ul>
     <li><a href="#网站信息收集">网站信息收集</a>
       <ul>
-        <li><a href="#cms版本">cms版本</a></li>
+        <li><a href="#cms版本">CMS版本</a></li>
         <li><a href="#中间件">中间件</a></li>
-        <li><a href="#脚本语言">脚本语言</a></li>
         <li><a href="#网站目录敏感目录爆破">网站目录/敏感目录爆破</a></li>
-        <li><a href="#子域名dns爆破">子域名/DNS爆破</a></li>
+        <li><a href="#子域名">子域名</a></li>
         <li><a href="#网站个人信息">网站个人信息</a></li>
       </ul>
     </li>

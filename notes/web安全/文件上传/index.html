@@ -305,6 +305,7 @@ cp logo.jpg /b + shell.php /a hack.jpg
 <h2 id="解析漏洞">解析漏洞</h2>
 <p><strong>原理</strong></p>
 <p>中间件（触发非php后缀文件进行解析） &raquo; php解析运行（版本&lt;5.3.9到此就成功解析了，往后版本增加security.limit_extensions限制，php再次检验文件后缀是否合法）</p>
+<p>技巧：找不到文件时404 NOT FOUND，交给PHP解析后PHP拒绝后显示不一样。</p>
 <p>​</p>
 <h3 id="iis">IIS</h3>
 <p><strong>IIS 5.x - 6.x</strong></p>

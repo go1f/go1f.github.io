@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Sun, 16 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shell反弹三式</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/shell%E5%8F%8D%E5%BC%B9/</link>
+      <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/shell%E5%8F%8D%E5%BC%B9/</guid>
+      <description>&lt;p&gt;三式反弹够用了，之后都是自己变通。&lt;/p&gt;
+&lt;p&gt;针对靶机有无公网IP两种情况讨论。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>坐钓鱼台 —— 中间人攻击</title>
@@ -37,7 +47,8 @@
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
-      <description>&lt;p&gt;后渗透的一些隐匿手段。&lt;/p&gt;</description>
+      <description>&lt;p&gt;后渗透的一些隐匿手段。&lt;/p&gt;
+&lt;p&gt;域渗透的一些隐匿手段。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -51,29 +62,20 @@
     
     <item>
       <title>Linux入门命令2</title>
-      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
       <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 dhclient ens38 ​ 安装 包管理 Debian（Ubuntu/kali）</description>
     </item>
     
     <item>
       <title>Linux学习的若干板块</title>
-      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
       <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
       <description>操作系统 进程管理、储存管理、设备管理、文件管理、作业管理 用户与用户组 相关文件 /etc/passwd -rw- r&amp;ndash; r&amp;ndash; 用户信息 1.用户名 2.密码 3.UID4.GID组号 5. 备注</description>
-    </item>
-    
-    <item>
-      <title>Linux入门命令1</title>
-      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
-      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
-      <description>whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #</description>
     </item>
     
   </channel>

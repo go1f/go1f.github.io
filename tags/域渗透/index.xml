@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>域渗透 on 春田花花幼稚园</title>
+    <link>https://blog.go1f.cc/tags/%E5%9F%9F%E6%B8%97%E9%80%8F/</link>
+    <description>Recent content in 域渗透 on 春田花花幼稚园</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy;go1f 2020</copyright>
+    <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.go1f.cc/tags/%E5%9F%9F%E6%B8%97%E9%80%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>域渗透必由之路下 —— 白银票据</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</guid>
+      <description>&lt;p&gt;黄金票据都有了，还要白银？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>域渗透必由之路上 —— 黄金票据与 mimikatz</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
+      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
+      <description>&lt;p&gt;后渗透的一些隐匿手段。&lt;/p&gt;
+&lt;p&gt;域渗透的一些隐匿手段。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hash抓取 —— 域与工作组、在线与离线</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</link>
+      <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</guid>
+      <description>&lt;p&gt;Hash抓取手法、重点是域网络下的离线抓取。什么是Hash？&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

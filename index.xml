@@ -12,12 +12,40 @@
     
     
     <item>
-      <title>翻箱倒柜 —— SQL注入</title>
+      <title>蟒蛇爬虫 —— Python入门道</title>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python%E7%88%AC%E8%99%AB/</guid>
+      <description>&lt;p&gt;本文，以知乎问题答案的爬取脚本结束，源码已提供&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>计算机网络</title>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E9%80%9F%E8%AE%B0%E5%A4%87%E5%BF%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E9%80%9F%E8%AE%B0%E5%A4%87%E5%BF%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</guid>
+      <description>OSI七层模型 物理层 主机之间物理网线连接 数据链路层 MAC对MAC，差错控制，帧编码 网络层 路由，IP寻址 传输层 多路复用，端对端，数据包顺序，流</description>
+    </item>
+    
+    <item>
+      <title>Shell反弹三式</title>
+      <link>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/shell%E5%8F%8D%E5%BC%B9/</link>
+      <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/shell%E5%8F%8D%E5%BC%B9/</guid>
+      <description>&lt;p&gt;三式反弹够用了，之后都是自己变通。&lt;/p&gt;
+&lt;p&gt;针对靶机有无公网IP两种情况讨论。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>压箱底技能 —— SQL注入</title>
       <link>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqli/</link>
       <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqli/</guid>
-      <description>&lt;p&gt;SQL注入已经不比当年了？遇到就珍惜。本篇没有什么多的感悟，重新温习而已。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇没有什么多的感悟，重新温习而已。初级玩家面试时不要被问倒了，看来还得再加一篇继续讲。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -72,7 +100,8 @@
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
-      <description>&lt;p&gt;后渗透的一些隐匿手段。&lt;/p&gt;</description>
+      <description>&lt;p&gt;后渗透的一些隐匿手段。&lt;/p&gt;
+&lt;p&gt;域渗透的一些隐匿手段。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -105,10 +134,10 @@
     
     <item>
       <title>PHP Manual —— 安全目录</title>
-      <link>https://blog.go1f.cc/notes/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual%E5%AE%89%E5%85%A8%E7%9B%AE%E5%BD%95/</link>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual/</link>
       <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual%E5%AE%89%E5%85%A8%E7%9B%AE%E5%BD%95/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual/</guid>
       <description>&lt;p&gt;有事没事翻翻&lt;a href=&#34;https://www.php.net/manual/zh/index.php&#34;&gt;PHP 手册&lt;/a&gt;，边作基础，帮助理解很多。&lt;/p&gt;</description>
     </item>
     
@@ -179,28 +208,28 @@
     
     <item>
       <title>Linux入门命令2</title>
-      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</link>
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</guid>
       <description>关机重启 重启 reboot , init 6 关机 init 0 , halt , shutdown , poweroff ​ 网卡配置 vi /etc/network/interfaces auto ens38 iface ens38 inet static address 192.168.5.200 netmask 255.255.255.0 gateway 192.168.5.1 ifdown ens38 ifup ens38 dhclient ens38 ​ 安装 包管理 Debian（Ubuntu/kali）</description>
     </item>
     
     <item>
       <title>Linux学习的若干板块</title>
-      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</link>
       <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</guid>
       <description>操作系统 进程管理、储存管理、设备管理、文件管理、作业管理 用户与用户组 相关文件 /etc/passwd -rw- r&amp;ndash; r&amp;ndash; 用户信息 1.用户名 2.密码 3.UID4.GID组号 5. 备注</description>
     </item>
     
     <item>
       <title>Linux入门命令1</title>
-      <link>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
-      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      <link>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/notes/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
+      <guid>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</guid>
       <description>whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #</description>
     </item>
     
