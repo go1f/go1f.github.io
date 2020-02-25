@@ -126,9 +126,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-21. Published at: 2020-02-11.">
+      <span title="Lastmod: 2020-02-25. Published at: 2020-02-11.">
         
-          Lastmod: 2020-02-21
+          Lastmod: 2020-02-25
         
       </span>
     </div>
@@ -328,7 +328,7 @@ mimikatz # sekurlsa::logonpasswords
 <li>DeDeCMS：裁切32位MD5， <code>$pwd = substr($password, 5, 20);</code></li>
 <li>WordPress：随机生成的盐与密码相加，进行count次md5，与encode64的hash数值累加，得到P开头密码</li>
 <li>Discuss、Vbulletin、IceBB：<code>MD5(MD5($password).$salt);</code></li>
-<li>Joomla：`MD5($pass.$salt);</li>
+<li>Joomla：<code>MD5($pass.$salt);</code></li>
 </ul>
 <p>​</p>
 <p><strong>数据库加密</strong></p>

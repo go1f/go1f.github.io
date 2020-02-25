@@ -19,7 +19,7 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  Web安全笔记系列 —— CSRF &ndash; 春田花花幼稚园
+  CSRF演习 by DVWA &ndash; 春田花花幼稚园
 
     </title>
     
@@ -40,7 +40,7 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="Web安全笔记系列 —— CSRF | 春田花花幼稚园">
+    <meta name="twitter:title" content="CSRF演习 by DVWA | 春田花花幼稚园">
     <meta name="twitter:description" content="CSRF又很好防，只能钻钻漏洞这样子。|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
@@ -100,7 +100,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">Web安全笔记系列 —— CSRF</div>
+    <div class="h1 mt-3 mb-1">CSRF演习 by DVWA</div>
   </div>
   <div class="Subhead-description">
     
@@ -124,9 +124,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-15. Published at: 2020-02-01.">
+      <span title="Lastmod: 2020-02-03. Published at: 2020-02-01.">
         
-          Lastmod: 2020-02-15
+          Lastmod: 2020-02-03
         
       </span>
     </div>
@@ -140,7 +140,7 @@ if (!doNotTrack) {
 <p>​</p>
 <h2 id="一些前提">一些前提</h2>
 <ul>
-<li>没有二次验证（验证码/密码/token）</li>
+<li>没有二次验证（验证码/密码/Token）</li>
 <li>在同一域名，或允许跨站请求的域名下找到XSS利用</li>
 </ul>
 <p>​</p>
@@ -162,7 +162,7 @@ if (!doNotTrack) {
 <p>页面中的链接、重定向以及表单提交</p>
 </li>
 <li>
-<p>跨域资源引入是可以的，但是js不能读写加载的内容。如嵌入到页面中的<code>&lt;script src=&quot;&quot;&gt;&lt;/script&gt;,&lt;img&gt;,&lt;link&gt;,&lt;iframe&gt;</code>等</p>
+<p>跨域资源引入是可以的，但是Js不能读写加载的内容。如嵌入到页面中的<code>&lt;script src=&quot;&quot;&gt;&lt;/script&gt;,&lt;img&gt;,&lt;link&gt;,&lt;iframe&gt;</code>等</p>
 </li>
 </ul>
 <h3 id="ajax跨域">AJAX跨域</h3>
@@ -290,7 +290,7 @@ if (!doNotTrack) {
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>Web安全笔记系列 —— CSRF</b><nav id="TableOfContents">
+      <b>CSRF演习 by DVWA</b><nav id="TableOfContents">
   <ul>
     <li><a href="#一些前提">一些前提</a></li>
     <li><a href="#同源策略">同源策略</a>

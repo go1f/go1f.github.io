@@ -44,22 +44,22 @@
   
   <url>
     <loc>https://blog.go1f.cc/tags/shell%E5%8F%8D%E5%BC%B9/</loc>
-    <lastmod>2020-02-20T10:20:04+08:00</lastmod>
+    <lastmod>2020-02-24T23:27:02+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/shell%E5%8F%8D%E5%BC%B9/</loc>
-    <lastmod>2020-02-20T10:20:04+08:00</lastmod>
+    <lastmod>2020-02-24T23:27:02+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/tags/sql%E6%B3%A8%E5%85%A5/</loc>
-    <lastmod>2020-02-21T21:06:04+08:00</lastmod>
+    <lastmod>2020-02-23T11:42:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/categories/web%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2020-02-21T21:06:04+08:00</lastmod>
+    <lastmod>2020-02-24T22:13:50+08:00</lastmod>
   </url>
   
   <url>
@@ -69,7 +69,7 @@
   
   <url>
     <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqli/</loc>
-    <lastmod>2020-02-21T21:06:04+08:00</lastmod>
+    <lastmod>2020-02-23T11:42:00+08:00</lastmod>
   </url>
   
   <url>
@@ -79,17 +79,17 @@
   
   <url>
     <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqlmap/</loc>
-    <lastmod>2020-02-19T20:33:30+08:00</lastmod>
+    <lastmod>2020-02-23T10:50:59+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/tags/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</loc>
-    <lastmod>2020-02-21T21:06:59+08:00</lastmod>
+    <lastmod>2020-02-24T23:18:13+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</loc>
-    <lastmod>2020-02-21T21:06:59+08:00</lastmod>
+    <lastmod>2020-02-24T23:18:13+08:00</lastmod>
   </url>
   
   <url>
@@ -104,12 +104,12 @@
   
   <url>
     <loc>https://blog.go1f.cc/tags/hash/</loc>
-    <lastmod>2020-02-21T21:11:12+08:00</lastmod>
+    <lastmod>2020-02-25T08:38:13+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/tags/%E5%9F%9F%E6%B8%97%E9%80%8F/</loc>
-    <lastmod>2020-02-21T21:11:12+08:00</lastmod>
+    <lastmod>2020-02-25T08:38:13+08:00</lastmod>
   </url>
   
   <url>
@@ -124,7 +124,7 @@
   
   <url>
     <loc>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</loc>
-    <lastmod>2020-02-21T21:11:12+08:00</lastmod>
+    <lastmod>2020-02-25T08:38:13+08:00</lastmod>
   </url>
   
   <url>
@@ -154,22 +154,22 @@
   
   <url>
     <loc>https://blog.go1f.cc/tags/csrf/</loc>
-    <lastmod>2020-02-15T19:29:43+08:00</lastmod>
+    <lastmod>2020-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/csrf/</loc>
-    <lastmod>2020-02-15T19:29:43+08:00</lastmod>
+    <lastmod>2020-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</loc>
-    <lastmod>2020-02-20T10:52:00+08:00</lastmod>
+    <lastmod>2020-02-24T22:13:50+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/tags/xss/</loc>
-    <lastmod>2020-02-20T10:52:00+08:00</lastmod>
+    <lastmod>2020-02-24T22:13:50+08:00</lastmod>
   </url>
   
   <url>
@@ -194,12 +194,12 @@
   
   <url>
     <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</loc>
-    <lastmod>2020-02-21T16:24:16+08:00</lastmod>
+    <lastmod>2020-02-24T10:14:51+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</loc>
-    <lastmod>2020-02-21T16:24:16+08:00</lastmod>
+    <lastmod>2020-02-24T10:14:51+08:00</lastmod>
   </url>
   
   <url>
@@ -230,6 +230,16 @@
   <url>
     <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</loc>
     <lastmod>2020-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/notes/%E9%9D%A2%E8%AF%95%E4%B8%93%E5%9C%BA/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</loc>
+    <priority>0</priority>
   </url>
   
   <url>

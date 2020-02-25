@@ -108,38 +108,51 @@ if (!doNotTrack) {
 <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
   <div class="Subhead mb-2">
     <div class="Subhead-heading">
-      <a href="/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/">
-        <div class="h2 mt-1 mb-1">域渗透必由之路下 —— 白银票据</div>
+      <a href="/notes/%E9%9D%A2%E8%AF%95%E4%B8%93%E5%9C%BA/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+        <div class="h2 mt-1 mb-1"></div>
       </a>
     </div>
     <div class="Subhead-description">
       
 
 
-<a href='/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F' class="muted-link">
-  <span class="Label Label--gray-darker">内网渗透</span>
-</a>
 
-
-
-<a href='/tags/hash' class="muted-link">
-  <span class="Label Label--gray">Hash</span>
-</a>
-
-<a href='/tags/%E5%9F%9F%E6%B8%97%E9%80%8F' class="muted-link">
-  <span class="Label Label--gray">域渗透</span>
-</a>
 
 
       <div class="float-md-right">
-        <span>2020-02-14</span>
+        <span>0001-01-01</span>
       </div>
     </div>
   </div>
   <div class="text-gray">
     
-    <p>黄金票据都有了，还要白银？</p>
-    <a class="muted-link" href="/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/">…</a>
+    XSS和CSRF的不同点。
+XSS是跨站脚本攻击，利用的是用户对链接/网页的信任，加载恶意脚本窃取用户信息、钓鱼等。
+CSRF是跨站请求伪造，XSS可以是它的一种手段，利用的是服务端对浏览器的信任，借助用户的身份认证像Cookie，造成信息篡改、发帖、蠕虫等。
+  你知道同源策略吗？都有哪些。
+域名相同、端口相同、协议相同，表单提交、重定向、链接跳转不受限；外域资源引用可以的，像img、script、css标签
+  CSP
+Content-Secure-Policy 允许内容来自的域
+  排序算法？
+冒泡、快速、选择、插入、桶排序
+  计算机网络协议模型？
+物理层、数据链路层、网络层、传输层、会话层、表示层、应用层
+  TCP、UDP不同点？
+TCP面向连接，可以做流量控制、提供稳定可靠连接
+UDP无连接、面向报文，优点快速，适合视频传输、DNS
+  你平时写脚本都用到什么库，什么工具？
+requests、os、json、PyV8；sublime、VS Code
+  XSS的防御方法。
+过滤用户输出，如果输出点在标签属性位置，注意设置函数，htmlspecialchars()默认不转义单引号
+  富文本编辑器如何过滤XSS payload
+白名单，正则匹配，非白一律转义。
+  如何判断一个URL是否有SQL注入
+单双引号，测试使用未过滤字符
+'&amp;&amp;'0 、1'&amp;&amp;sleep(1)&amp;&amp;'1
+  mysql UDF 提权
+phpstudy使用32位的MySQL，利用 SQLmap的UDF，放在mysql/lib/plugin文件夹
+cloak.py -d -i C:\tools\sqlmap\data\udf\mysql\windows\32\lib_mysqludf_sys.dll_ select @@basedir select unhex() into outfile &#39;xxx/mysql/lib/plugin/myudf.so&#39; create function sys_eval returns string soname &#39;lib_mysqludf_sys.
+    <a class="muted-link" href="/notes/%E9%9D%A2%E8%AF%95%E4%B8%93%E5%9C%BA/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">…</a>
   </div>
 </div>
 
@@ -149,117 +162,26 @@ if (!doNotTrack) {
 <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
   <div class="Subhead mb-2">
     <div class="Subhead-heading">
-      <a href="/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/">
-        <div class="h2 mt-1 mb-1">域渗透必由之路上 —— 黄金票据与 mimikatz</div>
+      <a href="/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/">
+        <div class="h2 mt-1 mb-1">Linux入门命令1</div>
       </a>
     </div>
     <div class="Subhead-description">
       
 
 
-<a href='/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F' class="muted-link">
-  <span class="Label Label--gray-darker">内网渗透</span>
-</a>
 
-
-
-<a href='/tags/hash' class="muted-link">
-  <span class="Label Label--gray">Hash</span>
-</a>
-
-<a href='/tags/%E5%9F%9F%E6%B8%97%E9%80%8F' class="muted-link">
-  <span class="Label Label--gray">域渗透</span>
-</a>
 
 
       <div class="float-md-right">
-        <span>2020-02-12</span>
+        <span>0001-01-01</span>
       </div>
     </div>
   </div>
   <div class="text-gray">
     
-    <p>后渗透的一些隐匿手段。</p>
-<p>域渗透的一些隐匿手段。</p>
-    <a class="muted-link" href="/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/">…</a>
-  </div>
-</div>
-
-  
-    
-    
-<div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
-  <div class="Subhead mb-2">
-    <div class="Subhead-heading">
-      <a href="/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/">
-        <div class="h2 mt-1 mb-1">Hash抓取 —— 域与工作组、在线与离线</div>
-      </a>
-    </div>
-    <div class="Subhead-description">
-      
-
-
-<a href='/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F' class="muted-link">
-  <span class="Label Label--gray-darker">内网渗透</span>
-</a>
-
-
-
-<a href='/tags/hash' class="muted-link">
-  <span class="Label Label--gray">Hash</span>
-</a>
-
-<a href='/tags/%E5%9F%9F%E6%B8%97%E9%80%8F' class="muted-link">
-  <span class="Label Label--gray">域渗透</span>
-</a>
-
-
-      <div class="float-md-right">
-        <span>2020-02-11</span>
-      </div>
-    </div>
-  </div>
-  <div class="text-gray">
-    
-    <p>Hash抓取手法、重点是域网络下的离线抓取。什么是Hash？</p>
-    <a class="muted-link" href="/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/">…</a>
-  </div>
-</div>
-
-  
-    
-    
-<div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
-  <div class="Subhead mb-2">
-    <div class="Subhead-heading">
-      <a href="/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual/">
-        <div class="h2 mt-1 mb-1">PHP Manual —— 安全目录</div>
-      </a>
-    </div>
-    <div class="Subhead-description">
-      
-
-
-<a href='/categories/web%E5%AE%89%E5%85%A8' class="muted-link">
-  <span class="Label Label--gray-darker">Web安全</span>
-</a>
-
-
-
-<a href='/tags/php' class="muted-link">
-  <span class="Label Label--gray">PHP</span>
-</a>
-
-
-      <div class="float-md-right">
-        <span>2020-02-05</span>
-      </div>
-    </div>
-  </div>
-  <div class="text-gray">
-    
-    <p>有事没事翻翻<a href="https://www.php.net/manual/zh/index.php">PHP 手册</a>，边作基础，帮助理解很多。</p>
-    <a class="muted-link" href="/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual/">…</a>
+    whoami whoami who # 目前登录系统的用户信息 last -5 # 显示最近5次登录信息 uname -a # 显示主机名、内核版本、硬件平台等 id #显示用户 uid、gid，所属组等信息 df -h #
+    <a class="muted-link" href="/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/">…</a>
   </div>
 </div>
 
@@ -272,7 +194,7 @@ if (!doNotTrack) {
   <div class="pagination">
     <ul>
       
-      <a href="/notes/page/2/" class="previous_page">Prev</a>
+      <a href="/notes/page/5/" class="previous_page">Prev</a>
       
 
       
@@ -313,21 +235,8 @@ if (!doNotTrack) {
           
           
             
-              <em class="current selected" aria-current="true">3</em>
-            
-          
-      
-          
-          
-          
-          
               
-              
-          
-          
-            
-              
-              <a href="/notes/page/4/">4</a>
+              <a href="/notes/page/3/">3</a>
             
           
       
@@ -352,13 +261,26 @@ if (!doNotTrack) {
           
             
               
-              <a href="/notes/page/6/">6</a>
+              <a href="/notes/page/5/">5</a>
+            
+          
+      
+          
+          
+          
+          
+              
+              
+          
+          
+            
+              <em class="current selected" aria-current="true">6</em>
             
           
       
 
       
-      <a href="/notes/page/4/" class="next_page">Next</a>
+      <span class="next_page disabled">Next</span>
       
     </ul>
   </div>

@@ -120,9 +120,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-19. Published at: 2020-02-16.">
+      <span title="Lastmod: 2020-02-23. Published at: 2020-02-16.">
         
-          Lastmod: 2020-02-19
+          Lastmod: 2020-02-23
         
       </span>
     </div>
@@ -186,7 +186,7 @@ if (!doNotTrack) {
 <p>当为空时没有限制，NULL时禁用导入导出功能。必须修改配置文件(my.cnf/my.ini)并重启MySQL才能生效。</p>
 <div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SHOW</span> <span class="n">variables</span> <span class="k">like</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">%SECURE%</span><span class="s1">&#39;</span><span class="p">;</span>
 <span class="k">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="o">@</span><span class="o">@</span><span class="n">secure_file_priv</span><span class="p">;</span>
-</code></pre></div><p>防御方法：secure_file_priv=NULL` ，站库分离</p>
+</code></pre></div><p>防御方法：<code>secure_file_priv=NULL</code> ，站库分离</p>
 <p>​</p>
 <p><strong>读取文件</strong></p>
 <p>&ndash;file-read=&quot;C:/windows/win.ini&rdquo;</p>
@@ -210,10 +210,8 @@ if (!doNotTrack) {
 </ul>
 <p>​</p>
 <h2 id="tamper">Tamper</h2>
-<p><code>--tamper=SCRIPT</code>  通过字符串变换，绕WAF</p>
-<ul>
-<li><input disabled="" type="checkbox">稍后补全 ToDo</li>
-</ul>
+<p><code>--identify-waf</code></p>
+<p><code>--tamper=SCRIPT1.py,SCRIPT2.py</code></p>
 <p>​</p>
 <h2 id="modules">Modules</h2>
 <p>doc</p>

