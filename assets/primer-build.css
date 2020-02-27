@@ -76,6 +76,7 @@ dfn {
     font-style: italic
 }
 h1 {
+    font-family: serif;
 	color: #586069;
     font-size: 2em;
     margin: 0.67em 0

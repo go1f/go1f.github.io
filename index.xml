@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>主页 on 春田花花幼稚园</title>
+    <title>主页 on 春田花花学习会</title>
     <link>https://blog.go1f.cc/</link>
-    <description>Recent content in 主页 on 春田花花幼稚园</description>
+    <description>Recent content in 主页 on 春田花花学习会</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -12,12 +12,22 @@
     
     
     <item>
-      <title>XSS Waf</title>
+      <title>XSS WAF绕过</title>
       <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xsswaf/</link>
       <pubDate>Tue, 25 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xsswaf/</guid>
       <description>&lt;p&gt;XSS Waf 常见的绕过手段&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL注入进阶 —— WAF绕过</title>
+      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqlwaf/</link>
+      <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqlwaf/</guid>
+      <description>&lt;p&gt;归纳前辈们绕过WAF的技巧。&lt;/p&gt;
+&lt;p&gt;整理归纳前辈们绕过WAF的技巧。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,7 +41,7 @@
     </item>
     
     <item>
-      <title>压箱底技能 —— SQL注入</title>
+      <title>WEB安全漏洞系列 —— SQL注入</title>
       <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqli/</link>
       <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -86,6 +96,16 @@
     </item>
     
     <item>
+      <title>内网/域控扫盲</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</link>
+      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</guid>
+      <description>&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;Windows、内网、域控、Kerberos的入门常识整理。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>域渗透必由之路上 —— 黄金票据与 mimikatz</title>
       <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
@@ -124,10 +144,10 @@
     
     <item>
       <title>XSS Payloads</title>
-      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xsslist/</link>
+      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xss%E6%B8%85%E5%8D%95/</link>
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xsslist/</guid>
+      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xss%E6%B8%85%E5%8D%95/</guid>
       <description>&lt;p&gt;XSS常识、标签事件清单、payload记录。&lt;/p&gt;
 &lt;p&gt;XSS的应用：Cookie窃取、键盘记录、客户端信息探查、页面劫持、XSS蠕虫。&lt;/p&gt;</description>
     </item>

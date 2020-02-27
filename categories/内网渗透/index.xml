@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>内网渗透 on 春田花花幼稚园</title>
+    <title>内网渗透 on 春田花花学习会</title>
     <link>https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</link>
-    <description>Recent content in 内网渗透 on 春田花花幼稚园</description>
+    <description>Recent content in 内网渗透 on 春田花花学习会</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -39,6 +39,16 @@
       
       <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</guid>
       <description>&lt;p&gt;黄金票据都有了，还要白银？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>内网/域控扫盲</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</link>
+      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</guid>
+      <description>&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;Windows、内网、域控、Kerberos的入门常识整理。&lt;/p&gt;</description>
     </item>
     
     <item>
