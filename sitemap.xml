@@ -4,12 +4,7 @@
   
   <url>
     <loc>https://blog.go1f.cc/</loc>
-    <lastmod>2020-02-19T21:08:11+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/</loc>
-    <lastmod>2020-02-19T20:48:39+08:00</lastmod>
+    <lastmod>2020-02-27T11:55:01+08:00</lastmod>
   </url>
   
   <url>
@@ -18,233 +13,133 @@
   </url>
   
   <url>
-    <loc>https://blog.go1f.cc/tags/python/</loc>
-    <lastmod>2020-02-21T21:03:14+08:00</lastmod>
+    <loc>https://blog.go1f.cc/categories/</loc>
+    <lastmod>2020-02-27T12:12:54+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/tags/</loc>
-    <lastmod>2020-10-20T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-27T12:02:23+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python%E7%88%AC%E8%99%AB/</loc>
-    <lastmod>2020-02-21T21:03:14+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E9%80%9F%E8%AE%B0%E5%A4%87%E5%BF%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2020-02-21T21:13:34+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/categories/</loc>
-    <lastmod>2020-10-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/shell%E5%8F%8D%E5%BC%B9/</loc>
-    <lastmod>2020-02-24T23:27:02+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/shell%E5%8F%8D%E5%BC%B9/</loc>
-    <lastmod>2020-02-24T23:27:02+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/sql%E6%B3%A8%E5%85%A5/</loc>
-    <lastmod>2020-02-23T11:42:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/categories/web%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2020-02-24T22:13:50+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</loc>
-    <lastmod>2020-10-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqli/</loc>
-    <lastmod>2020-02-23T11:42:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/mssql/</loc>
-    <lastmod>2020-02-20T17:12:35+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/sql%E6%B3%A8%E5%85%A5/sqlmap/</loc>
-    <lastmod>2020-02-23T10:50:59+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</loc>
-    <lastmod>2020-02-24T23:18:13+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</loc>
-    <lastmod>2020-02-24T23:18:13+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xxe/</loc>
-    <lastmod>2020-02-20T10:43:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/xxe/</loc>
-    <lastmod>2020-02-20T10:43:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/hash/</loc>
-    <lastmod>2020-02-25T08:38:13+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/%E5%9F%9F%E6%B8%97%E9%80%8F/</loc>
-    <lastmod>2020-02-25T08:38:13+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</loc>
-    <lastmod>2020-02-21T21:09:05+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</loc>
-    <lastmod>2020-02-21T21:11:01+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/hash%E6%8A%93%E5%8F%96/</loc>
-    <lastmod>2020-02-25T08:38:13+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</loc>
-    <lastmod>2020-02-21T21:01:04+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/blog/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%B7%91js%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AD%97%E5%85%B8%E7%94%9F%E6%88%90/</loc>
-    <lastmod>2020-02-21T21:01:04+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/blog/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E7%88%86%E7%A0%B4%E5%AF%86%E7%A0%81/</loc>
-    <lastmod>2020-02-14T21:10:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/php/</loc>
-    <lastmod>2020-02-16T22:50:59+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php-manual/</loc>
-    <lastmod>2020-02-16T22:50:59+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/csrf/</loc>
-    <lastmod>2020-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/csrf/</loc>
-    <lastmod>2020-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/xss/</loc>
-    <lastmod>2020-02-24T22:13:50+08:00</lastmod>
+    <loc>https://blog.go1f.cc/categories/web%E6%B8%97%E9%80%8F/</loc>
+    <lastmod>2020-02-27T12:12:27+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.go1f.cc/tags/xss/</loc>
-    <lastmod>2020-02-24T22:13:50+08:00</lastmod>
+    <lastmod>2020-02-27T12:02:23+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</loc>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xsswaf/</loc>
+    <lastmod>2020-02-26T19:40:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/shell%E5%8F%8D%E5%BC%B9/</loc>
+    <lastmod>2020-02-27T11:57:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/tags/sql%E6%B3%A8%E5%85%A5/</loc>
+    <lastmod>2020-02-27T12:01:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</loc>
+    <lastmod>2020-02-27T12:12:54+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqli/</loc>
+    <lastmod>2020-02-27T12:01:10+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/mssql/</loc>
+    <lastmod>2020-02-27T12:01:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/arpdns%E6%94%BB%E5%87%BB/</loc>
+    <lastmod>2020-02-27T12:12:54+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqlmap/</loc>
+    <lastmod>2020-02-27T12:01:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xxe/</loc>
+    <lastmod>2020-02-27T12:10:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/tags/hash/</loc>
+    <lastmod>2020-02-27T11:57:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/tags/%E5%9F%9F%E6%B8%97%E9%80%8F/</loc>
+    <lastmod>2020-02-27T11:57:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</loc>
+    <lastmod>2020-02-27T11:57:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</loc>
+    <lastmod>2020-02-27T11:51:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/hash%E6%8A%93%E5%8F%96/</loc>
+    <lastmod>2020-02-27T11:50:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/pyv8/</loc>
+    <lastmod>2020-02-27T12:05:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/%E4%BC%98%E9%9B%85%E7%88%86%E7%A0%B4/</loc>
+    <lastmod>2020-02-27T12:05:37+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xsslist/</loc>
+    <lastmod>2020-02-27T12:02:23+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</loc>
     <lastmod>2020-01-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</loc>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</loc>
     <lastmod>2020-01-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</loc>
-    <lastmod>2020-01-20T00:00:00+00:00</lastmod>
+    <loc>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</loc>
+    <lastmod>2020-02-27T12:12:27+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</loc>
-    <lastmod>2020-01-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</loc>
-    <lastmod>2020-02-24T10:14:51+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</loc>
-    <lastmod>2020-02-24T10:14:51+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/blog/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://blog.go1f.cc/blog/%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/xss%E9%97%AF%E5%85%B3/</loc>
     <lastmod>2020-02-01T18:00:25+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.go1f.cc/tags/burpsuit/</loc>
+    <loc>https://blog.go1f.cc/blog/%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2019-11-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/blog/burpsuit%E5%A4%9A%E9%87%8D%E4%BB%A3%E7%90%86/</loc>
-    <lastmod>2019-11-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/tags/linux/</loc>
-    <lastmod>2020-10-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A42/</loc>
-    <lastmod>2020-10-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%9D%BF%E5%9D%97/</loc>
-    <lastmod>2020-10-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E9%9D%A2%E8%AF%95%E4%B8%93%E5%9C%BA/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.go1f.cc/notes/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7/linux%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A41/</loc>
-    <lastmod>2020-02-21T16:38:31+08:00</lastmod>
   </url>
   
 </urlset>

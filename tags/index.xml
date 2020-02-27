@@ -7,26 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Fri, 21 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>python</title>
-      <link>https://blog.go1f.cc/tags/python/</link>
-      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      <title>XSS</title>
+      <link>https://blog.go1f.cc/tags/xss/</link>
+      <pubDate>Tue, 25 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Shell反弹</title>
-      <link>https://blog.go1f.cc/tags/shell%E5%8F%8D%E5%BC%B9/</link>
-      <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/shell%E5%8F%8D%E5%BC%B9/</guid>
+      <guid>https://blog.go1f.cc/tags/xss/</guid>
       <description></description>
     </item>
     
@@ -36,24 +27,6 @@
       <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/tags/sql%E6%B3%A8%E5%85%A5/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>中间人攻击</title>
-      <link>https://blog.go1f.cc/tags/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</link>
-      <pubDate>Sun, 16 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>XXE</title>
-      <link>https://blog.go1f.cc/tags/xxe/</link>
-      <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/xxe/</guid>
       <description></description>
     </item>
     
@@ -72,87 +45,6 @@
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/tags/%E5%9F%9F%E6%B8%97%E9%80%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>暴力破解</title>
-      <link>https://blog.go1f.cc/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</link>
-      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>PHP</title>
-      <link>https://blog.go1f.cc/tags/php/</link>
-      <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/php/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSRF</title>
-      <link>https://blog.go1f.cc/tags/csrf/</link>
-      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/csrf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>XSS</title>
-      <link>https://blog.go1f.cc/tags/xss/</link>
-      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/xss/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>文件上传</title>
-      <link>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link>
-      <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>文件包含</title>
-      <link>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
-      <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>信息收集</title>
-      <link>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</link>
-      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Burpsuit</title>
-      <link>https://blog.go1f.cc/tags/burpsuit/</link>
-      <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/burpsuit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://blog.go1f.cc/tags/linux/</link>
-      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/tags/linux/</guid>
       <description></description>
     </item>
     
