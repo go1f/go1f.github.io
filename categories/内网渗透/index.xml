@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Wed, 19 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>记一次综合靶场的摸底测试</title>
+      <link>https://blog.go1f.cc/blog/%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/%E7%BB%BC%E5%90%88%E9%9D%B6%E5%9C%BA%E9%97%AF%E5%85%B3/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/%E7%BB%BC%E5%90%88%E9%9D%B6%E5%9C%BA%E9%97%AF%E5%85%B3/</guid>
+      <description>&lt;p&gt;超长文慎点。靶场说大不大，就是搞了两天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，60分。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Shell反弹三式</title>
