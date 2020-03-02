@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SQL注入 on 阿花的学习荟</title>
+    <title>SQL注入 on 春田花花学习荟</title>
     <link>https://blog.go1f.cc/tags/sql%E6%B3%A8%E5%85%A5/</link>
-    <description>Recent content in SQL注入 on 阿花的学习荟</description>
+    <description>Recent content in SQL注入 on 春田花花学习荟</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
