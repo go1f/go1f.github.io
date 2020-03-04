@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Web渗透 on 春田花花学习荟</title>
+    <title>Web渗透 on 春田花花学习会</title>
     <link>https://blog.go1f.cc/categories/web%E6%B8%97%E9%80%8F/</link>
-    <description>Recent content in Web渗透 on 春田花花学习荟</description>
+    <description>Recent content in Web渗透 on 春田花花学习会</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -13,12 +13,12 @@
     
     
     <item>
-      <title>记一次综合靶场的摸底测试</title>
+      <title>记一次自摸底底测试</title>
       <link>https://blog.go1f.cc/blog/%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/%E7%BB%BC%E5%90%88%E9%9D%B6%E5%9C%BA%E9%97%AF%E5%85%B3/</link>
       <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/blog/%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/%E7%BB%BC%E5%90%88%E9%9D%B6%E5%9C%BA%E9%97%AF%E5%85%B3/</guid>
-      <description>&lt;p&gt;超长文慎点。靶场说大不大，就是搞了两天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，60分。&lt;/p&gt;</description>
+      <description>&lt;p&gt;超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。&lt;/p&gt;</description>
     </item>
     
     <item>
