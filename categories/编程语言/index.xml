@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程语言 on 春田花花学习会</title>
+    <link>https://blog.go1f.cc/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
+    <description>Recent content in 编程语言 on 春田花花学习会</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy;go1f 2020</copyright>
+    <lastBuildDate>Fri, 06 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.go1f.cc/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ThinkPHP MVC模型探索</title>
+      <link>https://blog.go1f.cc/blog/%E7%BC%96%E7%A8%8B%E9%9A%8F%E6%83%B3/thinkphp%E7%95%99%E8%A8%80%E6%9D%BF/</link>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E7%BC%96%E7%A8%8B%E9%9A%8F%E6%83%B3/thinkphp%E7%95%99%E8%A8%80%E6%9D%BF/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.kancloud.cn/manual/thinkphp/1805&#34;&gt;THINKPHP3.2.3&lt;/a&gt; 基于MVC的模型，迎合前后端分离的潮流，加上详尽的开发者手册，国内较为受欢迎的PHP 开发框架。现在出到5.x了，但3.2.3是个经典。MVC模型在大三下的时候就接触到了，当时是看着ASP.NET去学的。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

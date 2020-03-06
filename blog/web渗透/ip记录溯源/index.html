@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  获取Web访问用户真实IP &ndash; 春田花花学习会
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="WEB应用编程，常见的获取用户IP的来源。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花学习会">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="获取Web访问用户真实IP | 春田花花学习会">
+    <meta name="twitter:description" content="WEB应用编程，常见的获取用户IP的来源。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花学习会
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>主页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">获取Web访问用户真实IP</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E6%B8%97%E9%80%8F' class="muted-link">
+  <span class="Label Label--gray-darker">Web渗透</span>
+</a>
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-03-06. Published at: 2020-03-06.">
+        
+          Lastmod: 2020-03-06
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>WEB应用编程，常见的获取用户IP的来源。</p>
+<p><strong>在无代理情况下</strong></p>
+<p>REMOTE_ADDR可以认为是用户真实IP，认为这是中间件与其建立TCP连接的IP记录所取得的。该字段无法伪造，但是用户可以凭借代理服务器绕过。</p>
+<p>​</p>
+<p><strong>在代理后</strong></p>
+<p>如何获得真实IP，就有点君子协定的意思了，使用X-FORWARD-FOR字段。举例</p>
+<blockquote>
+<p>用户电脑ip-&gt;代理服务器1–&gt;代理服务器2–&gt;目标服务器</p>
+<p>REMOTE_ADDR:代理服务器2的IP值</p>
+<p>X-Forwarded-For就是：真实IP，代理1的IP，代理2的IP</p>
+</blockquote>
+<p>但是该字段可以伪造，只需要简单的截包改包。</p>
+<p>​</p>
+<p><strong>反向代理下</strong></p>
+<p>反向代理时，REMOTE_ADDR就会被最后处理反向代理的服务器IP掩盖，需要对反向代理作额外配置，例如nginx，新建一个 X-Real-IP 字段作记录。</p>
+<pre><code>proxy_set_header            Host $host;
+proxy_set_header            X-Real-IP $remote_addr;
+proxy_set_header            X-Forwarded-For $proxy_add_x_forwarded_for;
+</code></pre><p>​</p>
+<p>最好将所有IP有关的记录字段都作记录，也是对溯源有一定帮助。</p>
+<blockquote>
+<ul>
+<li>HTTP_CLIENT_IP</li>
+<li>HTTP_X_FORWARDED_FOR</li>
+<li>HTTP_X_FORWARDED</li>
+<li>HTTP_X_CLUSTER_CLIENT_IP</li>
+<li>HTTP_FORWARDED_FOR</li>
+<li>HTTP_FORWARDED</li>
+<li>REMOTE_ADDR (真實 IP 或是 Proxy IP)</li>
+<li>HTTP_VIA (參考經過的 Proxy)</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>最后，贴上经典代码。</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_CLIENT_IP&#39;</span><span class="p">])){</span>
+   <span class="nv">$myip</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_CLIENT_IP&#39;</span><span class="p">];</span>
+<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">])){</span>
+   <span class="nv">$myip</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">];</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+   <span class="nv">$myip</span><span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REMOTE_ADDR&#39;</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">echo</span> <span class="s2">&#34;你是从 &#34;</span><span class="o">.</span><span class="nv">$myip</span><span class="o">.</span><span class="s2">&#34; 这来的吗？&#34;</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
+</code></pre></div><p><strong>参考文章</strong></p>
+<p><a href="https://devco.re/blog/2014/06/19/client-ip-detection/">如何正確的取得使用者 IP？</a></p>
+<p><a href="http://xxlegend.com/2016/11/01/%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7IP%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF/">获取用户IP的正确姿势</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>获取Web访问用户真实IP</b><nav id="TableOfContents"></nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

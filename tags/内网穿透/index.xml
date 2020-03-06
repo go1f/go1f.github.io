@@ -13,22 +13,22 @@
     
     
     <item>
-      <title>端口映射、路由转发 —— 内网穿透</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/</link>
+      <title>SSH 端口转发讲解</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E4%B8%8A/</link>
       <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/</guid>
-      <description>&lt;p&gt;端口映射，一直晕晕的搞不透彻，这次结合自己搭建的环境，加深理解。&lt;/p&gt;
-&lt;p&gt;此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？&lt;/p&gt;</description>
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E4%B8%8A/</guid>
+      <description>&lt;p&gt;这里并不是解析SSH代理隧道，但相信很快会有。刚上手端口转发时，并没有实际概念与需求，往往看的一知半解，所以撰文简单叙述对端口转发的一点认识，陆续补充几种常见转发工具。前文有一篇结合反弹Shell介绍端口映射的，作为兄弟篇，现在讲讲端口转发。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>端口转发 —— SSH为例</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</link>
+      <title>端口映射 or 路由转发</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84-%E4%B8%8B/</link>
       <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</guid>
-      <description>&lt;p&gt;这里并不是解析SSH代理隧道，但相信很快会有。刚上手端口转发时，并没有实际概念与需求，往往看的一知半解，所以撰文简单叙述对端口转发的一点认识，陆续补充几种常见转发工具。前文有一篇结合反弹Shell介绍端口映射的，作为兄弟篇，现在讲讲端口转发。&lt;/p&gt;</description>
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84-%E4%B8%8B/</guid>
+      <description>&lt;p&gt;端口映射，之前搞不透彻，这次结合自己设计的拓扑实践，加深理解。&lt;/p&gt;
+&lt;p&gt;此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？&lt;/p&gt;</description>
     </item>
     
   </channel>

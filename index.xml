@@ -12,22 +12,40 @@
     
     
     <item>
-      <title>端口映射、路由转发 —— 内网穿透</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/</link>
-      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
+      <title>ThinkPHP MVC模型探索</title>
+      <link>https://blog.go1f.cc/blog/%E7%BC%96%E7%A8%8B%E9%9A%8F%E6%83%B3/thinkphp%E7%95%99%E8%A8%80%E6%9D%BF/</link>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/</guid>
-      <description>&lt;p&gt;端口映射，一直晕晕的搞不透彻，这次结合自己搭建的环境，加深理解。&lt;/p&gt;
-&lt;p&gt;此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？&lt;/p&gt;</description>
+      <guid>https://blog.go1f.cc/blog/%E7%BC%96%E7%A8%8B%E9%9A%8F%E6%83%B3/thinkphp%E7%95%99%E8%A8%80%E6%9D%BF/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.kancloud.cn/manual/thinkphp/1805&#34;&gt;THINKPHP3.2.3&lt;/a&gt; 基于MVC的模型，迎合前后端分离的潮流，加上详尽的开发者手册，国内较为受欢迎的PHP 开发框架。现在出到5.x了，但3.2.3是个经典。MVC模型在大三下的时候就接触到了，当时是看着ASP.NET去学的。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>端口转发 —— SSH为例</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</link>
+      <title>获取Web访问用户真实IP</title>
+      <link>https://blog.go1f.cc/blog/web%E6%B8%97%E9%80%8F/ip%E8%AE%B0%E5%BD%95%E6%BA%AF%E6%BA%90/</link>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/web%E6%B8%97%E9%80%8F/ip%E8%AE%B0%E5%BD%95%E6%BA%AF%E6%BA%90/</guid>
+      <description>&lt;p&gt;WEB应用编程，常见的获取用户IP的来源。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSH 端口转发讲解</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E4%B8%8A/</link>
       <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</guid>
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E4%B8%8A/</guid>
       <description>&lt;p&gt;这里并不是解析SSH代理隧道，但相信很快会有。刚上手端口转发时，并没有实际概念与需求，往往看的一知半解，所以撰文简单叙述对端口转发的一点认识，陆续补充几种常见转发工具。前文有一篇结合反弹Shell介绍端口映射的，作为兄弟篇，现在讲讲端口转发。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>端口映射 or 路由转发</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84-%E4%B8%8B/</link>
+      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84-%E4%B8%8B/</guid>
+      <description>&lt;p&gt;端口映射，之前搞不透彻，这次结合自己设计的拓扑实践，加深理解。&lt;/p&gt;
+&lt;p&gt;此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -56,6 +74,15 @@
       <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqlwaf/</guid>
       <description>&lt;p&gt;归纳前辈们绕过WAF的技巧。&lt;/p&gt;
 &lt;p&gt;整理归纳前辈们绕过WAF的技巧。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>蟒蛇爬虫 Python入门</title>
+      <link>https://blog.go1f.cc/blog/%E7%BC%96%E7%A8%8B%E9%9A%8F%E6%83%B3/python%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E7%BC%96%E7%A8%8B%E9%9A%8F%E6%83%B3/python%E7%88%AC%E8%99%AB/</guid>
+      <description>&lt;p&gt;本文，以知乎问题答案的爬取脚本结束，源码已提供&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -115,7 +142,7 @@
     </item>
     
     <item>
-      <title>域渗透必由之路下 —— 白银票据</title>
+      <title>域渗透 白银票据</title>
       <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%99%BD%E9%93%B6%E7%A5%A8%E6%8D%AE/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -124,7 +151,7 @@
     </item>
     
     <item>
-      <title>内网/域控扫盲</title>
+      <title>内网科普&#43;域提权</title>
       <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</link>
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -134,7 +161,7 @@
     </item>
     
     <item>
-      <title>域渗透必由之路上 —— 黄金票据与 mimikatz</title>
+      <title>域渗透 黄金票据与mimikatz</title>
       <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -143,7 +170,7 @@
     </item>
     
     <item>
-      <title>Hash抓取 —— 域与工作组、在线与离线</title>
+      <title>Hash抓取 域与工作组、在线与离线</title>
       <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/hash%E6%8A%93%E5%8F%96/</link>
       <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
       

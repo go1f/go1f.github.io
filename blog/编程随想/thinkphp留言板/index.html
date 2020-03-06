@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  ThinkPHP MVC模型探索 &ndash; 春田花花学习会
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="THINKPHP3.2.3 基于MVC的模型，迎合前后端分离的潮流，加上详尽的开发者手册，国内较为受欢迎的PHP 开发框架。现在出到5.x了，但3.2.3是个经典。MVC模型在大三下的时候就接触到了，当时是看着ASP.NET去学的。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花学习会">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="ThinkPHP MVC模型探索 | 春田花花学习会">
+    <meta name="twitter:description" content="THINKPHP3.2.3 基于MVC的模型，迎合前后端分离的潮流，加上详尽的开发者手册，国内较为受欢迎的PHP 开发框架。现在出到5.x了，但3.2.3是个经典。MVC模型在大三下的时候就接触到了，当时是看着ASP.NET去学的。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花学习会
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>主页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">ThinkPHP MVC模型探索</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80' class="muted-link">
+  <span class="Label Label--gray-darker">编程语言</span>
+</a>
+
+
+
+<a href='/tags/php' class="muted-link">
+  <span class="Label Label--gray">PHP</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-03-06. Published at: 2020-03-06.">
+        
+          Lastmod: 2020-03-06
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p><a href="https://www.kancloud.cn/manual/thinkphp/1805">THINKPHP3.2.3</a> 基于MVC的模型，迎合前后端分离的潮流，加上详尽的开发者手册，国内较为受欢迎的PHP 开发框架。现在出到5.x了，但3.2.3是个经典。MVC模型在大三下的时候就接触到了，当时是看着ASP.NET去学的。</p>
+<p>看着哔哩哔哩的视频、官方文档半懂不懂，又要赶出设计作业交，有点浮躁，最后感觉做的有点糊涂。回想要补坑，挖洞时候，也经常看见这个模型，就想着实践一下去了解应用，也是对开发者的一点体验，虽然只是做 Hello World 式的留言板。</p>
+<h2 id="功能与数据库">功能与数据库</h2>
+<p><strong>若干功能</strong></p>
+<p>登录、注册、发表留言、查看留言、网站日志</p>
+<p>​</p>
+<p><strong>四个页面</strong></p>
+<p><strong>主页</strong> 展示所有留言、登录入口、发表留言入口</p>
+<p><strong>登录</strong> 就是登录提交处理</p>
+<p><strong>注册</strong> 就是注册信息提交处理</p>
+<p><strong>发表留言</strong> 就是留言信息提交处理</p>
+<p><img src="https://i.loli.net/2020/03/06/onOe9FD2s634AmZ.png" alt="ThinkPHP_Xmind.png"></p>
+<p>​</p>
+<p><strong>数据库设计</strong> 设计留言表与用户表</p>
+<p><img src="https://i.loli.net/2020/03/06/QqyvoJMaHRCrjkF.png" alt="database.png"></p>
+<p>​</p>
+<h2 id="thinkphp323">ThinkPHP3.2.3</h2>
+<p>默认三个文件夹 Application、Public、ThinkPHP，ThinkPHP文件夹是框架的库，Application就是开发的项目存放。</p>
+<p>着重看Application目录，标志性的Controller、Model、View目录，Common目录存放公共函数，是框架运行前加载的文件。Conf则是配置的参数，如数据库的登录账号等。</p>
+<p><img src="https://i.loli.net/2020/03/06/ExvJzNbACYkonF5.png" alt="目录框架.png"></p>
+<p>控制器类文件要求以<code>控制器名+Controller.class.php</code>格式命名，譬如这里命名了Index与User的类，分别打算处理留言与账号的功能。</p>
+<p>​</p>
+<h3 id="model">Model</h3>
+<p>Model是指数据库的设计模型，跟Controller做数据交互。</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">#code: MessagesModel.php 
+</span><span class="c1"></span><span class="k">namespace</span> <span class="nx">Home\Model</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Think\Model</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">MessagesModel</span> <span class="k">extends</span> <span class="nx">Model</span> <span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$trueTableName</span> <span class="o">=</span> <span class="s1">&#39;messages&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>简单定义类就可以了。关键是添加数据库的配置。</p>
+<p><img src="https://i.loli.net/2020/03/06/4m2PqrwnzvVEbu7.png" alt="message_Model.png"></p>
+<p>调用时候，用ThinkPHP的M函数，会自动读取配置文件，新建出对应的模型对象。再调用模型的方法完成增删改查。</p>
+<p><img src="https://i.loli.net/2020/03/06/tmZEaDV3O8UcAIK.png" alt="Home_Conf.png"></p>
+<p>​</p>
+<h3 id="view">View</h3>
+<p>以展示留言这个功能，介绍前后端数据的传送。默认的模板文件定义规则是：</p>
+<pre><code>视图目录/[模板主题/]控制器名/操作名+模板后缀
+</code></pre><p>Index控制器类的 show_message 方法，从model模型取出数据，放到 $message_list，调用assign，指定变量与前端调用的接口名。</p>
+<p>View/Index/index.html 调用命名为message_list的变量就可以了。</p>
+<p><img src="https://i.loli.net/2020/03/06/Ux9KbqfsoJHdlc1.png" alt="controller_show_message.png"></p>
+<p>前端，使用了循环列表标签，二维数组的取值。</p>
+<p><img src="https://i.loli.net/2020/03/06/Dr1pZUL3Kw5TId8.png" alt="message_list_volist.png"></p>
+<p>​</p>
+<p>U函数调用，前端添加<code>{: }</code>，比如调用User控制器login方法，则<code>{:U('/User/login')}</code></p>
+<p><img src="https://i.loli.net/2020/03/06/fl3xiusj7PRmJaD.png" alt="U_function.png"></p>
+<p>后端的跳转同理，配合sucess、error方法跳转</p>
+<p><img src="https://i.loli.net/2020/03/06/nQB5ue2lETxargq.png" alt="link_jump.png"></p>
+<p>​</p>
+<h3 id="controller">Controller</h3>
+<p>定义的方法，供调用而已，如前文提到的login、show_message</p>
+<p>还有常用到的 I函数，用于读取请求中的GET、POST数据，并作过滤（防止SQL注入、XSS）</p>
+<p><img src="https://i.loli.net/2020/03/06/MiL6JbEBkP9v3VN.png" alt="I_function.png"></p>
+<p>​</p>
+<p>这只是很粗浅的一次起步，这个坑，算是埋了一点。</p>
+<h2 id="源码">源码</h2>
+<h3 id="controller-1">Controller</h3>
+<p>IndexController.class.php</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">Home\Controller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Think\Controller</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">IndexController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">show_message</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">show</span><span class="p">();</span>
+        <span class="nx">log_access</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">show_message</span><span class="p">(){</span>
+        <span class="nv">$messagesModel</span> <span class="o">=</span> <span class="nx">M</span><span class="p">(</span><span class="s2">&#34;messages&#34;</span><span class="p">);</span>
+        <span class="nv">$message_list</span> <span class="o">=</span> <span class="nv">$messagesModel</span><span class="o">-&gt;</span><span class="na">order</span><span class="p">(</span><span class="s2">&#34;create_time desc&#34;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">page</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assign</span><span class="p">(</span><span class="s1">&#39;message_list&#39;</span><span class="p">,</span><span class="nv">$message_list</span><span class="p">);</span>
+        <span class="c1">// dump($message_list);
+</span><span class="c1"></span>    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">show</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">do_add</span><span class="p">(){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">check_login</span><span class="p">();</span>
+        <span class="nv">$content</span> <span class="o">=</span> <span class="nx">I</span><span class="p">(</span><span class="s2">&#34;content&#34;</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$content</span><span class="p">)){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;内容不能为空！&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$messagesModel</span> <span class="o">=</span> <span class="nx">M</span><span class="p">(</span><span class="s2">&#34;Messages&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;user_id&#34;</span><span class="o">=&gt;</span><span class="nx">session</span><span class="p">(</span><span class="s2">&#34;user_id&#34;</span><span class="p">),</span><span class="s2">&#34;username&#34;</span><span class="o">=&gt;</span><span class="nx">session</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">),</span><span class="s2">&#34;content&#34;</span><span class="o">=&gt;</span><span class="nv">$content</span><span class="p">,</span><span class="s2">&#34;create_time&#34;</span><span class="o">=&gt;</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">)</span>  <span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$messagesModel</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$messagesModel</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">()</span> <span class="p">){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="s2">&#34;留言成功！&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;Index/index&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;留言插入失败！！&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">check_login</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nx">session</span><span class="p">(</span><span class="s2">&#34;user_id&#34;</span><span class="p">)</span> <span class="p">){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;请先登录！&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;User/login&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="c1">// $this-&gt;sucess(&#34;已登录！&#34;)
+</span><span class="c1"></span>        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>UserController.class.php</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">Home\Controller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Think\Controller</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">show</span><span class="p">(</span><span class="s1">&#39;Hello Login!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">regesiter</span><span class="p">(){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">show</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">(){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">show</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">(){</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">do_logout</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">do_register</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">session</span><span class="p">()){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;你已经登录！&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;Index/index&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$username</span> <span class="o">=</span> <span class="nx">I</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">);</span>
+        <span class="nv">$password</span> <span class="o">=</span> <span class="nx">I</span><span class="p">(</span><span class="s2">&#34;password&#34;</span><span class="p">);</span>
+        <span class="nv">$password_repeat</span> <span class="o">=</span> <span class="nx">I</span><span class="p">(</span><span class="s2">&#34;password_repeat&#34;</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="p">(</span><span class="nv">$username</span> <span class="o">&amp;&amp;</span> <span class="nv">$password</span> <span class="o">&amp;&amp;</span> <span class="nv">$password_repeat</span><span class="p">)</span> <span class="p">){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;请输入账号或密码！！&#34;</span><span class="p">,</span><span class="nx">U</span><span class="p">(</span><span class="s2">&#34;User/login&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$password_repeat</span> <span class="o">!=</span> <span class="nv">$password</span><span class="p">){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;密码不一致！！&#34;</span><span class="p">,</span><span class="nx">U</span><span class="p">(</span><span class="s2">&#34;User/register&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+        
+        <span class="nv">$userModel</span> <span class="o">=</span> <span class="nx">M</span><span class="p">(</span><span class="s2">&#34;Users&#34;</span><span class="p">);</span>
+        <span class="nv">$password</span> <span class="o">=</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$password</span><span class="o">.</span><span class="s2">&#34;go1f223&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="o">=&gt;</span><span class="nv">$username</span><span class="p">,</span><span class="s2">&#34;password&#34;</span><span class="o">=&gt;</span><span class="nv">$password</span><span class="p">);</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$result</span><span class="p">){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;该用户已经注册！！&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;User/register&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$userModel</span> <span class="o">=</span> <span class="nx">M</span><span class="p">(</span><span class="s2">&#34;Users&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="o">=&gt;</span><span class="nv">$username</span><span class="p">,</span><span class="s2">&#34;password&#34;</span><span class="o">=&gt;</span><span class="nv">$password</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">()</span> <span class="p">){</span>
+            <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">();</span>
+
+            <span class="nx">session</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span><span class="nv">$result</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">]);</span>
+            <span class="nx">session</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">,</span><span class="nv">$result</span><span class="p">[</span><span class="s2">&#34;username&#34;</span><span class="p">]);</span>
+            <span class="nx">log_register_sucess</span><span class="p">();</span>
+            
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="s2">&#34;注册成功！&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;Index/index&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;注册失败，请稍后再试。&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;Index/index&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">do_login</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">session</span><span class="p">()){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;你已经登录！&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;Index/index&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$username</span> <span class="o">=</span> <span class="nx">I</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">);</span>
+        <span class="nv">$password</span> <span class="o">=</span> <span class="nx">I</span><span class="p">(</span><span class="s2">&#34;password&#34;</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="p">(</span><span class="nv">$username</span> <span class="o">&amp;&amp;</span> <span class="nv">$password</span><span class="p">)</span> <span class="p">){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;请输入账号或密码！！&#34;</span><span class="p">,</span><span class="nx">U</span><span class="p">(</span><span class="s2">&#34;User/login&#34;</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="nv">$userModel</span> <span class="o">=</span> <span class="nx">M</span><span class="p">(</span><span class="s2">&#34;Users&#34;</span><span class="p">);</span>
+        <span class="nv">$password</span> <span class="o">=</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$password</span><span class="o">.</span><span class="s2">&#34;go1f223&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="o">=&gt;</span><span class="nv">$username</span><span class="p">,</span><span class="s2">&#34;password&#34;</span><span class="o">=&gt;</span><span class="nv">$password</span><span class="p">);</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">();</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$result</span><span class="p">)){</span>
+            <span class="nx">log_login_attempt</span><span class="p">(</span><span class="nv">$username</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&#34;账户名或密码错误！！&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nx">session</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span><span class="nv">$result</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">]);</span>
+        <span class="nx">session</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">,</span><span class="nv">$result</span><span class="p">[</span><span class="s2">&#34;username&#34;</span><span class="p">]);</span>
+        <span class="nx">log_login_sucess</span><span class="p">();</span>
+        
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="s2">&#34;登录成功！&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;Index/index&#34;</span><span class="p">));</span>
+
+    <span class="p">}</span>
+
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">do_logout</span><span class="p">(){</span>
+        <span class="nx">log_logout</span><span class="p">();</span>
+        <span class="nx">session_destroy</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="s2">&#34;退出成功！&#34;</span><span class="p">,</span> <span class="nx">U</span><span class="p">(</span><span class="s2">&#34;Index/index&#34;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div><p>add.html</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p"></span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p"></span><span class="p">&gt;</span>发表留言<span class="p">&lt;</span><span class="p">/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;__URL__/do_add&#34;</span><span class="p"></span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;content&#34;</span><span class="p"></span><span class="p">&gt;</span>留言内容<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">br</span> <span class="p">/</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;content&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;content&#34;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&#34;100&#34;</span> <span class="na">rows</span><span class="o">=</span><span class="s">&#34;4&#34;</span> <span class="na">required</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">textarea</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">br</span> <span class="p">/</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>发表<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;reset&#34;</span><span class="p"></span><span class="p">&gt;</span>重置<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;__URL__/index&#34;</span><span class="p"></span><span class="p">&gt;</span>首页<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><h3 id="view-1">View</h3>
+<p>Index/index.html</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p"></span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p"></span><span class="p">&gt;</span>春天花花画画板<span class="p">&lt;</span><span class="p">/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p"></span><span class="p">&gt;</span>留言板<span class="p">&lt;</span><span class="p">/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">empty</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;Think.session.username&#34;</span><span class="p"></span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{:U(&#39;User/login&#39;)}&#34;</span><span class="p"></span><span class="p">&gt;</span>登陆<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{:U(&#39;User/register&#39;)}&#34;</span><span class="p"></span><span class="p">&gt;</span>注册<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">else</span> <span class="p">/</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>{$Think.session.username},欢迎您！<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{:U(&#39;Index/add&#39;)}&#34;</span><span class="p"></span><span class="p">&gt;</span>发表留言<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{:U(&#39;User/logout&#39;)}&#34;</span><span class="p"></span><span class="p">&gt;</span>退出登录<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="p">/</span><span class="nt">empty</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">volist</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;message_list&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;messages&#34;</span><span class="p"></span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/</span><span class="p">&gt;</span>
+                {$messages.content}<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/</span><span class="p">&gt;</span>
+                留言者：{$messages.username}
+                留言时间：{$messages.create_time}
+                <span class="p">&lt;</span><span class="nt">eq</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;Think.session.user_id&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;$messages.user_id&#34;</span><span class="p"></span><span class="p">&gt;</span>
+                    <span class="c">&lt;!--</span><span class="c"> &lt;a href=&#34;{:U(&#39;delete?message_id=&#39;.$messages[&#39;message_id&#39;])}&#34;
+</span><span class="c">                        onclick=&#34;return confirm(&#39;确定删除此条留言？&#39;)&#34;&gt;删除&lt;/a&gt; </span><span class="c">--&gt;</span>
+                <span class="p">&lt;</span><span class="p">/</span><span class="nt">eq</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="p">/</span><span class="nt">volist</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="c">&lt;!--</span><span class="c">注意点：
+</span><span class="c">{:U(&#39;&#39;)}的用法
+</span><span class="c">{$messages.content}与value=&#34;$messages.content&#34;的区别</span><span class="c">--&gt;</span>
+</code></pre></div><p>User/login.html</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p"></span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p"></span><span class="p">&gt;</span>登陆<span class="p">&lt;</span><span class="p">/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p"></span><span class="p">&gt;</span>用户登陆<span class="p">&lt;</span><span class="p">/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;__URL__/do_login&#34;</span><span class="p"></span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">table</span><span class="p"></span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p"></span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;username&#34;</span><span class="p"></span><span class="p">&gt;</span>账号<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">required</span> <span class="p">/</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="p">/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p"></span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;password&#34;</span><span class="p"></span><span class="p">&gt;</span>密码<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">required</span> <span class="p">/</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="p">/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p"></span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span> <span class="na">colspan</span><span class="o">=</span><span class="s">&#34;2&#34;</span> <span class="na">align</span><span class="o">=</span><span class="s">&#34;center&#34;</span><span class="p"></span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>登陆<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;reset&#34;</span><span class="p"></span><span class="p">&gt;</span>重置<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="p">/</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="p">/</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;__URL__/register&#34;</span><span class="p"></span><span class="p">&gt;</span>没有有账号？点击注册<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><h3 id="common">Common</h3>
+<p>Common/function.php  主要实现日志记录</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+    <span class="k">function</span> <span class="nf">log_login_sucess</span><span class="p">(){</span>
+        <span class="nv">$fp</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s2">&#34;log.txt&#34;</span><span class="p">,</span><span class="s2">&#34;a&#34;</span><span class="p">)</span> <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="s2">&#34;Unable to open file!&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d h:i:sa&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34; login in, uname=&#34;</span><span class="o">.</span><span class="nx">session</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">)</span> <span class="o">.</span><span class="s2">&#34;, id=&#34;</span><span class="o">.</span><span class="nx">session</span><span class="p">(</span><span class="s2">&#34;user_id&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34;, ip=&#34;</span><span class="o">.</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&#34;REMOTE_ADDR&#34;</span><span class="p">]</span><span class="o">.</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+        <span class="nx">fwrite</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="nx">fclose</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">log_login_attempt</span><span class="p">(</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">){</span>
+        <span class="nv">$fp</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s2">&#34;log.txt&#34;</span><span class="p">,</span><span class="s2">&#34;a+&#34;</span><span class="p">)</span>  <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="s2">&#34;Unable to open file!&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d h:i:sa&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34; login failed, uname=&#34;</span><span class="o">.</span><span class="nv">$username</span><span class="o">.</span><span class="s2">&#34; with pw=&#34;</span><span class="o">.</span><span class="nv">$password</span><span class="o">.</span> <span class="s2">&#34; ip=&#34;</span><span class="o">.</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&#34;REMOTE_ADDR&#34;</span><span class="p">]</span><span class="o">.</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+        <span class="nx">fwrite</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="nx">fclose</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">log_access</span><span class="p">(){</span>
+        <span class="nv">$fp</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s2">&#34;log.txt&#34;</span><span class="p">,</span><span class="s2">&#34;a+&#34;</span><span class="p">)</span>  <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="s2">&#34;Unable to open file!&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d h:i:sa&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34; access, ip=&#34;</span><span class="o">.</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&#34;REMOTE_ADDR&#34;</span><span class="p">]</span><span class="o">.</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+        <span class="nx">fwrite</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="nx">fclose</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">log_logout</span><span class="p">(){</span>
+        <span class="nv">$fp</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s2">&#34;log.txt&#34;</span><span class="p">,</span><span class="s2">&#34;a+&#34;</span><span class="p">)</span>  <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="s2">&#34;Unable to open file!&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d h:i:sa&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34; login out, uname=&#34;</span><span class="o">.</span><span class="nx">session</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+        <span class="nx">fwrite</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="nx">fclose</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">log_register_sucess</span><span class="p">(){</span>
+        <span class="nv">$fp</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s2">&#34;log.txt&#34;</span><span class="p">,</span><span class="s2">&#34;a&#34;</span><span class="p">)</span> <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="s2">&#34;Unable to open file!&#34;</span><span class="p">);</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d h:i:sa&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34; register, uname=&#34;</span><span class="o">.</span><span class="nx">session</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">)</span> <span class="o">.</span><span class="s2">&#34;, id=&#34;</span><span class="o">.</span><span class="nx">session</span><span class="p">(</span><span class="s2">&#34;user_id&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34;, ip=&#34;</span><span class="o">.</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&#34;REMOTE_ADDR&#34;</span><span class="p">]</span><span class="o">.</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+        <span class="nx">fwrite</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="nx">fclose</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>ThinkPHP MVC模型探索</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#功能与数据库">功能与数据库</a></li>
+    <li><a href="#thinkphp323">ThinkPHP3.2.3</a>
+      <ul>
+        <li><a href="#model">Model</a></li>
+        <li><a href="#view">View</a></li>
+        <li><a href="#controller">Controller</a></li>
+      </ul>
+    </li>
+    <li><a href="#源码">源码</a>
+      <ul>
+        <li><a href="#controller-1">Controller</a></li>
+        <li><a href="#view-1">View</a></li>
+        <li><a href="#common">Common</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

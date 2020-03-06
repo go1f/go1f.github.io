@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  蟒蛇爬虫 Python入门 &ndash; 春田花花学习会
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="本文，以知乎问题答案的爬取脚本结束，源码已提供
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花学习会">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="蟒蛇爬虫 Python入门 | 春田花花学习会">
+    <meta name="twitter:description" content="本文，以知乎问题答案的爬取脚本结束，源码已提供|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花学习会
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>主页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">蟒蛇爬虫 Python入门</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+<a href='/tags/python' class="muted-link">
+  <span class="Label Label--gray">python</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-03-06. Published at: 2020-02-21.">
+        
+          Lastmod: 2020-03-06
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>本文，以知乎问题答案的爬取脚本结束，源码已提供</p>
+<h2 id="入门素养">入门素养</h2>
+<p><strong>声明编码</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#coding=utf-8</span>
+<span class="c1"># 使用 “标准写法”</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+</code></pre></div><p>py2默认使用ASCII运行脚本，字符串使用str或unicode类型，可以用 <code>decode</code>和 <code>encode</code> 相互转换</p>
+<p>py3默认使用UTF-8运行脚本(支持中文)，文本字符和二进制分别使用 <code>str</code> 和 <code>bytes</code> 进行区分</p>
+<p>​</p>
+<p><strong>读写文件</strong> <code>open()</code></p>
+<p><code>r</code>  读、<code>r+</code> 读与写、<code>w</code> 写 、<code>w+</code> 读与写、<code>a</code> 追加写、<code>a+</code> 读与追加写、<code>wb</code> 写二进制</p>
+<p>​</p>
+<p><strong>Debug</strong></p>
+<p>变量类型  <code>type()</code></p>
+<p>异常处理 <code>BaseException</code>、<code>Exception</code>、<code>IOError</code>、<code>SyntaxError</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+	<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">123.txt</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">r</span><span class="s2">&#34;</span><span class="p">)</span>
+	<span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+	<span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Hello World</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+	<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+	<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">what</span><span class="s2">&#39;</span><span class="s2">s going on?</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">get over</span><span class="s2">&#34;</span><span class="p">)</span>
+</code></pre></div><p>​</p>
+<h2 id="requests-lib">Requests Lib</h2>
+<p><strong>GET</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">http://www.baidu.com</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">id</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="c1"># print(url.text) #str类型</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span> <span class="c1">#二进制类型</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+</code></pre></div><p><strong>Header</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">header</span><span class="o">=</span><span class="p">{</span>
+	<span class="sa"></span><span class="s2">&#34;</span><span class="s2">Referer</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">https://www.google.com</span><span class="s2">&#34;</span><span class="p">,</span>
+	<span class="sa"></span><span class="s2">&#34;</span><span class="s2">User-Agent</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0</span><span class="s2">&#34;</span><span class="p">,</span>
+	<span class="sa"></span><span class="s2">&#34;</span><span class="s2">X-Forwarded-For</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">&lt;?php eval($_POST[a];?&gt;)</span><span class="s2">&#34;</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">https://blog.go1f.cc/notes/</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+</code></pre></div><p><strong>POST</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">https://www.baidu.com</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">id</span><span class="s2">&#34;</span><span class="p">:</span><span class="n">i</span><span class="p">}</span><span class="p">)</span>
+</code></pre></div><p><strong>Proxy</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">https</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">socks5://127.0.0.1:10808</span><span class="s2">&#34;</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">http://ipconfig.me</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">)</span>
+</code></pre></div><p>​</p>
+<h2 id="beautifulsoup">BeautifulSoup</h2>
+<p><code>str = BeautifulSoup(&quot;text&quot;,&quot;html.parser&quot;)</code></p>
+<p><code>str.find_all(&quot;tag&quot;)</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="c1"># import json</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+<span class="c1"># json = json.loads(response.content)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">html.parser</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1">#将html页面格式化/补齐标签</span>
+<span class="c1"># print(text.prettify())   #美化/换行</span>
+<span class="n">a_tags</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">a</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">mnav</span><span class="s1">&#39;</span><span class="p">)</span>   <span class="c1">#获取a标签里class=&#39;mnav&#39;的语句</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">a_tags</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">href</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>    <span class="c1">#获取标签内href的值</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>    <span class="c1">#获取标签内部字符串</span>
+</code></pre></div><p>​</p>
+<p>出师作品 —— 知乎爬虫：<a href="http://go1f.cc:81/zhihu.py">拥有一双大长腿是怎样的体验？</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>蟒蛇爬虫 Python入门</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#入门素养">入门素养</a></li>
+    <li><a href="#requests-lib">Requests Lib</a></li>
+    <li><a href="#beautifulsoup">BeautifulSoup</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
