@@ -19,13 +19,12 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  SQL注入进阶 —— WAF绕过 &ndash; 春田花花学习会
+  SQL注入进阶 WAF绕过 &ndash; 春田花花学习会
 
     </title>
     
     
-    <meta name="description" property="og:description" content="归纳前辈们绕过WAF的技巧。
-整理归纳前辈们绕过WAF的技巧。
+    <meta name="description" property="og:description" content="整理归纳吸收前辈们绕过WAF的技巧。
 |blog under go1f.cc">
     
 
@@ -41,9 +40,8 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="SQL注入进阶 —— WAF绕过 | 春田花花学习会">
-    <meta name="twitter:description" content="归纳前辈们绕过WAF的技巧。
-整理归纳前辈们绕过WAF的技巧。|blog under go1f.cc">
+    <meta name="twitter:title" content="SQL注入进阶 WAF绕过 | 春田花花学习会">
+    <meta name="twitter:description" content="整理归纳吸收前辈们绕过WAF的技巧。|blog under go1f.cc">
     <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
     
 
@@ -71,7 +69,7 @@ if (!doNotTrack) {
     
     <a class="UnderlineNav-item " href="/">
       
-      <span>主页</span>
+      <span>首页</span>
     </a>
     
     
@@ -94,7 +92,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">SQL注入进阶 —— WAF绕过</div>
+    <div class="h1 mt-3 mb-1">SQL注入进阶 WAF绕过</div>
   </div>
   <div class="Subhead-description">
     
@@ -114,9 +112,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-03-06. Published at: 2020-02-22.">
+      <span title="Lastmod: 2020-03-09. Published at: 2020-02-22.">
         
-          Lastmod: 2020-03-06
+          Lastmod: 2020-03-09
         
       </span>
     </div>
@@ -126,8 +124,7 @@ if (!doNotTrack) {
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>归纳前辈们绕过WAF的技巧。</p>
-<p>整理归纳前辈们绕过WAF的技巧。</p>
+    <p>整理归纳吸收前辈们绕过WAF的技巧。</p>
 <h2 id="代码防护">代码防护</h2>
 <p><code>php_quteos_gpc on</code> ，php5.3舍弃，将GPC (Get/Post/Cookie) 的变量 反斜杠转义单引号、双引号、反斜杠 和 NULL字符</p>
 <p><code>magic_quotes_runtime on</code> ，php5.3舍弃，反斜杠转义引号，影响file_get_contents()、file()、fgets()、fwrite()、fread()、exec()、system()、passthru()等函数</p>
@@ -177,7 +174,7 @@ $id=addslashes($id);
 <p><strong>多重URL编码</strong></p>
 <p>URL编码是经过中间件时会进行解码，而WAF会提前进行URL解码</p>
 <p><strong>16进制编码</strong></p>
-<p>hex()、conv(22,10,2)、char(97,98,99)</p>
+<p>hex()、conv(22,10,2)、char(97,98,99)、ascii()</p>
 <div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">select</span> <span class="n">username</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="mi">0</span><span class="n">x737475706964</span><span class="p">;</span>
 <span class="k">select</span> <span class="n">username</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="kt">char</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="p">;</span>
 </code></pre></div><p><strong>Unicode编码</strong></p>
@@ -192,7 +189,8 @@ $id=addslashes($id);
 <h3 id="逻辑符号">逻辑符号</h3>
 <pre><code>and, or, &amp;&amp;, ||, =, XOR, IS, NOT
 </code></pre><pre><code>&gt;=, &lt;=, &lt;&gt;, LIKE, BETWEEN,
-</code></pre><h3 id="白名单绕过">白名单绕过</h3>
+</code></pre><p>​</p>
+<h3 id="白名单绕过">白名单绕过</h3>
 <p>基于应用层的白名单，可能造成 byapss</p>
 <p>例如WAF若将<code>admin dede install</code>等特殊目录作为白名单</p>
 <pre><code>news.php/admin?id=1 and 0
@@ -230,7 +228,8 @@ id=1+(UnI)(oN)+(SeL)(EcT)
 <h2 id="filter">Filter</h2>
 <p><strong>等效函数</strong></p>
 <p><code>unhex() bin()</code>   ==&gt; <code>ascii()</code></p>
-<p><code>sleep()</code>   ==&gt;  <code>benchmark(100,pi()*pi())</code></p>
+<p>if() =&gt; filed() elt()</p>
+<p><code>sleep()</code>   ==&gt;  <code>benchmark(100,md5(pi()))</code>、笛卡尔内积、RLIKE、GET_LOCK(key,timeout)</p>
 <p><code>concat()</code>  ==&gt; <code>group_concat()</code>、<code>concat_ws()</code></p>
 <p><code>mid()</code>、 <code>substr()</code>  ==&gt; <code>left()</code>、 <code>right()</code> 、<code>substring()</code>、<code>STRCMP(1,1)、lpad()</code></p>
 <p><code>@@version</code>   ==&gt; <code>version()</code></p>
@@ -265,7 +264,7 @@ id=1+(UnI)(oN)+(SeL)(EcT)
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>SQL注入进阶 —— WAF绕过</b><nav id="TableOfContents">
+      <b>SQL注入进阶 WAF绕过</b><nav id="TableOfContents">
   <ul>
     <li><a href="#代码防护">代码防护</a></li>
     <li><a href="#单引号逃逸">单引号逃逸</a>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Web安全笔记系列 —— 反序列化 &ndash; 春田花花学习会
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="对用户可控的字符串进行反序列化时，产生意外的变量覆盖、方法重载，例如__awake()、tostring()等基类函数的实现，造成了代码注入。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花学习会">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Web安全笔记系列 —— 反序列化 | 春田花花学习会">
+    <meta name="twitter:description" content="对用户可控的字符串进行反序列化时，产生意外的变量覆盖、方法重载，例如__awake()、tostring()等基类函数的实现，造成了代码注入。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花学习会
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>首页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Web安全笔记系列 —— 反序列化</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E7%B3%BB%E5%88%97' class="muted-link">
+  <span class="Label Label--gray-darker">Web系列</span>
+</a>
+
+
+
+<a href='/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96' class="muted-link">
+  <span class="Label Label--gray">反序列化</span>
+</a>
+
+<a href='/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1' class="muted-link">
+  <span class="Label Label--gray">代码审计</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-03-09. Published at: 2020-02-16.">
+        
+          Lastmod: 2020-03-09
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>对用户可控的字符串进行反序列化时，产生意外的变量覆盖、方法重载，例如__awake()、tostring()等基类函数的实现，造成了代码注入。</p>
+<h2 id="序列化">序列化</h2>
+<p>反序列化漏洞存在与多种语言，例如Java、PHP、Python等语言中，但其原理基本相同。</p>
+<p><strong>PHP序列化</strong></p>
+<blockquote>
+<p><code>$class1_ser=serialize($class1)</code>把对象转换为字节序列，便于保存在内存、文件、数据库。</p>
+</blockquote>
+<p>​</p>
+<p><strong>PHP反序列化</strong></p>
+<blockquote>
+<p><code>$class2=unserialize($class1_ser)</code> 把字节序列恢复为对象。</p>
+</blockquote>
+<p>​</p>
+<h2 id="基类--magic函数">基类 / magic函数</h2>
+<p><code>__sleep()</code> 序列化时调用“睡眠”</p>
+<p><code>__wakeup()</code> 反序列化调用“唤醒”</p>
+<p><code>__construct()</code> 构造函数，对象创建时调用</p>
+<p><code>__destruct()</code> 析构函数，回收/销毁对象时调用</p>
+<p><code>__tostring()</code>对象被当作字符串调用</p>
+<h2 id="phar伪协议反序列化">PHAR伪协议反序列化</h2>
+<p><a href="https://threezh1.com/2019/09/09/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86">phar反序列化漏洞的原理</a></p>
+<h2 id="漏洞历史">漏洞历史</h2>
+<blockquote>
+<p>15年的Apache Commons Collections 反序列化远程命令执行漏洞，其当初影响范围包括：WebSphere、JBoss、Jenkins、WebLogic 和 OpenNMSd等。</p>
+<p>2016年Spring RMI反序列化漏洞今年比较出名的：Jackson，FastJson</p>
+</blockquote>
+<h2 id="扩展阅读">扩展阅读</h2>
+<p><a href="https://paper.seebug.org/312/">深入理解JAVA 反序列化漏洞 - Seebug Paper</a></p>
+<p><a href="https://xz.aliyun.com/t/2041">Java反序列化漏洞从入门到深入- 先知社区</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Web安全笔记系列 —— 反序列化</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#序列化">序列化</a></li>
+    <li><a href="#基类--magic函数">基类 / magic函数</a></li>
+    <li><a href="#phar伪协议反序列化">PHAR伪协议反序列化</a></li>
+    <li><a href="#漏洞历史">漏洞历史</a></li>
+    <li><a href="#扩展阅读">扩展阅读</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

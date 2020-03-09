@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  ARP DNS攻击 &ndash; 春田花花学习会
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="听说中间人攻击是经典技术，学习一下。
+在网络模型第二层展开的攻击，说明跟目标很近嘛，都是邻居一家人了，什么都可以瞅瞅吧。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花学习会">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="ARP DNS攻击 | 春田花花学习会">
+    <meta name="twitter:description" content="听说中间人攻击是经典技术，学习一下。
+在网络模型第二层展开的攻击，说明跟目标很近嘛，都是邻居一家人了，什么都可以瞅瞅吧。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花学习会
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>首页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">ARP DNS攻击</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97' class="muted-link">
+  <span class="Label Label--gray-darker">内网系列</span>
+</a>
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-03-09. Published at: 2020-02-16.">
+        
+          Lastmod: 2020-03-09
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>听说中间人攻击是经典技术，学习一下。</p>
+<p>在网络模型第二层展开的攻击，说明跟目标很近嘛，都是邻居一家人了，什么都可以瞅瞅吧。</p>
+<h2 id="arp-poisioning">ARP Poisioning</h2>
+<p><strong>IP转发</strong></p>
+<p>攻击机做中间媒介，不知不觉地介入到双方（例如网关与攻击机）间，拿到正常它们的第一手信息。为了伪装通信正常，需要把双方的通信内容“归还”给对方。这时候需要攻击机做IP转发，也就是吞了，再吐出去。</p>
+<pre><code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+</code></pre><p><strong>查看ARP缓存</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">ip neigh   #Linux
+arp -a    #Windows
+</code></pre></div><p>Arpspoof 是 dsniff 工具之一，<code>apt-get install dsniff </code></p>
+<p><strong>双方投毒</strong></p>
+<p><code>arpspoof -i eth0 -t &lt;cheated Host&gt; -r &lt;fake Host&gt;</code></p>
+<pre><code>arpspoof -i eth0 -t 192.168.145.1 -r 192.168.145.141
+arpspoof -i eth0 -t 192.168.145.1 -r 192.168.145.141
+</code></pre><p>​</p>
+<p><strong>监听</strong> 网卡流量 Tcpdump 或 Wireshark皆可，</p>
+<pre><code>tcpdump -i eth0 -X tcp port 21
+</code></pre><p>​</p>
+<p><strong>防御</strong></p>
+<p>IP/MAC绑定，添加 Static ARP记录</p>
+<pre><code>arp -s 192.168.145.141 00-0c-29-ff-2a-1b 
+</code></pre><p>​</p>
+<h2 id="ethernet-sniffing">Ethernet Sniffing</h2>
+<h3 id="抓取网页">抓取网页</h3>
+<p>Ettercap 三种User Interface启动方式，-T For Terminal 命令行， -G For GBK 较正常的GUI界面， -C For Curise 较简陋的GUI，这里使用 <code>ettercap -G</code>   。</p>
+<p><strong>操作步骤</strong></p>
+<p>Hosts - Scan Hosts</p>
+<p>Hosts - Hosts list : 选中目标主机 Add Target 1</p>
+<p><img src="https://i.loli.net/2020/02/17/JNm71a9TKA6FwUu.jpg" alt="ettercap_G_add_target.jpg"></p>
+<p>​</p>
+<p>Plugins - manage the plugins : remote-broswer  抓取目标主机的http协议的插件</p>
+<p><img src="https://i.loli.net/2020/02/17/PIlYUQxWh98AwbL.jpg" alt="ettercap_remote_browser.jpg"></p>
+<p>​</p>
+<h3 id="抓取图片">抓取图片</h3>
+<p><strong>driftnet</strong> -i eth0</p>
+<p>​</p>
+<h2 id="dns-spoofing">DNS Spoofing</h2>
+<p>这里应用 ettercap - dns_spoof 插件做 DNS Spoofing</p>
+<h3 id="流程">流程</h3>
+<p>首先配置DNS解析</p>
+<pre><code>vim /etc/ettercap/etter.dns
+</code></pre><p>添加一条的DNS A记录 <code>www.bilibili.com A 192.168.145.128</code>，IP指向Attacker Kali</p>
+<p><img src="https://i.loli.net/2020/02/17/ekNLaFP2nHROcuJ.jpg" alt="etter_dns_bilibili_com_A_record.jpg"></p>
+<p>​</p>
+<p>启动 ettercap，配置Victim主机，激活 dns_spool 插件</p>
+<p><img src="https://i.loli.net/2020/02/17/84rsyXBf2FNkScq.jpg" alt="ettercap_dns_spoof.jpg"></p>
+<p>​</p>
+<p>现在到Victim主机Ubuntu上，ping测试，发现其已经被解析到Attacker 主机了。</p>
+<p><img src="https://i.loli.net/2020/02/17/4oGijdxCsEwWfKc.jpg" alt="ping_on_pc1_bilibili_com.jpg"></p>
+<p>​</p>
+<p>意思就是，受害者访问<code>http://www.bilibili.com</code>，会到被解析到攻击机80端口。若返回一个高仿的网页，让受害者浑然不觉，岂不妙哉？</p>
+<p>所以接着，重点来了，联动 Cobalt Strike 在攻击机80端口上伪造一个网页。</p>
+<p><img src="https://i.loli.net/2020/02/17/r7fyaM5knQWVm4c.jpg" alt="cobalt_strike_clone_site.jpg"></p>
+<p><img src="https://i.loli.net/2020/02/17/Etw3obfq91Gns57.jpg" alt="site_clone_setting.jpg"></p>
+<p>​</p>
+<p>在Victim主机输入<code>http://www.bilibili.com</code>，好的，成功看到被伪造的网页了。</p>
+<p><img src="https://i.loli.net/2020/02/17/V4QpWyflPmR7U9K.jpg" alt="fake_www_bilibili_com.jpg"></p>
+<p>如何证明？且看CS监听的键盘记录。</p>
+<p><img src="https://i.loli.net/2020/02/17/VGTJbChL6xSfyja.jpg" alt="fake_www_bilibili_com_key_record.jpg"></p>
+<p>事实上，成功钓鱼Clone Site 的Attack一栏还应该加载攻击脚本，这里仅作入门学习，以后有机会深入使用。</p>
+<p>​</p>
+<h3 id="小结">小结</h3>
+<p>本次操作完成过程很曲折，在此归纳小结一下。</p>
+<ol>
+<li>
+<p>2019-4版本的Kali不好用。对我这些新手，往往看着旧教程，第一步就是找包名 <code>apt install</code>。其实不排斥新旧淘汰，主要是遇到了工具莫名失灵情况，需要做<code>apt upgrade</code>的大版本更新。</p>
+</li>
+<li>
+<p>按照当前博文的设置，若受害者输入<code>https://</code>的URL，我就没辙了。因为HTTPS的加密请求，就算DNS解析到了攻击机的地方，Cobalt Strike没有浏览器信任的证书。攻击机无法与浏览器认证握手成功，发送伪造的网页，浏览器自然也不认可。此时浏览器报错 <code>secure connection failed</code></p>
+</li>
+<li>
+<p>浏览器会记录网页https的记录，下一次默认走HTTPS协议</p>
+</li>
+<li>
+<p>DNS污染，污染失败就要清除再污染啊。<a href="https://ywnz.com/linuxjc/5059.html">在Ubuntu 18.04下刷新/删除DNS缓存，附删除浏览器DNS缓存的方法</a>，Windows清除DNS缓存，<code>ipconfig /flushdns</code></p>
+</li>
+</ol>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>ARP DNS攻击</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#arp-poisioning">ARP Poisioning</a></li>
+    <li><a href="#ethernet-sniffing">Ethernet Sniffing</a>
+      <ul>
+        <li><a href="#抓取网页">抓取网页</a></li>
+        <li><a href="#抓取图片">抓取图片</a></li>
+      </ul>
+    </li>
+    <li><a href="#dns-spoofing">DNS Spoofing</a>
+      <ul>
+        <li><a href="#流程">流程</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

@@ -13,7 +13,7 @@
     
     
     <item>
-      <title>XSS WAF绕过</title>
+      <title>XSSWAF绕过</title>
       <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xsswaf/</link>
       <pubDate>Tue, 25 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -22,7 +22,16 @@
     </item>
     
     <item>
-      <title>XSS Payloads</title>
+      <title>CSRF演习 by DVWA</title>
+      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/csrf/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/csrf/</guid>
+      <description>&lt;p&gt;CSRF又很好防，只能钻钻漏洞这样子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>XSS测试整理</title>
       <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xss%E6%B8%85%E5%8D%95/</link>
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       

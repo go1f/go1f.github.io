@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>主页 on 春田花花学习会</title>
+    <title>首页 on 春田花花学习会</title>
     <link>https://blog.go1f.cc/</link>
-    <description>Recent content in 主页 on 春田花花学习会</description>
+    <description>Recent content in 首页 on 春田花花学习会</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
@@ -30,15 +30,6 @@
     </item>
     
     <item>
-      <title>SSH 端口转发讲解</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E4%B8%8A/</link>
-      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E4%B8%8A/</guid>
-      <description>&lt;p&gt;这里并不是解析SSH代理隧道，但相信很快会有。刚上手端口转发时，并没有实际概念与需求，往往看的一知半解，所以撰文简单叙述对端口转发的一点认识，陆续补充几种常见转发工具。前文有一篇结合反弹Shell介绍端口映射的，作为兄弟篇，现在讲讲端口转发。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>端口映射 or 路由转发</title>
       <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84-%E4%B8%8B/</link>
       <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
@@ -46,6 +37,15 @@
       <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84-%E4%B8%8B/</guid>
       <description>&lt;p&gt;端口映射，之前搞不透彻，这次结合自己设计的拓扑实践，加深理解。&lt;/p&gt;
 &lt;p&gt;此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>端口转发 转发SSH端口</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E4%B8%8A/</link>
+      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E4%B8%8A/</guid>
+      <description>&lt;p&gt;这里并不是解析SSH代理隧道，但相信很快会有。刚上手端口转发时，并没有实际概念与需求，往往看的一知半解，所以撰文简单叙述对端口转发的一点认识，陆续补充几种常见转发工具。前文有一篇结合反弹Shell介绍端口映射的，作为兄弟篇，现在讲讲端口转发。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
     </item>
     
     <item>
-      <title>XSS WAF绕过</title>
+      <title>XSSWAF绕过</title>
       <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xsswaf/</link>
       <pubDate>Tue, 25 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -67,13 +67,12 @@
     </item>
     
     <item>
-      <title>SQL注入进阶 —— WAF绕过</title>
+      <title>SQL注入进阶 WAF绕过</title>
       <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqlwaf/</link>
       <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqlwaf/</guid>
-      <description>&lt;p&gt;归纳前辈们绕过WAF的技巧。&lt;/p&gt;
-&lt;p&gt;整理归纳前辈们绕过WAF的技巧。&lt;/p&gt;</description>
+      <description>&lt;p&gt;整理归纳吸收前辈们绕过WAF的技巧。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -97,10 +96,10 @@
     
     <item>
       <title>WEB安全漏洞系列 —— SQL注入</title>
-      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqli/</link>
+      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/mysqli/</link>
       <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqli/</guid>
+      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/mysqli/</guid>
       <description>&lt;p&gt;本篇没有什么多的感悟，重新温习而已。初级玩家面试时不要被问倒了，看来还得再加一篇继续讲。&lt;/p&gt;</description>
     </item>
     
@@ -114,22 +113,31 @@
     </item>
     
     <item>
-      <title>ARP、DNS攻击</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/arpdns%E6%94%BB%E5%87%BB/</link>
+      <title>ARP DNS攻击</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/arp-dns%E6%94%BB%E5%87%BB/</link>
       <pubDate>Sun, 16 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/arpdns%E6%94%BB%E5%87%BB/</guid>
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/arp-dns%E6%94%BB%E5%87%BB/</guid>
       <description>&lt;p&gt;听说中间人攻击是经典技术，学习一下。&lt;/p&gt;
 &lt;p&gt;在网络模型第二层展开的攻击，说明跟目标很近嘛，都是邻居一家人了，什么都可以瞅瞅吧。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Sqlmap重温</title>
+      <title>Sqlmap 工具整理</title>
       <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqlmap/</link>
       <pubDate>Sun, 16 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/sqlmap/</guid>
-      <description>&lt;p&gt;很久没跑过sqlmap了，不太相信有运气碰上一个SQL注入，挖洞时候碰上多好啊。&lt;/p&gt;</description>
+      <description>&lt;p&gt;很久没跑过sqlmap了，若有运气碰上一个SQL注入、挖洞时候碰上多好啊。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Web安全笔记系列 —— 反序列化</title>
+      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+      <pubDate>Sun, 16 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+      <description>&lt;p&gt;对用户可控的字符串进行反序列化时，产生意外的变量覆盖、方法重载，例如__awake()、tostring()等基类函数的实现，造成了代码注入。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -151,7 +159,7 @@
     </item>
     
     <item>
-      <title>内网科普&#43;域提权</title>
+      <title>内网扫盲 域提权</title>
       <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E5%86%85%E7%BD%91%E6%89%AB%E7%9B%B2/</link>
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -161,16 +169,16 @@
     </item>
     
     <item>
-      <title>域渗透 黄金票据与mimikatz</title>
-      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</link>
+      <title>域渗透 黄金票据 mimikatz</title>
+      <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE/</link>
       <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%B8%8Emimikatz/</guid>
+      <guid>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE/</guid>
       <description>&lt;p&gt;后渗透的一些隐匿手段。域渗透的一些隐匿手段。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Hash抓取 域与工作组、在线与离线</title>
+      <title>Hash抓取 域 工作组 在线 离线</title>
       <link>https://blog.go1f.cc/blog/%E5%86%85%E7%BD%91%E7%B3%BB%E5%88%97/hash%E6%8A%93%E5%8F%96/</link>
       <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -198,7 +206,16 @@
     </item>
     
     <item>
-      <title>XSS Payloads</title>
+      <title>CSRF演习 by DVWA</title>
+      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/csrf/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/csrf/</guid>
+      <description>&lt;p&gt;CSRF又很好防，只能钻钻漏洞这样子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>XSS测试整理</title>
       <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/xss/xss%E6%B8%85%E5%8D%95/</link>
       <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
       
