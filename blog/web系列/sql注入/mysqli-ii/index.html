@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  SQL注入防御失效的若干场景 &ndash; 春田花花游乐园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="没想到魔术引号、addslashes、mysql_real_escape() 也会被🐖队友连累，预编译也不放过！先列举常见失救情况，以后再详细补图。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花游乐园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="SQL注入防御失效的若干场景 | 春田花花游乐园">
+    <meta name="twitter:description" content="没想到魔术引号、addslashes、mysql_real_escape() 也会被🐖队友连累，预编译也不放过！先列举常见失救情况，以后再详细补图。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花游乐园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>首页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">SQL注入防御失效的若干场景</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E7%B3%BB%E5%88%97' class="muted-link">
+  <span class="Label Label--gray-darker">WEB系列</span>
+</a>
+
+
+
+<a href='/tags/sql%E6%B3%A8%E5%85%A5' class="muted-link">
+  <span class="Label Label--gray">SQL注入</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-03-10. Published at: 2020-03-10.">
+        
+          Lastmod: 2020-03-10
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>没想到魔术引号、addslashes、mysql_real_escape() 也会被🐖队友连累，预编译也不放过！先列举常见失救情况，以后再详细补图。</p>
+<h2 id="无效">无效！</h2>
+<ol>
+<li>
+<p>转义后再次解码，例如 URL解码、Base64解码。</p>
+<p>转义应该放在拼接前的最后一步。</p>
+<p>​</p>
+</li>
+<li>
+<p>宽字节编码</p>
+<p><code>mysql_query(&quot;GBK&quot;)</code> GBK编码、双字节，且单引号(0x5C)，存在于GBK中文编码的低字节，这时候，只需要高字节值大于128，编码会自动将改字节合并为一个汉字，例如0xDF5C。</p>
+<p>扩展：世界上其他的双字节编码同样会存在该问题。GB2312不存在这个问题，是因为0x5C不在其低字节值的范围内。</p>
+<p>​</p>
+</li>
+<li>
+<p>双条件查询（两对单引号），因为不规范的过滤，引入反引号或二次注入，把第二个引号注释，借助第三个引号闭合。</p>
+<p>双条件查询或带两对单引号的SQL语句，转义第二个单引号</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">username</span><span class="p">,</span><span class="n">password</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">$username</span><span class="s1">&#39;</span> <span class="k">and</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">$password</span><span class="s1">&#39;</span> <span class="k">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</code></pre></div><p>传入<code>\</code> 逃出单引号，payload: <code>username=abc\&amp;password=or 'admin</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">username</span><span class="p">,</span><span class="n">password</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">admin\</span><span class="s1">&#39;</span> <span class="k">and</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">$password</span><span class="s1">&#39;</span> <span class="k">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</code></pre></div><p>​</p>
+</li>
+<li>
+<p>PDO预编译失效</p>
+<ol>
+<li>错误地沿用拼接字符传统，而不采用绑定参数的方法。</li>
+<li>参数占位符不能用于指定查询中的**<a href="https://www.freebuf.com/articles/web/155876.html">表和列的名称</a>**</li>
+<li>ORDER BY后的ASC/DESC也不能被预编译，当业务场景涉及到用户可控制排序方式，且ASC/DESC是由前台传入并拼接到SQL语句</li>
+</ol>
+</li>
+</ol>
+<p>​</p>
+<h2 id="防御">防御</h2>
+<ol>
+<li>
+<p>双字节编码，即<code>mysql_query(&quot;GBK&quot;)</code>环境下，不要使用<code>addslashes()</code></p>
+</li>
+<li>
+<p>双字节编码，必须声明查询语句使用了的编码 <code>mysql_set_charset(&quot;GBK&quot;)</code>，令<code>mysql_real_escape()</code> 函数使用GBK编码规则来转义。</p>
+</li>
+<li>
+<p>规范使用预编译，某些不能预编译的特殊情况，采用第二条的防御方法。</p>
+</li>
+</ol>
+<p>​</p>
+<h2 id="参考">参考</h2>
+<p>！！！<a href="https://blog.51cto.com/wt7315/1931667">魔术引号、addslashes和mysql_real_escape_string的防御以及绕过</a></p>
+<p>！！！<a href="https://www.freebuf.com/articles/web/155876.html">SQL注入的“冷门姿势”</a></p>
+<p>！！<a href="https://www.iteye.com/blog/zhangxugg-163-com-1835721">PDO防注入原理分析以及使用PDO的注意事项</a></p>
+<p><a href="https://blog.csdn.net/qq_36705093/article/details/79865601">PHP防SQL注入不要再用addslashes和mysql_real_escape_string了</a></p>
+<p><a href="https://www.anquanke.com/post/id/86005">SQL注入防御与绕过的几种姿势</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>SQL注入防御失效的若干场景</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#无效">无效！</a></li>
+    <li><a href="#防御">防御</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
