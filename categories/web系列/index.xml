@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Tue, 10 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/categories/web%E7%B3%BB%E5%88%97/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SQL宽字节注入复现</title>
+      <link>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/blog/web%E7%B3%BB%E5%88%97/sql%E6%B3%A8%E5%85%A5/%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/</guid>
+      <description>&lt;p&gt;说到底，把GBK当作GBK来转义，就好了。整理编码导致的SQL注入，实践作深入了解。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SQL注入防御失效的若干场景</title>

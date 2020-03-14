@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  SQL宽字节注入复现 &ndash; 春田花花游乐园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="说到底，把GBK当作GBK来转义，就好了。整理编码导致的SQL注入，实践作深入了解。
+|blog under go1f.cc">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花游乐园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="SQL宽字节注入复现 | 春田花花游乐园">
+    <meta name="twitter:description" content="说到底，把GBK当作GBK来转义，就好了。整理编码导致的SQL注入，实践作深入了解。|blog under go1f.cc">
+    <meta name="twitter:image" content="https://blog.go1f.cc/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.go1f.cc/">
+    春田花花游乐园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>首页</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/blog/">
+      
+      <span>博客</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">SQL宽字节注入复现</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/web%E7%B3%BB%E5%88%97' class="muted-link">
+  <span class="Label Label--gray-darker">WEB系列</span>
+</a>
+
+
+
+<a href='/tags/sql%E6%B3%A8%E5%85%A5' class="muted-link">
+  <span class="Label Label--gray">SQL注入</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-03-14. Published at: 2020-03-14.">
+        
+          Lastmod: 2020-03-14
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>说到底，把GBK当作GBK来转义，就好了。整理编码导致的SQL注入，实践作深入了解。</p>
+<p>​</p>
+<h2 id="环境搭建">环境搭建</h2>
+<p>网页的编码，需要三者配合，才能够保证网页不出现乱码。</p>
+<ol>
+<li>网页编码，头部标签 <code>&lt;meta charset=&quot;GBK&quot;&gt;</code></li>
+<li>数据库存储字符集</li>
+<li>代码文件的编码</li>
+</ol>
+<p>​</p>
+<p>宽字节注入的问题往往出现在GBK的网页上。这里还原一个GBK网页的环境，即代码文件以GBK编码，网页声明GBK编码。</p>
+<p>首先代码文件GBK编码，<a href="https://blog.csdn.net/ubuntulover/article/details/21101979">Sublime Text 3技巧：支持GB2312和GBK编码</a></p>
+<p><img src="https://i.loli.net/2020/03/14/9TiYZO7GEAu4cRC.png" alt="sublime_gbk.png"></p>
+<p>再html头部声明，body标签内添加 <code>&lt;meta charset=&quot;GBK&quot;&gt;</code></p>
+<p>数据库则不必故意转换为GBK编码存储数据，因为可以通过 <code>SET NAMES GBK</code> 来协调数据进库出库的转码。当然访问量大的时候，最好也以网页相同的编码来存储数据。</p>
+<p>​</p>
+<p>这里也顺便展示一下 <code>SET NAMES GBK</code> 对设置项的影响。该语句设置 character_set_client、character_set_connection、character_set_results 均为GBK编码。</p>
+<p><img src="https://i.loli.net/2020/03/14/GbK2pmCqJvlSRr8.png" alt="show_variables_like_%char%.png"></p>
+<p>​</p>
+<p>若代码没有向数据库声明客户端的编码，mysql将以默认的UTF-8编码解析参数，导致错误。&ldquo;Illegal mix of collations (gbk_chinese_ci,IMPLICIT) and (utf8_general_ci, COERCIBLE) for operation &lsquo;=&rsquo; &quot;</p>
+<p><img src="https://i.loli.net/2020/03/14/Vz9yRUJTnhrSPqW.png" alt="no_set_names_gbk.png"></p>
+<p>​</p>
+<p>展示一个正常登录的情况。GBK下，正常真的不是说有就有的。</p>
+<p><img src="https://i.loli.net/2020/03/14/MbV2URGEouC5OlX.png" alt="set_names_gbk_normal_login.png"></p>
+<p>​</p>
+<p>再演示一个例子，仅仅设置客户端的编码，而没有设置返回结果的编码（client_set_results），结果返回的数据出现乱码（忽略宽字节注入，后面会补充叙述，这里仅为了展示页面返回的乱码）。</p>
+<p><img src="https://i.loli.net/2020/03/14/voGUMPmJQKgjqas.png" alt="character_set_client_gbk.png"></p>
+<p>​</p>
+<h2 id="复现">复现</h2>
+<p>但是，若单纯执行 <code>sql_query(&quot;SET NAMES GBK&quot;);</code> 稍后的SQL转义函数并不知道客户端编码已经转为GBK，仍然按照UTF-8的编码进行转义。下图看似成功拦截了注入。</p>
+<p><img src="https://i.loli.net/2020/03/14/cp7EW2tUsdAJvuq.png" alt="set_names_gbk_quote_escape.png"></p>
+<p>构造 Payload</p>
+<pre><code>url/?username=管理员%AA'or 1--+&amp;password=null
+</code></pre><p>参数经过<code>mysql_real_escape_string()</code> 过滤，单引号被转移，前面添加了反引号0x5C。但此时数据库对该参数GBK编码作解析，0x5C将与前一字节0xAA合并，成为一个汉字，单引号成功逃逸出来。</p>
+<p><img src="https://i.loli.net/2020/03/14/Ags5lHTYNUrJnv7.png" alt="gbk_no_quote_escape.png"></p>
+<p>​</p>
+<h2 id="防御">防御</h2>
+<p>正确做法，使用</p>
+<pre><code>mysql_set_charset(&quot;GBK&quot;);
+</code></pre><p>该方法会令 <code>mysql_real_escape_string</code> 根据编码去转义参数，可以看到，0xAA前面也添加了反引号转义。</p>
+<p><img src="https://i.loli.net/2020/03/14/NWVTGtFQ4vgOCbL.png" alt="gbk_yes_quote_escape.png"></p>
+<p>​</p>
+<p>或者使用 <code>mysqli_real_escape_string($conn,$username)</code> 函数</p>
+<h2 id="小结">小结</h2>
+<p>哎，好好的，用什么GBK？各位不要用Windows自带笔记本写代码，中文环境，肯定是GBK编码的。这次让我更好了解编码的知识，也是一扫很多迷惑之处。</p>
+<p>​</p>
+<p><strong>科普</strong></p>
+<p>什么是GBK编码？</p>
+<blockquote>
+<p>分单双字节编码， 字符有一字节和双字节编码，00–7F范围内是第一个字节，和ASCII保持一致。</p>
+<p>之后的双字节中，前一字节是双字节的第一位。总体上说第一字节的范围是81–FE（也就是不含80和FF），第二字节的一部分领域在40–7E，其他领域在80–FE。</p>
+<p>某字节值小于0x7E，不能判断其是单字节，要视乎其在第一字节还是第二字节的位置。</p>
+</blockquote>
+<p>什么是UTF-8编码？</p>
+<blockquote>
+<p>为Unicode编码的一种实现方式。一种变长的编码方式。</p>
+<p>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的 Unicode 码。与ASCII兼容。</p>
+<p>2）对于n字节的符号（n &gt; 1），第一个字节的前n位都设为1，第n + 1位设为0，后面字节的前两位一律设为10</p>
+</blockquote>
+<p>参考阅读 <a href="https://www.cnblogs.com/batsing/p/charset.html">彻底搞懂编码 GBK 和 UTF8</a></p>
+<p>​</p>
+<p><strong>扩展</strong></p>
+<p>世界上其他的双字节编码同样有可能出现该问题。</p>
+<p>为什么GB2312不存在这个问题？因为0x5C不在其低字节值的范围内。</p>
+<p>为什么将UTF-8字符当作GBK解析不会出事？因为，UTF8编码，多字节中不会出现0x27这样的ASCII编码，所以转义时，必然会转义0x27。而GBK中，0x27可能是单字节，也可能是双字节的尾字节。</p>
+<p>​</p>
+<p><strong>源码</strong></p>
+<pre><code class="language-php+HTML" data-lang="php+HTML">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;meta charset=&quot;GBK&quot;&gt;&lt;title&gt;TEST&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;form&gt; 用户名&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
+	密码 &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;
+	&lt;button type=&quot;submit&quot;&gt;登录&lt;/button&gt;
+&lt;/form&gt;&lt;br&gt;
+&lt;?php
+if(empty($_GET)) die();
+$link = mysql_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;);
+mysql_select_db(&quot;students&quot;);
+// mysql_query(&quot;SET character_set_client='GBK'&quot;);
+// mysql_query(&quot;SET character_set_connection='utf8'&quot;);
+// mysql_query(&quot;set character_set_results=utf8&quot;);
+// mysql_query(&quot;set names GBK&quot;);
+// mysql_set_charset(&quot;GBK&quot;);
+
+$username = $_GET['username'];
+$password = $_GET['password'];
+echo bin2hex($username).&quot;&lt;br&gt;\n&quot;;
+$username = mysql_real_escape_string($username);
+echo bin2hex($username).&quot;&lt;br&gt;\n&quot;;
+
+$query = &quot;select ChineseName,passwd from user_auths where ChineseName='&quot;.$username.&quot;' and passwd = '&quot;.$password.&quot;' limit 0,1;&quot;;
+echo $query.&quot;&lt;br&gt;\n&quot;;
+
+$result = mysql_query($query,$link);
+$row = mysql_fetch_array($result);
+
+if ($row) {
+	echo &quot;登录成功&lt;br&gt;\n &quot;.serialize($row);
+}
+else{
+	print_r(&quot;登录失败. &quot;.mysql_error().&quot;&lt;br&gt;\n&quot;);
+}
+
+show_source(&quot;index.php&quot;);
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>SQL宽字节注入复现</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#环境搭建">环境搭建</a></li>
+    <li><a href="#复现">复现</a></li>
+    <li><a href="#防御">防御</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©go1f 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
