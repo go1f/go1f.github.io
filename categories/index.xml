@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;go1f 2020</copyright>
-    <lastBuildDate>Sat, 14 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.go1f.cc/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>兴趣使然</title>
+      <link>https://blog.go1f.cc/categories/%E5%85%B4%E8%B6%A3%E4%BD%BF%E7%84%B6/</link>
+      <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.go1f.cc/categories/%E5%85%B4%E8%B6%A3%E4%BD%BF%E7%84%B6/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Web系列</title>
