@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Stupid Common Sense (updated 221020) &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="有大家都知道、你不知道的常识；还有不好找关键字搜索的、但又一拨即通的Stupid Easy Issue.
+Updating &amp;hellip;&amp;hellip;
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Stupid Common Sense (updated 221020)</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-04-29. Published at: 2022-10-20.">
+        
+          Lastmod: 2023-04-29
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>有大家都知道、你不知道的常识；还有不好找关键字搜索的、但又一拨即通的Stupid Easy Issue.</p>
+<p>Updating &hellip;&hellip;</p>
+<h3 id="window修改文件时间戳">Window修改文件时间戳</h3>
+<p><strong>使用PowerShell</strong></p>
+<pre tabindex="0"><code>New-item test.txt
+(ls test.txt).CreationTime=&#34;1998-02-24 18:02&#34;
+(ls test.txt).LastWriteTime=&#34;1998-09-24 18:32&#34;
+(ls test.txt).LastAccessTime=&#34;1998-09-24 18:02&#34;
+</code></pre><pre tabindex="0"><code>set t &#39;01/01/2021 01:01:01&#39;
+# 时间格式：MM/DD/YYYY hh:mm:ss
+echo $t
+ls &#39;sysin.txt&#39; | foreach-object { $_.LastWriteTime = $t; $_.CreationTime = $t; $_.LastAccessTime = $t}
+
+# 也可以单独设置不同的时间
+ls &#39;sysin.txt&#39; | foreach-object { $_.LastWriteTime = &#39;01/01/2021 01:01:01&#39;; $_.CreationTime = &#39;02/02/2021 01:01:01&#39;; $_.LastAccessTime = &#39;03/03/2021 01:01:01&#39; }
+</code></pre><p><strong>使用CMD</strong></p>
+<pre tabindex="0"><code>#修改当前系统时间
+date 2021/01/01
+time 10:59:30
+
+#需创建新文件名2，修改创建时间
+copy 文件名 文件名2
+
+#原文件修改修改时间，注意是连续两个英文逗号
+copy 文件名+,,
+
+#原文件修改修改时间和访问时间，注意是连续两个英文句号
+copy 文件名+..
+</code></pre><p><a href="https://zhuanlan.zhihu.com/p/343682839">如何修改文件的“创建时间”和“修改时间”（Windows Linux macOS）</a></p>
+<h3 id="windows挂载linux文件系统">Windows挂载Linux文件系统</h3>
+<pre tabindex="0"><code>#查看挂载硬盘名
+GET-CimInstance -query &#34;SELECT * from Win32_DiskDrive&#34;
+#查看挂载硬盘名
+wmic diskdrive list brief
+
+#挂载
+wsl --mount \\.\PHYSICALDRIVE2 --type xfs --partition 1
+</code></pre><p>参考：</p>
+<p><a href="https://learn.microsoft.com/zh-cn/windows/wsl/wsl2-mount-disk">关于在 WSL 2 中安装 Linux 磁盘的入门 | Microsoft Learn</a></p>
+<p><a href="https://devblogs.microsoft.com/commandline/access-linux-filesystems-in-windows-and-wsl-2/">Access Linux filesystems in Windows and WSL 2 - Windows Command Line (microsoft.com)</a></p>
+<h3 id="linux查看电池信息">Linux查看电池信息</h3>
+<pre tabindex="0"><code>upower -i /org/freedesktop/UPower/devices/battery_BAT0
+</code></pre><h3 id="kvm磁盘整理">KVM磁盘整理</h3>
+<p>windows</p>
+<pre tabindex="0"><code>#虚拟机
+sdelete -z c:
+#宿主机
+qemu-img convert -O qcow2 windows.qcow2 windows_new.qcow2 
+</code></pre><p>linux</p>
+<pre tabindex="0"><code>#虚拟机
+dd if=/dev/zero of=~/junk
+rm junk
+#宿主机
+qemu-img convert -O qcow2 centos7.qcow2 centos7_new.qcow2
+</code></pre><p><a href="https://www.cnblogs.com/kuangke/p/16217659.html">解决kvm虚拟机qcow2格式磁盘文件比实际空间占用大的问题</a></p>
+<p><strong>virt-sparsify</strong> - Make a virtual machine disk sparse</p>
+<pre tabindex="0"><code>sudo dnf install guestfs-tools
+</code></pre><p>efficient</p>
+<pre tabindex="0"><code>virt-sparsify --in-place disk.img
+</code></pre><p>safer</p>
+<pre tabindex="0"><code>virt-sparsify disk.img new-file.img
+</code></pre><h3 id="vps-dd命令重装windows">VPS DD命令重装Windows</h3>
+<pre tabindex="0"><code>bash &lt;(wget --no-check-certificate -qO- &#39;https://moeclub.org/attachment/LinuxShell/InstallNET.sh&#39;) -dd &#34;https://software.download.prss.microsoft.com/dbazure/Win10_20H2_English_x64.iso?t=b7884886-eec1-46d0-a099-3fbf8e22e5f5&amp;e=1658877491&amp;h=2e960a95f8ee0922cbbf552cba7ddf8c67c7525fa2e45c972f7e49b131bbc363&#34;
+
+wget --no-check-certificate -qO InstallNET.sh &#39;https://moeclub.org/attachment/LinuxShell/InstallNET.sh&#39; &amp;&amp; chmod a+x InstallNET.sh &amp;&amp; bash InstallNET.sh -dd &#39;https://image.moeclub.org/GoogleDrive/1srhylymTjYS-Ky8uLw4R6LCWfAo1F3s7&#39;
+</code></pre><p><a href="https://moe.best/tutorial/vultr-bare-metal.html">免费一个月 Bare Metal 独服以及 dd 安装 Windows</a></p>
+<h3 id="windows定位占用文件的进程">Windows定位占用文件的进程</h3>
+<p>资源监视器-&gt;CPU-&gt;关联的句柄</p>
+<p><a href="https://zhuanlan.zhihu.com/p/158119424">windows 查看文件被哪个进程占用</a></p>
+<h3 id="编译升级g520">编译升级G++5.2.0</h3>
+<pre tabindex="0"><code>sudo yum install gcc gcc-c++
+# 下载gcc 5.2.0源码
+wget http://ftp.gnu.org/gnu/gcc/gcc-5.2.0/gcc-5.2.0.tar.bz2
+# 源码解压
+tar xvf gcc-4.9.0.tar.bz2 
+cd gcc-5.2.0
+#下载一些必备的依赖程序
+./contrib/download_prerequisites
+mkdir build &amp;&amp; cd build
+../configure --enable-checking=release --enable-languages=c,c++ --disable-multilib
+# 开始编译，单线程编译要花费很长时间，
+# 可以考虑用-j参数执行并行编译如： make -j8， 8是指8个线程并行，
+# 但如果并行编译过程出错，有时很难发现
+make
+# 安装,需要root权限
+sudo make install
+
+
+ll /usr/local/lib64/libstdc++.so.6.0.21
+sudo rm -rf /usr/lib64/libstdc++.so.6  
+sudo ln -s /usr/local/lib64/libstdc++.so.6.0.21 /usr/lib64/libstdc++.so.6 
+</code></pre><p><a href="https://cloud.tencent.com/developer/article/1433688">centos6.5:gcc 升级(5.2.0)过程记录</a></p>
+<h3 id="创建系统隐藏文件">创建系统隐藏文件</h3>
+<pre tabindex="0"><code>#隐藏
+attrib test.txt +s +h /s /d
+#恢复
+attrib test.txt -s -h /s /d
+</code></pre><p><a href="https://blog.csdn.net/lk142500/article/details/50207149">如何更改文件或文件夹的系统隐藏属性</a></p>
+<h3 id="centos离线安装包">Centos离线安装包</h3>
+<p>查看依赖包</p>
+<pre tabindex="0"><code>yum deplist ansible
+</code></pre><p>安装yum-utils</p>
+<pre tabindex="0"><code>yum -y install yum-utils
+mkdir rpm
+cd rpm
+# 下载 nmap 全量依赖包
+repotrack nmap
+</code></pre><p>离线安装</p>
+<pre tabindex="0"><code>rpm -Uvh --force --nodeps *.rpm
+</code></pre><p>参考链接 <a href="https://cloud.tencent.com/developer/article/1614031">yum 下载全量依赖 rpm 包及离线安装（终极解决方案）</a></p>
+<h3 id="tmux快捷键">Tmux快捷键</h3>
+<p>重命名 Ctrl+B ,</p>
+<p>切换会话 CTRL+B S</p>
+<p>查看所有会话 tmux ls</p>
+<p>创建会话 tmux new -t name</p>
+<p>进入会话 tmux a -t name</p>
+<p>分离会话 CTRL+B d</p>
+<p>注销会话 exit或tmux kill-session -t name</p>
+<h3 id="蜜罐">蜜罐</h3>
+<pre tabindex="0"><code>docker run -itd --env LISTENING_ADDR=&#34;0.0.0.0:88&#34; --name decoymini --network=host --restart=always --privileged=true decoyit/decoymini:latest
+</code></pre><h3 id="docker离线安装并导入镜像">Docker离线安装并导入镜像</h3>
+<p>下载docker二进制，地址：https://download.docker.com/linux/static/stable/x86_64/</p>
+<pre tabindex="0"><code>tar -xvf docker-19.03.6.tar
+cp docker/* /usr/bin/
+</code></pre><p>安装system服务</p>
+<pre tabindex="0"><code>#vim /etc/systemd/system/docker.service
+[Unit]
+Description=Docker Application Container Engine
+Documentation=https://docs.docker.com
+After=network-online.target firewalld.service
+Wants=network-online.target
+[Service]
+Type=notify
+# the default is not to use systemd for cgroups because the delegate issues still
+# exists and systemd currently does not support the cgroup feature set required
+# for containers run by docker
+ExecStart=/usr/bin/dockerd
+ExecReload=/bin/kill -s HUP $MAINPID
+# Having non-zero Limit*s causes performance problems due to accounting overhead
+# in the kernel. We recommend using cgroups to do container-local accounting.
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+# Uncomment TasksMax if your systemd version supports it.
+# Only systemd 226 and above support this version.
+#TasksMax=infinity
+TimeoutStartSec=0
+# set delegate yes so that systemd does not reset the cgroups of docker containers
+Delegate=yes
+# kill only the docker process, not all processes in the cgroup
+KillMode=process
+# restart the docker process if it exits prematurely
+Restart=on-failure
+StartLimitBurst=3
+StartLimitInterval=60s
+ 
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>启动</p>
+<pre tabindex="0"><code>chmod +x /etc/systemd/system/docker.service  #添加文件权限
+systemctl daemon-reload  #重载unit配置文件
+systemctl start docker #启动Docker
+systemctl enable docker.service  
+</code></pre><p><strong>Docker离线镜像导入</strong></p>
+<p>联网下载并保存</p>
+<pre tabindex="0"><code>docker pull java:8
+docker save java:8 -o java.tar  #将java 8的镜像导出成tar文件
+</code></pre><p>离线机器导入</p>
+<pre tabindex="0"><code>docker load -i java.tar
+</code></pre><p>参考链接 <a href="https://www.jianshu.com/p/1dd72a6b5ae9">docker离线安装并导入镜像</a></p>
+<h3 id="windows常用变量">Windows常用变量</h3>
+<pre tabindex="0"><code>//变量                 类型       描述
+//%ALLUSERSPROFILE%   本地       返回“所有用户”配置文件的位置。
+//%APPDATA%           本地       返回默认情况下应用程序存储数据的位置。
+//%CD%                                                        本地       返回当前目录字符串。
+//%CMDCMDLINE%        本地       返回用来启动当前的 Cmd.exe 的准确命令行。
+//%CMDEXTVERSION%     系统       返回当前的“命令处理程序扩展”的版本号。
+//%COMPUTERNAME%      系统       返回计算机的名称。
+//%COMSPEC%           系统       返回命令行解释器可执行程序的准确路径。
+//%DATE%              系统       返回当前日期。使用与 date /t 命令相同的格式。由 Cmd.exe 生成。有关 date 命令的详细信息，请参阅 Date。
+//%ERRORLEVEL%        系统       返回上一条命令的错误代码。通常用非零值表示错误。
+//%HOMEDRIVE%         系统       返回连接到用户主目录的本地工作站驱动器号。基于主目录值而设置。用户主目录是在“本地用户和组”中指定的。
+//%HOMEPATH%          系统       返回用户主目录的完整路径。基于主目录值而设置。用户主目录是在“本地用户和组”中指定的。
+//%HOMESHARE%         系统       返回用户的共享主目录的网络路径。基于主目录值而设置。用户主目录是在“本地用户和组”中指定的。
+//%LOGONSERVER%       本地       返回验证当前登录会话的域控制器的名称。
+//%NUMBER_OF_PROCESSORS%         系统      指定安装在计算机上的处理器的数目。
+//%OS%                           系统      返回操作系统名称。Windows 2000 显示其操作系统为 Windows_NT。
+//%PATH%                         系统       指定可执行文件的搜索路径。
+//%PATHEXT%                      系统       返回操作系统认为可执行的文件扩展名的列表。
+//%PROCESSOR_ARCHITECTURE%       系统       返回处理器的芯片体系结构。值：x86 或 IA64（基于 Itanium）。
+//%PROCESSOR_IDENTFIER%          系统       返回处理器说明。
+//%PROCESSOR_LEVEL%              系统       返回计算机上安装的处理器的型号。
+//%PROCESSOR_REVISION%           系统       返回处理器的版本号。
+//%PROMPT%                       本地       返回当前解释程序的命令提示符设置。由 Cmd.exe 生成。
+//%RANDOM%                       系统       返回 0 到 32767 之间的任意十进制数字。由 Cmd.exe 生成。
+//%SYSTEMDRIVE%                  系统       返回包含 Windows server operating system 根目录（即系统根目录）的驱动器。
+//%SYSTEMROOT%                   系统       返回 Windows server operating system 根目录的位置。
+//%TEMP%和%TMP%                  系统和用户 返回对当前登录用户可用的应用程序所使用的默认临时目录。有些应用程序需要 TEMP，而其他应用程序则需要 TMP。
+//%TIME%                         系统       返回当前时间。使用与time /t命令相同的格式。由Cmd.exe生成。有关time命令的详细信息，请参阅 Time。
+//%USERDOMAIN%                   本地       返回包含用户帐户的域的名称。
+//%USERNAME%                     本地       返回当前登录的用户的名称。
+//%USERPROFILE%                  本地       返回当前用户的配置文件的位置。
+//%WINDIR%                       系统       返回操作系统目录的位置。
+</code></pre><h3 id="保存二进制文件">保存二进制文件</h3>
+<p>wireshark-&gt;data-&gt;copy as a hex stream</p>
+<p>paste to sublime -&gt; save with encoding -&gt; hex</p>
+<p>save</p>
+<h3 id="fedora导入系统证书"><strong>Fedora导入系统证书</strong></h3>
+<pre tabindex="0"><code>#存放PEM证书
+cp certificate.pem /etc/pki/ca-trust/source/anchors/
+#刷新
+sudo update-ca-trust
+
+#pem转crt格式
+openssl x509 -in fullchain.pem -out fullchain.crt  
+#pem转key格式
+openssl rsa -in privkey.pem -out privkey.key  
+</code></pre><h3 id="outdatedgnome40-dash-to-dock">(outdated)GNOME40 DASH To Dock</h3>
+<pre tabindex="0"><code>git clone -b ewlsh/gnome-40 https://github.com/ewlsh/dash-to-dock.git
+git clone https://github.com/ewlsh/dash-to-dock.git ./dash-to-dock-master
+cp ./dash-to-dock-master/stylesheet.css ./dash-to-dock/
+rm -r ./dash-to-dock-master
+cd dash-to-dock
+make
+make install
+</code></pre><h3 id="hidpi分数缩放">HiDPI分数缩放</h3>
+<p><strong>GNOME WAYLAND</strong></p>
+<pre tabindex="0"><code>gsettings set org.gnome.mutter experimental-features &#34;[&#39;scale-monitor-framebuffer&#39;]&#34;
+</code></pre><p><a href="https://wiki.archlinux.org/title/HiDPI_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">HiDPI (简体中文)</a></p>
+<h3 id="zram-swap大小调整">Zram Swap大小调整</h3>
+<pre tabindex="0"><code>sudo vim /usr/lib/systemd/zram-generator.conf
+[zram0]
+zram-fraction = 1.0
+max-zram-size = none
+
+重载新建Zram分区
+sudo systemctl restart systemd-zram-setup@zram0.service
+查看修改后状态
+free -m
+或
+swapon
+</code></pre><p>参考1 <a href="https://dev.to/ptuladhar3/dynamically-increase-swap-zram-size-in-fedora-linux-2iog">Dynamically Increase SWAP (ZRAM) Size in Linux - DEV Community</a></p>
+<p>参考2 <a href="https://www.techrepublic.com/article/how-to-enable-the-zram-module-for-faster-swapping-on-linux/">How to enable the zRAM module for faster swapping on Linux - TechRepublic</a><a href="https://www.techrepublic.com/article/how-to-enable-the-zram-module-for-faster-swapping-on-linux/">How to enable the zRAM module for faster swapping on Linux - TechRepublic</a></p>
+<h3 id="软链接到usrlocalbin">软链接到/usr/local/bin/</h3>
+<p>文件头添加引导</p>
+<pre tabindex="0"><code>#!/usr/bin/env python
+</code></pre><p>创建ln软链接</p>
+<pre tabindex="0"><code>sudo ln -s /home/jyufu/01PenOut/sqli/SQLmap/sqlmap.py /usr/local/bin/sqlmap
+</code></pre><h3 id="qv2ray">Qv2ray</h3>
+<p><a href="https://github.com/Qv2ray/Qv2ray/releases/tag/v2.6.3">Qv2ray v2.6.3 部分功能修复和更新</a></p>
+<p>解压v2ray-core到~/.config/qv2ray/vcore</p>
+<h3 id="cryptmotorcli">CryptmotorCli</h3>
+<pre tabindex="0"><code>dnf install davfs2
+dnf install java-17-openjdk
+#解密
+alternatives --config java
+java -jar cryptomator-cli-0.5.1.jar --bind 127.0.0.1 --port 8887 --vault demoVault=/home/jyufu/OneDrive/AccessBeta --password demoVault=&#39;123&#39; 
+#挂载
+echo | sudo mount -t davfs -o username=,user,gid=1000,uid=1000 http://localhost:8887/demoVault/ /home/jyufu/TmpCryptoCli/
+#同步
+rsync -av /home/jyufu/AccessBeta/ /home/jyufu/TmpCryptoCli/ --delete
+onedrive --synchronize --local-first
+</code></pre><h3 id="cryptmotoronedrive">Cryptmotor&amp;&amp;Onedrive</h3>
+<pre tabindex="0"><code>#配置授权
+onedrive
+#创建配置文件 https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#the-default-configuration-file-is-listed-below
+onedrive --display-config
+#配置同步文件夹白名单 https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#selective-sync-via-sync_list-file
+#Cryptmotor添加保险箱
+
+#配置监控
+onedrive --monitor --local-first
+
+#root开启onedrive服务常驻
+systemctl enable onedrive@jyufu.service
+systemctl start onedrive@jyufu.service
+systemctl stop onedrive@jyufu.service
+
+#常用命令
+#重置状态
+onedrive --resync
+</code></pre><h3 id="linux账号重命名">Linux账号重命名</h3>
+<pre tabindex="0"><code>root权限运行，hadoop为修改后的用户名
+usermod -l hadoop seed
+usermod -c hadoop hadoop
+groupmod -n hadoop seed
+usermod -md /home/hadoop hadoop
+</code></pre><h3 id="pwm频闪-on-windows-for-intel">PWM频闪 On Windows For Intel</h3>
+<p><a href="https://post.smzdm.com/p/a4wkrvew/">【数字生活】 篇一：0元解决笔记本屏幕PWM频闪_笔记本电脑_什么值得买 (smzdm.com)</a></p>
+<p><a href="https://github.com/anatoliis/PWMHelper">GitHub - anatoliis/PWMHelper: A command line utility for changing display PWM frequency (Intel embedded GPU&rsquo;s / Winx64 only)</a></p>
+<p>更多参考</p>
+<p><a href="https://devbraindom.blogspot.com/2013/03/eliminate-led-screen-flicker-with-intel.html">Random thoughts: Eliminate LED screen flicker with Intel i915 (devbraindom.blogspot.com)</a></p>
+<p><a href="https://wiki.archlinux.org/title/backlight#Backlight_PWM_modulation_frequency_(Intel_i915_only)">Backlight - ArchWiki (archlinux.org)</a></p>
+<h3 id="dns-over-tlshttps">DNS over TLS/HTTPS</h3>
+<p><a href="https://www.linuxbabe.com/ubuntu/dns-over-https-doh-resolver-ubuntu-dnsdist">Set Up DNS over HTTPS (DoH) Resolver on Ubuntu with DNSdist</a></p>
+<p><strong>DoT地址</strong>
+dns.pub
+doh.pub
+1.12.12.12
+223.5.5.5
+120.53.53.53
+223.6.6.6</p>
+<p><strong>DoH地址</strong>
+<a href="https://doh.pub/dns-query">https://doh.pub/dns-query</a>
+https://120.53.53.53/dns-query</p>
+<p><a href="https://dns.alidns.com/dns-query">https://dns.alidns.com/dns-query</a>
+https://223.5.5.5/dns-query</p>
+<h3 id="dnspod-ddns接口">DNSPOD DDNS接口</h3>
+<pre tabindex="0"><code>curl -X POST https://dnsapi.cn/Record.Ddns -d &#39;login_token=1，1&amp;domain=allsec.top&amp;record_line=%E9%BB%98%E8%AE%A4&amp;sub_domain=athome&amp;record_id=1045429357&#39;
+</code></pre><h3 id="ass转srt脚本">ASS转SRT脚本</h3>
+<p><a href="https://blog.sorz.org/p/py-ass2srt/">https://blog.sorz.org/p/py-ass2srt/</a></p>
+<p><a href="https://github.com/sorz/asstosrt">https://github.com/sorz/asstosrt</a></p>
+<h3 id="hugo博客常用命令"><strong>Hugo博客常用命令</strong></h3>
+<pre tabindex="0"><code>hugo -D 
+hugo server -D
+hugo 
+git config --global user.email &#34;grfu@qq.com&#34;
+git config --global user.name &#34;go1f&#34;
+cd public
+git add .
+git commit -m &#34;update initial notes&#34;
+git push origin master
+cd ..
+</code></pre><h3 id="windwos根据pid杀进程">Windwos根据PID杀进程</h3>
+<pre tabindex="0"><code>netstat -anot | findstr &#34;ESTAB&#34; | findstr -v &#34;127.0.0.1&#34;
+tasklist
+taskkill /f /pid 22333
+</code></pre><h3 id="linux命令行变量赋值">Linux命令行变量赋值</h3>
+<pre tabindex="0"><code>data=$(cat /root/data/data.txt) &amp;&amp; echo $dataline
+</code></pre><h3 id="redis常用">Redis常用</h3>
+<pre tabindex="0"><code>#socket连接，--scan获取所有keys
+redis-cli -s /tmp/redis.sock --scan
+#查询所有的key ： keys *
+#查询某一个key : get key
+</code></pre><h3 id="gitlab重置用户密码">Gitlab重置用户密码</h3>
+<pre tabindex="0"><code>gitlab-rails console -e production
+irb(main):007:0&gt; u = User.where(username:&#34;root&#34;).first
+u=User.where(id:1).first #查找与切换账号（User.all 可以查看所有用户）
+u.password=&#39;12345678&#39;
+u.save!
+</code></pre><pre tabindex="0"><code>#gitlab-ce-14初装以后，把密码放在了一个临时文件中
+/etc/gitlab/initial_root_password
+</code></pre><h3 id="officeword全文首行缩进2字符">OfficeWord全文首行缩进2字符</h3>
+<p>方法一：缩进和间距”选项卡下将“特殊格式”设置为“首行缩进”，2字符。</p>
+<p>方法二：视图-标尺-上游标移两字符。</p>
+<h3 id="burpsuite及android系统证书自制">Burpsuite及Android系统证书自制</h3>
+<p><a href="https://www.ibm.com/docs/zh/api-connect/10.0.1.x?topic=overview-generating-self-signed-certificate-using-openssl">使用 OpenSSL 生成自签名证书</a></p>
+<p>生成一个有效期为1年的证书：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+</span></span></code></pre></div><p>key.pem为私钥，certficate.pem为证书，在firefox证书颁发机构可以直接导入。</p>
+<p>将密钥和证书组合在 PKCS#12 (P12) 捆绑软件中，后续在burp导入。</p>
+<pre tabindex="0"><code>openssl pkcs12 -inkey key.pem -in certificate.pem -export -out certificate.p12
+#kaukei1234
+</code></pre><p>制作安卓的系统证书</p>
+<pre tabindex="0"><code>name=$(openssl x509 -inform PEM -subject_hash_old -in certificate.pem | head -1)
+
+cp certificate.pem &#34;$name.0&#34;
+</code></pre><p>这时复制一份certificate.pem，重命名为类似78ecfd2e.0的名字。</p>
+<pre tabindex="0"><code>adb devices
+adb push 78ecfd2e.0 /storage/emulated/0/Download/
+su root
+cd /storage/emulated/0/Download/
+cp 78ecfd2e.0 /system/etc/security/cacerts/
+chown root:root /system/etc/security/cacerts/xxxxxxxx.0
+chmod 644 /system/etc/security/cacerts/xxxxxxxx.0
+</code></pre><p>在将78ecfd2e.0导入至<code>/system/etc/security/cacerts/</code></p>
+<p>修改用户、读取权限</p>
+<pre tabindex="0"><code>chown root:root /system/etc/security/cacerts/xxxxxxxx.0
+chmod 644 /system/etc/security/cacerts/xxxxxxxx.0
+</code></pre><p><strong>————————老笔记-——————————</strong></p>
+<pre tabindex="0"><code>openssl req -x509 -days 730 -nodes -newkey rsa:2048 -outform der -keyout server.key -out ca.der -extensions v3_ca
+</code></pre><p>转换私钥为der：</p>
+<pre tabindex="0"><code>openssl rsa -in server.key -inform pem -out server.key.der -outform der
+openssl pkcs8 -topk8 -in server.key.der -inform der -out server.key.pkcs8.der -outform der -nocrypt
+</code></pre><p>转换公钥：</p>
+<pre tabindex="0"><code>openssl x509 -inform der -in ca.der -out ca.pem
+name=$(openssl x509 -inform PEM -subject_hash_old -in ca.pem | head -1)
+cp ca.pem &#34;$name.0&#34;
+</code></pre><p>导出证书，cer改der后缀。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mv FiddlerRoot.cer FiddlerRoot.der 
+</span></span><span class="line"><span class="cl">openssl x509 -inform DER -in FiddlerRoot.der -out FiddlerRoot.pem
+</span></span><span class="line"><span class="cl">openssl x509 -inform PEM -subject_hash_old -in FiddlerRoot.pem <span class="p">|</span>head -1
+</span></span><span class="line"><span class="cl">chmod <span class="m">644</span> cacert.pem
+</span></span><span class="line"><span class="cl">mv cacert.pem &lt;hash&gt;.0
+</span></span></code></pre></div><p><a href="https://support.huaweicloud.com/scm_faq/scm_01_0054.html">主流数字证书有哪些格式？</a></p>
+<ul>
+<li><em>.DER或</em>.CER文件：这样的证书文件是二进制格式，只含有证书信息，不包含私钥。</li>
+<li><em>.CRT文件：这样的证书文件可以是二进制格式，也可以是文本格式，一般均为文本格式，功能与</em>.DER及*.CER证书文件相同。</li>
+<li><em>.PEM文件：这样的证书文件一般是文本格式，可以存放证书或私钥，或者两者都包含。</em>.PEM文件如果只包含私钥，一般用*.KEY文件代替。</li>
+<li><em>.PFX或</em>.P12文件：这样的证书文件是二进制格式，同时包含证书和私钥，且一般有密码保护。</li>
+</ul>
+<h3 id="nessus探测目标的配置">Nessus探测目标的配置</h3>
+<p>主机允许PING情况下，开启Remote Host Ping，会快点显示出存活主机。</p>
+<p>目标禁PING情况下，不要开启PING探测。</p>
+<p>使用proxychains代理，Nessus扫描端口不全，也不要开启SYN扫描，会导致数据包外漏。</p>
+<h3 id="迁移带快照的虚拟机硬盘">迁移带快照的虚拟机硬盘</h3>
+<p><a href="https://libvirt.org/kbase/backing_chains.html#importance-of-proper-backing-chain-setup">迁移带快照的虚拟机硬盘</a></p>
+<p><strong>XML语法</strong></p>
+<pre tabindex="0"><code>&lt;disk type=&#39;file&#39; device=&#39;disk&#39;&gt;
+  &lt;driver name=&#39;qemu&#39; type=&#39;qcow2&#39;/&gt;
+  &lt;source file=&#39;/tmp/pull4.qcow2&#39;/&gt;
+  &lt;backingStore type=&#39;file&#39;&gt;
+    &lt;format type=&#39;qcow2&#39;/&gt;
+    &lt;source file=&#39;/tmp/pull3.qcow2&#39;/&gt;
+    &lt;backingStore type=&#39;file&#39;&gt;
+      &lt;format type=&#39;qcow2&#39;/&gt;
+      &lt;source file=&#39;/tmp/pull2.qcow2&#39;/&gt;
+      &lt;backingStore type=&#39;file&#39;&gt;
+        &lt;format type=&#39;qcow2&#39;/&gt;
+        &lt;source file=&#39;/tmp/pull1.qcow2&#39;/&gt;
+        &lt;backingStore type=&#39;file&#39;&gt;
+          &lt;format type=&#39;qcow2&#39;/&gt;
+          &lt;source file=&#39;/tmp/pull0.qcow2&#39;/&gt;
+          &lt;backingStore/&gt;
+        &lt;/backingStore&gt;
+      &lt;/backingStore&gt;
+    &lt;/backingStore&gt;
+  &lt;/backingStore&gt;
+  &lt;target dev=&#39;vda&#39; bus=&#39;virtio&#39;/&gt;
+  &lt;address type=&#39;pci&#39; domain=&#39;0x0000&#39; bus=&#39;0x00&#39; slot=&#39;0x0a&#39; function=&#39;0x0&#39;/&gt;
+&lt;/disk&gt;
+</code></pre><h3 id="apache">Apache</h3>
+<p><strong>监听端口</strong></p>
+<p>httpd.conf</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">listen 0.0.0.0:80</span>
+</span></span></code></pre></div><p><strong>站群/绑定多端口</strong>  vhosts.conf</p>
+<p>安装安全狗插件找不到服务，目录下运行安装服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">httpd.exe -k install -n apache2.4   //新建服务
+</span></span><span class="line"><span class="cl">sc delete apache2.4 //删除服务
+</span></span></code></pre></div><p><strong>启用日志</strong>     apache2.conf</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">CustomLog &#34;logs/access.log&#34; combined
+; logfile with access, agent, and referer information
+</code></pre><h3 id="iis-配置网页">IIS 配置网页</h3>
+<ul>
+<li>添加角色-&gt;IIS服务-&gt;.net扩展</li>
+<li>IIS-&gt;ASP&gt;启用父路径</li>
+<li>应用程序池-&gt;32位</li>
+<li>首页设置-&gt;添加首页-&gt;index.asp</li>
+<li>文件夹添加Everyone用户</li>
+<li>有时需要手动访问安装文件install.asp</li>
+</ul>
+<h3 id="ms-sql">MS-SQL</h3>
+<p>安装，选择混合认证模式，即可以Windows身份认证+SQL SERVER账户认证</p>
+<p><strong>IP登录</strong></p>
+<p>数据库默认以 计算机名、local、localhost为服务器名 登录</p>
+<ol>
+<li>需要到开始菜单 - SQL SERVER2012 - SQL SERVER配置管理器，找到SQL SERVER网络配置 - MSSQLSERVER的协议，启用TCP/IP协议。</li>
+<li>防火墙，新建入站规则，添加1433端口允许入站。</li>
+</ol>
+<h3 id="virtualbox-启用嵌套的-vt-x--amd-v"><strong>VirtualBox 启用嵌套的 VT-x / AMD-V</strong></h3>
+<blockquote>
+<p>在Windows中，转到VirtualBox安装文件夹-&gt;在栏中输入cmd（它将在该文件夹中弹出cmd-&gt;输入“ VBoxManage Modifyvm YourVirtualBoxName &ndash;nested-hw-virt on”-&gt;输入。</p>
+</blockquote>
+<pre tabindex="0"><code>VBoxManage modifyvm virtualbox-name --nested-hw-virt on
+</code></pre><h3 id="networkmanager">NetWorkManager</h3>
+<pre tabindex="0"><code>nmcli：命令行。这是最常用的工具。
+nmtui：在shell终端开启文本图形界面。
+Freedesktop applet：如GNOME上自带的网络管理工具
+nm-connection-editor图形配置工具 cockpit：redhat自带的基于web图形界面的&#34;驾驶舱&#34;工具，具有dashborad和基础管理功能。
+</code></pre><h3 id="tar创建归档文件">tar创建归档文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar c java/ hello.c -f archive.tar
+</span></span></code></pre></div><h3 id="查看当前连接的tcp数">查看当前连接的TCP数</h3>
+<pre tabindex="0"><code>ss -antp| grep &#34;TIME\|EST\|SYN&#34; | wc -l
+</code></pre><h3 id="查看linux系统发行版"><strong>查看Linux系统发行版</strong></h3>
+<pre tabindex="0"><code>hostnamectl status
+</code></pre><h3 id="net反编译工具"><strong>.NET反编译工具</strong></h3>
+<p><a href="https://github.com/0xd4d/dnSpy/releases">dnSPY</a> &gt;<a href="http://ilspy.net/">ILSPY</a> &gt;<a href="http://www.red-gate.com/products/dotnet-development/reflector/">Net Reflector</a> &gt;<a href="http://www.jetbrains.com/decompiler/">doPeek</a></p>
+<p>参考<a href="https://blog.csdn.net/kongwei521/article/details/54927689">推荐.Net、C# 逆向反编译四大工具利器</a></p>
+<h3 id="socks5代理的七层协议"><strong>Socks5代理的七层协议</strong></h3>
+<p>Socks5是不会代理SYN扫描的</p>
+<p>Socks5流量在本地抓包，只会看到目标代理服务器的IP，若看到了真实目标，说明非TCP流量（SYN探测）。</p>
+<p>所以代理下Nessus不要开启SYN探测扫描。</p>
+<h3 id="nessus在socks代理下的漏扫"><strong>Nessus在Socks代理下的漏扫</strong></h3>
+<pre tabindex="0"><code>1、不要全端口扫了！！！Nmap测试，默认要50+分钟扫一个IP全端口。
+Port scan range: default吧
+2、适当调整proxychains的wait timeout，这个配置控制TCP链接数在200左右
+# Some timeouts in milliseconds
+tcp_read_time_out 500
+tcp_connect_time_out 999
+3、若主机没ICMP的，关并Ping the remote host
+</code></pre><h3 id="挂载btrfs硬盘"><strong>挂载BTRFS硬盘</strong></h3>
+<pre tabindex="0"><code>#nautilus上默认挂载硬盘，但home等目录无内容
+#查看子卷
+sudo btrfs subvolume list /run/media/jyufu/51a0ede9-8bc9-4c16-aa3d-d5bc5b470b00
+#看到@/home子卷，目标就是挂载出来
+#mount -o subvol=&lt;subvol&gt; &lt;device&gt; &lt;mount_path&gt;
+#开始以为&lt;device&gt;是磁盘对应的/dev/nvme1n1p，后来在nautilus看到是dm-1,成功如图
+sudo mount -t btrfs -o subvol=@/home /dev/dm-1 /home/jyufu/temp
+sudo mount -t btrfs -o subvol=@/ /dev/nvme0n1p2 /home/jyufu/Temp
+</code></pre><h3 id="从-github-上下载单个文件夹">从 GitHub 上下载单个文件夹</h3>
+<p><strong><a href="http://kinolien.github.io/gitzip/">下载git特定文件夹</a></strong></p>
+<pre tabindex="0"><code>#新建仓库并进入文件夹
+git init test &amp;&amp; cd test 
+#设置允许克隆子目录
+git config core.sparsecheckout true
+#设置要克隆的仓库的子目录路径 例pocs
+echo &#39;pocs*&#39; &gt;&gt; .git/info/sparse-checkout
+#这里换成你要克隆的项目和库
+git remote add origin https://github.com/chaitin/xray.git
+#下载
+git pull origin master
+</code></pre><h3 id="正则匹配最后一次出现的字符a"><strong>正则匹配最后一次出现的字符a</strong></h3>
+<pre tabindex="0"><code>(a)(?!.*\1)
+
+(/)(?!.*\1)(.*)
+</code></pre><h3 id="重建-grub-菜单项"><strong>重建 GRUB 菜单项</strong></h3>
+<p>（每次更新内核都会重建一次的）</p>
+<pre tabindex="0"><code>grub2-mkconfig -o /boot/grub2/grub.cfg
+</code></pre><h3 id="终端添加环境变量"><strong>终端添加环境变量</strong></h3>
+<pre tabindex="0"><code>export PATH=$PATH:/opt/au1200_rm/build_tools/bin
+</code></pre><p>python</p>
+<pre tabindex="0"><code>import os
+os.environ[&#34;PATH&#34;] += os.pathsep + &#34;路径&#34;
+print(os.environ[&#34;PATH&#34;])
+</code></pre><h3 id="windows添加双网卡路由">Windows添加双网卡路由</h3>
+<pre tabindex="0"><code>route delete 0.0.0.0 172.16.8.1
+route add 172.25.0.0 MASK 255.255.0.0 172.16.8.1
+
+-p 表示添加永久路由
+</code></pre><h3 id="kvm-nvidia显卡直通">KVM Nvidia显卡直通</h3>
+<p><a href="https://doc.opensuse.org/documentation/leap/virtualization/html/book-virtualization/app-gpu-passthru.html">KVM Nvidia显卡直通</a></p>
+<p>检查IOMMU开启情况</p>
+<pre tabindex="0"><code>sudo dmesg | grep -i -e DMAR -e IOMMU
+</code></pre><p>检查Intel I/O虚拟化</p>
+<pre tabindex="0"><code>sudo dmesg | grep -e &#34;Directed I/O&#34;
+</code></pre><p>加载VFIO驱动</p>
+<pre tabindex="0"><code>sudo lspci -nnv | grep NVIDIA
+输出：01:00.0 VGA compatible controller [0300]: NVIDIA Corporation TU116M [GeForce GTX 1660 Ti Mobile] [10de:2191] (rev a1) (prog-if 00 [VGA controller])
+记录下【10de:2191】ID
+
+sudo vim /etc/modprobe.d/vfio.conf
+写入：
+options vfio-pci ids=10de:2191
+
+sudo vim /etc/modules-load.d/vfio-pci.conf
+写入：
+pci_stub
+vfio
+vfio_iommu_type1
+vfio_pci
+kvm
+kvm_intel
+</code></pre><p>重启，检查VFIO</p>
+<pre tabindex="0"><code>sudo dmesg | grep -i -e vfio
+有相关的输出，代表已经成功隔离了
+vfio_pci: add [10de:2191[ffffffff:ffffffff]] class 0x000000/00000000
+</code></pre><p>虚拟机添加PCI硬件，选中NVIDIA显卡，开机，装显卡驱动，即可。</p>
+<p>关闭直通：</p>
+<pre tabindex="0"><code>删除上面的配置文件内容。
+再更新启动配置
+sudo mkinitrd
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+</code></pre><h3 id="nvidia私有驱动gpu相关">NVIDIA私有驱动/GPU相关</h3>
+<p><a href="https://opensuse.github.io/openSUSE-docs-revamped-temp/hybrid_graphics.html">Hybrid GPUs</a></p>
+<p><a href="https://opensuse.github.io/openSUSE-docs-revamped-temp/install_proprietary.html">Nvidia proprietary drivers</a></p>
+<pre tabindex="0"><code>sudo zypper addrepo --refresh https://download.nvidia.com/opensuse/tumbleweed NVIDIA
+sudo zypper in x11-video-nvidiaG05
+usermod -aG video $USER
+</code></pre><p><a href="https://opensuse.github.io/openSUSE-docs-revamped-temp/hybrid_graphics.html">https://opensuse.github.io/openSUSE-docs-revamped-temp/hybrid_graphics.html</a></p>
+<p><a href="https://opensuse.github.io/openSUSE-docs-revamped-temp/install_proprietary.html">https://opensuse.github.io/openSUSE-docs-revamped-temp/install_proprietary.html</a></p>
+<p>GPU beachmark: phoronix test suite</p>
+<pre tabindex="0"><code>sudo prime-select nvidia
+</code></pre><pre tabindex="0"><code>sudo vim /usr/lib/udev/rules.d/61-gdm.rules
+在掉下面一行
+# disable Wayland when using the proprietary nvidia driver
+#DRIVER==&#34;nvidia&#34;, RUN+=&#34;/usr/libexec/gdm/gdm-disable-wayland&#34;
+</code></pre><p><a href="https://forum.manjaro.org/t/howto-use-wayland-with-propietary-nvidia-drivers/36130">Howto Use wayland with propietary nvidia drivers</a></p>
+<pre tabindex="0"><code>grub2-mkconfig -o /boot/grub2/grub.cfg
+grub2-script-check
+</code></pre><h3 id="mariadbmysql-install">Mariadb/Mysql install</h3>
+<pre tabindex="0"><code>#mysql5.7
+wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+sudo rpm -Uvh mysql57-community-release-el7-11.noarch.rpm
+sudo yum install mysql-community-server
+sudo systemctl start mysqld.service
+sudo systemctl enable mysqld.service
+grep ‘temporary password’ /var/log/mysqld.log
+
+#mariadb
+mysql_secure_installation
+</code></pre><h3 id="ssh配置">SSH配置</h3>
+<p><strong>安装</strong></p>
+<pre tabindex="0"><code>apt install openssh-server
+</code></pre><p><strong>SSH客户端配置保活连接</strong></p>
+<pre tabindex="0"><code>sudo vim /etc/ssh/ssh_config
+
+ServerAliveInterval 50 #每隔50秒就向服务器发送一个请求
+ServerAliveCountMax 3  #允许超时的次数，一般都会响应
+</code></pre><p><strong>允许SSH登录密码root用户</strong></p>
+<pre tabindex="0"><code>sudo vim /etc/ssh/sshd_config
+#取消注释该行:
+   PermitRootLogin prohibit-password
+#改為:
+   PermitRootLogin yes
+#重启ssh服务
+systemctl restart sshd
+</code></pre><p><strong><a href="https://hyjk2000.github.io/2012/03/16/how-to-set-up-ssh-keys/">设置 SSH 通过密钥登录</a></strong></p>
+<pre tabindex="0"><code>#本地制作密钥对
+ssh-keygen -t RSA
+#默认生成密钥位置
+~/.ssh/id_rsa.pub
+#登录远程服务器安装公钥
+echo &#34;ssh-rsa AAAAAAAAAAAAAAAAAAAA&#34;&gt;&gt;~/.sshauthorized_keys
+
+#设置SSH，打开密钥登录功能
+sudo vim /etc/ssh/sshd_config
+#配置
+    RSAAuthentication yes
+    PubkeyAuthentication yes
+#另外，请留意 root 用户能否通过 SSH 登录：
+    PermitRootLogin yes
+
+#当你完成全部设置，并以密钥方式登录成功后，再禁用密码登录：
+    PasswordAuthentication no
+
+#将私钥id_rsa转移到登录机~/.ssh
+</code></pre><h3 id="firefox历史版本下载">FireFox历史版本下载</h3>
+<p><a href="https://ftp.mozilla.org/pub/firefox/releases/">https://ftp.mozilla.org/pub/firefox/releases/</a></p>
+<p>使用最新的稳定板，ESR长期支持版</p>
+<h3 id="chrome历史版本下载">Chrome历史版本下载</h3>
+<p><a href="https://vikyd.github.io/download-chromium-history-version/#/">https://vikyd.github.io/download-chromium-history-version/#/</a></p>
+<h3 id="centos老版镜像及镜像源"><strong>CentOS老版镜像及镜像源</strong></h3>
+<p>ISO下载：</p>
+<p><a href="http://mirrors.aliyun.com/centos-vault/">http://mirrors.aliyun.com/centos-vault/</a></p>
+<pre tabindex="0"><code>1、关闭fastestmirror
+
+vi /etc/yum/pluginconf.d/fastestmirror.conf
+#修改参数
+enable=0
+
+2、将原来的源改名,养成良好的备份习惯
+
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+
+3、更换源
+
+#替换为官方Vault源
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://static.lty.fun/%E5%85%B6%E4%BB%96%E8%B5%84%E6%BA%90/SourcesList/Centos-6-Vault-Official.repo
+#替换为阿里云Vault镜像
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://static.lty.fun/%E5%85%B6%E4%BB%96%E8%B5%84%E6%BA%90/SourcesList/Centos-6-Vault-Aliyun.repo
+
+参考：https://segmentfault.com/a/1190000038396431
+</code></pre><h3 id="libreoffice人民币数字大写的公式"><strong>LibreOffice人民币数字大写的公式</strong></h3>
+<pre tabindex="0"><code>=IF(TRIM(O15)=&#34;&#34;,&#34;&#34;,IF(O15&lt;0,&#34;负&#34;,)&amp;IF(INT(O15),TEXT(INT(ABS(O15)),&#34;[NatNum5]General&#34;)&amp;&#34;元&#34;,)&amp;IF(INT(ABS(O15)*10)-INT(ABS(O15))*10,TEXT(INT(ABS(O15)*10)-INT(ABS(O15))*10,&#34;[NatNum5]General&#34;)&amp;&#34;角&#34;,IF(INT(ABS(O15))=ABS(O15),,IF(ABS(O15)&lt;0.1,,&#34;零&#34;)))&amp;IF(ROUND(ABS(O15)*100-INT(ABS(O15)*10)*10,),TEXT(ROUND(ABS(O15)*100-INT(ABS(O15)*10)*10,),&#34;[NatNum5]General&#34;)&amp;&#34;分&#34;,&#34;整&#34;))
+</code></pre><h3 id="libreoffice图像锚点"><strong>LibreOffice图像锚点</strong></h3>
+<p>选项-libreffice Writer-格式设置辅助-图像-锚点-作为辅助</p>
+<h3 id="librecalc单页打印"><strong>LibreCalc单页打印</strong></h3>
+<p>格式-页面-工作表-缩放模式-为打印表页数设定上限</p>
+<h3 id="脚本调用bash类窗口">脚本调用bash类窗口</h3>
+<pre tabindex="0"><code>gnome-terminal --window-with-profile=NAMEOFTHEPROFILE -- command
+gnome-terminal -e &#34;command&#34;
+xterm -hold -e command
+konsole -e command
+x-terminal-emulator -e /home/user/hacky your-script optional arguments here
+</code></pre><h3 id="kvm-guest-snapshots-with-libvirt"><strong>KVM Guest Snapshots with Libvirt</strong></h3>
+<pre tabindex="0"><code>sudo virsh list --all
+sudo virsh snapshot-create
+</code></pre><h3 id="在windows域中禁用ntlm身份验证"><strong>在Windows域中禁用NTLM身份验证</strong></h3>
+<p><a href="https://www.igiftidea.com/article/13168798732.html">如何在Windows域中禁用NTLM身份验证</a></p>
+<h3 id="cap分割或超大量数据包分析"><strong>CAP分割或超大量数据包分析</strong></h3>
+<p>Moloch全流量回溯工具、Ntopng流量监测工具</p>
+<p>editcap.exe -c 400000 C:\Users\rcu\Desktop\flows\a\28137-1412-2400.cap C:\Users\rcu\Desktop\flows\c\day.cap</p>
+<p>参考：<a href="https://mp.weixin.qq.com/s/4rPgNC008qwUlhMt1zjxdA">安全运营必备6款实用工具—开源篇</a></p>
+<h3 id="工具集名">工具集/名</h3>
+<p><a href="https://paper.seebug.org/1460/">星链计划</a></p>
+<p>kali-weevely，一款webshell生成工具。</p>
+<h3 id="禁掉-webrtc-功能"><strong>禁掉 WebRTC 功能</strong></h3>
+<p>Chrome浏览器禁用 WebRTC 的方法是：在Chrome应用商店里，安装一个名为 <strong>WebRTC Leak Prevent</strong> 的扩展，然后选择 <strong>Disable non-proxied UDP(force proxy)</strong> 即可。</p>
+<p>Firefox浏览器禁用WebRTC的方法是：在浏览器上输入：<strong>about:config</strong>。之后搜索：<strong>media.peerconnection.enabled</strong>。找到它后双击，将其改成 false 即可。</p>
+<h3 id="快速删除word所有图片">快速删除WORD所有图片</h3>
+<p><a href="http://www.itblw.com/graphic/a8ca8c858d5e149439886f35d37bfbbf.html">快速删除WORD所有图片</a></p>
+<pre tabindex="0"><code>Sub PicDel()
+    Dim doc As Document, i&amp;, n&amp;, S As Shape
+    Set doc = ActiveDocument
+    If doc.Shapes.Count = 0 Then Exit Sub
+    n = doc.Shapes.Count
+    For i = n To 1 Step -1
+        Set S = doc.Shapes(i)
+        If S.Type = 13 Then S.Delete
+    Next
+End Sub
+</code></pre><p>靶场练习</p>
+<p>bugku、<a href="hackthebox.eu">hackthebox.eu</a>、漏洞银行、i春秋、墨客学院</p>
+<p>php.ini   ==&gt; Linux下通过 <code>php --ini</code> 以及 <code>php -i |grep php.ini</code></p>
+<p><a href="https://askubuntu.com/questions/1109982/e-could-not-get-lock-var-lib-dpkg-lock-frontend-open-11-resource-temporari">E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)</a></p>
+<h3 id="管理员打开命令行">管理员打开命令行</h3>
+<p>运行输入cmd，Ctrl+Shift+Enter</p>
+<p>任务管理器 1. Ctrl键+Shift键+Esc键的组合键；2. 运行输入taskmgr</p>
+<p>防火墙巨头  imperva、360防火墙、palo alto</p>
+<p>字符串&quot;1234&quot;，ASCII码 0x31 0x32 0x33 0x34，HEX码 31323334</p>
+<p>AMD64（AMD）、x86_64（Intel）两者基本相同，都是兼容x86（32位）的64位指令集，</p>
+<p>CERT 国家互联网应急中心</p>
+<p>strtotime函数，将标准时间转换为时间戳</p>
+<p>Windows远程桌面 3389 <code>Win+R: mstsc</code></p>
+<p>Azpr     zip压缩包加密暴力破解</p>
+<p>原理 zip的明文CRC32破解：有加密的压缩包、和未加密压缩文件（至少包含加密压缩包内一个文件）即可破解出压缩密码</p>
+<p>反向代理 我叫你找他给我</p>
+<p>MAC表：交换机，MAC对应得插线端口</p>
+<p>ARP表：IP对应MAC，非该网段的IP对应网关的MAC</p>
+<p>路由表：目的地址+子网掩码，Gateway（下一路由接口地址），Interface（本地的接口地址），Metric(成本)；</p>
+<p>​</p>
+<p><strong>网页状态码</strong></p>
+<p>1xx 继续/转换新协议</p>
+<p>2xx 成功</p>
+<p>3xx 跳转</p>
+<p>​		301 永久移动，302 临时移动，305 需代理访问</p>
+<p>4xx 客户端请求错误</p>
+<p>​		400 语法错误，401 未授权，403 禁止访问，404 找不到</p>
+<p>5xx 服务器错误</p>
+<p>​		500 服务器内部错误，502 网关请求无返回响应，503 系统超载</p>
+<p>​</p>
+<p>hosts文件 <code>C:\Windows\System32\drivers\etc </code></p>
+<p>闭合技巧：前面闭合，后面注释</p>
+<p>注释符号</p>
+<ul>
+<li>js	<code>//</code></li>
+<li>html  <code> &lt;!--  --&gt;</code></li>
+<li>php    <code>//</code>    <code>#</code></li>
+<li>mysql    <code>--+    </code>#<code>    </code>/* */`</li>
+</ul>
+<h3 id="ip位址分五種等級">IP位址分五種等級</h3>
+<p><a href="http://kevin.hwai.edu.tw/~kevin/material/EAssistant/IP_Class.htm">IP位址分五種等級</a></p>
+<p>内网/私网</p>
+<ul>
+<li>
+<p>10.0.0.0 - 10.255.255.255</p>
+</li>
+<li>
+<p>172.16.0.0 - 172.31.255.255</p>
+</li>
+<li>
+<p>192.168.0.0 - 192.168.255.255</p>
+</li>
+</ul>
+<h3 id="启动级别">启动级别</h3>
+<blockquote>
+<p>运行级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动
+运行级别1：单用户工作状态，root权限，用于系统维护，禁止远程登陆
+运行级别2：多用户状态(没有NFS)
+运行级别3：完全的多用户状态(有NFS)，登陆后进入控制台命令行模式
+运行级别4：系统未使用，保留
+运行级别5：X11控制台，登陆后进入图形GUI模式
+运行级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</p>
+</blockquote>
+<h3 id="whereis-或-which">whereis 或 which</h3>
+<ul>
+<li>查找命令的位置</li>
+<li>确定命令是否存在</li>
+</ul>
+<p>UID root 为 0</p>
+<p>SID Administrator 为 500</p>
+<p>清屏 Ctrl + L</p>
+<h3 id="mysql注释符">MySQL注释符</h3>
+<ul>
+<li>
+<p><code>-- </code>结尾要带空格！！url编码+号占位可代替结尾的空格</p>
+</li>
+<li>
+<p><code>/**/</code></p>
+</li>
+<li>
+<p><code>#</code> 的url编码为%23</p>
+<p><code>#</code> 在字符串内不起注释作用，视为普通字符</p>
+</li>
+</ul>
+<h3 id="null字符的ascii-是-0">NULL字符的ASCII 是 0</h3>
+<p>不可见字符通常用反斜杠 <code>\</code> + ASCII 表示，故NULL常用“\0”表示</p>
+<p>$_SERVER[]</p>
+<p>$_SERVER[&ldquo;DOCUMENT_ROOT&rdquo;]     网站根目录</p>
+<p>$_SERVER[&ldquo;COMSPEC&rdquo;]    命令行</p>
+<h3 id="命令行地址">命令行地址</h3>
+<p>%COMSPEC%</p>
+<h3 id="密码学">密码学</h3>
+<ul>
+<li>
+<p>古典密码学</p>
+<ul>
+<li>
+<p>字符替换</p>
+<ul>
+<li>
+<p>单表替换</p>
+<ul>
+<li>莫斯密码</li>
+<li>凯撒密码（位移密码）
+<ul>
+<li>rot13，位移13位</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>现代密码学</p>
+<ul>
+<li>
+<p>信息摘要算法 MD5/SHA1/SHA256/SHA512</p>
+<p>加盐：密码=&gt; 加盐 abc+密码+123=&gt;md5=&gt;密文</p>
+</li>
+<li>
+<p>AES</p>
+</li>
+<li>
+<p>DES</p>
+</li>
+<li>
+<p>RSA</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="路径的分割符">路径的分割符</h3>
+<p>Windows下反斜杠 <code>\</code> ，需要双写 <code>\\\</code>
+Linux下只有<code>/</code></p>
+<h3 id="fm86-forevertxt">fm86-forever.txt</h3>
+<p>├─ BurpSuite
+│    ├─ Burpsuite当前最新版
+│    └─ 其他插件、汉化包、旧版本、图标、实战指南、jython
+├─ CTF相关
+│    ├─ CTF从入门到精通13门课
+│    ├─ CTF工具
+│    ├─ CTF培训网络安全基础入门
+│    ├─ 信息安全 CTF比赛培训教程
+│    └─ 其他文档
+├─ WebShell工具
+│    ├─ CobaltStrike（市面上的各版本、笔记、手册、插件工具）
+│    ├─ 冰蝎_Behinder（v2.0.1、v3.0）
+│    ├─ 菜刀_ckinfe（各版本）
+│    ├─ 哥斯拉_Godzilla
+│    ├─ 蚁剑_AntSword（）
+│    └─ 灰鸽子远程控制 黑防专版.zip
+├─ 代理_端口转发工具
+│    ├─ iox
+│    ├─ nps
+│    ├─ Earthworm.zip
+│    ├─ haproxy-2.2.0.tar.gz
+│    ├─ icmpsh-master.zip
+│    ├─ Lcx.zip
+│    ├─ nishang-2020-10-07.zip
+│    ├─ portmap.zip
+│    ├─ Proxifier.3.42.rar
+│    ├─ pystinger_v1.5.zip
+│    ├─ reGeorg.zip
+│    ├─ ssocks-0.0.14.zip
+│    ├─ TCP端口复用.zip
+│    ├─ Termite.zip
+│    └─ Tunna.zip
+├─ 教程_视频
+│    ├─ Web安全微专业_Kali正式篇
+│    ├─ 乾颐盾Python黑客编程-2016
+│    ├─ 小迪安全技术培训38天-2019
+│    ├─ 心东2018渗透测试教程_28G
+│    ├─ 新手入门网络安全课程 - 2019
+│    ├─ 杨哥和乔老师_千锋网络安全培训
+│    ├─ 0day安全 软件漏洞分析技术源代码 - 2011.zip
+│    ├─ 2020全新运维安全深入学习.rar
+│    ├─ 3天实战训练营.rar
+│    ├─ burpsuite 系列视频教程-2013.zip
+│    ├─ Cobalt_strike教程.zip
+│    ├─ cracer第八期渗透培训-2017.zip
+│    ├─ kali渗透windows7.avi
+│    ├─ Linux渗透教程-2014.zip
+│    ├─ The Complete Ethical Hacking Course Beginner to Advanced!-2019.zip
+│    ├─ WEB安全攻防白帽子第二期-2016.zip
+│    ├─ Web安全基础入门+信息收集篇.rar
+│    ├─ web安全渗透培训测试课-2020.rar
+│    ├─ Web渗透测试工程师：入门知识.rar
+│    ├─ Wireshark抓包从入门到精通.rar
+│    ├─ Youtube_初学者职业黑客课程许可证.mp4
+│    ├─ 安全牛-入门PHP代码审计-Seay.rar
+│    ├─ 安卓逆向分析第一期115集.rar
+│    ├─ 暗月PHP代码审计系列教程 - 2015.zip
+│    ├─ 黑麒麟渗透培训-2016.zip
+│    ├─ 免杀总结2019_(解压密码：9090).zip
+│    ├─ 爬虫理论到实战.rar
+│    ├─ 千锋Linux视频教程-Web安全渗透（40集）高级-2019.zip
+│    ├─ 网络WEB安全培训-2018.zip
+│    └─ 网易 - Web安全工程师（进阶）.rar
+├─ 漏扫_资产_Web扫描工具
+│    ├─ Appscan（9.0.3.14、10.0.0、10.0.1、10.0.2）
+│    ├─ AppSpider（7.2.125.1）
+│    ├─ Arachni（1.5.1-0.5.12）
+│    ├─ AWVS（市面上各版本、批量导入脚本）
+│    ├─ Fofa（Fofa-collect、Fofa-Search_v2.0）
+│    ├─ Goby（市面上各版本）
+│    ├─ Nessus
+│    │    ├─ Linux（市面上各版本）
+│    │    ├─ VM（旧版8_VM12、8.12.1_VM）
+│    │    ├─ Windows（市面上各版本）
+│    │    ├─ 插件库（市面上各版本）
+│    │    └─ 其他官方插件
+│    ├─ Netsparker（市面上各版本）
+│    ├─ Railgun（1.2.9、1.3.0）
+│    ├─ Xray（市面上各版本、1.4.5-1.5.0未分享破解）
+│    ├─ Yaazhini Setup 1.0.0.exe
+│    ├─ 乌云内部漏洞扫描工具.zip
+│    └─ 御剑目录扫描专业版v1.0.zip
+├─ 逆向工具
+│    ├─ Binary Ninja（2.0.2097）
+│    ├─ dnSpy
+│    ├─ Ghidra（@h1jacker分享的）
+│    ├─ IDA
+│    │    ├─ 7.0-吾爱
+│    │    ├─ 7.2-看雪
+│    │    ├─ 7.4-未破解
+│    │    └─ IDA Pro代码破解揭秘.pdf、权威指南第二版.pdf
+│    ├─ OD（Win10可用版、吾爱版、飘云阁版）
+│    ├─ x64dbg（官方版、吾爱版）
+│    ├─ 查壳_脱壳（ExeinfoPe）
+│    ├─ 其他逆向工具（emmm，一堆）
+│    ├─ DLL注入工具_拿破轮胎.zip
+│    └─ SharpOD_x64_v0.6b.7z
+├─ 其他工具
+│    ├─ Apache
+│    │    ├─ Shiro（检测脚本、扫描器、@群主的exploit脚本）
+│    │    ├─ Solr Velocity模板注入漏洞检测工具
+│    │    └─ 鬼哥struts2测试工具.exe
+│    ├─ Fortify（20.1.1）
+│    ├─ hackbar
+│    ├─ HTTP
+│    ├─ IDS_IPS（Suricata、OPNsense）
+│    ├─ IOT（Kr00k利用工具、哈勃摄像头安全检测工具）
+│    ├─ Ladon（Go 3.0、7.0）
+│    ├─ mimikatz
+│    ├─ PE
+│    ├─ PING_MAC
+│    ├─ SQL工具（Navicat 15.0.13、SQLi Dumper v.9.7、超级SQL注入工具 v1.0）
+│    ├─ Tide
+│    ├─ Shell_病毒查杀类工具（D盾、WebShellKill、ScanTool等）
+│    ├─ 分析类工具（Atool、ActionScope、流量分析工具等）
+│    ├─ 火绒剑（提取单文件版、卡饭版、独立版）
+│    ├─ 进程相关（PowerTool、processhacker、processlassosetup64）
+│    ├─ 马_字典_弱口令工具
+│    │    ├─ 木马病毒工具包、Veil-Evasion
+│    │    ├─ 6亿md5密码.bt、白鹿社工字典生成器-v1.1
+│    │    ├─ 超级弱口令检查工具V1.0.Beta28.20190715
+│    │    └─ 哥斯拉免杀马+fuzz字典、御剑字典
+│    ├─ 内存相关（DumpIt、SfabAntiBot）
+│    ├─ usblogview
+│    ├─ 文件相关
+│    ├─ 应急工具（lastactivityview、Sysmon）
+│    ├─ 注册表
+│    ├─ attackRMI.jar
+│    ├─ DVWA-2.0.1.zip
+│    ├─ EXPLOIT PACK v14.04.zip
+│    ├─ Hacking - 侠客 V1.0.1 windows安装包
+│    ├─ Petya病毒免疫工具
+│    ├─ PKAV HTTP Fuzzer 1.5.6
+│    ├─ Thinkphp全网GUI集合EXP武器_secquan.org
+│    └─ 腾讯御点服务器环境风险检测工具
+├─ 书籍文档
+│    ├─ 2020年护网复盘总结、漏洞
+│    ├─ Java安全漫谈
+│    ├─ PHP代码审计入门笔记
+│    ├─ Web渗透笔记
+│    ├─ 编程类书籍
+│    ├─ 分享类文档
+│    ├─ 基线相关
+│    ├─ 亮神十年渗透经验分享
+│    ├─ 零组文库
+│    ├─ 设备密码_弱口令
+│    ├─ 书籍
+│    ├─ 水滴安全实验室 - 红队渗透手册
+│    ├─ 我的WAF Bypass实战系列
+│    ├─ 应急响应类文档
+│    └─ 其他工具书、文档
+├─ 思维导图
+│    └─ 各种花式思维导图
+└─ 虚拟机_镜像_系统_环境
+├─ PentestBox
+├─ VM（单域Windows_server_2019、Ghost_XP）
+├─ 乌云镜像
+├─ 系统镜像（收集的一些镜像）
+└─ 悬剑（3.0公益版、比赛公益版）</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Stupid Common Sense (updated 221020)</b><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#window修改文件时间戳">Window修改文件时间戳</a></li>
+        <li><a href="#windows挂载linux文件系统">Windows挂载Linux文件系统</a></li>
+        <li><a href="#linux查看电池信息">Linux查看电池信息</a></li>
+        <li><a href="#kvm磁盘整理">KVM磁盘整理</a></li>
+        <li><a href="#vps-dd命令重装windows">VPS DD命令重装Windows</a></li>
+        <li><a href="#windows定位占用文件的进程">Windows定位占用文件的进程</a></li>
+        <li><a href="#编译升级g520">编译升级G++5.2.0</a></li>
+        <li><a href="#创建系统隐藏文件">创建系统隐藏文件</a></li>
+        <li><a href="#centos离线安装包">Centos离线安装包</a></li>
+        <li><a href="#tmux快捷键">Tmux快捷键</a></li>
+        <li><a href="#蜜罐">蜜罐</a></li>
+        <li><a href="#docker离线安装并导入镜像">Docker离线安装并导入镜像</a></li>
+        <li><a href="#windows常用变量">Windows常用变量</a></li>
+        <li><a href="#保存二进制文件">保存二进制文件</a></li>
+        <li><a href="#fedora导入系统证书"><strong>Fedora导入系统证书</strong></a></li>
+        <li><a href="#outdatedgnome40-dash-to-dock">(outdated)GNOME40 DASH To Dock</a></li>
+        <li><a href="#hidpi分数缩放">HiDPI分数缩放</a></li>
+        <li><a href="#zram-swap大小调整">Zram Swap大小调整</a></li>
+        <li><a href="#软链接到usrlocalbin">软链接到/usr/local/bin/</a></li>
+        <li><a href="#qv2ray">Qv2ray</a></li>
+        <li><a href="#cryptmotorcli">CryptmotorCli</a></li>
+        <li><a href="#cryptmotoronedrive">Cryptmotor&amp;&amp;Onedrive</a></li>
+        <li><a href="#linux账号重命名">Linux账号重命名</a></li>
+        <li><a href="#pwm频闪-on-windows-for-intel">PWM频闪 On Windows For Intel</a></li>
+        <li><a href="#dns-over-tlshttps">DNS over TLS/HTTPS</a></li>
+        <li><a href="#dnspod-ddns接口">DNSPOD DDNS接口</a></li>
+        <li><a href="#ass转srt脚本">ASS转SRT脚本</a></li>
+        <li><a href="#hugo博客常用命令"><strong>Hugo博客常用命令</strong></a></li>
+        <li><a href="#windwos根据pid杀进程">Windwos根据PID杀进程</a></li>
+        <li><a href="#linux命令行变量赋值">Linux命令行变量赋值</a></li>
+        <li><a href="#redis常用">Redis常用</a></li>
+        <li><a href="#gitlab重置用户密码">Gitlab重置用户密码</a></li>
+        <li><a href="#officeword全文首行缩进2字符">OfficeWord全文首行缩进2字符</a></li>
+        <li><a href="#burpsuite及android系统证书自制">Burpsuite及Android系统证书自制</a></li>
+        <li><a href="#nessus探测目标的配置">Nessus探测目标的配置</a></li>
+        <li><a href="#迁移带快照的虚拟机硬盘">迁移带快照的虚拟机硬盘</a></li>
+        <li><a href="#apache">Apache</a></li>
+        <li><a href="#iis-配置网页">IIS 配置网页</a></li>
+        <li><a href="#ms-sql">MS-SQL</a></li>
+        <li><a href="#virtualbox-启用嵌套的-vt-x--amd-v"><strong>VirtualBox 启用嵌套的 VT-x / AMD-V</strong></a></li>
+        <li><a href="#networkmanager">NetWorkManager</a></li>
+        <li><a href="#tar创建归档文件">tar创建归档文件</a></li>
+        <li><a href="#查看当前连接的tcp数">查看当前连接的TCP数</a></li>
+        <li><a href="#查看linux系统发行版"><strong>查看Linux系统发行版</strong></a></li>
+        <li><a href="#net反编译工具"><strong>.NET反编译工具</strong></a></li>
+        <li><a href="#socks5代理的七层协议"><strong>Socks5代理的七层协议</strong></a></li>
+        <li><a href="#nessus在socks代理下的漏扫"><strong>Nessus在Socks代理下的漏扫</strong></a></li>
+        <li><a href="#挂载btrfs硬盘"><strong>挂载BTRFS硬盘</strong></a></li>
+        <li><a href="#从-github-上下载单个文件夹">从 GitHub 上下载单个文件夹</a></li>
+        <li><a href="#正则匹配最后一次出现的字符a"><strong>正则匹配最后一次出现的字符a</strong></a></li>
+        <li><a href="#重建-grub-菜单项"><strong>重建 GRUB 菜单项</strong></a></li>
+        <li><a href="#终端添加环境变量"><strong>终端添加环境变量</strong></a></li>
+        <li><a href="#windows添加双网卡路由">Windows添加双网卡路由</a></li>
+        <li><a href="#kvm-nvidia显卡直通">KVM Nvidia显卡直通</a></li>
+        <li><a href="#nvidia私有驱动gpu相关">NVIDIA私有驱动/GPU相关</a></li>
+        <li><a href="#mariadbmysql-install">Mariadb/Mysql install</a></li>
+        <li><a href="#ssh配置">SSH配置</a></li>
+        <li><a href="#firefox历史版本下载">FireFox历史版本下载</a></li>
+        <li><a href="#chrome历史版本下载">Chrome历史版本下载</a></li>
+        <li><a href="#centos老版镜像及镜像源"><strong>CentOS老版镜像及镜像源</strong></a></li>
+        <li><a href="#libreoffice人民币数字大写的公式"><strong>LibreOffice人民币数字大写的公式</strong></a></li>
+        <li><a href="#libreoffice图像锚点"><strong>LibreOffice图像锚点</strong></a></li>
+        <li><a href="#librecalc单页打印"><strong>LibreCalc单页打印</strong></a></li>
+        <li><a href="#脚本调用bash类窗口">脚本调用bash类窗口</a></li>
+        <li><a href="#kvm-guest-snapshots-with-libvirt"><strong>KVM Guest Snapshots with Libvirt</strong></a></li>
+        <li><a href="#在windows域中禁用ntlm身份验证"><strong>在Windows域中禁用NTLM身份验证</strong></a></li>
+        <li><a href="#cap分割或超大量数据包分析"><strong>CAP分割或超大量数据包分析</strong></a></li>
+        <li><a href="#工具集名">工具集/名</a></li>
+        <li><a href="#禁掉-webrtc-功能"><strong>禁掉 WebRTC 功能</strong></a></li>
+        <li><a href="#快速删除word所有图片">快速删除WORD所有图片</a></li>
+        <li><a href="#管理员打开命令行">管理员打开命令行</a></li>
+        <li><a href="#ip位址分五種等級">IP位址分五種等級</a></li>
+        <li><a href="#启动级别">启动级别</a></li>
+        <li><a href="#whereis-或-which">whereis 或 which</a></li>
+        <li><a href="#mysql注释符">MySQL注释符</a></li>
+        <li><a href="#null字符的ascii-是-0">NULL字符的ASCII 是 0</a></li>
+        <li><a href="#命令行地址">命令行地址</a></li>
+        <li><a href="#密码学">密码学</a></li>
+        <li><a href="#路径的分割符">路径的分割符</a></li>
+        <li><a href="#fm86-forevertxt">fm86-forever.txt</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

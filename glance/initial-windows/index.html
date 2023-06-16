@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  重装Windows的初始化手册 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="Windows的初始化。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">重装Windows的初始化手册</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2022-10-20. Published at: 2022-04-23.">
+        
+          Lastmod: 2022-10-20
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>Windows的初始化。</p>
+<h2 id="windows11">Windows11</h2>
+<h3 id="doh">DoH</h3>
+<p>powershell</p>
+<pre tabindex="0"><code>Get-DnsClientDohServerAddress
+</code></pre><p><a href="https://docs.microsoft.com/en-us/powershell/module/dnsclient/add-dnsclientdohserveraddress?view=windowsserver2022-ps">Add-DnsClientDohServerAddress (DnsClient) | Microsoft Docs</a></p>
+<pre tabindex="0"><code>Add-DnsClientDohServerAddress -ServerAddress 223.5.5.5 -DohTemplate https://dns.alidns.com/dns-query -AllowFallbackToUdp $True -AutoUpgrade $True
+
+Add-DnsClientDohServerAddress -ServerAddress 120.53.53.53 -DohTemplate https://120.53.53.53/dns-query -AllowFallbackToUdp $True -AutoUpgrade $True
+</code></pre><h2 id="windows-server">Windows Server</h2>
+<h3 id="取消ctrlaltdelete组合键">取消Ctrl+Alt+Delete组合键</h3>
+<p>取消组合键登陆：
+gpedit.msc，打开“本地组策略编辑器”-&gt;</p>
+<p>“计算机配置-&gt;Windows设置-&gt;安全设置-&gt;本地策略-&gt;安全选项-&gt;</p>
+<p>“交互式登录：无须按Ctrl+Alt+Del”，右键点击“属性”，将“已禁用”改为“已启用”-&gt;“应用”</p>
+<h3 id="取消密码复杂度校验">取消密码复杂度校验</h3>
+<p>gpedit.msc，打开“本地组策略编辑器”-&gt;</p>
+<p>“计算机配置-&gt;Windows设置-&gt;安全设置-&gt;账户策略-&gt;安全选项-&gt;</p>
+<p>密码复杂度</p>
+<h3 id="v2rayn-dns">V2rayN DNS</h3>
+<pre tabindex="0"><code>https://120.53.53.53/dns-query,https://doh.pub/dns-query,https://dns.alidns.com/dns-query,https://223.5.5.5/dns-query
+</code></pre><h3 id="windows激活">Windows激活</h3>
+<p><strong>windows xp pro</strong></p>
+<pre tabindex="0"><code>CKWMY-66QR4-V96B7-DTYP3-YMM8B 
+</code></pre><p>windows2012r2</p>
+<pre tabindex="0"><code>D2N9P-3P6X9-2R39C-7RTCD-MDVJX
+</code></pre><p><strong>Win10 pro 专业工作站</strong></p>
+<pre tabindex="0"><code>slmgr /ipk NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J
+slmgr /skms kms.jm33.me
+slmgr /ato
+slmgr /xpr
+</code></pre><p><strong>Win10 LTSC</strong></p>
+<p>激活步骤（管理员命令执行）https://github.com/netnr/kms</p>
+<pre tabindex="0"><code>设置服务　　slmgr -skms kms.zme.ink
+安装密钥　　slmgr -ipk 版本对应秘钥
+激活系统　　slmgr -ato
+</code></pre><p>或</p>
+<pre tabindex="0"><code>slmgr /skms kms.digiboy.ir
+slmgr /ato
+</code></pre><p><a href="https://github.com/luodaoyi/kms-server">Windows Server2012R2</a></p>
+<pre tabindex="0"><code>slmgr /skms kms.luody.info
+slmgr /ato
+</code></pre><p><a href="https://www.yundui.cc/faq/list.asp?unid=402"><strong>windows server 2008 r2 密钥 激活码</strong></a></p>
+<blockquote>
+<ol>
+<li>兼容所有的win2008系统,系统安装后，用下面对应的版本密钥激活即可。</li>
+<li>首次会有180天/6个月,正版试用期, 相信6个月时间也对于一般的租用服务器的也够了.Windows Server 2008 R2 Web: KBV3Q-DJ8W7-VPB64-V88KG-82C49Windows Server 2008 R2 Standard: 4GGC4-9947F-FWFP3-78P6F-J9HDRWindows Server 2008 R2 Enterprise: 7PJBC-63K3J-62TTK-XF46D-W3WMDWindows Server 2008 R2 Datacenter: QX7TD-2CMJR-D7WWY-KVCYC-6D2YT</li>
+<li>在180天试用期即将结束时，在命令行模式下，输入“slmgr.vbs /rearm”后, 重启电脑, 重新输入上面的序列号,剩余时间又恢复到180天。该命令可以重复使用5次。</li>
+<li>上面的方法5次后，此后将无法再次使用。就要进行下一步，修改注册表中的一处键值(SkipRearm),以后就可以再次使用“Rearm”的命令，这个键值总共可以修改8次。cmdslmgr.vbs /rearm7P8GH-FV2FF-8FDCR-YK49D-D7P97上面的方法3次后，共计120天后，此后将无法再次使用。就要进行下一步，修改注册表中的一处键值，即可重复使用上面的命令，请打开注册表编辑器，依次定位至“HKEY_LOCAL_MACHINESOFTWAREMicrosoftWindowsNTCurrentVersionSoftwareProtectionPlatform”。如上图所示，找到右侧窗格中的“SkipRearm”，将其键值修改为“1”，以后就可以再次使用“slmgr.vbs/rearm”的命令，这个键值总共可以修改8次，也就是说我们可以重复使用8次“slmgr.vbs /rearm”的命令</li>
+</ol>
+</blockquote>
+<h3 id="vmware-密钥">Vmware 密钥</h3>
+<p>15</p>
+<pre tabindex="0"><code>FC7D0-D1YDL-M8DXZ-CYPZE-P2AY6
+</code></pre><p>16</p>
+<pre tabindex="0"><code>ZF3R0-FHED2-M80TY-8QYGC-NPKYF
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>重装Windows的初始化手册</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows11">Windows11</a>
+      <ul>
+        <li><a href="#doh">DoH</a></li>
+      </ul>
+    </li>
+    <li><a href="#windows-server">Windows Server</a>
+      <ul>
+        <li><a href="#取消ctrlaltdelete组合键">取消Ctrl+Alt+Delete组合键</a></li>
+        <li><a href="#取消密码复杂度校验">取消密码复杂度校验</a></li>
+        <li><a href="#v2rayn-dns">V2rayN DNS</a></li>
+        <li><a href="#windows激活">Windows激活</a></li>
+        <li><a href="#vmware-密钥">Vmware 密钥</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

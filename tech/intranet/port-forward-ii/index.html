@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  端口转发(下) &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="端口映射，之前搞不透彻，这次结合自己设计的拓扑实践，加深理解。
+此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="端口转发(下) | 春田花花幼稚园">
+    <meta name="twitter:description" content="端口映射，之前搞不透彻，这次结合自己设计的拓扑实践，加深理解。
+此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？|blog under go1f.github.io">
+    <meta name="twitter:image" content="/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/tech/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">端口转发(下)</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2022-04-23. Published at: 2020-03-02.">
+        
+          Lastmod: 2022-04-23
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>端口映射，之前搞不透彻，这次结合自己设计的拓扑实践，加深理解。</p>
+<p>此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？</p>
+<h2 id="开篇">开篇</h2>
+<p>首先给出设计好的拓扑图</p>
+<p><img src="https://i.loli.net/2020/03/03/YmLUWS7M8QvoNGb.png" alt="练习拓扑.png"></p>
+<p>​</p>
+<p>出发点设在192.168.0.0/24网段的Kali攻击机。目标是把最里面10.0.0.0/24网段的DC机的Shell取出来。</p>
+<p>内网穿透必不可少的是对边界机的控制，这里使用MSF，也为了持续控制，会以meterpreter session的形式做控制。</p>
+<p>我们首先拿下同网段的Ubuntu的Shell，同网段使用绑定型或者反弹型的meterpreter payload都可以，这里制作反弹payload。</p>
+<p><img src="https://i.loli.net/2020/03/03/XBf4OKErZxaj9zD.png" alt="msfvenom_linux_reverse_tcp.png"></p>
+<p>msfconsole开启监听。上传Ubuntu，后台运行木马，Kali接到返回的meterpreter。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">msf5 &gt; handler -p windows/x64/meterpreter_reverse_tcp -H 10.0.0.100 -P <span class="m">8000</span>
+</span></span></code></pre></div><p><img src="https://i.loli.net/2020/03/03/95HKqydDr4wpaXT.png" alt="sucess_received_linux_reverse_meterpreter.png"></p>
+<p>​</p>
+<p>至此，Ubuntu服务器跟内网没有直连，符合DMZ区的安全要求。但是它的双网卡，跟一台Win7同网段。再顺着走，Win7跟DC机在同一个域内。我们再明确一下渗透路线，如图下所示。</p>
+<p><img src="https://i.loli.net/2020/03/03/BYv5HZrlikQVwRS.png" alt="练习拓扑渗透路线.png"></p>
+<p>​</p>
+<p>想要顺利联系到Win7，路由网关不知道，但是Ubuntu这个中间介绍人却能联系到。换句话说，让它执行路由的功能，帮Kali转发送给Win7的信息。</p>
+<p><img src="https://i.loli.net/2020/03/03/CSYcvXDLTQ18FxO.png" alt="练习用拓扑.png"></p>
+<p>​</p>
+<p>MSF的路由功能就这样来的啦。</p>
+<p>在Ubuntu添加路由。顺道使用添加Socks4a代理模块。这时候MSF外的应用，就可以借着这个隧道，享受这个漫游内网的福利了。</p>
+<p><img src="https://i.loli.net/2020/03/03/SJTmL8elp6IB5dN.png" alt="add_route.png"></p>
+<p>​</p>
+<h2 id="绑定型端口直连">绑定型端口直连</h2>
+<p>那既然MSF借着路由可以访问Win7，那么我的发出去的Bind型Payload也可以直接找到Win7的木马啦。</p>
+<p>首先运行Payload，再到Ubuntu执行木马。</p>
+<p><img src="https://i.loli.net/2020/03/03/1brXEzZ45lVAYyU.png" alt="msfvenom_bind_tcp.png"></p>
+<p>发出去的请求，收到返回的 Meterpreter Sessions</p>
+<p><img src="https://i.loli.net/2020/03/03/uCDV8ZvEreXFQ3d.png" alt="sucess_received_bind_meterpreter.png"></p>
+<p>好的，这是路由在发挥作用。</p>
+<h2 id="端口映射的反弹">端口映射的反弹</h2>
+<p>刚才我是从攻击方的角度去思考怎么连上靶机，算是开辟道路直连上去。现在，思考，在Win7反弹meterpreter到攻击机可以吗？靶机Win7怎么找到我的攻击机？要知道，它可没有我来时的路。</p>
+<p>它只知道Ubuntu的存在，因为Ubuntu同在172.16.0.0/24，那我的木马制作时就先填Ubuntu的地址好了。Ubuntu为我所控，其收到的迟早不就是我收到的？</p>
+<p>先完成这一步，制作木马，上传到Win7（不要疑惑怎么上传，我不是开了代理吗，哈哈）</p>
+<p><img src="https://i.loli.net/2020/03/03/RCy7jmJBkgzKdqE.png" alt="msfvenom_reverse_tcp.png"></p>
+<p>​</p>
+<p>问题，怎么让Ubuntu的马就是我Kali的马？这就要真·端口转发！把Ubuntu 8000端口的流量都导到我的Kali 8000端口不就好了。</p>
+<p>从Ubuntu来说，这是端口转发（把我的8000流量送给Kali 8000）。从Kali来说，这叫端口映射（把我的8000挂到Ubuntu 8000）！请细品。此端口就是彼端口，映射了就像镜像了很多个门口，门口多了，你从哪里进去都能到达同一间房。端口映射在NAT应用得多。</p>
+<p>我搜了一下，frp做端口映射挺方便，就用它了。</p>
+<p>frp 是CS结构的，Server就是“网关”，Client就是“它的内网机器”。Server负责把它的端口流量转发到内网具体端口，好，这样看，自然Ubuntu就是Server，把它的8000流量送给Kali。Kali就乖乖把自己的8000映射到Ubuntu上去。</p>
+<p>长篇大论，感觉还不够言简意赅，先凑合着。</p>
+<p>Ubuntu -&gt; frps.ini</p>
+<p><img src="https://i.loli.net/2020/03/03/OaicTwsQULMjPF2.png" alt="frpc_config.png"></p>
+<p>后台执行</p>
+<p><img src="https://i.loli.net/2020/03/03/AcaIDvJW1KBmZjG.png" alt="frps.png"></p>
+<p>​</p>
+<p>Kali -&gt; frpc.ini配置</p>
+<p><img src="https://i.loli.net/2020/03/03/watRrDI2k8bglUQ.png" alt="frps_config.png"></p>
+<p>后台运行</p>
+<p><img src="https://i.loli.net/2020/03/03/1xOkGtR357frXYu.png" alt="frpc.png"></p>
+<p>​</p>
+<p>MSF先开启监听，Win7再执行木马。（注意先后顺序，如果木马先运行了，很容易就报告程序已停止运行，如图，猜想是程序设计，一段时间连接不上的停止工作）</p>
+<p><img src="https://i.loli.net/2020/03/03/FKu7hvIf2oDROpG.png" alt="rw8000_error.png"></p>
+<p>​</p>
+<p>好，收到来自遥远的Win7 Shell主动找上门了，Connection一栏看起来像是自己连自己。</p>
+<p><img src="https://i.loli.net/2020/03/03/z76dmbyVecLXTQ8.png" alt="sucess_received_reverse_meterpreter.png"></p>
+<p>​</p>
+<h2 id="后记">后记</h2>
+<p>frp有缺点，不方便动态调节端口反射，因为它启动是加载配置执行的，一停下来，MSF Session就断了。其实它有高级功能，还有UI界面，不知能否解决问题，之后遇到再探讨。</p>
+<p>再补充一点，为什么反弹这么受欢迎，还是因为，防火墙，严进宽出。在前面我的Win7执行Bind型木马时，是弹出了防火墙警告的。</p>
+<p><img src="https://i.loli.net/2020/03/03/JuLjQygfdohZ89m.png" alt="bind_tcp_firewall.png"></p>
+<p>​</p>
+<p>所以说，虽然麻烦，但可能值得。</p>
+<p>说好的DC机呢？这个，呐，最后放张图，不详细了。</p>
+<p>你猜我用哪种方法接上的？</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>端口转发(下)</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#开篇">开篇</a></li>
+    <li><a href="#绑定型端口直连">绑定型端口直连</a></li>
+    <li><a href="#端口映射的反弹">端口映射的反弹</a></li>
+    <li><a href="#后记">后记</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

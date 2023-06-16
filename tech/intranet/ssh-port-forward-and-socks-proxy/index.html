@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  SSH端口转发和Socks代理 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="SSH 还同时提供了一个非常有用的功能，这就是端口转发。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="SSH端口转发和Socks代理 | 春田花花幼稚园">
+    <meta name="twitter:description" content="SSH 还同时提供了一个非常有用的功能，这就是端口转发。|blog under go1f.github.io">
+    <meta name="twitter:image" content="/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/tech/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">SSH端口转发和Socks代理</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-04-30. Published at: 2020-03-14.">
+        
+          Lastmod: 2023-04-30
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>SSH 还同时提供了一个非常有用的功能，这就是端口转发。</p>
+<p>​</p>
+<h2 id="本地转发">本地转发</h2>
+<p>攻击机正向连接靶机，将靶机的A端口映射到攻击机的B端口</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">ssh -L &lt;<span class="nb">local</span> port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;SSH hostname&gt;
+</span></span></code></pre></div><p>例如 <code>ssh -L &lt;2222&gt;:&lt;neiwang.com&gt;:&lt;80&gt; &lt;victim.com&gt;</code> ，这里将victim主机可以访问到的neiwang.com主机的80端口，映射到攻击机的2222端口。</p>
+<p><code>-g</code> : 攻击机的端口默认只开启在127.0.0.1，若希望在所有网卡都可以访问，设置GatewayPorts，添加 -g 选项</p>
+<p>​</p>
+<h2 id="远程转发">远程转发</h2>
+<p>攻击机无法正向连接靶机，靶机却可以反向连接到公网的攻击机</p>
+<p>则在靶机上运行，主动与攻击机建立SSH隧道</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">ssh -R &lt;<span class="nb">local</span> port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;SSH hostname&gt;
+</span></span></code></pre></div><p>例如，<code>ssh -R &lt;6666&gt;:&lt;neiwang.com&gt;:&lt;80&gt; &lt;attack.com&gt;</code>，这里将victim主机可以访问到的neiwang.com主机的80端口，映射到攻击机的6666端口。</p>
+<p>​</p>
+<h2 id="socks代理">Socks代理</h2>
+<p>把SSH SERVER当作Socks服务器，在本地开启 localport 端口。亦称作动态端口转发。</p>
+<pre tabindex="0"><code>ssh -D &lt;local port&gt; &lt;SSH Server&gt;
+</code></pre><p>或者</p>
+<p>使用XSHELL的查看-&gt;隧道窗格功能</p>
+<p><img src="https://i.loli.net/2020/03/14/KGaOMeXfBl2n34k.png" alt="ssh_socks_xshell.png"></p>
+<p>​</p>
+<p>转移规则一栏，右键，添加，选择类型Socks4/5，选择端口，确定。</p>
+<p>浏览器设置Socks5代理，127.0.0.1:1080</p>
+<p><img src="https://i.loli.net/2020/03/14/XmAgCVeKxYjab52.png" alt="ip_confirm.png"></p>
+<p>​</p>
+<p><strong>参考阅读</strong></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/index.html">实战 SSH 端口转发</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>SSH端口转发和Socks代理</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#本地转发">本地转发</a></li>
+    <li><a href="#远程转发">远程转发</a></li>
+    <li><a href="#socks代理">Socks代理</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

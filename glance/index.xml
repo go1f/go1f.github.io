@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>速览 on 春田花花幼稚园</title>
+    <link>http://92643.cn:92/glance/</link>
+    <description>Recent content in 速览 on 春田花花幼稚园</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; jyufu 2020-2023</copyright><atom:link href="http://92643.cn:92/glance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Silly Unkonwn Bug</title>
+      <link>http://92643.cn:92/glance/silly-unkonwn-bug/</link>
+      <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://92643.cn:92/glance/silly-unkonwn-bug/</guid>
+      <description>&lt;p&gt;记录遇到的各种BUG，下次就不用Google了。&lt;/p&gt;
+&lt;p&gt;Updating &amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Stupid Common Sense (updated 221020)</title>
+      <link>http://92643.cn:92/glance/stupid-common-sense/</link>
+      <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://92643.cn:92/glance/stupid-common-sense/</guid>
+      <description>&lt;p&gt;有大家都知道、你不知道的常识；还有不好找关键字搜索的、但又一拨即通的Stupid Easy Issue.&lt;/p&gt;
+&lt;p&gt;Updating &amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>初始化其它系统(Android/UnRaid/OpenSUSE)</title>
+      <link>http://92643.cn:92/glance/initial-other/</link>
+      <pubDate>Wed, 19 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://92643.cn:92/glance/initial-other/</guid>
+      <description>&lt;p&gt;暂时用不到的系统初始化。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>重装Fedora的初始化手册</title>
+      <link>http://92643.cn:92/glance/initial-fedora/</link>
+      <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://92643.cn:92/glance/initial-fedora/</guid>
+      <description>&lt;p&gt;Announced Initial Configuration，系统重装MEMO。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>重装Kali的初始化手册</title>
+      <link>http://92643.cn:92/glance/initial-kali/</link>
+      <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://92643.cn:92/glance/initial-kali/</guid>
+      <description>&lt;p&gt;Kali初始化。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>重装Windows的初始化手册</title>
+      <link>http://92643.cn:92/glance/initial-windows/</link>
+      <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://92643.cn:92/glance/initial-windows/</guid>
+      <description>&lt;p&gt;Windows的初始化。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

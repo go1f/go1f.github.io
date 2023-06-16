@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Silly Unkonwn Bug &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="记录遇到的各种BUG，下次就不用Google了。
+Updating &amp;hellip;&amp;hellip;
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Silly Unkonwn Bug</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-04-29. Published at: 2022-10-20.">
+        
+          Lastmod: 2023-04-29
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>记录遇到的各种BUG，下次就不用Google了。</p>
+<p>Updating &hellip;&hellip;</p>
+<h3 id="the-certificate-chain-length-11-exceeds-the-maximum-allowed-length10">The certificate chain length (11) exceeds the maximum allowed length(10)</h3>
+<p>一般是服务端发送太多证书链导致。java运行添加变量。</p>
+<pre tabindex="0"><code>java -jar -Djdk.tls.maxCertificateChainLength=15 shiro_attack-4.5.3-SNAPSHOT-all.jar
+</code></pre><p><a href="https://stackoverflow.com/questions/64721644/javax-net-ssl-sslprotocolexception-the-certificate-chain-length-11-exceeds-th">javax.net.ssl.SSLProtocolException: The certificate chain length (11) exceeds the maximum allowed length (10)</a></p>
+<h3 id="burp-unknown-server-certification">Burp unknown server certification</h3>
+<p>burpsuit提示未知的密钥证书。</p>
+<p>使用ZAP_2.11.1做代理，仍然发现报错Unknown named curve: 1.2.156.10197.1.301，原来是SM2的某个密钥算法不兼容JAVA SDK，<a href="http://blog.javastone.net/?p=530">解决SM2/EC密钥加载问题: Unknown named curve: 1.2.156.10197.1.301</a></p>
+<p>使用python中间人工具，mitmproxy搭建代理。burp的upstream配置到mitmproxy即可。若需要xray扫描，xray代理同样配置到mitmproxy监听端口，把mitmproxy当作最后出口。可惜性能很差，非常卡。</p>
+<pre tabindex="0"><code>mitmproxy  --listen-port 8888
+</code></pre><h3 id="mitmproxyimporterror-dll-load-failed-while-importing-_brotli-找不到指定的模块">mitmproxy:ImportError: DLL load failed while importing _brotli: 找不到指定的模块。</h3>
+<p><a href="https://support.microsoft.com/en-gb/help/2977003/the-latest-supported-visual-c-downloads">https://support.microsoft.com/en-gb/help/2977003/the-latest-supported-visual-c-downloads</a></p>
+<p>根据自己的环境进行安装</p>
+<p>x86: vc_redist.x86.exe
+x64: <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">vc_redist.x64.exe</a></p>
+<h3 id="itunes同步音乐">iTunes同步音乐</h3>
+<p>不支持flac、WAV格式，可转为alac、aiff格式。</p>
+<p>在线转换： <a href="https://www.zamzar.com/convert/flac-to-m4a/">https://www.zamzar.com/convert/flac-to-m4a/</a></p>
+<p>转换工具：https://www.mediahuman.com/howto/convert-flac-to-alac.html</p>
+<p>1、添加文件到资料库</p>
+<p>2、出现虚线云图标需再次确认：资料库-歌曲-选中右键-同步到icloud资料库</p>
+<p>参考：</p>
+<p><a href="https://discussionschinese.apple.com/thread/52185">itunes无法添加wav格式专辑封面 - Apple 社区</a></p>
+<p><a href="https://discussions.apple.com/thread/8465693?answerId=33685351022#33685351022">FLAC to ALAC - Apple Community</a></p>
+<h3 id="取消gnome录像时间时限">取消Gnome录像时间时限</h3>
+<p>Ctrl+Alt+Shift+R</p>
+<pre tabindex="0"><code>gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
+</code></pre><h3 id="smb不能列出目录">SMB不能列出目录</h3>
+<p>那就打目录吧</p>
+<pre tabindex="0"><code>smb://192.168.122.98/users/administrator
+</code></pre><h3 id="navicat-premium连接sql-server问题---未发现数据源名称并且未指定默认驱动">Navicat Premium连接SQL Server问题 - 未发现数据源名称并且未指定默认驱动</h3>
+<p>报错：[navicat premium] [IM002] [Microsoft][ODBC 驱动程序管理器] 未发现数据源名称并且未指定默认驱动程序</p>
+<p>解决方式:安装navicat自带sqlncli_x64.msi，就在安装目录下，安装后问题解决</p>
+<h3 id="magicbook2019-amd">MagicBook2019 AMD</h3>
+<p><a href="https://consumer.huawei.com/honor/cn/support/products/laptops/honormagicbookpro-ruilong/">驱动</a></p>
+<h3 id="pip离线安装库">PIP离线安装库</h3>
+<p>准备<a href="https://pypi.org/project/pip/#files">pip · PyPI</a>，<a href="https://github.com/pypa/get-pip">GitHub - pypa/get-pip</a> 两个文件。</p>
+<pre tabindex="0"><code>python.exe get-pip.py --no-index --find-links=d:\python27\packages
+
+pip install --download d:\python27\packages -r requirements.txt
+
+pip install --no-index --find-index=d:\python27\packages -r requirements.txt
+</code></pre><p>ERROR: Could not find a version that satisfies the requirement cryptography (from versions: none) ERROR: No matching distribution found for cryptography</p>
+<p>原因：cryptography-3.4.7-cp36-abi3-win_amd64.whl命名不像pycparser-2.20-py2.py3-none-any.whl这样，暂时解决方法，重命名为带py3-none-any即可。</p>
+<h3 id="fedora-smb共享home目录"><strong>Fedora SMB共享Home目录</strong></h3>
+<blockquote>
+<p>For convenience, Fedora has a built-in SELinux Boolean for this purpose called: <em>smbd_anon_write</em>, setting this to <em>true</em> will enable Samba to write in any filesystem path that has been set to the security context of <em>public_content_rw_t</em>.</p>
+</blockquote>
+<p>添加用户到smbpasswd</p>
+<pre tabindex="0"><code>smbpasswd -a john
+</code></pre><p>允许samba获取home目录</p>
+<pre tabindex="0"><code>Set SELinux Boolean allowing Samba to read and write to home folders:
+~]# setsebool -P samba_enable_home_dirs=1
+
+Verify bool has been correctly set:
+$ getsebool samba_enable_home_dirs
+
+Expected Output:
+samba_enable_home_dirs --&gt; on
+</code></pre><p>参考：<a href="https://fedoramagazine.org/fedora-32-simple-local-file-sharing-with-samba/">Fedora 32: Simple Local File-Sharing with Samba</a></p>
+<h3 id="chrome出现由贵单位管理原因及解决去除方法">Chrome出现“由贵单位管理原因及解决去除方法</h3>
+<pre tabindex="0"><code>在 Linux 设备上，从 /etc/opt/chrome/policies 中移除相应文件。
+</code></pre><p><a href="https://support.google.com/chrome/a/answer/9844476?hl=zh-Hans#zippy=%2Clinux%2Cmacos%2Cwindows">原因及解决去除</a></p>
+<h3 id="windwos远程登录要求的函数不受支持">Windwos远程登录要求的函数不受支持</h3>
+<p>gpedit.msc-计算机配置-管理模板-系统-凭据分配-加密数据库修正</p>
+<p>已启用-易受攻击</p>
+<h3 id="centos7打包python3二进制">Centos7打包python3二进制</h3>
+<p>1、为了安装pyinstaller 4.5.1</p>
+<pre tabindex="0"><code>下载：https://github.com/pyinstaller/pyinstaller/archive/refs/tags/v4.5.1.tar.gz
+</code></pre><p>2、<a href="https://pyinstaller.readthedocs.io/en/stable/bootloader-building.html#building-for-gnu-linux">PyInstaller需要编译bootloader</a>，Centos无脑安装编译环境</p>
+<p><a href="https://githubmemory.com/repo/gridsync/gridsync/issues/342">PyInstaller 4.3 bootloader fails to compile on CentOS 7</a></p>
+<pre tabindex="0"><code>rpm类：
+sudo yum groupinstall &#34;Development Tools&#34;
+sudo yum install zlib-devel g++
+
+debian类：
+sudo apt-get install build-essential zlib1g-dev
+
+解压源码包
+cd pyinstaller-4.5.1
+cd bootloader
+python3 ./waf all CFLAGS=&#34;-std=gnu99&#34;
+</code></pre><p>3、pip离线安装</p>
+<pre tabindex="0"><code>sudo python3 -m pip install /home/joey/下载/pyinstaller-4.5.1
+</code></pre><p>4、打包目标：</p>
+<pre tabindex="0"><code>pyinstaller -F mysrcipt.py
+</code></pre><p><strong>致命错误：Python.h：没有那个文件或目录</strong></p>
+<pre tabindex="0"><code>sudo yum install python3-devel
+</code></pre><h3 id="删除onedrive牛皮癣"><strong>删除onedrive牛皮癣</strong></h3>
+<pre tabindex="0"><code>Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}
+</code></pre><h3 id="valueerror-unable-to-determine-socks-version-from-socks1270011080">ValueError: Unable to determine SOCKS version from socks://127.0.0.1:1080</h3>
+<p><a href="https://www.cnblogs.com/DLarTisan/p/11747375.html">ValueError: Unable to determine SOCKS version from socks://127.0.0.1:1080/</a></p>
+<pre tabindex="0"><code>export all_proxy=&#34;socks5://127.0.0.1:7890&#34;
+export all_proxy=&#34;&#34;
+</code></pre><p><strong>shell</strong> <a href="https://www.joxrays.com/linux-system-proxy/"><strong>Linux系统代理</strong></a></p>
+<pre tabindex="0"><code>export http_proxy=http://127.0.0.1:8888
+export https_proxy=http://127.0.0.1:8888
+</code></pre><p><strong>gnome</strong></p>
+<p>设置-网络-代理-禁用，关闭所有shell终端，再打开，代理没了。</p>
+<pre tabindex="0"><code>gsettings get org.gnome.system.proxy mode
+gsettings set org.gnome.system.proxy mode &#34;manual&#34;
+gsettings set org.gnome.system.proxy.http host &#34;127.0.0.1&#34;
+gsettings set org.gnome.system.proxy.http port 8888
+gsettings set org.gnome.system.proxy.socks host &#34;127.0.0.1&#34;
+gsettings set org.gnome.system.proxy.socks port 1088
+gsettings set org.gnome.system.proxy mode &#34;none&#34;
+gsettings set org.gnome.system.proxy.http use-authentication true
+gsettings set org.gnome.system.proxy.http authentication-user &#34;xxx&#34;
+gsettings set org.gnome.system.proxy.http authentication-password &#34;xxx&#34;
+</code></pre><h3 id="pptp-vpn-疑难解答">PPTP VPN 疑难解答</h3>
+<p><a href="https://docs.trendmicro.com/all/ent/de/v1.5/zh-cn/de_1.5_olh/ctm_ag/ctm1_ag_ch3/r_tshoot_pptp_vpn.htm"><strong>PPTP VPN 疑难解答</strong></a></p>
+<p>防火墙</p>
+<pre tabindex="0"><code>放通GRE协议
+开放1723端口
+</code></pre><h3 id="github制作私钥"><strong>Github制作私钥</strong></h3>
+<pre tabindex="0"><code>ssh-keygen -t rsa -C &#34;*****&#34;
+接着复制公钥内容到github
+测试：
+ssh -T git@github.com
+git config --global user.name &#34;go1f&#34;
+git config --global user.email &#34;grfu@qq.com&#34;
+</code></pre><h3 id="masscan安装"><strong>masscan安装</strong></h3>
+<pre tabindex="0"><code>sudo apt-get install libc6-dev
+sudo apt-get --assume-yes install git make gcc
+git clone https://github.com/robertdavidgraham/masscan
+cd masscan
+make -j 4
+make install
+</code></pre><h3 id="sh脚本异常binshmbad-interpreter-no-such-file-or-directory">sh脚本异常：/bin/sh^M:bad interpreter: No such file or directory</h3>
+<p><a href="https://www.cnblogs.com/pipelone/archive/2009/04/17/1437879.html">sh脚本异常：/bin/sh^M:bad interpreter: No such file or directory</a></p>
+<pre tabindex="0"><code>:set ff=unix
+</code></pre><h3 id="解决terminal-ssh连接服务器一段时间不操作之后卡死的问题"><strong>解决Terminal SSH连接服务器一段时间不操作之后卡死的问题</strong></h3>
+<p>1、服务器段配置（不建议在server端设置）</p>
+<pre tabindex="0"><code>sudo vim /etc/ssh/sshd_config
+
+ServerAliveInterval 50
+ServerAliveCountMax 3
+
+sudo systemctl restart ssh
+</code></pre><p>2、在本地打开配置文件</p>
+<pre tabindex="0"><code>sudo vim /etc/ssh/ssh_config
+</code></pre><p>添加以下参数，如果有直接修改</p>
+<pre tabindex="0"><code>ServerAliveInterval 50
+#每隔50秒就向服务器发送一个请求
+ServerAliveCountMax 3
+#允许超时的次数，一般都会响应
+</code></pre><h3 id="sqlserver-browser-无法启动"><strong>SQLSERVER browser 无法启动</strong></h3>
+<p>开始&mdash;-运行&mdash;services.msc 进入服务管理器，找到 SQL SERVER BROWER右击属性打开，启动模式为 手动或者自动，再启用 SQL SERVER BROWER服务。</p>
+<h3 id="scrt-8x激活"><strong>SCRT 8.X激活</strong></h3>
+<p>9.X以上版本的scrt跑不了中移动基线脚本。</p>
+<p>修改PID参数，下载其他版本SCRT：</p>
+<p><a href="https://www.vandyke.com/cgi-bin/download_form.php?pid=scrt_sfx_x64_853&amp;st=2">https://www.vandyke.com/cgi-bin/download_form.php?pid=scrt_sfx_x64_853&amp;st=2</a></p>
+<p><a href="https://www.imzhp.com/post/SecureCrt-8.x-SecureFX-8.x-Crack">https://www.imzhp.com/post/SecureCrt-8.x-SecureFX-8.x-Crack</a></p>
+<p><a href="https://blog.csdn.net/Hehuyi_In/article/details/103318333">SecureCRT 8.5.3 安装+Activation</a></p>
+<pre tabindex="0"><code>Name：REIZ
+Company：Toyota
+Serial Number：03-52-039026
+License Key：AAS4RS X1MU15 G9S6WV VTA5TV ACXK55 1JKW75 8R8Z5Z PK4FXJ
+Issue Date：08-08-2088
+</code></pre><h3 id="pip-install-mysqlclient-error"><strong>pip install mysqlclient, error</strong></h3>
+<pre tabindex="0"><code>#debian
+sudo apt install libmariadb-dev-compat
+sudo apt install mariadb mariadb-tools
+sudo systemctl start mysql
+sudo systemctl enable mysql
+sudo mysql_secure_installation
+
+#OpenSUSE
+sudo zypper in libmariadb-devel
+sudo zypper in mariadb mariadb-tools
+sudo systemctl start mysql
+sudo systemctl enable mysql
+sudo mysql_secure_installation
+</code></pre><h3 id="virt-manager桥接网卡"><strong>Virt-manager桥接网卡</strong></h3>
+<p><a href="https://doc.opensuse.org/documentation/leap/archive/42.1/virtualization/html/book.virt/cha.libvirt.networks.html">configure a Linux bridge with Network Manager</a></p>
+<p><strong>桥接无线网卡</strong></p>
+<p><a href="https://superuser.com/questions/694929/wireless-bridge-on-kvm-virtual-machine">Wireless bridge on KVM virtual machine</a></p>
+<p><a href="https://specman1.wordpress.com/2014/01/02/wireless-bridging-virtual-machines-kvm/">Wireless bridging for Virtual Machines (e.g. KVM)</a></p>
+<p><a href="https://jamielinux.com/docs/libvirt-networking-handbook/index.html">libvirt Networking Handbook</a></p>
+<p><a href="https://wiki.libvirt.org/page/Networking#NAT_forwarding_.28aka_.22virtual_networks.22.29"><strong>Important Note:</strong> Unfortunately, wireless interfaces cannot be  attached to a Linux host bridge, so if your connection to the external  network is via a wireless interface (&ldquo;wlanX&rdquo;), you will not be able to  use this mode of networking for your guests.</a></p>
+<p><a href="https://www.happyassassin.net/posts/2014/07/23/bridged-networking-for-libvirt-with-networkmanager-2014-fedora-21/">Setting up a bridge with NetworkManager</a></p>
+<h3 id="npm-does-not-support-nodejs-v10152"><strong>npm does not support Node.js v10.15.2</strong></h3>
+<p>症状</p>
+<pre tabindex="0"><code>npm WARN npm npm does not support Node.js v10.24.0
+npm WARN npm You should probably upgrade to a newer version of node as we
+npm WARN npm can&#39;t make any promises that npm will work with this version.
+npm WARN npm Supported releases of Node.js are the latest release of 4, 6, 7, 8, 9.
+</code></pre><p>解决方式</p>
+<p>sudo npm install npm@latest -g</p>
+<h3 id="error-response-from-daemon-cgroups-cgroup-mountpoint-does-not-exist-unknown"><strong>Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.</strong></h3>
+<pre tabindex="0"><code>sudo mkdir /sys/fs/cgroup/systemd
+sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+docker run hello-world 
+</code></pre><h3 id="战x不支持s3-deep-suspend-to-ram"><strong>战X不支持S3 deep suspend-to-ram</strong></h3>
+<p>cat /sys/power/state
+仅支持 freeze mem disk，mem是指执行/sys/power/mem_sleep内容
+则只支持freeze、disk,现在freeze会睡死？黑屏假死？软睡眠恢复失败。
+参考：
+<a href="https://www.cnblogs.com/dakewei/p/11323316.html">https://www.cnblogs.com/dakewei/p/11323316.html</a>
+<a href="https://www.cnblogs.com/arnoldlu/p/6253665.html">https://www.cnblogs.com/arnoldlu/p/6253665.html</a>
+<a href="https://www.kernel.org/doc/Documentation/power/states.txt">https://www.kernel.org/doc/Documentation/power/states.txt</a></p>
+<h3 id="vmware-hardware-graphics-acceleration-is-not-available"><strong>Vmware hardware graphics acceleration is not available</strong></h3>
+<p>编辑添加 /etc/vmware/config</p>
+<p>mks.gl.allowBlacklistedDrivers = &ldquo;TRUE&rdquo;</p>
+<h3 id="microsoft-visual-c-140-is-required"><strong>Microsoft Visual C++ 14.0 is required</strong></h3>
+<p>安装 <a href="http://go.microsoft.com/fwlink/?LinkId=691126&amp;fixForIE=.exe.">Visual C++ 2015 Build Tools</a></p>
+<pre tabindex="0"><code>参考：
+https://stackoverflow.com/questions/29846087/microsoft-visual-c-14-0-is-required-unable-to-find-vcvarsall-bat
+</code></pre><h3 id="chrome打不开"><strong>Chrome打不开</strong></h3>
+<pre tabindex="0"><code>google-chrome-stable %U --password-store=basic
+</code></pre><h3 id="windows蓝牙鼠标断联"><strong>Windows蓝牙鼠标断联</strong></h3>
+<p>计算机管理-设备管理器-英特尔(R)无线Bluetooth-电源管理-取消勾选 允许计算机关闭此设备以节省电源</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Silly Unkonwn Bug</b><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#the-certificate-chain-length-11-exceeds-the-maximum-allowed-length10">The certificate chain length (11) exceeds the maximum allowed length(10)</a></li>
+        <li><a href="#burp-unknown-server-certification">Burp unknown server certification</a></li>
+        <li><a href="#mitmproxyimporterror-dll-load-failed-while-importing-_brotli-找不到指定的模块">mitmproxy:ImportError: DLL load failed while importing _brotli: 找不到指定的模块。</a></li>
+        <li><a href="#itunes同步音乐">iTunes同步音乐</a></li>
+        <li><a href="#取消gnome录像时间时限">取消Gnome录像时间时限</a></li>
+        <li><a href="#smb不能列出目录">SMB不能列出目录</a></li>
+        <li><a href="#navicat-premium连接sql-server问题---未发现数据源名称并且未指定默认驱动">Navicat Premium连接SQL Server问题 - 未发现数据源名称并且未指定默认驱动</a></li>
+        <li><a href="#magicbook2019-amd">MagicBook2019 AMD</a></li>
+        <li><a href="#pip离线安装库">PIP离线安装库</a></li>
+        <li><a href="#fedora-smb共享home目录"><strong>Fedora SMB共享Home目录</strong></a></li>
+        <li><a href="#chrome出现由贵单位管理原因及解决去除方法">Chrome出现“由贵单位管理原因及解决去除方法</a></li>
+        <li><a href="#windwos远程登录要求的函数不受支持">Windwos远程登录要求的函数不受支持</a></li>
+        <li><a href="#centos7打包python3二进制">Centos7打包python3二进制</a></li>
+        <li><a href="#删除onedrive牛皮癣"><strong>删除onedrive牛皮癣</strong></a></li>
+        <li><a href="#valueerror-unable-to-determine-socks-version-from-socks1270011080">ValueError: Unable to determine SOCKS version from socks://127.0.0.1:1080</a></li>
+        <li><a href="#pptp-vpn-疑难解答">PPTP VPN 疑难解答</a></li>
+        <li><a href="#github制作私钥"><strong>Github制作私钥</strong></a></li>
+        <li><a href="#masscan安装"><strong>masscan安装</strong></a></li>
+        <li><a href="#sh脚本异常binshmbad-interpreter-no-such-file-or-directory">sh脚本异常：/bin/sh^M:bad interpreter: No such file or directory</a></li>
+        <li><a href="#解决terminal-ssh连接服务器一段时间不操作之后卡死的问题"><strong>解决Terminal SSH连接服务器一段时间不操作之后卡死的问题</strong></a></li>
+        <li><a href="#sqlserver-browser-无法启动"><strong>SQLSERVER browser 无法启动</strong></a></li>
+        <li><a href="#scrt-8x激活"><strong>SCRT 8.X激活</strong></a></li>
+        <li><a href="#pip-install-mysqlclient-error"><strong>pip install mysqlclient, error</strong></a></li>
+        <li><a href="#virt-manager桥接网卡"><strong>Virt-manager桥接网卡</strong></a></li>
+        <li><a href="#npm-does-not-support-nodejs-v10152"><strong>npm does not support Node.js v10.15.2</strong></a></li>
+        <li><a href="#error-response-from-daemon-cgroups-cgroup-mountpoint-does-not-exist-unknown"><strong>Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.</strong></a></li>
+        <li><a href="#战x不支持s3-deep-suspend-to-ram"><strong>战X不支持S3 deep suspend-to-ram</strong></a></li>
+        <li><a href="#vmware-hardware-graphics-acceleration-is-not-available"><strong>Vmware hardware graphics acceleration is not available</strong></a></li>
+        <li><a href="#microsoft-visual-c-140-is-required"><strong>Microsoft Visual C++ 14.0 is required</strong></a></li>
+        <li><a href="#chrome打不开"><strong>Chrome打不开</strong></a></li>
+        <li><a href="#windows蓝牙鼠标断联"><strong>Windows蓝牙鼠标断联</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

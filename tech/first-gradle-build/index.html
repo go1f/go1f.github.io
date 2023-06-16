@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  初次Gradle编译工程的记录 for PlotSquared &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="Q1: 我打算在macOS编译一个gradle管理的Java项目，请教我具体步骤。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="初次Gradle编译工程的记录 for PlotSquared | 春田花花幼稚园">
+    <meta name="twitter:description" content="Q1: 我打算在macOS编译一个gradle管理的Java项目，请教我具体步骤。|blog under go1f.github.io">
+    <meta name="twitter:image" content="/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/tech/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">初次Gradle编译工程的记录 for PlotSquared</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-05-14. Published at: 2023-05-14.">
+        
+          Lastmod: 2023-05-14
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>Q1: 我打算在macOS编译一个gradle管理的Java项目，请教我具体步骤。</p>
+<h2 id="gradle">Gradle</h2>
+<p>安装Gradle 在Mac上安装Gradle有多种方法。您可以使用Homebrew进行安装，也可以直接从Gradle官方网站下载二进制发行版。以下是使用Homebrew的安装方法：</p>
+<ol>
+<li>
+<p>打开终端应用程序。</p>
+</li>
+<li>
+<p>运行以下命令安装Homebrew（如果您已经安装了Homebrew，请跳过此步骤）：</p>
+<pre tabindex="0"><code>/bin/bash -c &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&#34;
+</code></pre></li>
+<li>
+<p>运行以下命令安装Gradle：</p>
+<pre tabindex="0"><code>brew install gradle
+</code></pre></li>
+</ol>
+<p>Q2: 我看到build.gradle.kts里面有一栏配置，    tasks.compileJava.configure {        options.release.set(17)    } 这代表指定了java17编译吗？</p>
+<p>Answer: 是的。</p>
+<h2 id="jdk17">JDK17</h2>
+<p><a href="https://www.oracle.com/java/technologies/downloads/#jdk17-mac">下载Orcale JDK 17</a>，解压到下载目录。</p>
+<pre tabindex="0"><code>export JAVA_HOME=/Users/jyufu/Downloads/jdk-17.0.7.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
+
+java -version
+#显示如下，即可。
+#java version &#34;17.0.7&#34; 2023-04-18 LTS
+</code></pre><h2 id="build">Build</h2>
+<h3 id="error0">Error0</h3>
+<p>不用想，第一个报错肯定是下载依赖库有问题。你没有科学上网。请科学上网后继续。</p>
+<h3 id="error1">Error1</h3>
+<pre tabindex="0"><code>**********
+You need to fork and clone this repository! Don&#39;t download a .zip file.
+If you need assistance, consult the GitHub docs: https://docs.github.com/get-started/quickstart/fork-a-repo
+**********
+</code></pre><p>意思是，你不要下载release的，要自己克隆。这里我指定v6.11.1的发布版。</p>
+<pre tabindex="0"><code>git clone --branch v6.11.1 --depth 1 https://github.com/IntellectualSites/PlotSquared.git
+</code></pre><h3 id="error2">Error2</h3>
+<pre tabindex="0"><code>* What went wrong:
+A problem was found with the configuration of task &#39;:PlotSquared-Bukkit:shadowJar&#39; (type &#39;ShadowJar&#39;).
+  - Gradle detected a problem with the following location: &#39;/Users/jyufu/Downloads/PlotSquared/Core/build/libs/PlotSquared-Core-6.11.1.jar&#39;.
+    
+    Reason: Task &#39;:PlotSquared-Bukkit:shadowJar&#39; uses this output of task &#39;:PlotSquared-Core:shadowJar&#39; without declaring an explicit or implicit dependency. This can lead to incorrect results being produced, depending on what order the tasks are executed.
+    
+    Possible solutions:
+      1. Declare task &#39;:PlotSquared-Core:shadowJar&#39; as an input of &#39;:PlotSquared-Bukkit:shadowJar&#39;.
+      2. Declare an explicit dependency on &#39;:PlotSquared-Core:shadowJar&#39; from &#39;:PlotSquared-Bukkit:shadowJar&#39; using Task#dependsOn.
+      3. Declare an explicit dependency on &#39;:PlotSquared-Core:shadowJar&#39; from &#39;:PlotSquared-Bukkit:shadowJar&#39; using Task#mustRunAfter.
+    
+    Please refer to https://docs.gradle.org/8.1.1/userguide/validation_problems.html#implicit_dependency for more details about this problem.
+</code></pre><p>喂给GPT，告诉我某个任务Task没声明依赖。</p>
+<p>我翻了一下跟目录的build.gradle.kts，明明声明了build动作前会做什么什么。</p>
+<p>太不可靠了。</p>
+<p>观察目录结构，发现Core和Bukkit两个子工程。</p>
+<p>既然Bukkit要依赖Core，先编译Core看看</p>
+<pre tabindex="0"><code>cd PlotSquared/Core
+gradle build
+#BUILD SUCCESSFUL in 687ms
+</code></pre><p>多么令人愉快的绿色字体。</p>
+<p>接着编译Bukkit。</p>
+<pre tabindex="0"><code>cd ../Bukkit
+gradle build
+#BUILD SUCCESSFUL in 387ms
+</code></pre><p>多么意外又愉快的绿色字体。</p>
+<p>其实到这里，在build/lib目录已经能生成想要的PlotSquared-Bukkit-6.11.1.jar</p>
+<p>那为什么根目录build就不行呢。</p>
+<p>我最后试着GPT提示，在Bukkit的build.gradle.kts，找到任务<code>tasks.named&lt;ShadowJar&gt;(&quot;shadowJar&quot;) </code></p>
+<p>添加了以下依赖声明</p>
+<pre tabindex="0"><code>dependsOn(&#34;:PlotSquared-Core:shadowJar&#34;)
+</code></pre><p>喔嚯，接着，也能编译通过了。</p>
+<p>奇怪。</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>初次Gradle编译工程的记录 for PlotSquared</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#gradle">Gradle</a></li>
+    <li><a href="#jdk17">JDK17</a></li>
+    <li><a href="#build">Build</a>
+      <ul>
+        <li><a href="#error0">Error0</a></li>
+        <li><a href="#error1">Error1</a></li>
+        <li><a href="#error2">Error2</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

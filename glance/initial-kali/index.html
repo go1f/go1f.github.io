@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  重装Kali的初始化手册 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="Kali初始化。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">重装Kali的初始化手册</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2022-10-20. Published at: 2022-04-23.">
+        
+          Lastmod: 2022-10-20
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>Kali初始化。</p>
+<h2 id="kali"><strong>Kali</strong></h2>
+<h3 id="spice虚拟机增强">SPICE虚拟机增强</h3>
+<pre tabindex="0"><code>sudo apt install spice-vdagent
+sudo systemctl start spice-vdagent
+sudo systemctl enable spice-vdagent
+</code></pre><h3 id="kali镜像源">Kali镜像源</h3>
+<pre tabindex="0"><code>vi /etc/apt/sources.list
+
+deb https://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+#deb-src https://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+</code></pre><h3 id="common-software">Common Software</h3>
+<pre tabindex="0"><code>apt install git masscan python2 nmap proxychains vim golang -y
+</code></pre><h3 id="sublime-text">Sublime-Text</h3>
+<pre tabindex="0"><code>wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo &#34;deb https://download.sublimetext.com/ apt/stable/&#34; | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+sudo apt-get update
+sudo apt-get install sublime-text
+</code></pre><h3 id="gnome-tweaks">Gnome Tweaks</h3>
+<pre tabindex="0"><code>apt install gnome-tweaks gnome-extensions-app -y
+
+#extensions.gnome.org
+https://extensions.gnome.org/extension/307/dash-to-dock/
+https://extensions.gnome.org/extension/4112/customize-ibus/
+https://extensions.gnome.org/extension/771/proxy-switcher/
+https://extensions.gnome.org/extension/4506/simple-system-monitor/
+</code></pre><h3 id="v2raya">V2rayA</h3>
+<pre tabindex="0"><code>#安装 V2Ray 内核 / Xray 内核
+curl -Ls https://mirrors.v2raya.org/go.sh | sudo bash
+sudo systemctl disable v2ray --now ### Xray 需要替换服务为 xray
+
+wget -qO - https://apt.v2raya.mzz.pub/key/public-key.asc | sudo tee /etc/apt/trusted.gpg.d/v2raya.asc
+echo &#34;deb https://apt.v2raya.mzz.pub/ v2raya main&#34; | sudo tee /etc/apt/sources.list.d/v2raya.list
+sudo apt update
+sudo apt install v2raya
+
+sudo systemctl start v2raya.service
+sudo systemctl enable v2raya.service
+</code></pre><h3 id="smb共享">SMB共享</h3>
+<pre tabindex="0"><code>sudo dnf install samba -y
+sudo vim /etc/samba/smb.conf
+#############################
+[misc-share]
+    comment = A new share
+    path = /home/jose/share
+    browseable = yes
+    read only = no
+    guest ok = no
+    valid users = jose
+[homes]
+        comment = Home Directories
+        valid users = %S, %D%w%S
+        browseable = Yes
+        read only = No
+        inherit acls = Yes
+#################################
+
+sudo smbpasswd -a jojo
+sudo systemctl restart smb
+sudo systemctl enable smb
+#可
+</code></pre><p><strong>Fedora额外配置 SMB共享Home目录</strong></p>
+<blockquote>
+<p>For convenience, Fedora has a built-in SELinux Boolean for this purpose called: <em>smbd_anon_write</em>, setting this to <em>true</em> will enable Samba to write in any filesystem path that has been set to the security context of <em>public_content_rw_t</em>.</p>
+</blockquote>
+<p>添加用户到smbpasswd</p>
+<pre tabindex="0"><code>smbpasswd -a john
+</code></pre><p>允许samba获取home目录</p>
+<pre tabindex="0"><code>#Set SELinux Boolean allowing Samba to read and write to home folders:
+setsebool -P samba_enable_home_dirs=1
+#Verify bool has been correctly set:
+getsebool samba_enable_home_dirs
+
+#Expected Output:
+##    samba_enable_home_dirs --&gt; on
+</code></pre><p>参考：<a href="https://fedoramagazine.org/fedora-32-simple-local-file-sharing-with-samba/">Fedora 32: Simple Local File-Sharing with Samba</a></p>
+<h3 id="git代理"><strong>GIT代理</strong></h3>
+<pre tabindex="0"><code>git config --global http.proxy &#34;socks5://192.168.122.1:20170&#34;
+git config --global https.proxy &#34;socks5://192.168.122.1:20170&#34;
+</code></pre><h3 id="hosts">Hosts</h3>
+<pre tabindex="0"><code>sudo tee -a /etc/hosts &lt;&lt;-&#39;EOF&#39;
+1.1.1.1 myvps.mydomain.com
+EOF
+#-a 将输出添加到 File 的末尾而不是覆盖写入。
+</code></pre><h3 id="pip23安装及源">PIP2&amp;3安装及源</h3>
+<pre tabindex="0"><code>python2 -m ensurepip --upgrade
+python3 -m ensurepip --upgrade
+
+curl  https://bootstrap.pypa.io/pip/2.7/get-pip.py&gt; get-pip2.py
+python2 get-pip2.py    ## 运行安装脚本
+
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   ## 下载安装脚本
+python3 get-pip.py    ## 运行安装脚本
+
+python3 -m pip install wheel
+python3 -m pip install pip --upgrade
+
+## 清华源
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+## 阿里源
+python3 -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+## 腾讯源
+python3 -m pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple
+## 豆瓣源
+python3 -m pip config set global.index-url http://pypi.douban.com/simple/
+</code></pre><h3 id="npm源"><strong>NPM源</strong></h3>
+<pre tabindex="0"><code>1.临时使用
+npm --registry https://registry.npm.taobao.org install express
+2.持久使用
+npm config set registry https://registry.npm.taobao.org
+</code></pre><h3 id="ruby源">Ruby源</h3>
+<pre tabindex="0"><code># 添加 TUNA 源并移除默认源
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+# 列出已有源
+gem sources -l
+# 应该只有 TUNA 一个
+
+#使用以下命令替换 bundler 默认源
+bundle config mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/rubygems
+</code></pre><h3 id="go源">Go源</h3>
+<pre tabindex="0"><code>go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+</code></pre><h3 id="docker">Docker</h3>
+<p><a href="https://yeasy.gitbook.io/docker_practice/install">Docker —— 从入门到实践</a></p>
+<pre tabindex="0"><code>curl -fsSL get.docker.com -o get-docker.sh
+sudo sh get-docker.sh --mirror Aliyun
+
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;
+{
+  &#34;registry-mirrors&#34;: [&#34;https://mgvo34vl.mirror.aliyuncs.com&#34;]
+}
+EOF
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl enable docker
+sudo systemctl start docker
+su root
+su jojo
+docker run --rm hello-world
+</code></pre><p>docker-compose</p>
+<pre tabindex="0"><code>sudo curl -L &#34;https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)&#34; -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+</code></pre><h3 id="msf安装">MSF安装</h3>
+<pre tabindex="0"><code>curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &gt; msfinstall
+chmod +x msfinstall
+./msfinstall
+msfconsole --version
+msfdb init
+
+msfconsole
+
+msfupdate
+</code></pre><h3 id="java-oracle-jdk-811与配置java版本">Java-Oracle-jdk-8/11与配置Java版本</h3>
+<p><a href="https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html">Java SE Development Kit 8 Downloads</a>，<a href="https://www.oracle.com/java/technologies/downloads/archive/">Java Archive</a>，<a href="https://www.oracle.com/java/technologies/javase-jdk11-downloads.html">Java SE Development Kit 11 Downloads</a></p>
+<pre tabindex="0"><code>sudo mkdir -p /usr/lib/jvm
+sudo tar zxvf jdk-8u301-linux-x64.tar.gz -C /usr/lib/jvm
+sudo update-alternatives --install &#34;/usr/bin/java&#34; &#34;java&#34; &#34;/usr/lib/jvm/jdk1.8.0_301/bin/java&#34; 1
+sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_301/bin/java
+
+sudo update-alternatives --install &#34;/usr/bin/java&#34; &#34;java&#34; &#34;/usr/lib/jvm/jdk-11.0.11/bin/java&#34; 2
+sudo update-alternatives --set java /usr/lib/jvm/jdk-11.0.11/bin/java
+</code></pre><p><a href="https://docs.datastax.com/en/jdk-install/doc/jdk-install/installOracleJdkDeb.html">Installing Oracle JRE or JDK 8 on Debian</a></p>
+<pre tabindex="0"><code>#配置keytool变量
+ln -s /usr/lib/jvm/jdk1.8.0_301/bin/keytool /usr/local/bin/keytool
+</code></pre><p>配置版本</p>
+<pre tabindex="0"><code>sudo update-alternatives --config java
+</code></pre><h3 id="burpsuite20202021激活">Burpsuite2020/2021+激活</h3>
+<p>安装oracle-java-11，配置环境</p>
+<pre tabindex="0"><code>/home/jojo/01PenOut/burp2021/jdk-11.0.12/bin/java -jar burp-keygen-scz.jar
+
+/home/jojo/01PenOut/burp2021/jdk-11.0.12/bin/java -Dfile.encoding=utf-8 -noverify -javaagent:/home/jojo/01PenOut/00burp/burp-loader-x-Ai.jar -Xmx2048m -jar /home/jojo/01PenOut/00burp/burpsuite_pro_v2.1.07.jar
+</code></pre><p>若要重新激活，删除以下文件</p>
+<pre tabindex="0"><code>file:///home/jyufu/.java/.userPrefs/burp/prefs.xml
+</code></pre><p>另外的运行命令：</p>
+<pre tabindex="0"><code>java --illegal-access=permit -Dfile.encoding=utf-8 -javaagent:BurpSuiteCn.jar  -noverify -jar burpsuite_pro_v2020.9.1.jar
+</code></pre><p>导入自制证书</p>
+<pre tabindex="0"><code>kaukei1234
+</code></pre><p><a href="https://www.secpulse.com/archives/124527.html">一些相见恨晚的BurpSuite插件推荐</a></p>
+<h3 id="nessus安装">Nessus安装</h3>
+<pre tabindex="0"><code>#安装包下载地址：https://www.tenable.com/downloads/nessus
+
+dpkg -i Nessus-8.15.0-debian6_amd64.deb
+rpm -i Nessus-8.15.2-es7.x86_64.rpm
+
+systemctl stop nessusd
+systemctl start nessusd
+#访问https://127.0.0.1:8834/#/填账号名密码
+
+#激活
+sudo /opt/nessus/sbin/nessuscli update ~/Downloads/all-2.0-20210726.tar.gz
+sudo vim /opt/nessus/lib/nessus/plugins/plugin_feed_info.inc
+sudo vim /opt/nessus/var/nessus/plugin_feed_info.inc 
+####填写以下内容
+PLUGIN_SET = &#34;202008211304&#34;;
+PLUGIN_FEED = &#34;ProfessionalFeed (Direct)&#34;;
+PLUGIN_FEED_TRANSPORT = &#34;Tenable Network Security Lightning&#34;;
+
+#重启Nessus
+sudo systemctl stop nessusd
+sudo systemctl start nessusd
+#等待插件编译完成
+#再重复一遍安装从
+sudo /opt/nessus/sbin/nessuscli update ~/Downloads/all-2.0-20210726.tar.gz
+#使用全局代理
+sudo systemctl stop nessusd
+proxychains4 /opt/nessus/sbin/nessusd
+</code></pre><h3 id="masscan编译安装">Masscan编译安装</h3>
+<pre tabindex="0"><code>#sudo apt-get --assume-yes install git make gcc
+#sudo apt-get install libc6-dev
+sudo zypper in libpcap-devel
+git clone https://github.com/robertdavidgraham/masscan
+cd masscan
+make -j
+sudo make install
+</code></pre><h3 id="awvs容器安装">AWVS（容器）安装</h3>
+<p>Docker</p>
+<pre tabindex="0"><code>Usage:
+docker pull secfa/docker-awvs
+docker run -it -d -p 13443:3443 secfa/docker-awvs
+Then visit https://YOUR_IP:13443/
+
+INFO:
+Username:admin@admin.com
+password:Admin123
+
+AWVS Version:220401065
+[How to change credential]
+1.docker exec -u root -it $docker_names /bin/bash
+2.run /home/acunetix/.acunetix/change_credentials.sh
+3.input your new credential
+</code></pre><p>常规</p>
+<pre tabindex="0"><code>su root
+cat &lt;&lt;EOF &gt;&gt;/etc/hosts 
+127.0.0.1 updates.acunetix.com
+127.0.0.1 erp.acunetix.com
+EOF
+
+exit
+
+sudo ./acunetix_14.3.210628104_x64.sh
+
+cd ~/Download/awvs
+sudo cp * /home/acunetix/.acunetix/data/license
+
+#卸载
+sudo /home/acunetix/.acunetix/unistall.sh
+</code></pre><h3 id="ruby安装">Ruby安装</h3>
+<pre tabindex="0"><code>dnf install ruby ruby-devel
+
+sudo apt install ruby ruby-dev ruby
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+cd whatweb
+
+bundle install
+gem install mmh3
+</code></pre><h3 id="chinese-fonts">Chinese Fonts</h3>
+<pre tabindex="0"><code>locale -a
+#结果会显示你的电脑已经安装的语言环境：
+#en_US.ISO-8859-1
+#zh_CN.GBK
+#安装语言环境（root权限）：
+dpkg-reconfigure locales
+#安装中文字体
+apt-get install ttf-wqy-zenhei
+apt-get install xfonts-intl-chinese wqy*
+</code></pre><p><a href="https://www.cnblogs.com/iwetuan/p/13489736.html">安装中文字体</a></p>
+<h3 id="gnome桌面shortcuts">Gnome桌面shortcuts</h3>
+<p>/usr/share/applications/burp2021.desktop</p>
+<pre tabindex="0"><code>[Desktop Entry]
+StartupNotify=true
+Version=2021-06-02
+Terminal=false
+Icon=/home/john/01PenOut/burp2021/Burp-suite.ico
+Type=Application
+Categories=Burpsuit;Penetration
+Exec=java -Dfile.encoding=utf-8 -noverify -javaagent:/home/john/01PenOut/burp2021/burp-loader-x-Ai.jar -Xmx2048m -jar /home/john/01PenOut/burp2021/burpsuite_pro_v2021.6.2.jar
+Name=Burpsuite2021
+GenericName=Burpsuite 2021
+Comment=Penetration tools.
+StartupNotify=true
+Keywords=Burpsuit;Penetration;Burp;
+</code></pre><pre tabindex="0"><code>sudo vim /usr/share/applications/burp.desktop
+
+[Desktop Entry]
+StartupNotify=true
+Terminal=false
+Icon=/home/john/01PenOut/burp/Burp-suite.ico
+Type=Application
+Categories=Burpsuit;Penetration
+Exec=java -noverify -Xbootclasspath/p:/home/john/01PenOut/burp/burp-loader-keygen-2_1_07.jar -jar /home/john/01PenOut/burp/burpsuite_pro_v2.1.07.jar
+Name=Burpsuite2.1.07
+GenericName=Burpsuite pro2.1.07
+Comment=Penetration tools.
+StartupNotify=true
+Keywords=Burpsuit;Penetration;Burp;
+</code></pre><h3 id="浏览器插件">浏览器插件</h3>
+<p><strong>Addons for Firefox</strong></p>
+<pre tabindex="0"><code>exploit-db
+Switchy Omega
+wappalyzer
+noscript
+手势插件 [gesturefy](https://addons.mozilla.org/en-US/firefox/addon/gesturefy/versions/)
+[hackbar2.1.3](https://github.com/HCTYMFF/hackbar2.1.3)
+</code></pre><p><strong>Addons for Chrome</strong></p>
+<pre tabindex="0"><code>### Chrome插件地址
+https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif
+https://github.com/0140454/hackbar
+https://chrome.google.com/webstore/detail/noscript/doojmbjmlfjjnbmnoijecmcbfeoakpjm/
+https://github.com/tarampampam/random-user-agent
+https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall
+https://chrome.google.com/webstore/detail/wappalyzer/gppongmhjkpfnbhagpmjfkannfbllamg
+https://github.com/cnrstar/anti-honeypot
+#firefox
+https://github.com/PhHitachi/HackBar
+https://addons.mozilla.org/firefox/downloads/file/3616824/foxyproxy_standard-7.5.1-an+fx.xpi
+ 
+crMouse chrome 手势
+charset  修改默认编码
+Hackbar
+Proxy SwitchOmega
+OneTab
+Save All Resources   扒取整个网页 CSS、JS在内所有资源
+Tampermonkey  油猴脚本
+- AC-baidu
+- CSDN 去广告沉浸阅读模式
+User-Agent Switcher for Chrome
+Zomeeye Tools
+二维码生成器
+翻译侠
+JSON-handle
+</code></pre><h3 id="kunlun-m代码扫描工具">Kunlun-M代码扫描工具</h3>
+<pre tabindex="0"><code>#install mariadb First!
+#install mariadb First!
+#install mariadb First!
+sudo dnf install mysql
+sudo dnf install community-mysql-devel
+sudo dnf install python3-devel
+
+sudo apt install mysql
+sudo apt install community-mysql-devel
+sudo apt install python3-devel
+python3 -m pip install -r requirement.txt
+
+#KunLun-M
+cp Kunlun_M/settings.py.bak Kunlun_M/settings.py
+python3 kunlun.py init initialize
+python3 kunlun.py config load
+python3 kunlun.py config loadtamper
+</code></pre><h3 id="w13scan"><strong>w13scan</strong></h3>
+<pre tabindex="0"><code>sudo apt install libxslt1-dev
+sudo apt install libxml2-dev
+python3 -m pip install -r requirements.txt
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>重装Kali的初始化手册</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#kali"><strong>Kali</strong></a>
+      <ul>
+        <li><a href="#spice虚拟机增强">SPICE虚拟机增强</a></li>
+        <li><a href="#kali镜像源">Kali镜像源</a></li>
+        <li><a href="#common-software">Common Software</a></li>
+        <li><a href="#sublime-text">Sublime-Text</a></li>
+        <li><a href="#gnome-tweaks">Gnome Tweaks</a></li>
+        <li><a href="#v2raya">V2rayA</a></li>
+        <li><a href="#smb共享">SMB共享</a></li>
+        <li><a href="#git代理"><strong>GIT代理</strong></a></li>
+        <li><a href="#hosts">Hosts</a></li>
+        <li><a href="#pip23安装及源">PIP2&amp;3安装及源</a></li>
+        <li><a href="#npm源"><strong>NPM源</strong></a></li>
+        <li><a href="#ruby源">Ruby源</a></li>
+        <li><a href="#go源">Go源</a></li>
+        <li><a href="#docker">Docker</a></li>
+        <li><a href="#msf安装">MSF安装</a></li>
+        <li><a href="#java-oracle-jdk-811与配置java版本">Java-Oracle-jdk-8/11与配置Java版本</a></li>
+        <li><a href="#burpsuite20202021激活">Burpsuite2020/2021+激活</a></li>
+        <li><a href="#nessus安装">Nessus安装</a></li>
+        <li><a href="#masscan编译安装">Masscan编译安装</a></li>
+        <li><a href="#awvs容器安装">AWVS（容器）安装</a></li>
+        <li><a href="#ruby安装">Ruby安装</a></li>
+        <li><a href="#chinese-fonts">Chinese Fonts</a></li>
+        <li><a href="#gnome桌面shortcuts">Gnome桌面shortcuts</a></li>
+        <li><a href="#浏览器插件">浏览器插件</a></li>
+        <li><a href="#kunlun-m代码扫描工具">Kunlun-M代码扫描工具</a></li>
+        <li><a href="#w13scan"><strong>w13scan</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

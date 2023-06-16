@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  初始化其它系统(Android/UnRaid/OpenSUSE) &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="暂时用不到的系统初始化。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">初始化其它系统(Android/UnRaid/OpenSUSE)</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2022-10-20. Published at: 2022-10-19.">
+        
+          Lastmod: 2022-10-20
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>暂时用不到的系统初始化。</p>
+<h2 id="android-11">Android 11</h2>
+<p>目标：刷Pixel Experience Room，并获取ROOT权限。</p>
+<pre tabindex="0"><code>#代码框里的是电脑ADB终端的操作
+</code></pre><p>打开开发者模式，</p>
+<p>勾选unlock OEM，</p>
+<p>勾选打开调试模式，</p>
+<p>bootloader解锁，</p>
+<pre tabindex="0"><code>adb reboot bootloader
+#linux提示no permission，切换到ROOT用户
+adb oem unlock
+</code></pre><p>此时手机点击确认，重置手机所有数据，包括sdcard。完成后，手机重启。重复上面步骤，再次打开ADB调试模式，然后再次进入bootloader，</p>
+<p>刷入临时recovery到boot分区，</p>
+<pre tabindex="0"><code>fastboot flash boot PixelExperience_Plus_fajita-11.0-20211225-1141-OFFICIAL.img
+</code></pre><p>在bootloader界面用音量键移动菜单，电源键确认重启到recovery模式，</p>
+<p>手机界面选中Apply Update -&gt; Apply from ADB，</p>
+<pre tabindex="0"><code>adb sideload copy-partitions-20210323_1922.zip
+#这里是刷写一个保险的包到另一个启动分区，防砖。
+</code></pre><p>选中Advanced -&gt; Reboot to recovery，重新进入recovery模式，</p>
+<p>手机界面选中Apply Update -&gt; Apply from ADB，</p>
+<pre tabindex="0"><code>adb sideload PixelExperience_Plus_fajita-11.0-20211225-1141-OFFICIAL.zip
+</code></pre><p>完成后，重启系统。</p>
+<pre tabindex="0"><code># 看到 &#34;(~47%) adb: failed to read the command: No error&#34;提示，不要怕，这个代表成功了。
+</code></pre><p>ROOT</p>
+<p>下载安装<a href="https://github.com/topjohnwu/Magisk/releases">magisk</a> apk，</p>
+<p>重启至recovery模式，</p>
+<pre tabindex="0"><code>#将Magisk-v25.2.apk重命名为Magisk-v25.2.zip
+adb sideload Magisk-v25.2.zip
+</code></pre><p>重启，完成。</p>
+<p><strong>参考链接</strong></p>
+<p><a href="https://wiki.pixelexperience.org/devices/fajita/install/">Install PixelExperience on fajita</a></p>
+<p><a href="https://www.youtube.com/watch?v=nXmHmxJq-5g">How To Root Pixel Experience (Android 12 and Below) Without Computer &amp; Without TWRP | 2022 Guide</a></p>
+<h2 id="ubuntu"><strong>Ubuntu</strong></h2>
+<h3 id="common-software">Common Software</h3>
+<pre tabindex="0"><code>sudo apt install python vim samba curl proxychains4 nmap masscan
+sudo snap install sublime-text typora
+</code></pre><h2 id="unraid">UnRaid</h2>
+<h3 id="v2raya">V2rayA</h3>
+<pre tabindex="0"><code>docker run -d --restart=always --privileged \
+    --network bridge \
+    -p 2017:2017 \
+    -p 20171:20171 \
+    --name v2raya \
+    -v /etc/resolv.conf:/etc/resolv.conf \
+    -v /mnt/user/appdata/v2raya:/etc/v2raya \
+    -v /mnt/user/appdata/v2raya/modules:/lib/modules \
+    mzz2017/v2raya
+</code></pre><h3 id="vpn">VPN</h3>
+<ol>
+<li>
+<p>应用商店下载Dynamix WireGuard</p>
+</li>
+<li>
+<p>参考<a href="https://engineerworkshop.com/blog/how-to-set-up-wireguard-on-unraid/">how-to-set-up-wireguard-on-unraid</a>进行配置</p>
+</li>
+<li>
+<p>安装WireGuard客户端 <a href="https://www.wireguard.com/install/">https://www.wireguard.com/install/</a></p>
+</li>
+</ol>
+<h3 id="商店代理">商店代理</h3>
+<pre tabindex="0"><code>cd /boot/config/plugins/community.applications/
+tee proxy.cfg &lt;&lt;-&#39;EOF&#39;
+port=20171
+tunnel=1
+proxy=http://192.168.3.155
+EOF
+</code></pre><h3 id="百度云dokcer">百度云Dokcer</h3>
+<pre tabindex="0"><code> docker run -d  \
+    --name=baidunetdisk  \
+    -p 5800:5800  \
+    -p 5900:5900  \
+    -v /mnt/user/appdata/baidunetdisk:/config  \
+    -v /mnt/user/Videos/Downloads:/config/baidunetdiskdownload  \
+    --restart unless-stopped  \
+    johngong/baidunetdisk:latest
+</code></pre><h2 id="opensuse-tumbleweedleap"><strong>OpenSUSE Tumbleweed/Leap</strong></h2>
+<h3 id="镜像源">镜像源</h3>
+<p>#换软件源</p>
+<pre tabindex="0"><code>sudo zypper mr -da
+</code></pre><p>添加 TUNA <a href="https://mirrors.tuna.tsinghua.edu.cn/help/opensuse/">Tumbleweed清华镜像源</a>，<a href="https://mirrors.tuna.tsinghua.edu.cn/help/opensuse/">openSUSE Leap 15.2 或更新版本使用方法</a></p>
+<pre tabindex="0"><code>sudo zypper ar -fcg http://mirrors.ustc.edu.cn/opensuse/tumbleweed/repo/oss/ ustc-oss
+sudo zypper ar -fcg http://mirrors.ustc.edu.cn/opensuse/tumbleweed/repo/non-oss/ ustc-non-oss
+</code></pre><p>刷新软件源</p>
+<pre tabindex="0"><code>sudo zypper ref
+sudo zypper dup #tumbleweed
+
+zypper up #leap
+</code></pre><p>#添加各种<a href="https://zh.opensuse.org/%E8%A7%A3%E7%A0%81%E5%99%A8">闭源编码器</a></p>
+<pre tabindex="0"><code>sudo zypper ar -cfp 90 https://mirrors.tuna.tsinghua.edu.cn/packman/suse/openSUSE_Tumbleweed packman
+sudo zypper refresh
+sudo zypper dist-upgrade --from packman --allow-vendor-change
+sudo zypper install --from packman ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
+sudo zypper install opi
+opi codecs
+</code></pre><h3 id="qv2ray">Qv2ray</h3>
+<pre tabindex="0"><code>sudo zypper addrepo https://download.opensuse.org/repositories/home:zzndb:Qv2ray/openSUSE_Tumbleweed/home:zzndb:Qv2ray.repo
+sudo zypper refresh
+sudo zypper install Qv2ray
+</code></pre><h3 id="typorarpm">Typora.RPM</h3>
+<p><a href="https://github.com/RPM-Outpost/typora">typora</a></p>
+<pre tabindex="0"><code>git clone https://github.com/RPM-Outpost/typora.git
+cd typora
+./create-package.sh
+</code></pre><h3 id="sublime-text">Sublime Text</h3>
+<pre tabindex="0"><code>sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+##Stable
+sudo zypper addrepo -g -f https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+sudo zypper in sublime-text
+</code></pre><h3 id="ibus与令人无语的opensuse-fcitx">iBUS与令人无语的opensuse Fcitx</h3>
+<p>默认opensuse会启动fcitx输入法，同时也安装iBus。</p>
+<p>gnome默认gtk框架，偏好ibus的。</p>
+<p>首先，卸载fcitx相关。</p>
+<p>然后，借助<a href="https://github.com/openSUSE/Customize-IBus">Customize IBus</a>extension插件，方便地配置主题。</p>
+<pre tabindex="0"><code>wget https://github.com/openSUSE/Customize-IBus/raw/package-repo/customize-ibus-rpm.repo
+sudo mv customize-ibus-rpm.repo /etc/zypp/repos.d/
+sudo zypper refresh
+sudo zypper install gnome-shell-extension-customize-ibus
+</code></pre><p>文件导入<strong>Customize ibus配置</strong>。</p>
+<p>在setting - input sources添加中文智能拼音输入。并prenfrence配置shortcuts-Switch Chinense/English 为shift。</p>
+<p>【非必要】在<strong>iBus prenfrence</strong>设置shift 为next input method的快捷键。</p>
+<p>答疑：https://wiki.archlinux.org/title/IBus_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E4%B8%AD%E6%96%87%E5%BC%95%E6%93%8E</p>
+<h3 id="virt-manager">Virt-Manager</h3>
+<p>Yast -&gt; virtualization -&gt; KVM+KVM-Tools</p>
+<p><strong>共享剪贴板共享文件夹</strong>
+<a href="https://www.spice-space.org/">https://www.spice-space.org/</a>
+How to Enable clipboard and folder sharing in Qemu/KVM on Windows Guest
+<a href="https://dausruddin.com/how-to-enable-clipboard-and-folder-sharing-in-qemu-kvm-on-windows-guest/#Solution_Clipboard_sharing">https://dausruddin.com/how-to-enable-clipboard-and-folder-sharing-in-qemu-kvm-on-windows-guest/#Solution_Clipboard_sharing</a></p>
+<h3 id="hidpi分数缩放">HiDPI分数缩放</h3>
+<pre tabindex="0"><code>gsettings set org.gnome.mutter experimental-features &#34;[&#39;scale-monit&#39;]&#34;
+</code></pre><h3 id="fonts-添加">Fonts 添加</h3>
+<pre tabindex="0"><code>sudo zypper in adobe-sourcehanserif-cn-fonts adobe-sourcehansans-cn-fonts
+#复制字体到
+sudo cp -r * /usr/share/fonts
+#执行，更新字体缓存
+fc-cache -fv
+</code></pre><p><a href="https://zh-cn.libreoffice.org/download/fonts/">https://zh-cn.libreoffice.org/download/fonts/</a></p>
+<h3 id="sdblamp-setup">SDB:LAMP setup</h3>
+<p><a href="https://en.opensuse.org/SDB:LAMP_setup#Installing_MariaDB">https://en.opensuse.org/SDB:LAMP_setup#Installing_MariaDB</a></p>
+<pre tabindex="0"><code>sudo zypper in mariadb mariadb-tools
+sudo systemctl start mysql
+sudo systemctl enable mysql
+sudo mysql_secure_installation
+</code></pre><h3 id="xorg-touchbar-gnome-gesture">Xorg Touchbar Gnome Gesture</h3>
+<p>1.添加<a href="https://copr.fedorainfracloud.org/coprs/jose_exposito/touchegg/">touchegg coprs库</a>。安装touchegg，选择对应该库的版本。</p>
+<pre tabindex="0"><code>sudo zypper addrepo -g -f https://copr.fedorainfracloud.org/coprs/jose_exposito/touchegg/repo/opensuse-leap-15.3/jose_exposito-touchegg-opensuse-tumbleweed.repo
+
+#https://download.copr.fedorainfracloud.org/results/jose_exposito/touchegg/opensuse-tumbleweed-$basearch/
+</code></pre><p>2.安装gnome-extension：x11-gestures</p>
+<p><a href="https://extensions.gnome.org/extension/4033/x11-gestures/">https://extensions.gnome.org/extension/4033/x11-gestures/</a></p>
+<p><a href="https://github.com/JoseExposito/gnome-shell-extension-x11gestures">https://github.com/JoseExposito/gnome-shell-extension-x11gestures</a></p>
+<p>ibus主题/插件</p>
+<pre tabindex="0"><code>https://extensions.gnome.org/extension/4112/customize-ibus/
+https://github.com/openSUSE/IBus-Theme-Hub
+</code></pre><h3 id="tumbleweed-virtualbox"><strong>Tumbleweed VIrtualBox</strong></h3>
+<p><a href="https://en.opensuse.org/SDB:VirtualBox_Installation">https://en.opensuse.org/SDB:VirtualBox_Installation</a></p>
+<h2 id="manjaro"><strong>Manjaro</strong></h2>
+<h3 id="manjaro配置fcitx5输入法">Manjaro配置fcitx5输入法</h3>
+<p>Manjaro设置-区域语言包-添加中文
+sudo pacman -S manjaro-asian-input-support-fcitx5
+sudo pacman -S fcitx5-chinese-addons fcitx5-material-color
+注销，右上角配置，添加-&gt;中文-拼音</p>
+<h3 id="manjaro-安装vmware">Manjaro 安装Vmware</h3>
+<p><a href="https://wiki.manjaro.org/index.php/VMware">安装Vmware</a></p>
+<p><a href="https://wiki.manjaro.org/index.php/VirtualBox">安装VirtualBox</a></p>
+<p>安装uname -r的对应内核headers</p>
+<pre tabindex="0"><code>pamac build vmware-workstation
+</code></pre><p>无需重启而初启动Vmware</p>
+<pre tabindex="0"><code>sudo modprobe -a vmw_vmci vmmon
+</code></pre><p><a href="https://wiki.archlinux.org/title/VMware_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%8D%B8%E8%BD%BD">Linux 卸载VMWARE</a></p>
+<pre tabindex="0"><code>vmware-installer -u vmware-workstation
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>初始化其它系统(Android/UnRaid/OpenSUSE)</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#android-11">Android 11</a></li>
+    <li><a href="#ubuntu"><strong>Ubuntu</strong></a>
+      <ul>
+        <li><a href="#common-software">Common Software</a></li>
+      </ul>
+    </li>
+    <li><a href="#unraid">UnRaid</a>
+      <ul>
+        <li><a href="#v2raya">V2rayA</a></li>
+        <li><a href="#vpn">VPN</a></li>
+        <li><a href="#商店代理">商店代理</a></li>
+        <li><a href="#百度云dokcer">百度云Dokcer</a></li>
+      </ul>
+    </li>
+    <li><a href="#opensuse-tumbleweedleap"><strong>OpenSUSE Tumbleweed/Leap</strong></a>
+      <ul>
+        <li><a href="#镜像源">镜像源</a></li>
+        <li><a href="#qv2ray">Qv2ray</a></li>
+        <li><a href="#typorarpm">Typora.RPM</a></li>
+        <li><a href="#sublime-text">Sublime Text</a></li>
+        <li><a href="#ibus与令人无语的opensuse-fcitx">iBUS与令人无语的opensuse Fcitx</a></li>
+        <li><a href="#virt-manager">Virt-Manager</a></li>
+        <li><a href="#hidpi分数缩放">HiDPI分数缩放</a></li>
+        <li><a href="#fonts-添加">Fonts 添加</a></li>
+        <li><a href="#sdblamp-setup">SDB:LAMP setup</a></li>
+        <li><a href="#xorg-touchbar-gnome-gesture">Xorg Touchbar Gnome Gesture</a></li>
+        <li><a href="#tumbleweed-virtualbox"><strong>Tumbleweed VIrtualBox</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#manjaro"><strong>Manjaro</strong></a>
+      <ul>
+        <li><a href="#manjaro配置fcitx5输入法">Manjaro配置fcitx5输入法</a></li>
+        <li><a href="#manjaro-安装vmware">Manjaro 安装Vmware</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
