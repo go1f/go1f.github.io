@@ -55,12 +55,12 @@
     </item>
     
     <item>
-      <title>DNSLog平台搭建</title>
-      <link>https://blog.allsec.top/skill/dnslog-deploy/</link>
-      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
+      <title>打点仔的一点素养（上）</title>
+      <link>https://blog.allsec.top/skill/readteam-quality-1/</link>
+      <pubDate>Thu, 11 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.allsec.top/skill/dnslog-deploy/</guid>
-      <description>&lt;p&gt;讲解一下DNSLog平台搭建的原理。&lt;/p&gt;</description>
+      <guid>https://blog.allsec.top/skill/readteam-quality-1/</guid>
+      <description>&lt;p&gt;安服仔 &amp;raquo; 打点仔 &amp;hellip; &amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,21 +73,21 @@
     </item>
     
     <item>
-      <title>DNS&amp;ICMP隧道搭建</title>
+      <title>DNS&amp;ICMP隧道测试</title>
       <link>https://blog.allsec.top/skill/dnsicmp-tunnel/</link>
-      <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://blog.allsec.top/skill/dnsicmp-tunnel/</guid>
       <description>&lt;p&gt;测试市面上的UDP ICMP隧道。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>打点仔的一点素养（上）</title>
-      <link>https://blog.allsec.top/skill/readteam-quality-1/</link>
-      <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
+      <title>DNSLog平台搭建</title>
+      <link>https://blog.allsec.top/skill/dnslog-deploy/</link>
+      <pubDate>Sun, 29 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.allsec.top/skill/readteam-quality-1/</guid>
-      <description>&lt;p&gt;安服仔 &amp;raquo; 打点仔 &amp;hellip; &amp;hellip;&lt;/p&gt;</description>
+      <guid>https://blog.allsec.top/skill/dnslog-deploy/</guid>
+      <description>&lt;p&gt;讲解一下DNSLog平台搭建的原理。&lt;/p&gt;</description>
     </item>
     
     <item>
