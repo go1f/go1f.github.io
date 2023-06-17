@@ -8,6 +8,15 @@
     <language>en</language>
     <copyright>&amp;copy; jyufu 2020-2023</copyright><atom:link href="https://blog.allsec.top/skill/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>捕捞预编译漏网小鱼</title>
+      <link>https://blog.allsec.top/skill/precompiled-exception/</link>
+      <pubDate>Sat, 17 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.allsec.top/skill/precompiled-exception/</guid>
+      <description>&lt;p&gt;在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Android Test Cheat Sheet</title>
       <link>https://blog.allsec.top/skill/android/android-test-cheat-sheet/</link>
       <pubDate>Thu, 15 Jun 2023 00:00:00 +0000</pubDate>
@@ -37,15 +46,6 @@
     </item>
     
     <item>
-      <title>MSSQL注入与命令执行</title>
-      <link>https://blog.allsec.top/skill/mssql-xp_cmdshell/</link>
-      <pubDate>Tue, 08 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.allsec.top/skill/mssql-xp_cmdshell/</guid>
-      <description>&lt;p&gt;为那个研究怎么在站库分离情况下利用MSSQL注入漏洞的通宵，补充一点笔记。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>真无线ADB调试开启</title>
       <link>https://blog.allsec.top/skill/android/android-true-wireless-adb/</link>
       <pubDate>Tue, 08 Nov 2022 00:00:00 +0000</pubDate>
@@ -55,12 +55,12 @@
     </item>
     
     <item>
-      <title>预编译的漏网之鱼捕捞</title>
-      <link>https://blog.allsec.top/skill/precompiled-exception/</link>
-      <pubDate>Sun, 30 Oct 2022 00:00:00 +0000</pubDate>
+      <title>DNSLog平台搭建</title>
+      <link>https://blog.allsec.top/skill/dnslog-deploy/</link>
+      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.allsec.top/skill/precompiled-exception/</guid>
-      <description>&lt;p&gt;在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子，让我们钻空子，找找漏洞。&lt;/p&gt;</description>
+      <guid>https://blog.allsec.top/skill/dnslog-deploy/</guid>
+      <description>&lt;p&gt;讲解一下DNSLog平台搭建的原理。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -82,24 +82,6 @@
     </item>
     
     <item>
-      <title>DNSLog平台搭建</title>
-      <link>https://blog.allsec.top/skill/dnslog-deploy/</link>
-      <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.allsec.top/skill/dnslog-deploy/</guid>
-      <description>&lt;p&gt;讲解一下DNSLog平台搭建的原理。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>一次小小波澜的OpenSSL版本加固</title>
-      <link>https://blog.allsec.top/skill/misc/openssl-make-then-install/</link>
-      <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.allsec.top/skill/misc/openssl-make-then-install/</guid>
-      <description>&lt;p&gt;终于遇到我最怕面对、最怕麻烦的加固工作。怕的是因为要Linux编译安装，而那些环境变量、软件依赖、乃至编译链接安装，都很少涉猎，特别是生产环境的系统，特别是这个物理机的CentOS，就没有镜像备份的概念。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>打点仔的一点素养（上）</title>
       <link>https://blog.allsec.top/skill/readteam-quality-1/</link>
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
@@ -111,20 +93,38 @@
     <item>
       <title>邮件钓鱼核心技术之Postfix搭建</title>
       <link>https://blog.allsec.top/skill/postfix-deploy/</link>
-      <pubDate>Fri, 20 Aug 2021 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://blog.allsec.top/skill/postfix-deploy/</guid>
       <description>&lt;p&gt;我认为，配置Gophish花些时间即可，而邮件网关，则没那么好配，属于是核心技术了，莫名有坑点。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>通用型CNVD证书初体验</title>
+      <title>MSSQL注入命令执行利用</title>
+      <link>https://blog.allsec.top/skill/mssql-xp_cmdshell/</link>
+      <pubDate>Thu, 08 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.allsec.top/skill/mssql-xp_cmdshell/</guid>
+      <description>&lt;p&gt;为那个研究怎么在站库分离情况下利用MSSQL注入漏洞的通宵，补充一点笔记。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>一次小小波澜的OpenSSL版本加固</title>
+      <link>https://blog.allsec.top/skill/misc/openssl-make-then-install/</link>
+      <pubDate>Sat, 20 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.allsec.top/skill/misc/openssl-make-then-install/</guid>
+      <description>&lt;p&gt;终于遇到我最怕面对、最怕麻烦的加固工作。怕的是因为要Linux编译安装，而那些环境变量、软件依赖、乃至编译链接安装，都很少涉猎，特别是生产环境的系统，特别是这个物理机的CentOS，就没有镜像备份的概念。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WSDL注入绕过及SQLMAP自动化实现</title>
       <link>https://blog.allsec.top/skill/first-cnvd/</link>
       <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>https://blog.allsec.top/skill/first-cnvd/</guid>
-      <description>&lt;p&gt;安服仔保不齐所有漏洞，特别是Nday也没资源，加上又不是渗透能手。&lt;/p&gt;
-&lt;p&gt;只好尽地主之便宜，榨取所有，即白盒审计。&lt;/p&gt;</description>
+      <description>&lt;p&gt;二编，展示SQL注入测试必要的技术链条细节。&lt;/p&gt;
+&lt;p&gt;本文的故事版姐妹篇参见文末参考阅读。&lt;/p&gt;</description>
     </item>
     
     <item>

