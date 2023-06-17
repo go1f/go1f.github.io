@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  一次小小波澜的OpenSSL版本加固 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="终于遇到我最怕面对、最怕麻烦的加固工作。怕的是因为要Linux编译安装，而那些环境变量、软件依赖、乃至编译链接安装，都很少涉猎，特别是生产环境的系统，特别是这个物理机的CentOS，就没有镜像备份的概念。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">一次小小波澜的OpenSSL版本加固</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2022-06-20.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>终于遇到我最怕面对、最怕麻烦的加固工作。怕的是因为要Linux编译安装，而那些环境变量、软件依赖、乃至编译链接安装，都很少涉猎，特别是生产环境的系统，特别是这个物理机的CentOS，就没有镜像备份的概念。</p>
+<p>犹记得上次只是重启sshd来刷新版本，弹出个no hostkey alg都吓了一跳。犹记得上次，polkit升级，找了半天有签名的RPM包，然后rpm -Uvh，就为了避免源码编译。这次，OpenSSL升级，是硬货。</p>
+<h2 id="telnet保障">Telnet保障</h2>
+<p>序言：菜鸟Telnet不开，机房为你开。</p>
+<p>为10台机子，开telnet时，惊觉，8台都没有telnet-server服务，不禁默默赞上一位加固OpenSSH的工程师一句，艺高人胆大。</p>
+<pre tabindex="0"><code>#查看telnet-server版本
+rpm -qa telnet-server
+#没有就去阿里云下载对应xinetd、telnet-server的RPM包，看版本号，cat /etc/issue,http://mirrors.aliyun.com/centos-vault/6.5/os/x86_64/Packages/
+rpm -ivh xinetd
+rpm -ivh telnet-server
+#编辑disable=no,并启动telnet服务做备用
+vi /etc/xinetd.d/telnet
+#sed可以快速修改，无奈匹配符学得不好
+
+#关
+sed -i &#39;s/disable\t\t= no/disable\t\t= yes/g&#39; /etc/xinetd.d/telnet
+cat /etc/xinetd.d/telnet
+service xinetd restart
+
+#开
+sed -i &#39;s/disable\t\t= yes/disable\t\t= no/g&#39; /etc/xinetd.d/telnet
+#确认
+cat /etc/xinetd.d/telnet
+service xinetd restart
+
+#开放23端口防火墙，Centos6.5 防火墙开放端口 
+vi /etc/sysconfig/iptables
+#开放23，发现管理员已经对特定IP放通所有端口，好，少折腾一个。
+##centos7的话
+firewall-cmd --zone=public --add-port=23/tcp
+firewall-cmd --reload
+</code></pre><p>默认Telnet禁止不信任的终端tty登陆Root用户，而普通账号又密码全过期了，懒得帮管理员改，所以选择无脑加白名单。<a href="https://www.unix.com/linux/42697-how-enable-telnet-root-user.html">how-enable-telnet-root-user</a></p>
+<pre tabindex="0"><code>#可查登陆记录，发现pts/0的告警日志
+tail /var/log/secure
+#Mar 31 11:42:13 server3 login: pam_securetty(remote:auth): access denied: tty &#39;pts/0&#39; is not secure !
+
+#添加tty白名单
+vi /etc/securetty
+#添加以下对应的终端
+pts/0
+pts/1
+pts/2
+pts/3
+pts/4
+pts/5
+pts/6
+pts/7
+pts/8
+pts/9
+
+#从同网段的机器登录，telnet一遍，测试成功
+telnet 19.XXX.XXX.150
+</code></pre><h2 id="for-openssl111x">For OpenSSL1.1.1x</h2>
+<p>SFTP把所有的测试过可能依赖环境的RPM包、OpenSSL源码包放到自己喜欢的路径。看见了历代加固工程师，喜欢放根目录，感觉就是一个字，为所欲为。</p>
+<pre tabindex="0"><code>#先看看版本
+openssl version
+#一个技巧，cd到前辈们的openssl目录，看他们的config配置：
+#perl configdata.pm --dump
+</code></pre><p>历史红利，一般编译环境都会有的。make gcc不需要怎么关注。</p>
+<pre tabindex="0"><code>sudo yum install zlib zlib-devel pam-devel
+</code></pre><p>我的思路保守，希望生成一个独立的OpenSSL，不要覆盖以前的。https://www.openssl.org/source/</p>
+<pre tabindex="0"><code>cd openssl-2022-3-30
+tar -zxvf openssl-1.1.1n.tar.gz
+cd openssl-1.1.1n
+#可以看到prefix、openssldir，指定了特定的文件夹，前辈笔记有shared参数，感觉不是必要的，删走。zlib本地测试没加上都能用，还是参考着写一写吧。
+./config zlib --prefix=/usr/local/openssl1.1.1n --openssldir=/usr/local/openssl1.1.1n
+
+#make clean
+#默认一切顺利
+make
+make install
+#去看看有无正确响应
+/usr/local/openssl1.1.1n/bin/openssl version
+#一般会报错找不到glibc.so
+</code></pre><p>所以将OpenSSL加载起来。</p>
+<pre tabindex="0"><code>#门面功夫（感觉非必要：将openssl的二进制链接起来，注意看当前系统openssl的路径
+which openssl
+mv /usr/bin/openssl /usr/bin/openssl.1.1.1k.bak
+mv /usr/include/openssl /usr/include/openssl.1.1.1k.bak
+ll /usr/bin/openssl.1.1.1k.bak
+
+ln -s /usr/local/openssl1.1.1n/bin/openssl /usr/bin/openssl
+ln -s /usr/local/openssl1.1.1n/include/openssl /usr/include/openssl
+
+#真正的登堂入室，加载配置
+#先备份
+cp /etc/ld.so.conf /etc/ld.so.conf.bak.3.31
+#追加写入/etc/ld.so.conf配置
+echo &#34;/usr/local/openssl1.1.1n/lib/&#34; &gt;&gt; /etc/ld.so.conf
+#再vi进去删除老的openssl库的行
+vi /etc/ld.so.conf
+#刷新加载
+/sbin/ldconfig
+
+openssl version
+#好的，偷懒的可以收工了。
+#上一位真·高工，升级的OpenSSH是动态加载OpenSSL的，所以，无缝升级了OpenSSH版本。
+sshd -VVVVVVVVVVVVV
+</code></pre><h2 id="for-openssl111o">For OpenSSL1.1.1o</h2>
+<pre tabindex="0"><code>tar -zxvf openssl-1.1.1o.tar.gz
+cd openssl-1.1.1o
+#可以看到prefix、openssldir，指定了特定的文件夹，前辈笔记有shared参数，感觉不是必要的，删走。zlib本地测试没加上都能用，还是参考着写一写吧。
+./config zlib --prefix=/usr/local/openssl1.1.1o --openssldir=/usr/local/openssl1.1.1o
+
+#make clean
+#默认一切顺利
+make
+make install
+#去看看有无正确响应
+/usr/local/openssl1.1.1o/bin/openssl version
+#一般会报错找不到glibc.so
+</code></pre><p>所以将OpenSSL加载起来。</p>
+<pre tabindex="0"><code>
+which openssl
+#如果是/usr/bin/openssl
+mv /usr/bin/openssl /usr/bin/openssl.1.1.1n.bak
+mv /usr/include/openssl /usr/include/openssl.1.1.1n.bak
+ll /usr/bin/openssl.1.1.1n.bak
+
+ln -s /usr/local/openssl1.1.1o/bin/openssl /usr/bin/openssl
+ln -s /usr/local/openssl1.1.1o/include/openssl /usr/include/openssl
+
+
+#如果是/usr/local/openssl/bin/openssl
+mv /usr/local/openssl/bin/openssl /usr/local/openssl/bin/openssll.1.1.1n.bak
+mv /usr/local/include/openssl /usr/local/include/openssll.1.1.1n.bak
+ll /usr/local/openssl/bin/openssll.1.1.1n.bak
+
+ln -s /usr/local/openssl1.1.1o/bin/openssl /usr/local/openssl/bin/openssl
+ln -s /usr/local/openssl1.1.1o/include/openssl /usr/local/include/openssl
+
+
+#真正的登堂入室，加载配置
+#先备份
+cp /etc/ld.so.conf /etc/ld.so.conf.bak.2022.5.25
+#追加写入/etc/ld.so.conf配置
+echo &#34;/usr/local/openssl1.1.1o/lib/&#34; &gt;&gt; /etc/ld.so.conf
+#再vi进去删除老的openssl库的行
+vi /etc/ld.so.conf
+#刷新加载
+/sbin/ldconfig
+
+openssl version
+sshd -VVVVVVVVVVVVV
+ip a
+</code></pre><h2 id="for-openssh89">For OpenSSH8.9</h2>
+<pre tabindex="0"><code>tar -zxvf openssh-8.9p1.tar.gz
+cd openssh-8.9p1
+#要留意pam.d有没有这个sshd文件，可能导致重启后因为开了selinux而sshd起不来。没有就，复制一份cp contrib/sshd.pam.generic /etc/pam.d/sshd
+cp /etc/pam.d/sshd /etc/pam.d/sshd.3.23.bak
+#比较怂，整个文件夹备份
+cp -r /etc/ssh /etc/ssh.3.23.bak
+
+#指定ssl路径，这应该是静态SSL的写法。
+./configure --prefix=/opt/openssh8.9p1 --sysconfdir=/etc/ssh --with-pam --with-ssl-dir=/usr/local/openssl1.1.1o
+
+make
+make install
+
+#测试
+/opt/openssh8.9p1/sbin/sshd -t -f /etc/ssh/sshd_config
+vim /etc/ssh/sshd_config
+
+which sshd
+#根据真实路径备份
+mv /usr/sbin/sshd /usr/sbin/sshd.bak0325
+mv /usr/local/sbin/sshd /usr/local/sbin/sshd.bak0325
+ln -s /opt/openssh8.9p1/sbin/sshd /usr/local/sbin/sshd
+ll /usr/sbin/sshd.bak0325
+
+#链接，替代旧主。
+ln -s /opt/openssh8.9p1/sbin/sshd /usr/sbin/sshd
+
+sshd -V
+/etc/init.d/sshd restart
+service sshd restart
+</code></pre><h2 id="for-openssl102x">For OpenSSL1.0.2x</h2>
+<p>1.0.2有漏洞，但是官方也要收费支持，才能获得源码？</p>
+<p>所以我们全都升1.1.1，不要给自己设限，是可以的。</p>
+<p>实际上，跟上面章节几乎一样。</p>
+<p>除了perl的版本要编译升级一下。思路一样，独立安装，不想影响原来的perl，即添加Dversiononly参数</p>
+<p><a href="https://www.cnblogs.com/badboy200800/p/11207578.html">OpenSSL升级提示perl版本较低（安装Perl）</a></p>
+<p>下载地址：https://www.perl.org/get.html#unix_like</p>
+<pre tabindex="0"><code>cd perl-5.34.1
+./Configure -des -Dprefix=/usr/local/perl-5.34.1 -Dusethreads -Dversiononly
+make
+make install
+mv /usr/bin/perl /usr/bin/perl.old.bak
+ln -s /usr/local/perl-5.34.1/bin/perl5.34.1 /usr/bin/perl
+perl -v
+</code></pre><p>可能zlib也太老，可以编译，可以找RPM，最新的软件对zlib版本要求都不高。</p>
+<pre tabindex="0"><code>tar -zxvf zlib-1.2.12.tar.gz
+cd zlib-1.2.12
+./configure
+make
+make install
+</code></pre><p>编译安装，愿你平安。</p>
+<pre tabindex="0"><code>#ERROR:crypto/threads_pthread.c:48: error: `PTHREAD_MUTEX_RECURSIVE&#39;
+#https://github.com/openssl/openssl/issues/10966
+./config --prefix=/usr/local/openssl1.1.1n/ --openssldir=/usr/local/openssl1.1.1n -D_XOPEN_SOURCE=500
+
+mv /usr/bin/openssl /usr/bin/openssl.1.0.1.bak
+ll /usr/bin/openssl.1.0.1.bak
+ln -s /usr/local/openssl1.1.1n/bin/openssl /usr/bin/openssl
+openssl version
+
+echo &#34;/usr/local/openssl1.1.1n/lib&#34; &gt;&gt; /etc/ld.so.conf
+/sbin/ldconfig
+</code></pre><p>已经觉得大功告成了。所以我下班了。</p>
+<p>想着第二天收个尾，早早溜。</p>
+<p>第二天，傻了，ssh_exchange_identification: Connection closed by remote host，堡垒机登不上了，而Telnet没开！昨晚加班的恶果，兴冲冲的装了，却忘记上保险。</p>
+<p>原本1.0.2的OpenSSL换成1.1.1n后，猜被OpenSSH加载了，但不兼容，毕竟大版本升级了OpenSSL。</p>
+<h2 id="隐藏openssh版本号">隐藏OpenSSH版本号</h2>
+<p>法1、临时修改</p>
+<p>注意备份sshd，启动telnet。容易版本号改高了导致sshd启动失败。</p>
+<pre tabindex="0"><code>strings /usr/sbin/sshd | grep OpenSSH
+sed -i &#39;s/OpenSSH_8.9p1/OpenSSH_9.2p1/g&#39; /usr/sbin/sshd
+sed -i &#39;s/OpenSSH_8.9/OpenSSH_9.1/g&#39; /usr/sbin/sshd
+</code></pre><p>法2、修改openssh的version.h，再次编译。</p>
+<h2 id="抢修方案">抢修方案</h2>
+<p>#ssh_exchange_identification: Connection closed by remote host</p>
+<p>冷静下来，思路是，ln是影响不了OpenSSH的，so库才是，还好做了备份。</p>
+<p>疫情，空降的工程师不能进机房，只好委托机房管理员操办，不知道他的水平，只好，谨慎的写出简短精确的恢复命令。</p>
+<p>方案1、</p>
+<pre tabindex="0"><code>cp -f /etc/ld.so.conf.bak.3.31 /etc/ld.so.conf
+ldconfig
+openssl version
+service sshd start
+</code></pre><p>方案2、开启telnet</p>
+<p>由于不确定telnet-server是否安装（我忘了装，不推荐。</p>
+<pre tabindex="0"><code>rpm -qa telnet-server
+#如果有显示行，代表存在telnet服务
+service xinetd start
+</code></pre><p>非常幸运，就在用户领导站起来，抬头望到我时，我确认恢复了，对他一个肯定的呲牙笑点头，他得以放松地去吃午餐。</p>
+<h2 id="no-hostkey-algon-openssh-88ssh-rsa">no hostkey alg.(On OpenSSH 8.8+,SSH-RSA)</h2>
+<p>我前一晚说收尾的工作就是，OpenSSH升级太高了，堡垒机又报经典的no hostkey alg。</p>
+<p>上次笔记是，清空/etc/ssh的key文件，重启sshd，即会重新生成密钥对。</p>
+<pre tabindex="0"><code>cd /etc/ssh
+mkdir  host_key_bak
+mv ssh_host*key host_key_bak/
+mv ssh_host*pub host_key_bak/
+service sshd restart
+</code></pre><p>这里没key重启。失败了。本地测试好好的，这里就只报错，不自动生成key。</p>
+<pre tabindex="0"><code>#手动生成
+ssh-keygen -A
+service sshd restart
+</code></pre><p>还是只有堡垒机不行。这时我就猜到这个堡垒机年月太久了，肯定仅支持被老淘汰的密钥算法。但无奈，只能打给管理员，想轻轻的敲击一下他们，你们的堡垒机太老了。然后问问有没类似问题的解决手册，下班了，明天请早。</p>
+<p>那我也别偷懒了，求人不如求己，线索有，找找方法更靠谱。对比以前生成的key和现在的key，发现少了一个名叫ssh_host_key的文件。cat查看，第一行:”SSH PRIVATE KEY FILE FORMAT 1.1“，原来这是ssh-rsa第一代算法，有缺陷，8.8起默认禁用了。</p>
+<p>所以，ssh-keygen也不能生成：</p>
+<pre tabindex="0"><code>ssh-keygen -t rsa1 -f /etc/ssh/ssh_host_key
+</code></pre><p>官方release，指出了潜在不兼容的问题。<a href="https://www.openssh.com/txt/release-8.8">Potentially-incompatible changes</a></p>
+<p>可是，没有写服务器端的解决方法，还好stackexchange有。<a href="https://unix.stackexchange.com/questions/674582/how-to-enable-ssh-rsa-in-sshd-of-openssh-8-8">How to enable ssh-rsa in sshd of OpenSSH 8.8?</a></p>
+<pre tabindex="0"><code>#因为升级后的ssh-keygen不支持生成rsa1的key了，所以沿用以前的key
+#保留原来的ssh-rsa1的密钥对，/etc/ssh/ssh_host_key，文件特征是第一行:SSH PRIVATE KEY FILE FORMAT 1.1
+#There are also legacy RSA1 keys that should be gone today with SSHv1 protocol, but can be identified by the header:
+SSH PRIVATE KEY FILE FORMAT 1.1
+
+vim /etc/ssh/sshd_config
+#添加以下行，恢复ssh-rsa算法支持：
+HostKeyAlgorithms=+ssh-rsa
+PubkeyAcceptedAlgorithms=+ssh-rsa
+
+#重启服务
+service sshd restart
+</code></pre><p>完满解决。</p>
+<pre tabindex="0"><code>Host old-host
+    HostkeyAlgorithms +ssh-rsa
+    PubkeyAcceptedAlgorithms +ssh-rsa
+</code></pre><pre tabindex="0"><code></code></pre><h2 id="errorsanswers">Errors&amp;Answers</h2>
+<h3 id="errorencctext0x1223-undefined-reference-to-bio_f_zlib">ERROR:enc.c:(.text+0x1223): undefined reference to `BIO_f_zlib'</h3>
+<p>清空上一次make的残留再make。</p>
+<pre tabindex="0"><code>make clean
+make
+</code></pre><h3 id="openssl编译报错cryptothreads_pthreadc48-error-pthread_mutex_recursive">OpenSSL编译报错:crypto/threads_pthread.c:48: error: `PTHREAD_MUTEX_RECURSIVE'</h3>
+<p><a href="https://github.com/openssl/openssl/issues/10966">https://github.com/openssl/openssl/issues/10966</a></p>
+<p>多线程编译openssl的问题？添加-D_XOPEN_SOURCE=500参数</p>
+<pre tabindex="0"><code>./config --prefix=/usr/local/openssl1.1.1n/ --openssldir=/usr/local/openssl1.1.1n -D_XOPEN_SOURCE=500
+</code></pre><h3 id="sshd_config-line-72-unsupported-option-gssapiauthentication">sshd_config line 72: Unsupported option GSSAPIAuthentication</h3>
+<p>关了GSSAPIAuthentication的支持，看起来也没用到</p>
+<pre tabindex="0"><code>sed -i &#39;s/GSSAPI/#GSSAPI/g&#39; /etc/ssh/sshd_config
+
+vi /etc/ssh/sshd_config
+#注释掉GSSAPI相关的行，有两行。
+#/etc/ssh/sshd_config line 81: Unsupported option GSSAPIAuthentication
+#/etc/ssh/sshd_config line 83: Unsupported option GSSAPICleanupCredentials
+#测试
+/opt/openssh8.9p1/sbin/sshd -t -f /etc/ssh/sshd_config
+</code></pre><h3 id="configure-error--zlibh-missing---please-install-first-or-check-configlog-">configure: error: *** zlib.h missing - please install first or check config.log **</h3>
+<pre tabindex="0"><code>#下载RPM包，zlib的源码包。
+rpm -ivh zlib-1.2.1.2-1.2.x86_64.rpm
+rpm -ivh zlib-devel-1.2.1.2-1.2.i386.rpm
+
+#手动编译
+tar -zxvf zlib-1.2.12.tar.gz
+cd zlib-1.2.12
+./configure
+make
+make install
+</code></pre><p>编译OpenSSH的依赖软件包，https://blog.csdn.net/liumiaocn/article/details/103444258</p>
+<pre tabindex="0"><code>#yum install make gcc perl pcre-devel zlib-devel -y
+
+#离线安装
+rpm -ivh pam-0.77-66.26.x86_64.rpm
+rpm -ivh pam-devel-0.77-66.26.x86_64.rpm
+rpm -ivh make-3.80-7.EL4.x86_64.rpm
+rpm -ivh zlib-1.2.1.2-1.2.x86_64.rpm
+rpm -ivh zlib-devel-1.2.1.2-1.2.i386.rpm
+rpm -ivh pcre-devel-4.5-4.el4_6.6.x86_64.rpm
+rpm -ivh glibc-kernheaders-2.4-9.1.103.EL.x86_64.rpm
+rpm -ivh glibc-devel-2.3.4-2.43.x86_64.rpm
+</code></pre><h3 id="error15-解决-sshd-no-hostkeys-available">Error(15) 解决 sshd: no hostkeys available</h3>
+<pre tabindex="0"><code>ssh-keygen -A
+service sshd restart
+</code></pre><h3 id="your-openssl-headers-do-not-match-your-library">Your OpenSSL headers do not match your library.</h3>
+<p>1、提高headers版本的加载顺序。</p>
+<pre tabindex="0"><code>cat /etc/ld.so.conf
+ld.so.conf.d/*.conf
+/opt/openssl/openssl1.1.1k_20210609/lib
+/usr/local/lib64
+</code></pre><p>2、headers建立新link</p>
+<pre tabindex="0"><code>mv /usr/include/openssl /usr/include/openssl.1.1.1k.bak
+
+ln -s /usr/local/openssl1.1.1n/include/openssl /usr/include/openssl
+</code></pre><h3 id="插曲-乱装rpm的余波">插曲-乱装RPM的余波</h3>
+<p>某台机器，RPM安装时报错：#libc.so.6: version &lsquo;GLIBC_2.14&rsquo; not found(require by /lib64/libgcc_s.so.1)</p>
+<p>我差点，以为GLIBC太老要升级，找了资料，发现升级glibc非同小可，搞错可以导致系统宕机。</p>
+<p>而博客们，可信度还是不高，不想节外生枝冒险。</p>
+<p>查一下谁引入了什么导致要求GLIBC_2.14吧。</p>
+<pre tabindex="0"><code>ll lib64/libgcc_s.so.1
+#指向/lib64/libgc_s-4.8.5-20150702.so.1
+</code></pre><p>谷歌了libgc_s-4.8.5-20150702.so.1，发现是CentOS7的包！</p>
+<p><a href="https://centos.pkgs.org/7/centos-x86_64/libgcc-4.8.5-44.el7.x86_64.rpm.html">libgcc-4.8.5-44.el7.x86_64.rpm</a></p>
+<p>再find全硬盘查找，果然找到这个RPM包，同目录还有其他编译环境用的RPM包。</p>
+<p>破案。</p>
+<p>有人以为这系统是CentOS 7，一通安装闯祸了，又不修好！</p>
+<p>思路，卸载gcc、gcc++，由于某些软件版本太高，版本依赖又互相纠缠</p>
+<p>只能边尝试rpm -e gcc卸载，边试rpm -Uvh &ndash;oldpackage gcc.rpm低版本退回，边安装rpm -i gcc.rpm 。</p>
+<p>几番递归，才解决。</p>
+<pre tabindex="0"><code>rpm -Uvh --oldpackage gcc.rpm
+</code></pre><p>无关的技巧：查看当前so的进程占用情况。</p>
+<pre tabindex="0"><code>lsof lib64/libgcc_s.so.1
+ldd sshd
+</code></pre><p>加固就是这么多意外。</p>
+<p>哪怕本地流畅调试成功。</p>
+<p>定位利刃，可加固就是钝石，偶尔砍一下可以，长久还是不要挥出来。</p>
+<p>这一章，我写了太多“猜”的字眼，因为不愿意纠细节了，能用先用着吧，一扩散可以有无限多的分岔条件，不需要不需要精通。</p>
+<h3 id="升级openssl后sftp-server服务异常">升级openssl后sftp-server服务异常</h3>
+<p>发现回退/etc/ld.so.conf可以恢复sftp服务。</p>
+<p>处置一：</p>
+<p>修改sshd_config的密钥白名单配置项</p>
+<pre tabindex="0"><code>Host *
+    HostkeyAlgorithms +ssh-rsa
+    PubkeyAcceptedAlgorithms +ssh-rsa
+</code></pre><p>处置二：</p>
+<p>尝试1：</p>
+<p>指定最新的openssl库，重新编译openssh</p>
+<p>失败，问题依然重现。</p>
+<p>尝试2：</p>
+<p>删除/etc/ld.so.conf内过时的库路径。</p>
+<p>ok！</p>
+<pre tabindex="0"><code>/etc/ld.so.conf
+
+/usr/local/openssl/lib
+/usr/local/openssl_102l/lib
+/usr/local/openssl1.1.1n/lib/
+
+==》
+include ld.so.conf.d/*.conf
+/usr/local/openssl/lib
+/usr/local/openssl1.1.1o/lib/
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>一次小小波澜的OpenSSL版本加固</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#telnet保障">Telnet保障</a></li>
+    <li><a href="#for-openssl111x">For OpenSSL1.1.1x</a></li>
+    <li><a href="#for-openssl111o">For OpenSSL1.1.1o</a></li>
+    <li><a href="#for-openssh89">For OpenSSH8.9</a></li>
+    <li><a href="#for-openssl102x">For OpenSSL1.0.2x</a></li>
+    <li><a href="#隐藏openssh版本号">隐藏OpenSSH版本号</a></li>
+    <li><a href="#抢修方案">抢修方案</a></li>
+    <li><a href="#no-hostkey-algon-openssh-88ssh-rsa">no hostkey alg.(On OpenSSH 8.8+,SSH-RSA)</a></li>
+    <li><a href="#errorsanswers">Errors&amp;Answers</a>
+      <ul>
+        <li><a href="#errorencctext0x1223-undefined-reference-to-bio_f_zlib">ERROR:enc.c:(.text+0x1223): undefined reference to `BIO_f_zlib'</a></li>
+        <li><a href="#openssl编译报错cryptothreads_pthreadc48-error-pthread_mutex_recursive">OpenSSL编译报错:crypto/threads_pthread.c:48: error: `PTHREAD_MUTEX_RECURSIVE'</a></li>
+        <li><a href="#sshd_config-line-72-unsupported-option-gssapiauthentication">sshd_config line 72: Unsupported option GSSAPIAuthentication</a></li>
+        <li><a href="#configure-error--zlibh-missing---please-install-first-or-check-configlog-">configure: error: *** zlib.h missing - please install first or check config.log **</a></li>
+        <li><a href="#error15-解决-sshd-no-hostkeys-available">Error(15) 解决 sshd: no hostkeys available</a></li>
+        <li><a href="#your-openssl-headers-do-not-match-your-library">Your OpenSSL headers do not match your library.</a></li>
+        <li><a href="#插曲-乱装rpm的余波">插曲-乱装RPM的余波</a></li>
+        <li><a href="#升级openssl后sftp-server服务异常">升级openssl后sftp-server服务异常</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

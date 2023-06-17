@@ -8,6 +8,15 @@
     <language>en</language>
     <copyright>&amp;copy; jyufu 2020-2023</copyright><atom:link href="http://92643.cn:92/glance/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>重装macOS的初始化手册</title>
+      <link>http://92643.cn:92/glance/initial-macos/</link>
+      <pubDate>Sun, 23 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://92643.cn:92/glance/initial-macos/</guid>
+      <description>&lt;p&gt;macOS初始化。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Silly Unkonwn Bug</title>
       <link>http://92643.cn:92/glance/silly-unkonwn-bug/</link>
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>

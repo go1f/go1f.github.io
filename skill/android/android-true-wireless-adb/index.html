@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  真无线ADB调试开启 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="在没有线的情况下，捣鼓了小半天，尝试调通ADB。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">真无线ADB调试开启</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2022-11-08.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>在没有线的情况下，捣鼓了小半天，尝试调通ADB。</p>
+<p>凭着以下信念。</p>
+<p>1、ADB应该很有用，不能放弃。</p>
+<p>2、手指点点点来打开开发者模式彩蛋和反复弹窗允许调试，是没必要的，一定有更直接的命令行模式绕过繁琐步骤。</p>
+<p>3、我觉得可以。</p>
+<p>这里的手机，默认指Android手机。</p>
+<h2 id="常规的adb调试">常规的ADB调试</h2>
+<p>手机：开发者模式-允许调试，连接数据线。</p>
+<p>电脑：adb devices</p>
+<p>手机：确认允许</p>
+<p>电脑：adb shell</p>
+<h2 id="常规的无线adb调试不要求android版本">常规的无线ADB调试（不要求Android版本）</h2>
+<p>手机：开发者模式-允许调试，连接数据线。</p>
+<p>电脑：adb devices</p>
+<p>手机：确认允许</p>
+<p>电脑：adb tcpip 5555 #端口任意；举例5555。</p>
+<p>手机：拔线</p>
+<p>电脑：adb connect [your_phone_ip]:5555</p>
+<p>电脑：adb shell</p>
+<h2 id="高版本的无线配对adb调试android--11">高版本的无线配对ADB调试（Android &gt;= 11）</h2>
+<p>手机：开发者模式-允许调试、允许无线调试。界面显示出IP与端口PORT</p>
+<p>电脑：adb connect  [IP]:[PORT]</p>
+<h2 id="真无线adb调试不要求android版本不要求gui界面授权">*真·无线ADB调试（不要求Android版本/不要求GUI界面授权）</h2>
+<p>前置条件，获得一个手机的shell，ROOT权限。</p>
+<p>我遇到的场景里，有telnet到手机的shell。</p>
+<p>也可以在ROOT的手机端安装termux等模拟终端的APP。</p>
+<p>开始。</p>
+<p>手机端或电脑端使用ADB生成一个证书：</p>
+<pre tabindex="0"><code>adb keygen myadbkey
+</code></pre><p>获得一对myadbkey私钥与myadbkey.pub公钥。</p>
+<p>将私钥放在电脑端的家目录下的.android/路径，形如：</p>
+<pre tabindex="0"><code>#Linux:
+/home/jojo/.android/myadbkey
+#Windows:
+C:\Users\jojo\.android\myadbkey
+</code></pre><p>公钥则放在手机端的/data/misc/adb/目录，并务必重命名为adb_keys，设置恰当的用户组与权限。</p>
+<pre tabindex="0"><code>cp myadbkey.pub /data/misc/adb/adb_keys
+
+tee /data/misc/adb/adb_keys &lt;&lt;EOF
+QAAAALUfkvpj6VpBLZR5eFHb06TIEPZ8AW6a/rMt83qjb7c7NE/2rXyQBV0fM7ma8J9kaQ8r+4V2mdLSOYNpNamMkSaI20GHju+4vA4HotjRQsIkn4hsVgBAqNpcbpvJG/LpAPPOdnmUhEikyciSTjin2TMUOlsSv5NqYzSs1LKc+2DlPqKYJBJLrjG3KUwWXa2IJlIjT8eSs2I1auWHY+x0qxmTCWPf0mJ7BSnVJDyDqd97LtiO3JtrGQk2sWmJ3xzJrkiiItTZkR76NVJ/w8pM6NhLtH6Tj/YH1iUXCzy/++uNcYeCtV/GMx8of1asEGR2sduP5tAQif2IWW1eOFEudTcBFZLAWMJtKqnvMaUnRXFAsgdeLAaTPvtsZ1YNJNCQkxvQU+qjq06sOytkDmLfKUnTiiTtMMDa4r9gy0GTsbQewXNRxFcgNc49Mop4pX5tRRr6tSyHsdOJqa77ta8cMol6qiwQOSKJY0JWOZJ5lXLMd936QE5drj/Opa70sS/8mhA6aDWo48+ieg5rGUp4fr2taD/tDy/hcnbjfYkVh03MwC5dJtnF2EuN7llpK5EQph8zcI1UVWWsbfl0WAAXaHjGrT1Tckiwu3kojDfmgSWFw7RYH5oxMhPLeBbRtoManaaU9BEwVFQsPCiHyB+Eg7Z96Vwq1zE24cRVVPxsmUnrxurVuQEAAQA= jyufu@ma22ko.local
+EOF
+chown system:shell /data/misc/adb/adb_keys
+chmod 640 /data/misc/adb/adb_keys
+</code></pre><p>手机端接着，运行adbd守护进程。</p>
+<pre tabindex="0"><code>stop adbd
+#可以使用netstat -anltp|grep adb命令,确认adbd进程关闭情况，进程仍存活就去开发者模式把允许调试取消，然后重启，再进行下一步。
+setprop persist.adb.tcp.port 5555 #这里设置了5555端口
+start adbd
+#也可以直接adbd命令，adbd则会在前台运行并输出信息。
+</code></pre><p>电脑端，双手合十，连接。</p>
+<pre tabindex="0"><code>adb connect [your_phone_ip]:5555
+
+adb devices
+#可以看到device的标识，代表成功。
+#List of devices attached
+#192.168.68.135:5555     device
+</code></pre><p>ADB的一些新奇玩法，还不知道，找找，以后要说说。</p>
+<h2 id="faq"><strong>FAQ</strong></h2>
+<p>1、/system/bin/sh: adbd: inaccessible or not found？</p>
+<p>自己找真实路径，据有限样本观察，Android是配备了adb、adbd二进制的。</p>
+<pre tabindex="0"><code>find / -name adbd 2&gt;/dev/null
+</code></pre><p>2、failed to authenticate to [IP]:5555？</p>
+<p>再次确认公私钥证书有无放错位置，以及读写权限问题。</p>
+<p>可以大胆把.android/、/data/misc/adb/adb_keys目录里的证书都删除。按如上步骤放好生成的证书。</p>
+<p>电脑端重启adb服务。</p>
+<pre tabindex="0"><code>adb stop-server
+adb start-server
+</code></pre><p>3、电脑端的ADB工具？</p>
+<p>SDK 平台工具下载 <a href="https://developer.android.com/studio/releases/platform-tools?hl=zh-cn">https://developer.android.com/studio/releases/platform-tools?hl=zh-cn</a></p>
+<p>目前最新33.03，Win11提示有个dll缺失，建议下载33.02版，https://dl.google.com/android/repository/platform-tools_r33.0.2-windows.zip?hl=zh-cn</p>
+<p>Linux系统的adb命令，在ROOT权限下执行。不然提示no auth。</p>
+<h2 id="参考链接"><strong>参考链接</strong></h2>
+<p><a href="https://stackoverflow.com/questions/32132434/set-adb-vendor-keys">android - Set adb vendor keys - Stack Overflow</a></p>
+<p><a href="https://stackoverflow.com/questions/31638582/android-adb-devices-unauthorized">Android ADB devices unauthorized - Stack Overflow</a></p>
+<p><a href="http://blog.kmckk.com/archives/4092970.html">KMC Staff Blog:Androidのadbのメモ(7) Androidデバイス側でadbを動かす (kmckk.com)</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>真无线ADB调试开启</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#常规的adb调试">常规的ADB调试</a></li>
+    <li><a href="#常规的无线adb调试不要求android版本">常规的无线ADB调试（不要求Android版本）</a></li>
+    <li><a href="#高版本的无线配对adb调试android--11">高版本的无线配对ADB调试（Android &gt;= 11）</a></li>
+    <li><a href="#真无线adb调试不要求android版本不要求gui界面授权">*真·无线ADB调试（不要求Android版本/不要求GUI界面授权）</a></li>
+    <li><a href="#faq"><strong>FAQ</strong></a></li>
+    <li><a href="#参考链接"><strong>参考链接</strong></a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

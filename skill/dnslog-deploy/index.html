@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  DNSLog平台搭建 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="讲解一下DNSLog平台搭建的原理。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">DNSLog平台搭建</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2022-06-20.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>讲解一下DNSLog平台搭建的原理。</p>
+<h2 id="预备">预备</h2>
+<p>DNSLOG平台代码</p>
+<p><a href="https://github.com/lijiejie/eyes.sh"><strong>eyes.sh</strong></a></p>
+<p><strong><a href="https://github.com/yumusb/DNSLog-Platform-Golang">DNSLog-Platform-Golang</a></strong></p>
+<p>VPS一枚</p>
+<p>VPS操作系统：Ubuntu20.04LTS</p>
+<p>域名一个</p>
+<h2 id="准备">准备</h2>
+<p>举例腾讯云，域名是allsec.top</p>
+<pre tabindex="0"><code>添加一条A记录
+主机记录：ns1 记录值：VPS的IP
+添加一条NS记录
+主机记录：log 记录值：ns1.allsec.top
+</code></pre><p>完成。注意坑三。</p>
+<p>【可选】调试</p>
+<p>VPS上使用TCPDUMP抓包</p>
+<pre tabindex="0"><code>tcpdump udp port 53
+</code></pre><p>本地尝试查找A记录</p>
+<pre tabindex="0"><code>nslookup aaaa.log.allsec.top 114.114.114.114
+</code></pre><p>正常的话，VPS上已经能看到aaaa.log.allsec.top的A请求记录了。</p>
+<h2 id="方案一xray">方案一：XRAY</h2>
+<p>配置参考：</p>
+<pre tabindex="0"><code>reverse:
+  db_file_path: &#34;rev.db&#34;   # 反连平台数据库文件位置, 这是一个 KV 数据库
+  token: &#34;bugaosuni&#34;         # 反连平台认证的 Token, 独立部署时不能为空
+  http:
+    enabled: true
+    listen_ip: 0.0.0.0 
+    listen_port: &#34;9990&#34;
+    ip_header: &#34;&#34;     
+  dns:
+    enabled: true
+    listen_ip: 0.0.0.0 
+    domain: &#34;log.allsec.top&#34;     # DNS 域名配置
+    is_domain_name_server: true        # 是否修改了域名的 ns 为反连平台，如果是，那 nslookup 等就不需要指定 dns 了
+    resolve:            # DNS 静态解析规则
+    - type: A             # A, AAAA, TXT 三种
+      record: localhost
+      value: 127.0.0.1
+      ttl: 60
+</code></pre><p>运行：</p>
+<pre tabindex="0"><code>./xray_linux_amd64 reverse
+</code></pre><p>参考阅读：<a href="https://docs.xray.cool/#/configration/reverse?id=dns-%E7%9B%B8%E5%85%B3">DNS 相关</a></p>
+<h2 id="方案二编译">方案二：编译</h2>
+<p>config.toml配置文件，domians填自己的dns服务器，cname填你想解析到的域名。</p>
+<p>开启认证，帐号密码kokokoko/sec</p>
+<pre tabindex="0"><code>[front]
+template = &#34;index.html&#34;
+[back]
+listenhost = &#34;0.0.0.0&#34;
+listenport = 8088
+domains = [ &#34;log.allsec.top&#34;]
+cname = &#34;www.bilibili.com&#34;
+[basicauth]
+check = true
+username = &#34;kokokoko&#34;
+password = &#34;sec&#34;
+</code></pre><p>Ubuntu安装golang</p>
+<pre tabindex="0"><code>sudo apt install golang-go
+</code></pre><p>编译，注意先完成坑一：</p>
+<pre tabindex="0"><code>go build main.go
+</code></pre><p>在main/main获得二进制文件，重命名。</p>
+<pre tabindex="0"><code>mv main/main log-server
+</code></pre><h2 id="完成">完成</h2>
+<p>[可选]为了不用sudo也能绑定53端口运行，为添加特例</p>
+<pre tabindex="0"><code>sudo setcap cap_net_bind_service=+eip ~/dnslog/log-server
+</code></pre><p>运行：</p>
+<pre tabindex="0"><code>./log-server
+或
+./xray_linux_amd64 reverse
+</code></pre><p>其实可以了。</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="坑一">坑一：</h3>
+<p>go运行加载仓库需要非常通畅的网络环境，国内是没有的，所以配置镜像。</p>
+<pre tabindex="0"><code>go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+</code></pre><h3 id="坑二">坑二：</h3>
+<p>系统自带服务在占用53端口：</p>
+<blockquote>
+<p>root@tesVM:/home/jose/DNSLog-Platform-Golang# ss -anltp | grep 53
+LISTEN 0      10                           172.18.0.1:53           0.0.0.0:*     users:((&ldquo;named&rdquo;,pid=748,fd=55),(&ldquo;named&rdquo;,pid=748,fd=54),(&ldquo;named&rdquo;,pid=748,fd=53))
+LISTEN 0      10                           172.17.0.1:53           0.0.0.0:*     users:((&ldquo;named&rdquo;,pid=748,fd=50),(&ldquo;named&rdquo;,pid=748,fd=49),(&ldquo;named&rdquo;,pid=748,fd=48))
+LISTEN 0      10                            10.0.8.16:53           0.0.0.0:*     users:((&ldquo;named&rdquo;,pid=748,fd=33),(&ldquo;named&rdquo;,pid=748,fd=32),(&ldquo;named&rdquo;,pid=748,fd=31))
+LISTEN 0      10                            127.0.0.1:53           0.0.0.0:*     users:((&ldquo;named&rdquo;,pid=748,fd=28),(&ldquo;named&rdquo;,pid=748,fd=27),(&ldquo;named&rdquo;,pid=748,fd=26))
+LISTEN 0      4096                      127.0.0.53%lo:53           0.0.0.0:*     users:((&ldquo;systemd-resolve&rdquo;,pid=713,fd=13))                                   <br>
+LISTEN 0      4096                          127.0.0.1:953          0.0.0.0:*     users:((&ldquo;named&rdquo;,pid=748,fd=22))                                             <br>
+LISTEN 0      10       [fe80::5054:ff:fede:6ad7]%eth0:53              [::]:*     users:((&ldquo;named&rdquo;,pid=748,fd=44),(&ldquo;named&rdquo;,pid=748,fd=43),(&ldquo;named&rdquo;,pid=748,fd=42))
+LISTEN 0      10                                [::1]:53              [::]:*     users:((&ldquo;named&rdquo;,pid=748,fd=39),(&ldquo;named&rdquo;,pid=748,fd=38),(&ldquo;named&rdquo;,pid=748,fd=37))
+LISTEN 0      4096                              [::1]:953             [::]:*     users:((&ldquo;named&rdquo;,pid=748,fd=45))</p>
+<p>root@tesVM:/home/jose/DNSLog-Platform-Golang# ps aux | grep 748
+bind         748  0.0  0.8 379540 33868 ?        Ssl  Oct13   7:40 /usr/sbin/named -f -u bind</p>
+<p>root@tesVM:/home/jose/DNSLog-Platform-Golang# ss -anltp | grep 53
+LISTEN    0         4096         127.0.0.53%lo:53               0.0.0.0:*        users:((&ldquo;systemd-resolve&rdquo;,pid=713,fd=13))</p>
+</blockquote>
+<p>可以看到，就是named、systemd-resolve在占用端口。</p>
+<p>在关停服务前，保险起见，先打个快照。也避免影响sudo命令，所以同时为VPS加一条hosts。</p>
+<pre tabindex="0"><code>sudo vim /etc/hosts
+-----------添加一行，这里的VPS主机名是tesVM----------
+127.0.0.1 tesVM
+----------------
+</code></pre><p>关停占用的系统服务</p>
+<pre tabindex="0"><code>sudo systemctl stop systemd-resolved
+sudo systemctl stop named
+sudo systemctl disable named
+</code></pre><h3 id="坑三">坑三：</h3>
+<p>VPS防火墙策略，记得放通UDP端口53。</p>
+<h3 id="坑四">坑四：</h3>
+<p>这家伙的仓库 <a href="https://github.com/lanyi1998/DNSlog-GO">lanyi1998/<em>DNSlog</em>-GO</a>，star多，但是用不起来，没用。 &ndash;2021-12-31</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>DNSLog平台搭建</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#预备">预备</a></li>
+    <li><a href="#准备">准备</a></li>
+    <li><a href="#方案一xray">方案一：XRAY</a></li>
+    <li><a href="#方案二编译">方案二：编译</a></li>
+    <li><a href="#完成">完成</a></li>
+    <li><a href="#faq">FAQ</a>
+      <ul>
+        <li><a href="#坑一">坑一：</a></li>
+        <li><a href="#坑二">坑二：</a></li>
+        <li><a href="#坑三">坑三：</a></li>
+        <li><a href="#坑四">坑四：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Android On KVM&#43;QEMU x86 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="在Fedora的KVM安装一个x86的Android虚拟机。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Android On KVM&#43;QEMU x86</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2022-07-20.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>在Fedora的KVM安装一个x86的Android虚拟机。</p>
+<h3 id="安装系统">安装系统</h3>
+<p>下载镜像 <a href="https://www.android-x86.org/">Android-x86</a></p>
+<p>使用BIOS传统模式安装，几乎都是点下一步。</p>
+<p>WiFI代理里配置外网环境，就可以愉快地使用google paly store服务。</p>
+<h3 id="开启arm转译支持">开启ARM转译支持</h3>
+<p>令应用支持arm应用，需要配置houdini库</p>
+<p>1、设置-兼容模式-打开</p>
+<p>2、打开终端模拟器</p>
+<pre tabindex="0"><code>su
+enable_nativebridge
+</code></pre><hr>
+<p>参考链接：<a href="https://blog.csdn.net/qq_40427716/article/details/119378647">Android x86 手动安装houdini</a></p>
+<p>打开终端模拟器，先换到root用户，输入&quot;enable_nativebridge&quot;，回车。</p>
+<p>如果你发现没有报错，并且开始下载文件，那么恭喜，下面的步骤会自动进行。</p>
+<p>自动下载需要梯子，所以大概率还是会报错。</p>
+<p>如果你看到&quot;mount: xxx -&gt; /system/lib/arm not a file or directory&quot;，别慌，观察一下&quot;xxx&quot;那里是怎么写的，我的系统是android-x86_64-9.0-r2，显示&quot;houdini9_y.sfs&quot;，记住下划线前的数字和后边的字母，一会要用到。</p>
+<p>打开浏览器下载dl.android-x86.org/houdini/9_y/houdini.sfs，这个不需要梯子，标红的部分根据刚才的报错内容更改。下载得到houdini.sfs，同样根据报错内容把文件名改成houdini9_y.sfs，复制到/system/etc。</p>
+<p>再次enable_nativebridge，如果上面的步骤操作正确就不会再报同样的错误，我的报了个modprobe错误，第三次就没有了。设置里兼容模式打开，退出设置，再打开设置，如果这个开关没有自动关掉，那么就安装成功了。</p>
+<h3 id="安装微信">安装微信</h3>
+<p>Play Store安装即可。</p>
+<h3 id="安装代理分流器">安装代理分流器</h3>
+<p>使用postern。</p>
+<p>配置规则，一条是杂七杂八的统计采集网址，走外网代理。减少干扰以及流量拥堵的情况。</p>
+<pre tabindex="0"><code>mmbiz.qpic.cn; wx.qlogo.cn; szextshort.weixin.qq.com; wx.qlogo.cn; szminorshort.weixin.qq.com; www.google-analytics.com;update.googleapis.com; ocsp.pki.goog;
+</code></pre><p>然后下一条规则走全局burp监听地址。</p>
+<h3 id="other-tips">Other Tips</h3>
+<p>1、APK包使用32位ARM包，发现64位会安装不成功。</p>
+<p>2、也可以下载x86架构的，实测支持，感觉更兼容。</p>
+<p>3、Android 9的微信8.0.25版仍然信任系统证书。</p>
+<p>4、自带的文件浏览器点击安装APP会闪退</p>
+<p>5、GPT的GRUB启动似乎安装不成功，引导不了系统。</p>
+<p>6、真的畅快，网络不卡了，比自己开热点用真机测试还爽快。</p>
+<h3 id="参考链接">参考链接</h3>
+<p><a href="https://www.v2ex.com/t/805077">Android 有好用的设置 http proxy 的软件吗</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Android On KVM&#43;QEMU x86</b><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装系统">安装系统</a></li>
+        <li><a href="#开启arm转译支持">开启ARM转译支持</a></li>
+        <li><a href="#安装微信">安装微信</a></li>
+        <li><a href="#安装代理分流器">安装代理分流器</a></li>
+        <li><a href="#other-tips">Other Tips</a></li>
+        <li><a href="#参考链接">参考链接</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

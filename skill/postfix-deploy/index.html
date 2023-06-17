@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
+}
+</script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  邮件钓鱼核心技术之Postfix搭建 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="我认为，配置Gophish花些时间即可，而邮件网关，则没那么好配，属于是核心技术了，莫名有坑点。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="http://92643.cn:92">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">邮件钓鱼核心技术之Postfix搭建</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2023-06-17. Published at: 2021-08-20.">
+        
+          Lastmod: 2023-06-17
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>我认为，配置Gophish花些时间即可，而邮件网关，则没那么好配，属于是核心技术了，莫名有坑点。</p>
+<h3 id="解析域名">解析域名</h3>
+<pre tabindex="0"><code>mail.poorme.xyz A记录到 123.123.123.123（你的服务器ip）
+@    MX记录到 mail.poorme.xyz 优先级10
+@    TXT记录到 v=spf1 mx -all
+</code></pre><h3 id="重启">重启</h3>
+<pre tabindex="0"><code>sudo /usr/sbin/postfix stop
+sudo /usr/sbin/postfix start
+</code></pre><h3 id="修改端口">修改端口</h3>
+<p>意义在于不想用默认的端口。</p>
+<p>1、修改postfix的配置文件</p>
+<pre tabindex="0"><code>vim /etc/postfix/master.cf
+#在已有的第一行：
+smtp    inet  n    -    n    -    －   smtpd
+#之后添加： 
+smtp2    inet  n    -    n    -    －   smtpd
+</code></pre><p>2、修改/etc/services文件，增加smtp2监听端口，本文以2525端口为例</p>
+<pre tabindex="0"><code>vim /etc/services
+找到： smtp       25/tcp      mail
+其后添加： 
+smtp2      2525/tcp mail2
+smtp2      2525/udp     mail2 
+</code></pre><p>3、重启postfix</p>
+<pre tabindex="0"><code>service postfix restart
+</code></pre><h3 id="配置postfix">配置Postfix</h3>
+<p>/etc/postfix/main.cf，修改为如下，其中的myhostname根据实际修改。</p>
+<pre tabindex="0"><code>smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination reject_unauth_destination
+myhostname = mmm.poorme.xyz
+mydomain = poorme.xyz
+myorigin = $mydomain
+mydestination = $myhostname.localhost.$mydomain,localhost,$mydomain
+mynetworks = 127.0.0.0/8
+home_mailbox = Maildir/
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = all
+inet_protocols = ipv4
+#配置smtp认证 PHPMailer就是通过这个认证账户去发送邮件的
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_local_domain = $mydomain
+smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination
+smtpd_client_restrictions = permit_sasl_authenticated
+broken_sasl_auth_clients = yes
+smtpd_sasl_path = smtpd    
+smtpd_sasl_security_options = noanonymous #禁止匿名
+smtpd_sasl_authenticated_header = yes
+message_size_limit = 15728640
+</code></pre><h3 id="创建用户">创建用户</h3>
+<pre tabindex="0"><code>#使用saslpasswd2创建认证用户及密码（安装了cyrus-sasl就已安装saslpasswd2）
+
+#创建admin@daliycode的邮箱账号（也是smtp的账号）和密码
+saslpasswd2 -c -u daliycode.com(你的域名) admin(用户) #回车要求输入密码，2次
+
+#这里很关键，在ubuntu下postfix所能浏览的目录有限制，必须把数据库文件复制到postfix的运行目录下，不然在用户验证的时候会出错。
+
+cp -a /etc/sasldb2 /var/spool/postfix/etc/
+#将postfix添加到sasl组
+
+gpasswd -a postfix sasl
+#修改sasldb权限
+chmod 640 /var/spool/postfix/etc/sasldb2
+#列举sasldb2中的用户
+sasldblistusers2 -f /var/spool/postfix/etc/sasldb2
+</code></pre><h3 id="测试邮件发送">测试邮件发送</h3>
+<pre tabindex="0"><code>#测试发送邮件
+echo &#34;测试邮件正文&#34; | mail -s &#34;邮件标题&#34; XXXX@qq.com（你的接收邮箱地址）
+
+#列出当前在postfix发送队列中的所有邮件
+mailq  
+
+#删除当前等待发送队列的所有邮件，包括发送失败的退信  
+postsuper -d ALL
+</code></pre><p><strong>参考阅读</strong></p>
+<p><a href="http://www.daliycode.com/info-3-201.html">ubuntu搭建postfix smtp邮箱服务为站点发送邮件</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>邮件钓鱼核心技术之Postfix搭建</b><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#解析域名">解析域名</a></li>
+        <li><a href="#重启">重启</a></li>
+        <li><a href="#修改端口">修改端口</a></li>
+        <li><a href="#配置postfix">配置Postfix</a></li>
+        <li><a href="#创建用户">创建用户</a></li>
+        <li><a href="#测试邮件发送">测试邮件发送</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
