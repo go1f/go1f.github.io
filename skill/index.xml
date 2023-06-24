@@ -8,6 +8,15 @@
     <language>en</language>
     <copyright>&amp;copy; jyufu 2020-2023</copyright><atom:link href="https://blog.allsec.top/skill/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>三年杂烩</title>
+      <link>https://blog.allsec.top/skill/captin/</link>
+      <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.allsec.top/skill/captin/</guid>
+      <description>&lt;p&gt;所有近文。包含未完成未深入未放弃的议题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>捕捞预编译漏网小鱼</title>
       <link>https://blog.allsec.top/skill/precompiled-exception/</link>
       <pubDate>Sat, 17 Jun 2023 00:00:00 +0000</pubDate>

@@ -8,6 +8,24 @@
     <language>en</language>
     <copyright>&amp;copy; jyufu 2020-2023</copyright><atom:link href="https://blog.allsec.top/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>三年杂烩</title>
+      <link>https://blog.allsec.top/skill/captin/</link>
+      <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.allsec.top/skill/captin/</guid>
+      <description>&lt;p&gt;所有近文。包含未完成未深入未放弃的议题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>快速重装手册macOS、Fedora、Kali、Windows</title>
+      <link>https://blog.allsec.top/glance/initial/</link>
+      <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.allsec.top/glance/initial/</guid>
+      <description>&lt;p&gt;此人曾最爱重装。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>捕捞预编译漏网小鱼</title>
       <link>https://blog.allsec.top/skill/precompiled-exception/</link>
       <pubDate>Sat, 17 Jun 2023 00:00:00 +0000</pubDate>
@@ -52,15 +70,6 @@
       
       <guid>https://blog.allsec.top/whisper/emotion/</guid>
       <description>&lt;p&gt;逃避不可取，随流不长久。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>重装macOS的初始化手册</title>
-      <link>https://blog.allsec.top/glance/initial-macos/</link>
-      <pubDate>Sun, 23 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.allsec.top/glance/initial-macos/</guid>
-      <description>&lt;p&gt;macOS初始化。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -153,15 +162,6 @@
       <guid>https://blog.allsec.top/glance/stupid-common-sense/</guid>
       <description>&lt;p&gt;有大家都知道、你不知道的常识；还有不好找关键字搜索的、但又一拨即通的Stupid Easy Issue.&lt;/p&gt;
 &lt;p&gt;Updating &amp;hellip;&amp;hellip;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>初始化其它系统(Android/UnRaid/OpenSUSE)</title>
-      <link>https://blog.allsec.top/glance/initial-other/</link>
-      <pubDate>Wed, 19 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.allsec.top/glance/initial-other/</guid>
-      <description>&lt;p&gt;暂时用不到的系统初始化。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -334,33 +334,6 @@
       <guid>https://blog.allsec.top/sheep/only-emotion/</guid>
       <description>&lt;p&gt;时间到了两点 你text我 问我去咗边&lt;/p&gt;
 &lt;p&gt;冇啊 我等紧你上线&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>重装Fedora的初始化手册</title>
-      <link>https://blog.allsec.top/glance/initial-fedora/</link>
-      <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.allsec.top/glance/initial-fedora/</guid>
-      <description>&lt;p&gt;Announced Initial Configuration，系统重装MEMO。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>重装Kali的初始化手册</title>
-      <link>https://blog.allsec.top/glance/initial-kali/</link>
-      <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.allsec.top/glance/initial-kali/</guid>
-      <description>&lt;p&gt;Kali初始化。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>重装Windows的初始化手册</title>
-      <link>https://blog.allsec.top/glance/initial-windows/</link>
-      <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.allsec.top/glance/initial-windows/</guid>
-      <description>&lt;p&gt;Windows的初始化。&lt;/p&gt;</description>
     </item>
     
     <item>
