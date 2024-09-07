@@ -3,17 +3,20 @@
   <head>
     
     
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CKMT2J522R');
+        }
+      </script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +53,7 @@ if (!doNotTrack) {
 
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://blog.allsec.top">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.allsec.top/">
     春田花花幼稚园
   </a>
 
@@ -786,10 +789,10 @@ reverse-sourcemap --output-dir ./test xxx.js.map
 </li>
 <li>
 <p>like参数注入。使用如下SQL语句可防止SQL注入</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">方案二：使用官方推荐的</span><span class="n">bind</span><span class="o">()</span><span class="err">函数完成参数绑定</span>
-</span></span><span class="line"><span class="cl"> <span class="o">&lt;</span><span class="n">bind</span> <span class="n">name</span><span class="o">=</span><span class="s">&#34;pattern&#34;</span> <span class="n">value</span><span class="o">=</span><span class="s">&#34;&#39;%&#39; + name + &#39;%&#39;&#34;</span> <span class="o">/&gt;</span>
-</span></span><span class="line"><span class="cl">     <span class="n">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">Studentinfo</span> <span class="n">where</span> <span class="n">name</span> <span class="n">like</span> <span class="err">#</span><span class="o">{</span><span class="n">pattern</span><span class="o">}</span>
-</span></span></code></pre></div><pre tabindex="0"><code>方案一：
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">方案二</span><span class="err">：</span><span class="n">使用官方推荐的bind</span><span class="p">()</span><span class="n">函数完成参数绑定</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="o">&lt;</span><span class="n">bind</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&#34;pattern&#34;</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&#34;&#39;%&#39; + name + &#39;%&#39;&#34;</span><span class="w"> </span><span class="o">/&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">Studentinfo</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">like</span><span class="w"> </span><span class="err">#</span><span class="p">{</span><span class="n">pattern</span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><pre tabindex="0"><code>方案一：
 like concat(&#39;%&#39;,#{title}, &#39;%&#39;)，
 </code></pre></li>
 <li>

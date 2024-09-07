@@ -3,17 +3,20 @@
   <head>
     
     
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CKMT2J522R');
+        }
+      </script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,7 +52,7 @@ if (!doNotTrack) {
 
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://blog.allsec.top">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.allsec.top/">
     春田花花幼稚园
   </a>
 
@@ -248,8 +251,8 @@ if (!doNotTrack) {
 <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
   <div class="Subhead mb-2">
     <div class="Subhead-heading">
-      <a href="/skill/android/android-true-wireless-adb/">
-        <div class="h2 mt-1 mb-1">真无线ADB调试开启</div>
+      <a href="/skill/misc/python-3.12-bug/">
+        <div class="h2 mt-1 mb-1">Python error externally-managed-environment</div>
       </a>
     </div>
     <div class="Subhead-description">
@@ -260,14 +263,16 @@ if (!doNotTrack) {
 
 
       <div class="float-md-right">
-        <span>2022-11-08</span>
+        <span>2023-03-31</span>
       </div>
     </div>
   </div>
   <div class="text-gray">
     
-    <p>在没有线的情况下，捣鼓了小半天，尝试调通ADB。</p>
-    <a class="muted-link" href="/skill/android/android-true-wireless-adb/">…</a>
+    <h2 id="bug报错详情">Bug报错详情</h2>
+<p>~ % python3 -m pip install pip
+error: externally-managed-environment</p>
+    <a class="muted-link" href="/skill/misc/python-3.12-bug/">…</a>
   </div>
 </div>
 

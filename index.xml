@@ -4,447 +4,422 @@
     <title>园语 on 春田花花幼稚园</title>
     <link>https://blog.allsec.top/</link>
     <description>Recent content in 园语 on 春田花花幼稚园</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <copyright>&amp;copy; jyufu 2020-2023</copyright><atom:link href="https://blog.allsec.top/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&amp;copy; jyufu 2020-2023</copyright>
+    <atom:link href="https://blog.allsec.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>修理</title>
+      <link>https://blog.allsec.top/sheep/fix/</link>
+      <pubDate>Sat, 31 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/fix/</guid>
+      <description>&lt;p&gt;哪。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>时装 · 春</title>
+      <link>https://blog.allsec.top/sheep/cloth-spring/</link>
+      <pubDate>Tue, 26 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/cloth-spring/</guid>
+      <description>&lt;p&gt;今年做43件未做过的事。时间到了12月30号，我再意义罗列出来。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>若你太少定语</title>
+      <link>https://blog.allsec.top/sheep/less-word/</link>
+      <pubDate>Tue, 26 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/less-word/</guid>
+      <description>&lt;p&gt;我可以提要求，我要提要求。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>醋包的日记</title>
+      <link>https://blog.allsec.top/sheep/mean-diary/</link>
+      <pubDate>Sun, 07 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/mean-diary/</guid>
+      <description>&lt;p&gt;我是不是应该，搞一顶帽子。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>吸尘器与干衣机</title>
+      <link>https://blog.allsec.top/sheep/dust-and-dry/</link>
+      <pubDate>Mon, 04 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/dust-and-dry/</guid>
+      <description>&lt;p&gt;逃避虽可耻。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>今日几号</title>
+      <link>https://blog.allsec.top/sheep/which-day/</link>
+      <pubDate>Wed, 08 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/which-day/</guid>
+      <description>&lt;p&gt;今日系11月23年7号。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>驰骋</title>
+      <link>https://blog.allsec.top/sheep/fly-back/</link>
+      <pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/fly-back/</guid>
+      <description>&lt;p&gt;想创我了。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>辞呈</title>
+      <link>https://blog.allsec.top/sheep/quit/</link>
+      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/quit/</guid>
+      <description>&lt;p&gt;「摇篮曲于天空驰骋」&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>转发即送周国贤麦浚龙演唱会门票！！</title>
+      <link>https://blog.allsec.top/sheep/show/</link>
+      <pubDate>Sun, 02 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/show/</guid>
+      <description>&lt;p&gt;转发本文至作者，即可获得近距离站立票两张。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>三年杂烩</title>
       <link>https://blog.allsec.top/skill/captin/</link>
       <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/captin/</guid>
       <description>&lt;p&gt;所有近文。包含未完成未深入未放弃的议题。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>快速重装手册macOS、Fedora、Kali、Windows</title>
       <link>https://blog.allsec.top/glance/initial/</link>
       <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/glance/initial/</guid>
       <description>&lt;p&gt;此人曾最爱重装。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>捕捞预编译漏网小鱼</title>
       <link>https://blog.allsec.top/skill/precompiled-exception/</link>
       <pubDate>Sat, 17 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/precompiled-exception/</guid>
       <description>&lt;p&gt;在Java持久化层或Web框架化的情况下，要么很难有SQL注入，要么全是SQL注入（没用防注入框架的网站，xray狂喜）。这里列出特例或者开发常犯错的例子。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Android Test Cheat Sheet</title>
       <link>https://blog.allsec.top/skill/android/android-test-cheat-sheet/</link>
       <pubDate>Thu, 15 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/android/android-test-cheat-sheet/</guid>
       <description>&lt;p&gt;更新一些Android APP测试的技巧。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>如何在macOS正确地使用Packet Filter</title>
       <link>https://blog.allsec.top/skill/pf-on-macos/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/pf-on-macos/</guid>
       <description>&lt;p&gt;初初使用macOS，遇到以下的提示框。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>初次Gradle编译工程的记录 for PlotSquared</title>
       <link>https://blog.allsec.top/skill/misc/first-gradle-build/</link>
       <pubDate>Sun, 14 May 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/misc/first-gradle-build/</guid>
-      <description>&lt;p&gt;阿伟要我编译个项目。&lt;/p&gt;
-&lt;p&gt;Q0: 为什么是我？&lt;/p&gt;
-&lt;p&gt;Q1: 我打算在macOS编译一个gradle管理的Java项目，请教我具体步骤。&lt;/p&gt;</description>
+      <description>&lt;p&gt;阿伟要我编译个项目。&lt;/p&gt;&#xA;&lt;p&gt;Q0: 为什么是我？&lt;/p&gt;&#xA;&lt;p&gt;Q1: 我打算在macOS编译一个gradle管理的Java项目，请教我具体步骤。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>我在做什么</title>
       <link>https://blog.allsec.top/whisper/emotion/</link>
       <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/whisper/emotion/</guid>
       <description>&lt;p&gt;逃避不可取，随流不长久。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>撒花</title>
       <link>https://blog.allsec.top/sheep/end/</link>
       <pubDate>Fri, 21 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/end/</guid>
       <description>&lt;p&gt;源源不断滔滔不绝不知所谓。&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title>撒花</title>
+      <link>https://blog.allsec.top/sheep/packet-filter/</link>
+      <pubDate>Fri, 21 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/sheep/packet-filter/</guid>
+      <description>&lt;p&gt;还没想到新的名字，一个月就过去了，有想法再改吧。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python error externally-managed-environment</title>
+      <link>https://blog.allsec.top/skill/misc/python-3.12-bug/</link>
+      <pubDate>Fri, 31 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.allsec.top/skill/misc/python-3.12-bug/</guid>
+      <description>&lt;h2 id=&#34;bug报错详情&#34;&gt;Bug报错详情&lt;/h2&gt;&#xA;&lt;p&gt;~ % python3 -m pip install pip&#xA;error: externally-managed-environment&lt;/p&gt;</description>
+    </item>
     <item>
       <title>神说</title>
       <link>https://blog.allsec.top/sheep/god-said/</link>
       <pubDate>Sun, 26 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/god-said/</guid>
       <description>&lt;p&gt;&amp;ldquo;Let there be car,&amp;rdquo; and there was car.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>乳糖与诺如</title>
       <link>https://blog.allsec.top/sheep/stomachache/</link>
       <pubDate>Tue, 07 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/stomachache/</guid>
       <description>&lt;p&gt;我的手表首次收录到零分钟的深度睡眠，刷新记录。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>钓鱼</title>
       <link>https://blog.allsec.top/sheep/fisher/</link>
       <pubDate>Mon, 27 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/fisher/</guid>
       <description>&lt;p&gt;拉长时间来看，有些言行还算贯穿始终。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>我的老师</title>
       <link>https://blog.allsec.top/sheep/my-teacher/</link>
       <pubDate>Tue, 03 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/my-teacher/</guid>
       <description>&lt;p&gt;虽然高中了，但有些句子还有点小学，可是他夸我清新。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>一纸证书</title>
       <link>https://blog.allsec.top/sheep/one-cert/</link>
       <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/one-cert/</guid>
       <description>&lt;p&gt;我用一份写满名字与歌词的试卷换来一张证书，广州多了一个半桶水的软件工程师。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Play Yuanshen on macOS M2</title>
       <link>https://blog.allsec.top/sheep/play-yuanshen-on-macos-m2/</link>
       <pubDate>Fri, 11 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/play-yuanshen-on-macos-m2/</guid>
       <description>&lt;p&gt;原神启动！&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>真无线ADB调试开启</title>
       <link>https://blog.allsec.top/skill/android/android-true-wireless-adb/</link>
       <pubDate>Tue, 08 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/android/android-true-wireless-adb/</guid>
       <description>&lt;p&gt;在没有线的情况下，捣鼓了小半天，尝试调通ADB。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Silly Unkonwn Bug</title>
       <link>https://blog.allsec.top/glance/silly-unkonwn-bug/</link>
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/glance/silly-unkonwn-bug/</guid>
-      <description>&lt;p&gt;记录遇到的各种BUG，下次就不用Google了。&lt;/p&gt;
-&lt;p&gt;Updating &amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+      <description>&lt;p&gt;记录遇到的各种BUG，下次就不用Google了。&lt;/p&gt;&#xA;&lt;p&gt;Updating &amp;hellip;&amp;hellip;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Stupid Common Sense (updated 221020)</title>
       <link>https://blog.allsec.top/glance/stupid-common-sense/</link>
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/glance/stupid-common-sense/</guid>
-      <description>&lt;p&gt;有大家都知道、你不知道的常识；还有不好找关键字搜索的、但又一拨即通的Stupid Easy Issue.&lt;/p&gt;
-&lt;p&gt;Updating &amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+      <description>&lt;p&gt;有大家都知道、你不知道的常识；还有不好找关键字搜索的、但又一拨即通的Stupid Easy Issue.&lt;/p&gt;&#xA;&lt;p&gt;Updating &amp;hellip;&amp;hellip;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>脸盲</title>
       <link>https://blog.allsec.top/sheep/face-blind/</link>
       <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/face-blind/</guid>
       <description>&lt;p&gt;要是遇着心急想记得的人，就比较抓狂。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>重逢</title>
       <link>https://blog.allsec.top/sheep/reunion/</link>
       <pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/reunion/</guid>
       <description>&lt;p&gt;You&amp;rsquo;re not alone.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>心灵作家</title>
       <link>https://blog.allsec.top/sheep/heal-writer/</link>
       <pubDate>Fri, 09 Sep 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/heal-writer/</guid>
       <description>&lt;p&gt;《恋之风景》，专辑自《约会林嘉欣》。女生的名字，多带嘉欣晓婷敏珊字。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>打点仔的一点素养（上）</title>
       <link>https://blog.allsec.top/skill/readteam-quality-1/</link>
       <pubDate>Thu, 11 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/readteam-quality-1/</guid>
       <description>&lt;p&gt;安服仔 &amp;raquo; 打点仔 &amp;hellip; &amp;hellip;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>注解</title>
       <link>https://blog.allsec.top/sheep/explain/</link>
       <pubDate>Tue, 09 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/explain/</guid>
       <description>&lt;p&gt;不要听缠绵悱恻的歌，听温暖窝心的。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Android On KVM&#43;QEMU x86</title>
       <link>https://blog.allsec.top/skill/android/android-on-kvm&#43;qemu/</link>
       <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/android/android-on-kvm&#43;qemu/</guid>
       <description>&lt;p&gt;在Fedora的KVM安装一个x86的Android虚拟机。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>To be Kontinued...</title>
       <link>https://blog.allsec.top/sheep/to-be-kontinue/</link>
       <pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/to-be-kontinue/</guid>
       <description>&lt;p&gt;藏书。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>最自大的假想</title>
       <link>https://blog.allsec.top/sheep/pride-assumption/</link>
       <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/pride-assumption/</guid>
       <description>&lt;p&gt;我死了，这个世界还存在吗？&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>考试就有题目</title>
       <link>https://blog.allsec.top/sheep/exam-topic/</link>
       <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/exam-topic/</guid>
       <description>&lt;p&gt;很多时候只能做到70-80分。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>终于无题</title>
       <link>https://blog.allsec.top/sheep/finally-endless/</link>
       <pubDate>Tue, 05 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/finally-endless/</guid>
       <description>&lt;p&gt;最近也没什么借题发挥的东西，这些是新曲+精选。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Why Blue</title>
       <link>https://blog.allsec.top/sheep/why-blue/</link>
       <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/why-blue/</guid>
       <description>&lt;p&gt;现在淡忘了这个明示，却可能潜化了为暗示，也许过后原来并没有事。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>故事一编</title>
       <link>https://blog.allsec.top/sheep/make-up-a-story/</link>
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/make-up-a-story/</guid>
       <description>&lt;p&gt;等车也是等车，编一下故事。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>DNS&amp;ICMP隧道测试</title>
       <link>https://blog.allsec.top/skill/dnsicmp-tunnel/</link>
       <pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/dnsicmp-tunnel/</guid>
       <description>&lt;p&gt;测试市面上的UDP ICMP隧道。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>不吐不快(未发表)</title>
       <link>https://blog.allsec.top/sheep/cant-wait/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/cant-wait/</guid>
       <description>&lt;p&gt;朋友系来麻烦的，打扰得多嘅系朋友。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>DNSLog平台搭建</title>
       <link>https://blog.allsec.top/skill/dnslog-deploy/</link>
       <pubDate>Sun, 29 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/dnslog-deploy/</guid>
       <description>&lt;p&gt;讲解一下DNSLog平台搭建的原理。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>发现了自己</title>
       <link>https://blog.allsec.top/sheep/found-out-myself/</link>
       <pubDate>Thu, 26 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/found-out-myself/</guid>
       <description>&lt;p&gt;今天是疯狂星期四，我发了一句话，说我也去健身了。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>为什么虚弱也感到开心</title>
       <link>https://blog.allsec.top/sheep/why-feel-glad-in-weakness/</link>
       <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/why-feel-glad-in-weakness/</guid>
       <description>&lt;p&gt;最近有人吃错东西，说虚脱了两天。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>谈何容易</title>
       <link>https://blog.allsec.top/sheep/what-easy/</link>
       <pubDate>Wed, 27 Apr 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/what-easy/</guid>
       <description>&lt;p&gt;前阵子听到玩笑，复制9个还是10个我就可以完成部门业绩了。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>只谈感情</title>
       <link>https://blog.allsec.top/sheep/only-emotion/</link>
       <pubDate>Sun, 24 Apr 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/only-emotion/</guid>
-      <description>&lt;p&gt;时间到了两点 你text我 问我去咗边&lt;/p&gt;
-&lt;p&gt;冇啊 我等紧你上线&lt;/p&gt;</description>
+      <description>&lt;p&gt;时间到了两点 你text我 问我去咗边&lt;/p&gt;&#xA;&lt;p&gt;冇啊 我等紧你上线&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>晒足350天</title>
       <link>https://blog.allsec.top/sheep/shine-for-350-day/</link>
       <pubDate>Tue, 19 Apr 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/shine-for-350-day/</guid>
       <description>&lt;p&gt;昨晚回想到一个场景，多年前的周六晚上街边球场，自投自乐。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>第一篇</title>
       <link>https://blog.allsec.top/sheep/first/</link>
       <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/sheep/first/</guid>
       <description>&lt;p&gt;拖了好久好久。把当时的新知写出来，一次发，没期望多少人看完又长又啰嗦的纯文字。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>邮件钓鱼核心技术之Postfix搭建</title>
       <link>https://blog.allsec.top/skill/postfix-deploy/</link>
       <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/postfix-deploy/</guid>
       <description>&lt;p&gt;我认为，配置Gophish花些时间即可，而邮件网关，则没那么好配，属于是核心技术了，莫名有坑点。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>MSSQL注入命令执行利用</title>
       <link>https://blog.allsec.top/skill/mssql-xp_cmdshell/</link>
       <pubDate>Thu, 08 Jul 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/mssql-xp_cmdshell/</guid>
       <description>&lt;p&gt;为那个研究怎么在站库分离情况下利用MSSQL注入漏洞的通宵，补充一点笔记。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>一次小小波澜的OpenSSL版本加固</title>
       <link>https://blog.allsec.top/skill/misc/openssl-make-then-install/</link>
       <pubDate>Sat, 20 Mar 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/misc/openssl-make-then-install/</guid>
       <description>&lt;p&gt;终于遇到我最怕面对、最怕麻烦的加固工作。怕的是因为要Linux编译安装，而那些环境变量、软件依赖、乃至编译链接安装，都很少涉猎，特别是生产环境的系统，特别是这个物理机的CentOS，就没有镜像备份的概念。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>WSDL注入绕过及SQLMAP自动化实现</title>
       <link>https://blog.allsec.top/skill/first-cnvd/</link>
       <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/first-cnvd/</guid>
-      <description>&lt;p&gt;二编，展示SQL注入测试必要的技术链条细节。&lt;/p&gt;
-&lt;p&gt;本文的故事版姐妹篇参见文末参考阅读。&lt;/p&gt;</description>
+      <description>&lt;p&gt;二编，展示SQL注入测试必要的技术链条细节。&lt;/p&gt;&#xA;&lt;p&gt;本文的故事版姐妹篇参见文末参考阅读。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>SSH端口转发和Socks代理</title>
       <link>https://blog.allsec.top/skill/intranet/ssh-port-forward-and-socks-proxy/</link>
       <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/intranet/ssh-port-forward-and-socks-proxy/</guid>
       <description>&lt;p&gt;SSH 还同时提供了一个非常有用的功能，这就是端口转发。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>端口转发(上)</title>
       <link>https://blog.allsec.top/skill/intranet/port-forward-i/</link>
       <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/intranet/port-forward-i/</guid>
       <description>&lt;p&gt;叙述对端口转发的一点认识，陆续补充几种常见转发工具。前文有一篇结合反弹Shell介绍端口映射的，作为兄弟篇，现在讲讲端口转发。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>端口转发(下)</title>
       <link>https://blog.allsec.top/skill/intranet/port-forward-ii/</link>
       <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/intranet/port-forward-ii/</guid>
-      <description>&lt;p&gt;端口映射，之前搞不透彻，这次结合自己设计的拓扑实践，加深理解。&lt;/p&gt;
-&lt;p&gt;此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？&lt;/p&gt;</description>
+      <description>&lt;p&gt;端口映射，之前搞不透彻，这次结合自己设计的拓扑实践，加深理解。&lt;/p&gt;&#xA;&lt;p&gt;此端口就是彼端口，映射就像复制了很多个门口，门口多了，你开哪一扇门都能进到同一间房，很方便，随意门 ？？？&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>记一次自摸的综合靶场</title>
       <link>https://blog.allsec.top/skill/intranet/ichunqiu-lab/</link>
       <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/intranet/ichunqiu-lab/</guid>
       <description>&lt;p&gt;超长文慎点。靶场说大不大，就是搞了三天，一是网速，二是网速，三是网速的原因，还有就是经验的原因。至今未完，70分。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>使用PyV8库应对前端JS加密</title>
       <link>https://blog.allsec.top/skill/misc/pyv8-lib-for-js-encryption/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/misc/pyv8-lib-for-js-encryption/</guid>
       <description>&lt;p&gt;关键字: 前端JS加密，伪验证码，PyV8，pydictor&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sony XZ3 Flash Pixel Experience Rom</title>
       <link>https://blog.allsec.top/skill/xz3-pixel-experience-flash-record/</link>
       <pubDate>Sat, 06 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.allsec.top/skill/xz3-pixel-experience-flash-record/</guid>
       <description>&lt;p&gt;心血来潮，希望给Sony阉割的Android10带来完整的体验，例如药丸手势，哎，踏上不成功便成仁的不归路。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

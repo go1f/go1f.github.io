@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CKMT2J522R');
+        }
+      </script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Python error externally-managed-environment &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="Bug报错详情 ~ % python3 -m pip install pip error: externally-managed-environment
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.allsec.top/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Python error externally-managed-environment</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2024-09-07. Published at: 2023-03-31.">
+        
+          Lastmod: 2024-09-07
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <h2 id="bug报错详情">Bug报错详情</h2>
+<p>~ % python3 -m pip install pip
+error: externally-managed-environment</p>
+<p>× This environment is externally managed
+╰─&gt; To install Python packages system-wide, try brew install
+xyz, where xyz is the package you are trying to
+install.</p>
+<pre><code>If you wish to install a non-brew-packaged Python package,
+create a virtual environment using python3 -m venv path/to/venv.
+Then use path/to/venv/bin/python and path/to/venv/bin/pip.
+
+If you wish to install a non-brew packaged Python application,
+it may be easiest to use pipx install xyz, which will manage a
+virtual environment for you. Make sure you have pipx installed.
+</code></pre>
+<p>note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing &ndash;break-system-packages.
+hint: See PEP 668 for the detailed specification.</p>
+<h2 id="分析">分析</h2>
+<p>macOS系统路径是自带Python 3.9的<code>/usr/bin/python</code>，然后pip的路径安装在以前一直相安无事。</p>
+<pre tabindex="0"><code>% /usr/bin/python3 -m pip -V
+pip 24.0 from /Users/jyufu/Library/Python/3.9/lib/python/site-packages/pip (python 3.9)
+</code></pre><p>但由于Brew安装某些应用时强制指定了依赖PythonXX版本，所以brew自己又管理了一套Python版本。</p>
+<pre tabindex="0"><code>% brew uses --installed python@3.12
+ffmpeg          glib            harfbuzz        libass          pango           pipx            scrcpy          tesseract
+</code></pre><p>然后，Brew自己在根目录的.zprofile添加一行了环境变量，</p>
+<blockquote>
+<pre tabindex="0"><code>eval &#34;$(/opt/homebrew/bin/brew shellenv)&#34;
+</code></pre></blockquote>
+<p>所以我的环境变量最前面是brew的路径，使用python3自然用了brew的python。</p>
+<p>以前我用<code>python -m pip install requests</code>的命令来安装依赖库，应该算是系统层面(system-wide)的安装。如今的brew版python则认为这是不恰当、有风险的操作，可能搞坏系统依赖。</p>
+<blockquote>
+<p><a href="https://peps.python.org/pep-0668/#marking-an-interpreter-as-using-an-external-package-manager">Marking an interpreter as using an external package manager</a></p>
+</blockquote>
+<h2 id="怎么办">怎么办</h2>
+<p>不爽，brew把我的Python抢占了，然后还不能好好用。</p>
+<p>回想，即合规范地用，它还是告诉了方法的。</p>
+<blockquote>
+<p>If you wish to install a non-brew-packaged Python package,
+create a virtual environment using python3 -m venv path/to/venv.
+Then use path/to/venv/bin/python and path/to/venv/bin/pip.</p>
+</blockquote>
+<p>自行再生成一个虚拟环境。然后把路径放在环境变量最前面。</p>
+<pre tabindex="0"><code>/usr/bin/python3 -m venv ~/.local/python3/
+
+echo &#34;PATH=~/.local/python3/bin:\$PATH&#34; &gt;&gt; ~/.zprofile
+</code></pre>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Python error externally-managed-environment</b><nav id="TableOfContents">
+  <ul>
+    <li><a href="#bug报错详情">Bug报错详情</a></li>
+    <li><a href="#分析">分析</a></li>
+    <li><a href="#怎么办">怎么办</a></li>
+  </ul>
+</nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

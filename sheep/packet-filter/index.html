@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CKMT2J522R');
+        }
+      </script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  撒花 &ndash; 春田花花幼稚园
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="还没想到新的名字，一个月就过去了，有想法再改吧。
+|blog under go1f.github.io">
+    
+
+    <meta name="apple-mobile-web-app-title" content="春田花花幼稚园">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.allsec.top/">
+    春田花花幼稚园
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item " href="/whisper/">
+      
+      <span>离骚</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/skill/">
+      
+      <span>拙技</span>
+    </a>
+    
+    
+    
+    
+    <a class="UnderlineNav-item " href="/glance/">
+      
+      <span>速览</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">撒花</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2024-09-07. Published at: 2023-04-21.">
+        
+          Lastmod: 2024-09-07
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>还没想到新的名字，一个月就过去了，有想法再改吧。</p>
+<h1 id="在macos正确地使用packet-filter">在macOS正确地使用Packet Filter</h1>
+<p>kokoisko 沉默的小羔羔 <em>2023年06月01日 21:55</em> <em>广东</em></p>
+<p>初初使用macOS，遇到以下的提示框。</p>
+<p>「该应用从互联网下载，您是否打开？」，「该应用签名未经验证。」「是否允许应用接入传输？」，或者是，启动项出现了奇怪的名字。</p>
+<p>这种警告提示，给我带来隐隐的不安。因为对背后原理的未知与不确定。</p>
+<p>macOS披上一层优雅的外衣，内里的运行机制不会有说明，官方只有简略浅显的「用户帮助使用手册」。</p>
+<p>其实Windows也会有这种顿然割裂的提示框，例如UAC、防火墙等弹窗，只不过看的时间长了，迷惑的感受淡化了。</p>
+<p>我宁愿一个漂亮的系统从头到尾地蒙蔽我，界面一直绚丽，别具一格。可是，一旦露馅出现了不协调，刚建立的感觉容易顿失，Flyme、锤子系统也有类似的经历。</p>
+<p>macOS的应用防火墙（ApplicationFirewall）就是一个例子，它图形界面没有缺陷，披着漂亮界面，内里却运行得一团糟。</p>
+<p>我反复观察仍不得要领。</p>
+<p>它按应用划分做网络准入控制。可是我却不能肯定它什么时候弹出防火墙允许的窗口。自定义添加应用白名单，竟然导致它暗里崩溃，而你全然不知。</p>
+<p>我妥协，把防火墙关了。然而，开关按钮并没有真的把防火墙关了，我还要重启电脑！矛盾的是，我常常跟一帮黑客在同一个公司，同一个局域网，我还是需要防火墙的啊。</p>
+<p>摒弃原装防火墙的道路，了解到macOS自带了另一套防火墙Packet Filter，简称PF。以下是我断续捣腾了几天才调通的一些方法。</p>
+<p>我的需求很简单，默认屏蔽所有入站流量，仅按需要开放我临时用到的TCP端口，不要影响我访问互联网。</p>
+<p>首先关闭原装防火墙。在图形界面，点击设置应用-网络-防火墙-关闭，重启电脑即可。以下是命令行版本。</p>
+<pre tabindex="0"><code>#查看ApplicationFirewall规则
+/usr/libexec/ApplicationFirewall/socketfilterfw --list
+#命令行关闭ApplicationFirewal
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 0
+sudo launchctl unload /System/Library/LaunchAgents/com.apple.alf.useragent.plist
+sudo launchctl unload /System/Library/LaunchDaemons/com.apple.alf.agent.plist
+sudo defaults read /Library/Preferences/com.apple.alf globalstate
+</code></pre><p>PF常用的命令</p>
+<pre tabindex="0"><code>#查看pf防火墙状态
+sudo pfctl -s info
+#启用pf防火墙：
+sudo pfctl -e
+#禁用pf防火墙：
+sudo pfctl -d
+#查看pf规则
+sudo pfctl -sr
+</code></pre><p>创建自己的PF配置文件，anchor可理解为一种封装。</p>
+<pre tabindex="0"><code>sudo vim /etc/pf.ma22ko.local.conf
+
+###
+anchor &#34;ma22ko.local.pf&#34;
+load anchor &#34;ma22ko.local.pf&#34; from &#34;/etc/pf.anchors/ma22ko.local&#34;
+###
+</code></pre><p>接下来具体写过滤规则。</p>
+<pre tabindex="0"><code>sudo vim /etc/pf.anchors/ma22ko.local
+###
+# Network interfaces
+# 主要针对上网的网卡做设置，我的是en0
+ether=en0
+# Don&#39;t filter on local loopback
+set skip on lo0
+# Table allow IPs
+# table &lt;local&gt; persist file &#34;/etc/auth_ips&#34;
+# Block all traffic on LAN interface en0 by default
+# 封禁所有入站流量
+block in on $ether all
+# Allow all traffic in/out in the local subnet
+# pass on $ether from &lt;local&gt;
+# 放通所有主动访问互联网的流量
+pass out on $ether proto { tcp, udp }
+# Allow 9999,9209 and echoreq ICMP type
+pass in on $ether proto tcp to port 9999 keep state
+pass in on $ether proto tcp to port 9209 keep state
+# 允许PING
+pass inet proto icmp from any icmp-type echoreq
+# 允许DHCP协议
+pass in on en0 proto udp from any to any port 67:68 keep state
+###
+</code></pre><p>用以下命令，反复调试，终于调通。</p>
+<pre tabindex="0"><code>#激活规则
+sudo pfctl -E -f /etc/pf.ma22ko.local.conf
+#查看运行状态
+sudo pfctl -s info | grep Status
+#查看运行的规则
+sudo pfctl -sr
+</code></pre><p>PF默认开机不启动，需要创建开机启动的守护进程。</p>
+<pre tabindex="0"><code>sudo vim /Library/LaunchDaemons/local.ma22ko.pfctl.plist
+
+&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;
+&lt;!DOCTYPE plist PUBLIC &#34;-//Apple Computer/DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;
+&lt;plist version=&#34;1.0&#34;&gt;
+&lt;dict&gt;
+  &lt;key&gt;Label&lt;/key&gt;
+      &lt;string&gt;local.ma22ko.pfctl.plist&lt;/string&gt;
+  &lt;key&gt;Program&lt;/key&gt;
+      &lt;string&gt;/usr/local/bin/firewall.sh&lt;/string&gt;
+  &lt;key&gt;RunAtLoad&lt;/key&gt;
+      &lt;true/&gt;
+  &lt;key&gt;LaunchOnlyOnce&lt;/key&gt;
+      &lt;true/&gt;
+  &lt;key&gt;StandardOutPath&lt;/key&gt;
+      &lt;string&gt;/Users/jyufu/Downloads/pfctl_log.log&lt;/string&gt;
+  &lt;key&gt;StandardErrorPath&lt;/key&gt;
+      &lt;string&gt;/Users/jyufu/Downloads/pfctl_error.log&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre><p>编写启动脚本</p>
+<pre tabindex="0"><code>sudo vim /usr/local/bin/firewall.sh
+#!/bin/bash
+/bin/sleep 5
+/usr/sbin/ipconfig waitall
+/sbin/pfctl -E -f /etc/pf.ma22ko.local.conf
+
+#赋予执行权限
+chmod 764 /usr/local/bin/firewall.sh
+</code></pre><p>结尾就是这么朴素。</p>
+<p>我快速的阅读一遍，发现喔，写得很像外语翻译过来的。</p>
+<p><strong>参考阅读</strong></p>
+<p>Setting up correctly Packet Filter (pf) firewall on any macOS (from Sierra to Big Sur)</p>
+<p>man pf.conf</p>
+<p><a href="http://92643.cn:92/skill/pf-on-macos/">阅读原文</a></p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>撒花</b><nav id="TableOfContents"></nav></div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    © jyufu 2020-2023 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

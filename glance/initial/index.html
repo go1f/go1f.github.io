@@ -3,17 +3,20 @@
   <head>
     
     
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-CKMT2J522R', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CKMT2J522R"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CKMT2J522R');
+        }
+      </script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +53,7 @@ if (!doNotTrack) {
 
       <div id="header" class="px-1 bg-white">
         <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://blog.allsec.top">
+  <a class="UnderlineNav-actions muted-link h2" href="https://blog.allsec.top/">
     春田花花幼稚园
   </a>
 
@@ -105,9 +108,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2023-06-24. Published at: 2023-06-24.">
+      <span title="Lastmod: 2024-04-19. Published at: 2023-06-24.">
         
-          Lastmod: 2023-06-24
+          Lastmod: 2024-04-19
         
       </span>
     </div>
@@ -168,9 +171,9 @@ brew install inetutils upx
 brew install jadx
 brew install --cask sublime-text
 brew install --cask intellij-idea-ce
-brew install --cask docker
-brew install --cask snipaste
-brew install --cask dbeaver-community
+#brew install --cask docker
+#brew install --cask snipaste
+#brew install --cask dbeaver-community
 brew install --cask db-browser-for-sqlite
 brew install --cask android-platform-tools
 brew install --cask PlayCover/playcover/playcover-community
@@ -187,9 +190,34 @@ brew install --cask ${apps[@]}
 <p>参考阅读</p>
 <p><a href="https://github.com/corretto/corretto-11/issues/165">Native support for Apple Silicon devices</a></p>
 <p><a href="https://santandergto.com/en/java-for-apple-m1-nightmare-arm-street/">java-for-apple-m1-nightmare-arm-street</a></p>
-<h3 id="python23-for-macos-on-arm">Python2/3 for MacOS on Arm</h3>
-<p>python3，系统自带。</p>
+<pre tabindex="0"><code>brew install jenv
+export PATH=&#34;$HOME/.jenv/bin:$PATH&#34;
+eval &#34;$(jenv init -)&#34;
+
+echo &#39;export PATH=&#34;$HOME/.jenv/bin:$PATH&#34;&#39; &gt;&gt; ~/.zprofile
+echo &#39;eval &#34;$(jenv init -)&#34;&#39; &gt;&gt; ~/.zprofile
+
+#查看Oracle JDK安装路径
+/usr/libexec/java_home -V
+#查看Brew的openjdk路径
+brew list openjdk@11
+
+jenv add /Library/Java/JavaVirtualMachines/jdk-1.8.jdk/Contents/Home
+jenv add /opt/homebrew/Cellar/openjdk@11/11.0.22/
+
+# 全局设置为Java 11
+jenv global 11
+# 在当前目录下设置为Java 17
+jenv local 17
+
+java -version
+</code></pre><h3 id="python23-for-macos-on-arm">Python2/3 for MacOS on Arm</h3>
+<p>python3，系统自带，但也新建一个虚拟环境。</p>
 <pre tabindex="0"><code>python3 -V
+/usr/bin/python3 -m venv ~/.local/python3.9/
+
+#注意要放在brew的变量前，避免被brew python覆盖
+echo &#34;PATH=~/.local/python3.9/bin:\$PATH&#34; &gt;&gt; ~/.zprofile
 </code></pre><p><a href="https://www.wyr.me/post/658">brew安装python2</a></p>
 <pre tabindex="0"><code>brew install pyenv
 pyenv install 2.7.18
@@ -198,7 +226,6 @@ pyenv global 2.7.18
 python --version
 
 echo &#39;PATH=$(pyenv root)/shims:$PATH&#39; &gt;&gt; ~/.zshrc
-</code></pre><pre tabindex="0"><code>echo &#39;PATH=$PATH:/Users/jyufu/Library/Python/3.9/bin:/Users/jyufu/go/bin/&#39; &gt;&gt; ~/.zshrc
 </code></pre><h2 id="peneration-usual">Peneration Usual</h2>
 <h3 id="goby">Goby</h3>
 <p>使用前关闭VPN，否则Goby报错不提示详情。</p>
